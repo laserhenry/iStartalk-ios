@@ -1,0 +1,89 @@
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+*.xcbkptlist
+*.xcuserstate
+xcuserdata  
+UserInterfaceState.xcuserstate  
+Untitled.xcworkspace/  
+xcuserdata/  
+UserInterface.xcuserstate 
+IMSDK-iOS.xcworkspace/xcuserdata/
+
+*.xcuserstate  
+project.xcworkspace  
+xcuserdata  
+UserInterfaceState.xcuserstate  
+project.xcworkspace/  
+xcuserdata/  
+UserInterface.xcuserstate
+
+yarn.lock
+package-lock.json
+QIMSDK/Podfile.lock
+
+*/.idea/
+.idea/
+ 
+# old skool
+.svn
+ 
+# Exclude the build directory
+SRC/build/
+build/
+app/
+beta/
+ 
+# Exclude temp nibs and swap files
+*~.nib
+*.swp
+
+## Build generated
+build/
+DerivedData/
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+## Other
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+
+## Obj-C/Swift specific
+.hmap
+.ipa
+.dSYM.zip
+.dSYM
+
+# osx noise
+.DS_Store
+*.swp
+profile
+/xcodePack/pack
+/xcodePack/build
+/xcodePack/resources
+
+# ignore node_modules  
+/node_modules
+npm-debug.log
+
+# CocoaPods
+#
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:
+# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+#
+Pods/*
+Podfile.lock
+QIMRNKit/Pods/*
+QIMSDK/Pods/*

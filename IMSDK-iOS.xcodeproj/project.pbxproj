@@ -1,0 +1,727 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2C794BF921B173F90063BA11 /* open_scheme.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C794BF821B173F90063BA11 /* open_scheme.html */; };
+		2CC52E1721B027DC0009EAB5 /* STDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC52E1621B027DC0009EAB5 /* STDelegate.m */; };
+		2CC52E1A21B027DC0009EAB5 /* STViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC52E1921B027DC0009EAB5 /* STViewController.m */; };
+		2CC52E1D21B027DC0009EAB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC52E1B21B027DC0009EAB5 /* Main.storyboard */; };
+		2CC52E1F21B027DE0009EAB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CC52E1E21B027DE0009EAB5 /* Assets.xcassets */; };
+		2CC52E2221B027DE0009EAB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC52E2021B027DE0009EAB5 /* LaunchScreen.storyboard */; };
+		2CC52E2521B027DE0009EAB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC52E2421B027DE0009EAB5 /* main.m */; };
+		5069279A25E137AC00439E03 /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 506925EC25E122AD00439E03 /* RTLabel.m */; };
+		BC9908A376B6B28934DA4BC2 /* libPods-IMSDK-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5739EC91D4FD5A403CFE4C /* libPods-IMSDK-iOS.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2C2A79A822168AE800AF2153 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		2C2A79AA22168D4000AF2153 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2C794BF821B173F90063BA11 /* open_scheme.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = open_scheme.html; sourceTree = "<group>"; };
+		2CC52E1221B027DC0009EAB5 /* IMSDK-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IMSDK-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CC52E1521B027DC0009EAB5 /* STDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDelegate.h; sourceTree = "<group>"; };
+		2CC52E1621B027DC0009EAB5 /* STDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STDelegate.m; sourceTree = "<group>"; };
+		2CC52E1821B027DC0009EAB5 /* STViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STViewController.h; sourceTree = "<group>"; };
+		2CC52E1921B027DC0009EAB5 /* STViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STViewController.m; sourceTree = "<group>"; };
+		2CC52E1C21B027DC0009EAB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2CC52E1E21B027DE0009EAB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2CC52E2121B027DE0009EAB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2CC52E2321B027DE0009EAB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CC52E2421B027DE0009EAB5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		506925EC25E122AD00439E03 /* RTLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
+		6BFF7E29ACF67F0EDFD9CEAE /* Pods-IMSDK-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMSDK-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IMSDK-iOS/Pods-IMSDK-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		9A830545AC1BCEB56DED8FEE /* Pods-IMSDK-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMSDK-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-IMSDK-iOS/Pods-IMSDK-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		CD5739EC91D4FD5A403CFE4C /* libPods-IMSDK-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IMSDK-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2CC52E0F21B027DC0009EAB5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC9908A376B6B28934DA4BC2 /* libPods-IMSDK-iOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		062F977CF210DA8C15089C39 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2C2A79AA22168D4000AF2153 /* CoreGraphics.framework */,
+				2C2A79A822168AE800AF2153 /* CoreFoundation.framework */,
+				CD5739EC91D4FD5A403CFE4C /* libPods-IMSDK-iOS.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2CC52E0921B027DC0009EAB5 = {
+			isa = PBXGroup;
+			children = (
+				506925EC25E122AD00439E03 /* RTLabel.m */,
+				2CC52E1421B027DC0009EAB5 /* IMSDK-iOS */,
+				2CC52E1321B027DC0009EAB5 /* Products */,
+				D2BCDABEE36D10B63C2FD6F0 /* Pods */,
+				062F977CF210DA8C15089C39 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2CC52E1321B027DC0009EAB5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2CC52E1221B027DC0009EAB5 /* IMSDK-iOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CC52E1421B027DC0009EAB5 /* IMSDK-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				2C794BF821B173F90063BA11 /* open_scheme.html */,
+				2CC52E1521B027DC0009EAB5 /* STDelegate.h */,
+				2CC52E1621B027DC0009EAB5 /* STDelegate.m */,
+				2CC52E1821B027DC0009EAB5 /* STViewController.h */,
+				2CC52E1921B027DC0009EAB5 /* STViewController.m */,
+				2CC52E1B21B027DC0009EAB5 /* Main.storyboard */,
+				2CC52E1E21B027DE0009EAB5 /* Assets.xcassets */,
+				2CC52E2021B027DE0009EAB5 /* LaunchScreen.storyboard */,
+				2CC52E2321B027DE0009EAB5 /* Info.plist */,
+				2CC52E2421B027DE0009EAB5 /* main.m */,
+			);
+			path = "IMSDK-iOS";
+			sourceTree = "<group>";
+		};
+		D2BCDABEE36D10B63C2FD6F0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6BFF7E29ACF67F0EDFD9CEAE /* Pods-IMSDK-iOS.debug.xcconfig */,
+				9A830545AC1BCEB56DED8FEE /* Pods-IMSDK-iOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2CC52E1121B027DC0009EAB5 /* IMSDK-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CC52E2821B027DE0009EAB5 /* Build configuration list for PBXNativeTarget "IMSDK-iOS" */;
+			buildPhases = (
+				85837ABA31E07E39268060DF /* [CP] Check Pods Manifest.lock */,
+				2CC52E0E21B027DC0009EAB5 /* Sources */,
+				2CC52E0F21B027DC0009EAB5 /* Frameworks */,
+				2CC52E1021B027DC0009EAB5 /* Resources */,
+				35B71279B55488FAB2F12B0A /* [CP] Copy Pods Resources */,
+				7F99527C83A268ACC0A3615F /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "IMSDK-iOS";
+			productName = "IMSDK-iOS";
+			productReference = 2CC52E1221B027DC0009EAB5 /* IMSDK-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2CC52E0A21B027DC0009EAB5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1250;
+				ORGANIZATIONNAME = QIM;
+				TargetAttributes = {
+					2CC52E1121B027DC0009EAB5 = {
+						CreatedOnToolsVersion = 10.0;
+					};
+				};
+			};
+			buildConfigurationList = 2CC52E0D21B027DC0009EAB5 /* Build configuration list for PBXProject "IMSDK-iOS" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2CC52E0921B027DC0009EAB5;
+			productRefGroup = 2CC52E1321B027DC0009EAB5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2CC52E1121B027DC0009EAB5 /* IMSDK-iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2CC52E1021B027DC0009EAB5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CC52E2221B027DE0009EAB5 /* LaunchScreen.storyboard in Resources */,
+				2CC52E1F21B027DE0009EAB5 /* Assets.xcassets in Resources */,
+				2C794BF921B173F90063BA11 /* open_scheme.html in Resources */,
+				2CC52E1D21B027DC0009EAB5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		35B71279B55488FAB2F12B0A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IMSDK-iOS/Pods-IMSDK-iOS-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IMSDK-iOS/Pods-IMSDK-iOS-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IMSDK-iOS/Pods-IMSDK-iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7F99527C83A268ACC0A3615F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IMSDK-iOS/Pods-IMSDK-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IMSDK-iOS/Pods-IMSDK-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IMSDK-iOS/Pods-IMSDK-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		85837ABA31E07E39268060DF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-IMSDK-iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2CC52E0E21B027DC0009EAB5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5069279A25E137AC00439E03 /* RTLabel.m in Sources */,
+				2CC52E1A21B027DC0009EAB5 /* STViewController.m in Sources */,
+				2CC52E2521B027DE0009EAB5 /* main.m in Sources */,
+				2CC52E1721B027DC0009EAB5 /* STDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2CC52E1B21B027DC0009EAB5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2CC52E1C21B027DC0009EAB5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2CC52E2021B027DE0009EAB5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2CC52E2121B027DE0009EAB5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2CC52E2621B027DE0009EAB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/IMSDK-iOS/QRCodeGenerator/";
+			};
+			name = Debug;
+		};
+		2CC52E2721B027DE0009EAB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/IMSDK-iOS/QRCodeGenerator/";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2CC52E2921B027DE0009EAB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BFF7E29ACF67F0EDFD9CEAE /* Pods-IMSDK-iOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KYP523QX74;
+				INFOPLIST_FILE = "IMSDK-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"AvoidCrash\"",
+					"-l\"CocoaAsyncSocket\"",
+					"-l\"CocoaLumberjack\"",
+					"-l\"DACircularProgress\"",
+					"-l\"DoubleConversion\"",
+					"-l\"FDFullscreenPopGesture\"",
+					"-l\"Folly\"",
+					"-l\"LCActionSheet\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"MDHTMLLabel\"",
+					"-l\"MGSwipeTableCell\"",
+					"-l\"MJRefresh\"",
+					"-l\"MMLayout\"",
+					"-l\"MMMarkdown\"",
+					"-l\"Masonry\"",
+					"-l\"ProtocolBuffers\"",
+					"-l\"QIMCommon\"",
+					"-l\"QIMCommonCategories\"",
+					"-l\"QIMDataBase\"",
+					"-l\"QIMGeneralModule\"",
+					"-l\"QIMKitVendor\"",
+					"-l\"QIMPrivatePBCommon\"",
+					"-l\"QIMReactNativeLibrary\"",
+					"-l\"QIMUIKit\"",
+					"-l\"Reachability\"",
+					"-l\"SCLAlertView-Objective-C\"",
+					"-l\"SDWebImage\"",
+					"-l\"SQLiteRepairKit\"",
+					"-l\"SocketRocket\"",
+					"-l\"SwipeTableView\"",
+					"-l\"UICKeyChainStore\"",
+					"-l\"WCDB\"",
+					"-l\"WCDBOptimizedSQLCipher\"",
+					"-l\"YYCache\"",
+					"-l\"YYDispatchQueuePool\"",
+					"-l\"YYKeyboardManager\"",
+					"-l\"YYModel\"",
+					"-l\"ZipArchive\"",
+					"-l\"bz2\"",
+					"-l\"c++\"",
+					"-l\"crypto\"",
+					"-l\"glog\"",
+					"-l\"iconv\"",
+					"-l\"icucore\"",
+					"-l\"opencore-amrnb\"",
+					"-l\"opencore-amrwb\"",
+					"-l\"resolv\"",
+					"-l\"sqlite3\"",
+					"-l\"sqlite3.0\"",
+					"-l\"ssl\"",
+					"-l\"stdc++\"",
+					"-l\"xml2\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AMapFoundationKit\"",
+					"-framework",
+					"\"AMapLocationKit\"",
+					"-framework",
+					"\"AMapSearchKit\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"AlipaySDK\"",
+					"-framework",
+					"\"AssetsLibrary\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreMotion\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"ExternalAccessory\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"JavaScriptCore\"",
+					"-framework",
+					"\"MAMapKit\"",
+					"-framework",
+					"\"MediaPlayer\"",
+					"-framework",
+					"\"MessageUI\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"Photos\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TXLiteAVSDK_Player\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"UserNotifications\"",
+					"-framework",
+					"\"VideoToolbox\"",
+					"-framework",
+					"\"WebKit\"",
+					"-framework",
+					"\"WebRTC\"",
+					"-weak_framework",
+					"\"Photos\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lilu.ProductName.IMSDK-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/libwebp/src",
+				);
+			};
+			name = Debug;
+		};
+		2CC52E2A21B027DE0009EAB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A830545AC1BCEB56DED8FEE /* Pods-IMSDK-iOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KYP523QX74;
+				INFOPLIST_FILE = "IMSDK-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"AvoidCrash\"",
+					"-l\"CocoaAsyncSocket\"",
+					"-l\"CocoaLumberjack\"",
+					"-l\"DACircularProgress\"",
+					"-l\"DoubleConversion\"",
+					"-l\"FDFullscreenPopGesture\"",
+					"-l\"Folly\"",
+					"-l\"LCActionSheet\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"MDHTMLLabel\"",
+					"-l\"MGSwipeTableCell\"",
+					"-l\"MJRefresh\"",
+					"-l\"MMLayout\"",
+					"-l\"MMMarkdown\"",
+					"-l\"Masonry\"",
+					"-l\"ProtocolBuffers\"",
+					"-l\"QIMCommon\"",
+					"-l\"QIMCommonCategories\"",
+					"-l\"QIMDataBase\"",
+					"-l\"QIMGeneralModule\"",
+					"-l\"QIMKitVendor\"",
+					"-l\"QIMPrivatePBCommon\"",
+					"-l\"QIMReactNativeLibrary\"",
+					"-l\"QIMUIKit\"",
+					"-l\"Reachability\"",
+					"-l\"SCLAlertView-Objective-C\"",
+					"-l\"SDWebImage\"",
+					"-l\"SQLiteRepairKit\"",
+					"-l\"SocketRocket\"",
+					"-l\"SwipeTableView\"",
+					"-l\"UICKeyChainStore\"",
+					"-l\"WCDB\"",
+					"-l\"WCDBOptimizedSQLCipher\"",
+					"-l\"YYCache\"",
+					"-l\"YYDispatchQueuePool\"",
+					"-l\"YYKeyboardManager\"",
+					"-l\"YYModel\"",
+					"-l\"ZipArchive\"",
+					"-l\"bz2\"",
+					"-l\"c++\"",
+					"-l\"crypto\"",
+					"-l\"glog\"",
+					"-l\"iconv\"",
+					"-l\"icucore\"",
+					"-l\"opencore-amrnb\"",
+					"-l\"opencore-amrwb\"",
+					"-l\"resolv\"",
+					"-l\"sqlite3\"",
+					"-l\"sqlite3.0\"",
+					"-l\"ssl\"",
+					"-l\"stdc++\"",
+					"-l\"xml2\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AMapFoundationKit\"",
+					"-framework",
+					"\"AMapLocationKit\"",
+					"-framework",
+					"\"AMapSearchKit\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"AlipaySDK\"",
+					"-framework",
+					"\"AssetsLibrary\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreMotion\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"ExternalAccessory\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"JavaScriptCore\"",
+					"-framework",
+					"\"MAMapKit\"",
+					"-framework",
+					"\"MediaPlayer\"",
+					"-framework",
+					"\"MessageUI\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"Photos\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TXLiteAVSDK_Player\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"UserNotifications\"",
+					"-framework",
+					"\"VideoToolbox\"",
+					"-framework",
+					"\"WebKit\"",
+					"-framework",
+					"\"WebRTC\"",
+					"-weak_framework",
+					"\"Photos\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lilu.ProductName.IMSDK-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2CC52E0D21B027DC0009EAB5 /* Build configuration list for PBXProject "IMSDK-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CC52E2621B027DE0009EAB5 /* Debug */,
+				2CC52E2721B027DE0009EAB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2CC52E2821B027DE0009EAB5 /* Build configuration list for PBXNativeTarget "IMSDK-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CC52E2921B027DE0009EAB5 /* Debug */,
+				2CC52E2A21B027DE0009EAB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2CC52E0A21B027DC0009EAB5 /* Project object */;
+}
