@@ -769,6 +769,7 @@ static STFastEntrance *_sharedInstance = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         QIMWebView *webView = [[QIMWebView alloc] init];
         [webView setUrl:url];
+        
         if (!showNavBar) {
             webView.navBarHidden = !showNavBar;
         }

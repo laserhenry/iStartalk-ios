@@ -335,6 +335,7 @@ RCT_EXPORT_METHOD(openNativePage:(NSDictionary *)params){
     } else if ([nativeName isEqualToString:@"NavAddress"]) {
         
         if ([[[STKit sharedInstance] qimNav_AppWebHostUrl] length]) {
+            NSString *ckey = [[STKit sharedInstance] thirdpartKeywithValue];
             NSString *url = [NSString stringWithFormat:@"%@/manage#/nav_code?domain=%@", [[STKit sharedInstance] qimNav_AppWebHostUrl], [[STKit sharedInstance] getDomain]];
             [STFastEntrance openWebViewForUrl:url showNavBar:YES];
         }

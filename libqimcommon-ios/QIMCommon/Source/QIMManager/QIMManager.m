@@ -916,7 +916,7 @@ static QIMManager *__IMManager = nil;
     NSDictionary *properties = [[NSMutableDictionary alloc] init];
     [properties setValue:[[QIMManager sharedInstance] thirdpartKeywithValue] forKey:NSHTTPCookieValue];
     [properties setValue:@"q_ckey" forKey:NSHTTPCookieName];
-    [properties setValue:@".qunar" forKey:NSHTTPCookieDomain];
+    [properties setValue:@".startalk.im" forKey:NSHTTPCookieDomain];
     [properties setValue:@"/" forKey:NSHTTPCookiePath];
     NSHTTPCookie *cookie = [[NSHTTPCookie alloc] initWithProperties:properties];
     return cookie;

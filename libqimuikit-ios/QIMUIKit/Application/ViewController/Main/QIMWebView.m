@@ -397,6 +397,22 @@ static NSString *__default_ua = nil;
     return self;
 }
 
+-(NSString *)readCurrentCookie{
+    NSMutableDictionary *cookieDic = [NSMutableDictionary dictionary];
+    NSMutableString *cookieValue = [NSMutableString stringWithFormat:@""];
+    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in [cookieJar cookies]) {
+        [cookieDic setObject:cookie.value forKey:cookie.name];
+    }
+    
+         // The cookie is repeated, first placed in the dictionary to de-weight, and then spliced
+    for (NSString *key in cookieDic) {
+          NSString *appendString = [NSString stringWithFormat:@"%@=%@;", key, [cookieDic valueForKey:key]];
+            [cookieValue appendString:appendString];
+    }
+    return cookieValue;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.translucent = NO;
@@ -535,7 +551,7 @@ static NSString *__default_ua = nil;
             [qckeyCookieProperties setQIMSafeObject:[[STKit sharedInstance] qimNav_DomainHost] forKey:NSHTTPCookieDomain];
             [qckeyCookieProperties setQIMSafeObject:@"/" forKey:NSHTTPCookiePath];
             [qckeyCookieProperties setQIMSafeObject:@"0" forKey:NSHTTPCookieVersion];
-            NSHTTPCookie*qckeyCookie = [NSHTTPCookie cookieWithProperties:qckeyCookieProperties];
+            NSHTTPCookie *qckeyCookie = [NSHTTPCookie cookieWithProperties:qckeyCookieProperties];
             [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:qckeyCookie];
             NSHTTPCookieStorage *cook = [NSHTTPCookieStorage sharedHTTPCookieStorage];
             [cook setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
@@ -629,7 +645,7 @@ static NSString *__default_ua = nil;
                 [qcookieProperties setQIMSafeObject:@"/" forKey:NSHTTPCookiePath];
                 [qcookieProperties setQIMSafeObject:@"0" forKey:NSHTTPCookieVersion];
                 
-                NSHTTPCookie*qcookie = [NSHTTPCookie cookieWithProperties:qcookieProperties];
+                NSHTTPCookie *qcookie = [NSHTTPCookie cookieWithProperties:qcookieProperties];
                 [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:qcookie];
                 
                 NSMutableDictionary *vcookieProperties = [NSMutableDictionary dictionary];
@@ -693,13 +709,13 @@ static NSString *__default_ua = nil;
                 [qckeyCookieProperties setQIMSafeObject:@"0" forKey:NSHTTPCookieVersion];
                 
             
-                NSDictionary*properties = [[NSMutableDictionary alloc] init];
+                NSDictionary *properties = [[NSMutableDictionary alloc] init];
                 [properties setValue:[STKit getLastUserName] forKey:NSHTTPCookieValue];//value值
                 [properties setValue:@"q_u" forKey:NSHTTPCookieName];//kay
                 [properties setValue:[[STKit sharedInstance] qimNav_DomainHost] forKey:NSHTTPCookieDomain];
                 
                 [properties setValue:[[NSURL URLWithString:@"/"] path] forKey:NSHTTPCookiePath];
-                NSHTTPCookie*cookie = [[NSHTTPCookie alloc] initWithProperties:properties];
+                NSHTTPCookie *cookie = [[NSHTTPCookie alloc] initWithProperties:properties];
                 [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
 
                 
@@ -707,10 +723,16 @@ static NSString *__default_ua = nil;
                 [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:qckeyCookie];
                 NSHTTPCookie *dCookie = [NSHTTPCookie cookieWithProperties:dcookieProperties];
                 [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:dCookie];
-               
+
+                request = [NSMutableURLRequest requestWithURL:_requestUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+                NSArray *tmp = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+                NSDictionary *dicCookies = [NSHTTPCookie requestHeaderFieldsWithCookies:tmp];
+                NSString *c = [self readCurrentCookie];
+                [request setValue:c forHTTPHeaderField:@"Cookie"];
+                
             }
         }
-//        if ([self.url isEqualToString:[[QIMKit sharedInstance] qimNav_getManagerAppUrl]]) {
+        if ([self.url isEqualToString:[[STKit sharedInstance] qimNav_getManagerAppUrl]]) {
             NSMutableDictionary *confignavProperties = [NSMutableDictionary dictionary];
             [confignavProperties setQIMSafeObject:@"confignav" forKey:NSHTTPCookieName];
             [confignavProperties setQIMSafeObject:[[STKit sharedInstance] qimNav_NavUrl] forKey:NSHTTPCookieValue];
@@ -719,10 +741,11 @@ static NSString *__default_ua = nil;
             [confignavProperties setQIMSafeObject:@"0" forKey:NSHTTPCookieVersion];
             NSHTTPCookie *confignavCookie = [NSHTTPCookie cookieWithProperties:confignavProperties];
             [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:confignavCookie];
-//        }
         NSHTTPCookieStorage *cook = [NSHTTPCookieStorage sharedHTTPCookieStorage];
         [cook setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
         request = [[NSMutableURLRequest alloc] initWithURL:_requestUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+        }
+        
         [_webView loadRequest:request];
     }
     //_webView.mediaPlaybackRequiresUserAction = NO;
@@ -837,7 +860,7 @@ static NSString *__default_ua = nil;
         _package = YES;
         self.needAuth = NO;
     }
-    if ([theUrl containsString:@"mainSite/touchs/"]) {
+    if ([theUrl containsString:@"nothing"]) {
         _publicIm = YES;
         self.needAuth = NO;
         self.navBarHidden = YES;
