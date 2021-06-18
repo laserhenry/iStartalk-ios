@@ -3,7 +3,8 @@
 //  Startalk
 //
 //  Created by xueping on 15/6/29.
-//
+//  Copyright © 2021 Startalk LTD.
+//  Copyright © Laser (laserhenry@gmail.com)
 //
 #import <WebKit/WebKit.h>
 
@@ -245,8 +246,6 @@ static NSString *__default_ua = nil;
     BOOL _publicIm;
     BOOL _qcGrab;
     BOOL _qcZhongbao;
-    //NJKWebViewProgressView *_progressProxyView;
-    //NJKWebViewProgress *_progressProxy;
     WKWebView *_webView;
 }
 
@@ -407,7 +406,6 @@ static NSString *__default_ua = nil;
         !theCompletionHandler ?: theCompletionHandler();
         return;
     }
-//    NSString *c = [self readCurrentCookie];
     for (NSHTTPCookie *cookie in cookies) {
         [cookieStroe setCookie:cookie completionHandler:^{
             if ([[cookies lastObject] isEqual:cookie]) {
@@ -418,7 +416,9 @@ static NSString *__default_ua = nil;
     }
 }
  
-
+//
+// A method to read all cookie into a string in name=value; pairs
+//
 -(NSString *)readCurrentCookie{
     NSMutableDictionary *cookieDic = [NSMutableDictionary dictionary];
     NSMutableString *cookieValue = [NSMutableString stringWithFormat:@""];
@@ -484,8 +484,6 @@ static NSString *__default_ua = nil;
     wkWebConfig.allowsInlineMediaPlayback = true;
     
     _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) configuration:wkWebConfig];
-    //_webView.navigationDelegate = _progressProxy;
-    //[_webView addObserver:nil forKeyPath:<#(nonnull NSString *)#> options:<#(NSKeyValueObservingOptions)#> context:<#(nullable void *)#> forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     if (self.needAuth) {
         if ([STKit getQIMProjectType] != QIMProjectTypeQChat) {
             NSString *ua = [[QIMWebView defaultUserAgent] stringByAppendingString:[[NSString alloc] initWithFormat:@"%@ - %@", @" qunartalk-ios-client", [[STKit sharedInstance] getDefaultUserAgentString]]];
@@ -717,7 +715,6 @@ static NSString *__default_ua = nil;
                 
                 [dcookieProperties setQIMSafeObject:domain forKey:NSHTTPCookieValue];
                 [dcookieProperties setQIMSafeObject:@"q_d" forKey:NSHTTPCookieName];
-                //domain = [[STKit sharedInstance] qimNav_DomainHost] ;
                 [dcookieProperties setValue:domain forKey:NSHTTPCookieDomain];
                 [dcookieProperties setValue:@"/" forKey:NSHTTPCookiePath];
                 [dcookieProperties setQIMSafeObject:@"0" forKey:NSHTTPCookieVersion];
@@ -726,7 +723,6 @@ static NSString *__default_ua = nil;
                 NSString *qckey = [[STKit sharedInstance] thirdpartKeywithValue];
                 [qckeyCookieProperties setQIMSafeObject:qckey forKey:NSHTTPCookieValue];
                 [qckeyCookieProperties setQIMSafeObject:@"q_ckey" forKey:NSHTTPCookieName];
-                //domain = [[STKit sharedInstance] qimNav_DomainHost];
                 [qckeyCookieProperties setQIMSafeObject:domain forKey:NSHTTPCookieDomain];
                 [qckeyCookieProperties setValue:@"/" forKey:NSHTTPCookiePath];
                 [qckeyCookieProperties setQIMSafeObject:@"0" forKey:NSHTTPCookieVersion];
@@ -772,8 +768,6 @@ static NSString *__default_ua = nil;
                 }];
     }
 
-    //_webView.mediaPlaybackRequiresUserAction = NO;
-    //_webView.allowsInlineMediaPlayback = YES;
     QIMVerboseLog(@"WebView LoadRequest : %@ \n Cookie : %@", _requestUrl, [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies);
     if ([[QIMDeviceManager sharedInstance] isIphoneXSeries] == YES && @available(iOS 11.0, *)) {
         _webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -793,7 +787,6 @@ static NSString *__default_ua = nil;
         [self.navigationController setNavigationBarHidden:YES animated:YES];
     } else {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
-        //[self.navigationController.navigationBar addSubview:_progressProxyView];
     }
 }
 
@@ -803,7 +796,6 @@ static NSString *__default_ua = nil;
     if (self.navBarHidden) {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     }
-    //[_progressProxyView removeFromSuperview];
     self.toolbarItems = nil;
     [self.navigationController setToolbarHidden:YES animated:NO];
 }
@@ -960,10 +952,6 @@ static NSString *__default_ua = nil;
     [_webView goForward];
 }
 
-//- (void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress {
-    //[_progressProxyView setProgress:progress animated:YES];
-    //self.title = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-//}
 
 - (void)openSingleChat:(NSString *)jid{
     
@@ -1240,7 +1228,7 @@ static NSString *__default_ua = nil;
         }];
         [self presentViewController:self.activityViewController animated:YES completion:nil];
     }];
-    /*
+    
     [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:urlStr] options:SDWebImageDownloaderLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
         
     } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
@@ -1263,7 +1251,7 @@ static NSString *__default_ua = nil;
         }];
         [self presentViewController:self.activityViewController animated:YES completion:nil];
     }];
-    */
+    
     /*
     [[QIMSDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:urlStr] options:QIMSDWebImageDownloaderLowPriority gifFlag:NO progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         
@@ -1287,7 +1275,7 @@ static NSString *__default_ua = nil;
         }];
         [self presentViewController:self.activityViewController animated:YES completion:nil];
     }];
-    */
+   */
 }
 
 @end
