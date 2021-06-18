@@ -397,6 +397,28 @@ static NSString *__default_ua = nil;
     return self;
 }
 
+//
+// a IOS11+ version method of sending cookie
+//
+- (void)copyNSHTTPCookieStorageToWKHTTPCookieStoreWithCompletionHandler:(nullable void (^)())theCompletionHandler; {
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    WKHTTPCookieStore *cookieStroe = _webView.configuration.websiteDataStore.httpCookieStore;
+    if (cookies.count == 0) {
+        !theCompletionHandler ?: theCompletionHandler();
+        return;
+    }
+//    NSString *c = [self readCurrentCookie];
+    for (NSHTTPCookie *cookie in cookies) {
+        [cookieStroe setCookie:cookie completionHandler:^{
+            if ([[cookies lastObject] isEqual:cookie]) {
+                !theCompletionHandler ?: theCompletionHandler();
+                return;
+            }
+        }];
+    }
+}
+ 
+
 -(NSString *)readCurrentCookie{
     NSMutableDictionary *cookieDic = [NSMutableDictionary dictionary];
     NSMutableString *cookieValue = [NSMutableString stringWithFormat:@""];
@@ -448,7 +470,8 @@ static NSString *__default_ua = nil;
     //[_progressProxyView setProgress:0 animated:YES];
     //[self.navigationController.navigationBar addSubview:_progressProxyView];
 
-    
+    NSMutableURLRequest *request =nil;
+
     NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
 
     WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
@@ -503,7 +526,7 @@ static NSString *__default_ua = nil;
             [self setNavBarHidden:YES];
         }
         
-        NSMutableURLRequest *request = nil;
+        
         if (_package) {
             [self setNavigationButtons];
             [UIView performWithoutAnimation:^{
@@ -541,7 +564,6 @@ static NSString *__default_ua = nil;
             [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:qnmCookie];
             NSHTTPCookieStorage *cook = [NSHTTPCookieStorage sharedHTTPCookieStorage];
             [cook setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-            request = [[NSMutableURLRequest alloc] initWithURL:_requestUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
         } else if (_publicIm) {
             NSMutableDictionary *qckeyCookieProperties = [NSMutableDictionary dictionary];
             
@@ -555,7 +577,6 @@ static NSString *__default_ua = nil;
             [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:qckeyCookie];
             NSHTTPCookieStorage *cook = [NSHTTPCookieStorage sharedHTTPCookieStorage];
             [cook setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-            request = [[NSMutableURLRequest alloc] initWithURL:_requestUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
         } else if (_qcGrab || _qcZhongbao) {
             
             NSString * qCookie = [[[STKit sharedInstance] userObjectForKey:@"QChatCookie"] objectForKey:@"q"];
@@ -692,11 +713,12 @@ static NSString *__default_ua = nil;
                 
                 //QTalk 默认q_ckey
                 NSMutableDictionary *dcookieProperties = [NSMutableDictionary dictionary];
-                NSString *domain = [[STKit sharedInstance] getDomain];
+                NSString *domain = [[STKit sharedInstance] qimNav_DomainHost];
                 
                 [dcookieProperties setQIMSafeObject:domain forKey:NSHTTPCookieValue];
                 [dcookieProperties setQIMSafeObject:@"q_d" forKey:NSHTTPCookieName];
-                [dcookieProperties setValue:[[STKit sharedInstance] qimNav_DomainHost] forKey:NSHTTPCookieDomain];
+                //domain = [[STKit sharedInstance] qimNav_DomainHost] ;
+                [dcookieProperties setValue:domain forKey:NSHTTPCookieDomain];
                 [dcookieProperties setValue:@"/" forKey:NSHTTPCookiePath];
                 [dcookieProperties setQIMSafeObject:@"0" forKey:NSHTTPCookieVersion];
                 
@@ -704,7 +726,8 @@ static NSString *__default_ua = nil;
                 NSString *qckey = [[STKit sharedInstance] thirdpartKeywithValue];
                 [qckeyCookieProperties setQIMSafeObject:qckey forKey:NSHTTPCookieValue];
                 [qckeyCookieProperties setQIMSafeObject:@"q_ckey" forKey:NSHTTPCookieName];
-                [qckeyCookieProperties setQIMSafeObject:[[STKit sharedInstance] qimNav_DomainHost] forKey:NSHTTPCookieDomain];
+                //domain = [[STKit sharedInstance] qimNav_DomainHost];
+                [qckeyCookieProperties setQIMSafeObject:domain forKey:NSHTTPCookieDomain];
                 [qckeyCookieProperties setValue:@"/" forKey:NSHTTPCookiePath];
                 [qckeyCookieProperties setQIMSafeObject:@"0" forKey:NSHTTPCookieVersion];
                 
@@ -712,7 +735,7 @@ static NSString *__default_ua = nil;
                 NSDictionary *properties = [[NSMutableDictionary alloc] init];
                 [properties setValue:[STKit getLastUserName] forKey:NSHTTPCookieValue];//value值
                 [properties setValue:@"q_u" forKey:NSHTTPCookieName];//kay
-                [properties setValue:[[STKit sharedInstance] qimNav_DomainHost] forKey:NSHTTPCookieDomain];
+                [properties setValue:domain forKey:NSHTTPCookieDomain];
                 
                 [properties setValue:[[NSURL URLWithString:@"/"] path] forKey:NSHTTPCookiePath];
                 NSHTTPCookie *cookie = [[NSHTTPCookie alloc] initWithProperties:properties];
@@ -724,11 +747,24 @@ static NSString *__default_ua = nil;
                 NSHTTPCookie *dCookie = [NSHTTPCookie cookieWithProperties:dcookieProperties];
                 [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:dCookie];
 
-                request = [NSMutableURLRequest requestWithURL:_requestUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
                 NSArray *tmp = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
                 NSDictionary *dicCookies = [NSHTTPCookie requestHeaderFieldsWithCookies:tmp];
-                NSString *c = [self readCurrentCookie];
-                [request setValue:c forHTTPHeaderField:@"Cookie"];
+                //NSString *c = [self readCurrentCookie];
+
+               // WKHTTPCookieStore *cookieStroe = _webView.configuration.websiteDataStore.httpCookieStore;
+               // if(tmp.count == 0){return;}
+               // for (NSHTTPCookie *cookie in tmp) {
+               //     [cookieStroe setCookie:cookie completionHandler:nil];
+               // }
+                //
+                // [request setValue:c forHTTPHeaderField:@"Cookie"];
+                // [request setHTTPMethod:@"GET"];
+                // [request addValue:@"cors" forHTTPHeaderField:@"Sec-Fetch-Mode"];
+                // [request addValue:@"document" forHTTPHeaderField:@"Sec-Fetch-Dest"];
+                // [request addValue:@"none" forHTTPHeaderField:@"Sec-Fetch-Site"];
+                // [request addValue:@"?1" forHTTPHeaderField:@"Sec-Fetch-User"];
+                // [request addValue:@"no-cache" forHTTPHeaderField:@"cache-control"];
+                //[request addValue:@"1" forHTTPHeaderField:@"Upgrade-Insecure-Requests"];
                 
             }
         }
@@ -743,11 +779,16 @@ static NSString *__default_ua = nil;
             [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:confignavCookie];
         NSHTTPCookieStorage *cook = [NSHTTPCookieStorage sharedHTTPCookieStorage];
         [cook setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-        request = [[NSMutableURLRequest alloc] initWithURL:_requestUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
         }
-        
-        [_webView loadRequest:request];
+
+        request = [[NSMutableURLRequest alloc] initWithURL:_requestUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];;
+
+        [self copyNSHTTPCookieStorageToWKHTTPCookieStoreWithCompletionHandler:^{
+
+                    [_webView loadRequest:request];
+                }];
     }
+
     //_webView.mediaPlaybackRequiresUserAction = NO;
     //_webView.allowsInlineMediaPlayback = YES;
     QIMVerboseLog(@"WebView LoadRequest : %@ \n Cookie : %@", _requestUrl, [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies);
