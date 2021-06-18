@@ -749,23 +749,6 @@ static NSString *__default_ua = nil;
 
                 NSArray *tmp = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
                 NSDictionary *dicCookies = [NSHTTPCookie requestHeaderFieldsWithCookies:tmp];
-                //NSString *c = [self readCurrentCookie];
-
-               // WKHTTPCookieStore *cookieStroe = _webView.configuration.websiteDataStore.httpCookieStore;
-               // if(tmp.count == 0){return;}
-               // for (NSHTTPCookie *cookie in tmp) {
-               //     [cookieStroe setCookie:cookie completionHandler:nil];
-               // }
-                //
-                // [request setValue:c forHTTPHeaderField:@"Cookie"];
-                // [request setHTTPMethod:@"GET"];
-                // [request addValue:@"cors" forHTTPHeaderField:@"Sec-Fetch-Mode"];
-                // [request addValue:@"document" forHTTPHeaderField:@"Sec-Fetch-Dest"];
-                // [request addValue:@"none" forHTTPHeaderField:@"Sec-Fetch-Site"];
-                // [request addValue:@"?1" forHTTPHeaderField:@"Sec-Fetch-User"];
-                // [request addValue:@"no-cache" forHTTPHeaderField:@"cache-control"];
-                //[request addValue:@"1" forHTTPHeaderField:@"Upgrade-Insecure-Requests"];
-                
             }
         }
         if ([self.url isEqualToString:[[STKit sharedInstance] qimNav_getManagerAppUrl]]) {
