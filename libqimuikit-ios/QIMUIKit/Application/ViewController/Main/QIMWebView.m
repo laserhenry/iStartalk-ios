@@ -747,7 +747,7 @@ static NSString *__default_ua = nil;
                 NSDictionary *dicCookies = [NSHTTPCookie requestHeaderFieldsWithCookies:tmp];
             }
         }
-        if ([self.url isEqualToString:[[STKit sharedInstance] qimNav_getManagerAppUrl]]) {
+        //if ([self.url isEqualToString:[[STKit sharedInstance] qimNav_getManagerAppUrl]]) {
             NSMutableDictionary *confignavProperties = [NSMutableDictionary dictionary];
             [confignavProperties setQIMSafeObject:@"confignav" forKey:NSHTTPCookieName];
             [confignavProperties setQIMSafeObject:[[STKit sharedInstance] qimNav_NavUrl] forKey:NSHTTPCookieValue];
@@ -758,7 +758,7 @@ static NSString *__default_ua = nil;
             [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:confignavCookie];
         NSHTTPCookieStorage *cook = [NSHTTPCookieStorage sharedHTTPCookieStorage];
         [cook setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-        }
+        //}
 
         request = [[NSMutableURLRequest alloc] initWithURL:_requestUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];;
 
