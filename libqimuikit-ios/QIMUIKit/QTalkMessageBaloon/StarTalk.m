@@ -6,7 +6,7 @@
 //
 //
 
-#import "QTalk.h"
+#import "StarTalk.h"
 #import "QIMKitPublicHeader.h"
 #import "QIMIconFont.h"
 #import "QIMImageManager.h"
@@ -15,9 +15,9 @@
 #import "QIMNoteManager.h"
 #endif
 
-static QTalk *__global_qtalk = nil;
+static StarTalk *__global_qtalk = nil;
 
-@implementation QTalk
+@implementation StarTalk
 
 + (void)load {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didfinishNSNotification:) name:UIApplicationDidFinishLaunchingNotification object:nil];
@@ -26,13 +26,13 @@ static QTalk *__global_qtalk = nil;
 + (instancetype)sharedInstance {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        __global_qtalk = [[QTalk alloc] init];
+        __global_qtalk = [[StarTalk alloc] init];
     });
     return __global_qtalk;
 }
 
 + (void)didfinishNSNotification:(NSNotification *)notify {
-    [[QTalk sharedInstance] initConfiguration];
+    [[StarTalk sharedInstance] initConfiguration];
 }
 
 - (void)initConfiguration {

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface QTalk : NSObject
+@interface StarTalk : NSObject
 
 + (instancetype)sharedInstance;
 
