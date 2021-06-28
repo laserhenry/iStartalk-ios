@@ -851,7 +851,7 @@ static QIMManager *__IMManager = nil;
     if ([[STAppInfo sharedInstance] appType] == QIMProjectTypeQChat) {
         myNickName = [QIMManager getLastUserName];
     } else {
-        /*
+        
         NSDictionary *myProfile = [self getUserInfoByUserId:[self getLastJid]];
         if (myProfile.count) {
             NSString *nickName = [myProfile objectForKey:@"Name"];
@@ -859,7 +859,7 @@ static QIMManager *__IMManager = nil;
                 myNickName = nickName;
             }
         }
-        */
+        
     }
     return myNickName;
 }

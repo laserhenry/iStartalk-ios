@@ -1,5 +1,5 @@
 //
-//  QTalk.h
+//  StarTalk.h
 //  qunarChatIphone
 //
 //  Created by xueping on 15/7/9.

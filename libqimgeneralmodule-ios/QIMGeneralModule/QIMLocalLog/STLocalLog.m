@@ -323,7 +323,7 @@ static NSString *LocalZipLogsPath = @"ZipLogs";
     [requestDic setObject:@"日志反馈" forKey:@"alt_body"];
     [requestDic setObject:@"true" forKey:@"is_html"];
     NSData *requestData = [[QIMJSONSerializer sharedInstance] serializeObject:requestDic error:nil];
-    NSURL *requestUrl = [NSURL URLWithString:@"https://qim.qunar.com/package/newapi/nck/sendmail.qunar"];
+    NSURL *requestUrl = [NSURL URLWithString:@"https://uk.startalk.im/emailtest"];
 
     NSMutableDictionary *requestHeader = [NSMutableDictionary dictionaryWithCapacity:1];
     [requestHeader setObject:@"application/json;" forKey:@"Content-type"];
