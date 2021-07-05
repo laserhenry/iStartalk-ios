@@ -95,8 +95,8 @@
     switch (msg.messageType) {
         case QIMMessageType_Time:
         {
-//            NSString *timeStr = [[NSDate dateWithTimeIntervalSince1970:msg.messageDate] formattedDateDescription];
-//            [self appendTimeStemp:timeStr];
+            NSString *timeStr = [NSDate dateWithTimeIntervalSince1970:msg.messageDate] ;
+            [self appendTimeStemp:timeStr];
         }
             break;
         case QIMMessageType_MicroTourGuide:

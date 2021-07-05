@@ -7,9 +7,10 @@
 //  Copyright © 2021 StarTalk Limited. All rights reserved.
 //
 
+#import <UserNotifications/UNUserNotificationCenter.h>
 #import <UIKit/UIKit.h>
 
-@interface STDelegate : UIResponder <UIApplicationDelegate>
+@interface STDelegate : UIResponder <UIApplicationDelegate,UNUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

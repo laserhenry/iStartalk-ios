@@ -86,13 +86,23 @@ static STNotificationMgr *_notificationManager = nil;
 
 - (void)showNotificationWithName:(NSString *)name{
     
-    if (@available(iOS 10.0, *)) {
+    // Remove UILocalNotification support -- laser 2021-07-05
+    //if (@available(iOS 10.0, *)) {
         
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        UNAuthorizationOptions options = UNAuthorizationOptionAlert + UNAuthorizationOptionSound;
+        [center requestAuthorizationWithOptions:options
+                              completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (!granted) {
+                NSLog(@"Oops, no access");
+            }
+        }];
+
         UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
         // 标题
-        content.title = @"视频通话邀请";
-        content.subtitle = [NSString stringWithFormat:@"您有一个来自%@视频通话，点击查看",name];
+        content.title = @"StarTalk";
+        content.subtitle = [NSString stringWithFormat:@"Got Notify from %@, Click to view",name];
+        content.sound = UNNotificationSound.defaultSound;
         // 内容
 //        content.userInfo = msgInfo;
         // 声音
@@ -116,12 +126,16 @@ static STNotificationMgr *_notificationManager = nil;
          UNCalendarNotificationTrigger *calendarTrigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:components repeats:YES];
          */
         // 添加通知的标识符，可以用于移除，更新等操作
-        NSString *identifier = @"MypushNoticeId";
+        NSString *identifier = @"StarTalk Notify";
         UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:identifier content:content trigger:trigger];
         
         [center addNotificationRequest:request withCompletionHandler:^(NSError *_Nullable error) {
-            NSLog(@"成功添加推送");
+            if (error != nil) {
+                NSLog(@"Unable to Add Notification Request");
+            }
         }];
+    // remove the UILocalNotification support
+    /*
     }else {
         UILocalNotification *notif = [[UILocalNotification alloc] init];
         // 发出推送的日期
@@ -140,6 +154,7 @@ static STNotificationMgr *_notificationManager = nil;
         
         [[UIApplication sharedApplication] scheduleLocalNotification:notif];
     }
+     */
 }
 
 //单人音视频

@@ -2281,24 +2281,24 @@
                 } else {
                     [self.messageManager.dataSource addObject:msg];
                 }
-                [_tableView reloadData];
+                [self.tableView reloadData];
             } else if ([self.messageManager.dataSource count] != [_tableView numberOfRowsInSection:0]) {
                 if (frontInsert == YES) {
                     [self.messageManager.dataSource insertObject:msg atIndex:self.messageManager.dataSource.count - 1];
                 } else {
                     [self.messageManager.dataSource addObject:msg];
                 }
-                [_tableView reloadData];
+                [self.tableView reloadData];
             } else {
+                NSArray *insertIndexPaths=nil;
                 if (frontInsert == YES) {
                     [self.messageManager.dataSource insertObject:msg atIndex:self.messageManager.dataSource.count - 1];
-                    NSArray *insertIndexPaths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.messageManager.dataSource.count - 2 inSection:0]];
-                    [_tableView insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationNone];
+                    insertIndexPaths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.messageManager.dataSource.count - 2 inSection:0]];
                 } else {
                     [self.messageManager.dataSource addObject:msg];
-                    NSArray *insertIndexPaths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.messageManager.dataSource.count - 1 inSection:0]];
-                    [_tableView insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationNone];
+                    insertIndexPaths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.messageManager.dataSource.count - 1 inSection:0]];
                 }
+                [self.tableView insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationNone];
             }
             [self addImageToImageList];
             [self scrollToBottomWithCheck:NO];

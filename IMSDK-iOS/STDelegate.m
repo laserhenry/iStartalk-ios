@@ -79,8 +79,7 @@ void SignalHandler(int code)
     QIMErrorLog(@"SignalHandler = %d",code);
 }
 
-void InitCrashReport()
-{
+void InitCrashReport() {
     //系统错误信号捕获
     for (int i = 0; i < s_fatal_signal_num; ++i) {
         signal(s_fatal_signals[i], SignalHandler);
@@ -104,7 +103,10 @@ void InitCrashReport()
 - (void)initRemoteNotification {
     //注册系统通知
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
+    //
+    // So we remove all UILocalNotification -- laser
+    //
+ //   if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
         
         UNUserNotificationCenter *notifyCenter = [UNUserNotificationCenter currentNotificationCenter];
         notifyCenter.delegate = self;
@@ -125,6 +127,7 @@ void InitCrashReport()
         UNNotificationCategory * category = [UNNotificationCategory categoryWithIdentifier:@"msg" actions:@[textInputAction] intentIdentifiers:@[] options:UNNotificationCategoryOptionCustomDismissAction];
         [notifyCenter setNotificationCategories:[NSSet setWithObjects:category,nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
+    /*
     }else{
         UIMutableUserNotificationCategory *categorys = nil;
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) {
@@ -151,7 +154,10 @@ void InitCrashReport()
             [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
         }
     }
+     */
 #else
+    /*
+     
     UIMutableUserNotificationCategory *categorys = nil;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) {
         UIMutableUserNotificationAction *action = [[UIMutableUserNotificationAction alloc] init];
@@ -176,6 +182,7 @@ void InitCrashReport()
     } else {
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
     }
+     */
 #endif
 }
 
@@ -387,8 +394,12 @@ void InitCrashReport()
 #endif
 }
 
+//
+// Laser revised below to UserNotification Framework
+//
+/*
+
 - (void)testLocalQuickReplyNotification {
-    
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
     notification.timeZone = [NSTimeZone defaultTimeZone];
@@ -396,25 +407,32 @@ void InitCrashReport()
     notification.category = @"msg";
     notification.userInfo = @{@"aps":@{@"alert":@{@"body":@"测试推送进入"}, @"sound":@"hongbao.acc", @"badge": @(110), @"category":@"msg", @"userid":@"e5ad60f2a824456d87027246f7fa6e3d@conference.apple.com"},@"userid":@"e5ad60f2a824456d87027246f7fa6e3d@conference.apple.com"};
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    
 }
+*/
 
 #pragma mark - register notification
 //ios8 需要调用内容
+/*
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
     [application registerForRemoteNotifications];
 }
+*/
 
-//本地通知快捷回复，点击回复后回调
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(nullable NSString *)identifier forLocalNotification:(UILocalNotification *)notification withResponseInfo:(NSDictionary *)responseInfo completionHandler:(void(^)())completionHandler {
+
+//本地通知快捷回复，点击回复后回调 -- removed by Laser
+/*
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(nullable NSString *)identifier forLocalNotification:(UNNotificationRequest *)notification withResponseInfo:(NSDictionary *)responseInfo completionHandler:(void(^)())completionHandler {
     NSLog(@"LocalNotification Identifier : %@, notification : %@, responseInfo : %@", identifier, notification, responseInfo);
     if ([identifier isEqualToString:@"comments"]) {
         NSString * replyValue = responseInfo[UIUserNotificationActionResponseTypedTextKey];
-        NSDictionary * userInfo = notification.userInfo[@"aps"];
+        NSDictionary * userInfo = notification.content.userInfo[@"aps"];
+        
         if (userInfo) {
-            NSString * userid1 = notification.userInfo[@"userid"];
+            NSString * userid1 = notification.content.userInfo[@"userid"];
             
             NSString * userid2 = userInfo[@"userid"];
-            NSString * userId1 = notification.userInfo[@"userId"];
+            NSString * userId1 = notification.content.userInfo[@"userId"];
             NSString * userId2 = userInfo[@"userId"];
             
             if (userid1.length && replyValue.length) {
@@ -434,7 +452,6 @@ void InitCrashReport()
     }
     completionHandler();
 }
-
 //远程通知快捷回复，点击回复后回调
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(nullable NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo withResponseInfo:(NSDictionary *)responseInfo completionHandler:(void(^)())completionHandler {
     NSLog(@"iOS10之前远程通知快捷回复，点击回复后回调RemoteNotification Identifier : %@, userInfo : %@, responseInfo : %@", identifier, userInfo, responseInfo);
@@ -477,6 +494,7 @@ void InitCrashReport()
         [[STKit sharedInstance] removeUserObjectForKey:@"LaunchByRemoteNotificationUserInfo"];
     }
 }
+ */
 
 #pragma mark - iOS10接收远程通知
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
@@ -515,10 +533,11 @@ void InitCrashReport()
 
 #endif
 
+/*
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(nullable NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void(^)())completionHandler {
     completionHandler();
 }
-
+*/
 //ios8 push下拉扩展
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler {
     //handle the actions
@@ -555,11 +574,11 @@ void InitCrashReport()
     QIMErrorLog(@"Push register token failed %@",error);
 }
 
-
+/*
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     return [[STSDKUIHelper shareInstance] parseURL:url];
 }
-
+*/
 - (void)configureAPIKey {
  
     [[STKit sharedInstance] setGAODE_APIKEY:GAODE_APIKEY];

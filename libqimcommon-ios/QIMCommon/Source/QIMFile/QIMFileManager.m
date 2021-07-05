@@ -465,7 +465,7 @@ static QIMFileManager *_newfileManager = nil;
     BOOL videoConfigUseAble = [[[STUserCacheManager sharedInstance] userObjectForKey:@"VideoConfigUseAble"] boolValue];
     NSInteger videoMaxTimeLen = [[[STKit sharedInstance] userObjectForKey:@"videoMaxTimeLen"] integerValue];
     NSInteger videoDuration = [[videoExt objectForKey:@"Duration"] integerValue];
-    if ((videoConfigUseAble == YES) && (videoDuration < videoMaxTimeLen)) {
+    if ((videoConfigUseAble == YES) && (videoDuration <= videoMaxTimeLen)) {
         //当服务端返回的VideoConfigUseAble == true 或者 视频时长小于 服务器下发的videoMaxTimeLen时长
         //新接口上传视频
         NSData *videoData = [NSData dataWithContentsOfFile:videoPath];

@@ -33,6 +33,7 @@
 		2CC52E2321B027DE0009EAB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CC52E2421B027DE0009EAB5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		506925EC25E122AD00439E03 /* RTLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
+		50F898A7269330D1005FC9D8 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		6BFF7E29ACF67F0EDFD9CEAE /* Pods-IMSDK-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMSDK-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IMSDK-iOS/Pods-IMSDK-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		9A830545AC1BCEB56DED8FEE /* Pods-IMSDK-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMSDK-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-IMSDK-iOS/Pods-IMSDK-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		CD5739EC91D4FD5A403CFE4C /* libPods-IMSDK-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IMSDK-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +54,7 @@
 		062F977CF210DA8C15089C39 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				50F898A7269330D1005FC9D8 /* UserNotifications.framework */,
 				2C2A79AA22168D4000AF2153 /* CoreGraphics.framework */,
 				2C2A79A822168AE800AF2153 /* CoreFoundation.framework */,
 				CD5739EC91D4FD5A403CFE4C /* libPods-IMSDK-iOS.a */,

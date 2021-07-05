@@ -771,12 +771,23 @@
     }
 }
 
+- (NSString *) getDateStringFromDate:(NSDate *)date {
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:SS"];
+
+    NSString *dateString = [dateFormatter stringFromDate:date];
+
+    return dateString;
+}
+
 - (void)checkMsgTimeWithJid:(NSString *)jid WithMsgDate:(long long)msgDate WithGroup:(BOOL)flag withFrontInsert:(BOOL)frontInsert {
     if (!jid || msgDate < 0) {
         return;
     }
     NSNumber *globalMsgDate = [self.timeStempDic objectForKey:jid];
-    if (msgDate - globalMsgDate.longLongValue >= 2 * 60 * 1000) {
+    long long myresult = msgDate - globalMsgDate.longLongValue;
+    
+    if ( 1 || myresult >= 2 * 60 * 1000) {
         
         [self.timeStempDic setObject:@(msgDate) forKey:jid];
         STMsgModel *msg = [STMsgModel new];
