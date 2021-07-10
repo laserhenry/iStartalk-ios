@@ -1,8 +1,9 @@
 //
-//  QIMDefalutMessageCell.m
+//  STDefalutMessageCell.m
 //  qunarChatIphone
 //
 //  Created by 李露 on 2018/2/2.
+//  Copyright © Startalk Ltd. 2021
 //
 
 #import "STMsgBaloonBaseCell.h"

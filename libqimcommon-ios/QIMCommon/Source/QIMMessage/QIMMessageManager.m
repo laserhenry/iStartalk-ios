@@ -29,7 +29,7 @@ static QIMMessageManager *__global_msg_manager = nil;
 - (instancetype)init{
     self = [super init];
     if (self) {
-        _msgCellClassDic = [[NSMutableDictionary alloc] initWithCapacity:5];
+        _msgCellClassDic = [[NSMutableDictionary alloc] initWithCapacity:50];
         _msgVCClassDic = [[NSMutableDictionary alloc] init];
         _textBarButtonList = [[NSMutableArray alloc] init];
         _showTextDic = [[NSMutableDictionary alloc] init];
@@ -64,7 +64,7 @@ static QIMMessageManager *__global_msg_manager = nil;
 - (void)registerMsgCellClassName:(NSString *)cellClassName ForMessageType:(QIMMessageType)messageType{
     @try {
         Class cellClass = NSClassFromString(cellClassName);
-        NSString *baseCellClassStr = @"QIMMsgBaloonBaseCell";
+        NSString *baseCellClassStr = @"STMsgBaloonBaseCell"; //Laser fix this for qimmessagetyp_time
         Class baseCellClass = NSClassFromString(baseCellClassStr);
         if ([cellClass isSubclassOfClass:[baseCellClass class]] && ![cellClassName isEqualToString:@"QIMDefalutMessageCell"]) {
             [_msgCellClassDic setObject:cellClass forKey:@(messageType)];

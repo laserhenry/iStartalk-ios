@@ -787,7 +787,7 @@
     NSNumber *globalMsgDate = [self.timeStempDic objectForKey:jid];
     long long myresult = msgDate - globalMsgDate.longLongValue;
     
-    if ( 1 || myresult >= 2 * 60 * 1000) {
+    if ( myresult >= 2 * 60 * 1000) {
         
         [self.timeStempDic setObject:@(msgDate) forKey:jid];
         STMsgModel *msg = [STMsgModel new];
@@ -796,6 +796,7 @@
         [msg setRealJid:jid];
         [msg setXmppId:jid];
         [msg setFrom:jid];
+        [msg setMsgRaw:@"aaa"];
         [msg setMessageType:QIMMessageType_Time];
         [msg setMessageDate:msgDate - 1];
         [msg setMessageSendState:QIMMessageSendState_Success];
