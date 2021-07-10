@@ -1,5 +1,5 @@
 //
-//  QIMDefalutMessageCell.h
+//  STDefalutMessageCell.h
 //  qunarChatIphone
 //
 //  Created by 李露 on 2018/2/2.
@@ -8,7 +8,7 @@
 #import "QIMCommonUIFramework.h"
 
 @class STMsgBaloonBaseCell;
-@interface QIMDefalutMessageCell : STMsgBaloonBaseCell
+@interface STDefalutMessageCell : STMsgBaloonBaseCell
 
 @property (nonatomic, strong)STMsgModel *message;
 

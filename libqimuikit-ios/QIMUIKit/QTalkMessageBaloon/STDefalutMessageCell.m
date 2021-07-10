@@ -7,7 +7,7 @@
 //
 
 #import "STMsgBaloonBaseCell.h"
-#import "QIMDefalutMessageCell.h"
+#import "STDefalutMessageCell.h"
 #import "QIMAttributedLabel.h"
 #import "QIMMessageParser.h"
 
@@ -20,7 +20,7 @@
 #define kMinTextWidth       30
 #define kMinTextHeight      30
 
-@interface QIMDefalutMessageCell () <QIMMenuImageViewDelegate>
+@interface STDefalutMessageCell () <QIMMenuImageViewDelegate>
 
 @property (nonatomic, strong) QIMAttributedLabel *messageLabel;
 
@@ -28,7 +28,7 @@
 
 @end
 
-@implementation QIMDefalutMessageCell
+@implementation STDefalutMessageCell
 
 - (QIMAttributedLabel *)messageLabel {
     if (!_messageLabel) {

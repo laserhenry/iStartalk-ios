@@ -66,7 +66,7 @@ static QIMMessageManager *__global_msg_manager = nil;
         Class cellClass = NSClassFromString(cellClassName);
         NSString *baseCellClassStr = @"STMsgBaloonBaseCell"; //Laser fix this for qimmessagetyp_time
         Class baseCellClass = NSClassFromString(baseCellClassStr);
-        if ([cellClass isSubclassOfClass:[baseCellClass class]] && ![cellClassName isEqualToString:@"QIMDefalutMessageCell"]) {
+        if ([cellClass isSubclassOfClass:[baseCellClass class]] && ![cellClassName isEqualToString:@"STDefalutMessageCell"]) {
             [_msgCellClassDic setObject:cellClass forKey:@(messageType)];
         }
     } @catch (NSException *exception) {
