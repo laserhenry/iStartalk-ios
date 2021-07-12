@@ -21,6 +21,12 @@
         self.dataDetectorTypes = UIDataDetectorTypeNone;
         self.returnKeyType = UIReturnKeySend;
         self.enablesReturnKeyAutomatically = YES;
+        //
+        // Laser add below to compatible with dark mode
+        //
+        if (@available(iOS 13.0, *)){
+            self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+        }
         
         _placeHolder = nil;
         _placeHolderTextColor = [UIColor lightGrayColor];
