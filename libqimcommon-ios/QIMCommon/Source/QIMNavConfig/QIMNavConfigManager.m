@@ -852,7 +852,7 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                 NSData *responseData = response.data;
                 NSString *filePath = [self qimNav_getAdvertImageFilePath];
-                NSString *advertFileName = [[QIMFileManager sharedInstance] getFileNameFromUrl:imageUrl];
+                NSString *advertFileName = [[STFileManager sharedInstance] getFileNameFromUrl:imageUrl];
                 filePath = [filePath stringByAppendingPathComponent:advertFileName];
                 [responseData writeToFile:filePath atomically:YES];
             });

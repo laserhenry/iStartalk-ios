@@ -1,5 +1,5 @@
 //
-//  QIMFileManager.h
+//  STFileManager.h
 //  QIMCommon
 //
 //  Created by lilu on 2019/8/28.
@@ -13,7 +13,7 @@ typedef void(^QIMKitCheckImageCallBack)(NSString *imageUrl);
 typedef void(^QIMKitCheckFileCallBack)(NSString *fileUrl);
 
 
-@interface QIMFileManager : NSObject
+@interface STFileManager : NSObject
 
 + (instancetype)sharedInstance;
 

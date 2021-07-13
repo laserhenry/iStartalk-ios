@@ -406,7 +406,7 @@ static NSMutableArray *cacheUserCardHttpList = nil;
 }
 
 - (void)updateMyPhoto:(NSData *)photoData {
-    [[QIMFileManager sharedInstance] qim_uploadMyPhotoData:photoData withCallBack:^(NSString *myPhotoUrl) {
+    [[STFileManager sharedInstance] qim_uploadMyPhotoData:photoData withCallBack:^(NSString *myPhotoUrl) {
         if (myPhotoUrl.length > 0) {
             NSDictionary *cardDic = @{@"user": [QIMManager getLastUserName], @"url": myPhotoUrl, @"domain":[[XmppImManager sharedInstance] domain]};
             NSData *data = [[QIMJSONSerializer sharedInstance] serializeObject:@[cardDic] error:nil];

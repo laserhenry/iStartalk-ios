@@ -1,5 +1,5 @@
 //
-//  STDefalutMessageCell.m
+//  STDefaultMessageCell.m
 //  qunarChatIphone
 //
 //  Created by 李露 on 2018/2/2.
@@ -7,7 +7,7 @@
 //
 
 #import "STMsgBaloonBaseCell.h"
-#import "STDefalutMessageCell.h"
+#import "STDefaultMessageCell.h"
 #import "QIMAttributedLabel.h"
 #import "QIMMessageParser.h"
 
@@ -20,7 +20,7 @@
 #define kMinTextWidth       30
 #define kMinTextHeight      30
 
-@interface STDefalutMessageCell () <QIMMenuImageViewDelegate>
+@interface STDefaultMessageCell () <QIMMenuImageViewDelegate>
 
 @property (nonatomic, strong) QIMAttributedLabel *messageLabel;
 
@@ -28,7 +28,7 @@
 
 @end
 
-@implementation STDefalutMessageCell
+@implementation STDefaultMessageCell
 
 - (QIMAttributedLabel *)messageLabel {
     if (!_messageLabel) {

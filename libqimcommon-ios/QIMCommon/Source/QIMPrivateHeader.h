@@ -59,7 +59,7 @@
 #import "QIMDESHelper.h"
 #import "QIMHttpRequestMonitor.h"
 #import "QIMJSONSerializer.h"
-#import "QIMFileManager.h"
+#import "STFileManager.h"
 #import "QIMUUIDTools.h"
 #import "QIMNetwork.h"
 #import "QIMWatchDog.h"

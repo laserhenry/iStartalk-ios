@@ -1,30 +1,30 @@
 //
-//  QIMFileManager.m
+//  STFileManager.m
 //  QIMCommon
 //
 //  Created by lilu on 2019/8/28.
 //
 
-#import "QIMFileManager.h"
+#import "STFileManager.h"
 #import "QIMStringTransformTools.h"
 
 #define QIM_MAX_FILE_EXTENSION_LENGTH (NAME_MAX - CC_MD5_DIGEST_LENGTH * 2 - 1)
 #define kNewFileHashSalt    @"kNewFileHashSalt"
 
-@interface QIMFileManager ()
+@interface STFileManager ()
 
 @property (nonatomic, copy) NSString *localCachePath;
 @property (nonatomic, copy) NSString *remoteCachePath;
 
 @end
 
-@implementation QIMFileManager
+@implementation STFileManager
 
-static QIMFileManager *_newfileManager = nil;
+static STFileManager *_newfileManager = nil;
 + (instancetype)sharedInstance {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _newfileManager = [[QIMFileManager alloc] init];
+        _newfileManager = [[STFileManager alloc] init];
         [_newfileManager initCachePath];
     });
     return _newfileManager;
