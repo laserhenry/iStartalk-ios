@@ -54,7 +54,7 @@
 #import "QIMMessageBrowserVC.h"
 #import "QIMInputPopView.h"
 
-#import "QIMFileManagerViewController.h"
+#import "STFileMngrVCtrler.h"
 #import "QIMPreviewMsgVC.h"
 
 #import "QIMEmotionSpirits.h"
@@ -1875,7 +1875,7 @@
             }
             
         } else if ([trId isEqualToString:QIMTextBarExpandViewItem_MyFiles]) {
-            QIMFileManagerViewController *fileManagerVC = [[QIMFileManagerViewController alloc] init];
+            STFileMngrVCtrler *fileManagerVC = [[STFileMngrVCtrler alloc] init];
             fileManagerVC.isSelect = YES;
             fileManagerVC.userId = self.chatId;
             fileManagerVC.messageSaveType = ChatType_SingleChat;

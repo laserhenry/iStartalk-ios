@@ -1,18 +1,18 @@
 //
-//  QIMFileManagerViewController.m
+//  STFileMngrVCtrler.m
 //  qunarChatIphone
 //
 //  Created by chenjie on 15/7/24.
 //
-//
+//  Copyright © 2022 Startalk Ltd.
 
-#import "QIMFileManagerViewController.h"
-#import "QIMFileManagerCell.h"
+#import "STFileMngrVCtrler.h"
+#import "STFileMngrCell.h"
 #import "STFilePreviewVC.h"
 #import "QIMJSONSerializer.h"
 //#import "NSBundle+QIMLibrary.h"
 
-@interface QIMFileManagerViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface STFileMngrVCtrler ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView         * _mainTableView;
     NSMutableDictionary      * _filesDic;
@@ -24,7 +24,7 @@
 
 @end
 
-@implementation QIMFileManagerViewController
+@implementation STFileMngrVCtrler
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -179,9 +179,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
    STMsgModel * message = [[_filesDic objectForKey:[_fileKeys objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-    QIMFileManagerCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    STFileMngrCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
-        cell = [[QIMFileManagerCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+        cell = [[STFileMngrCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     }
     [cell setCellMessage:message];
     cell.isSelect = self.isSelect;
@@ -220,7 +220,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.isSelect) {
-        QIMFileManagerCell * cell = (QIMFileManagerCell *)[tableView cellForRowAtIndexPath:indexPath];
+        STFileMngrCell * cell = (STFileMngrCell *)[tableView cellForRowAtIndexPath:indexPath];
         [cell setCellSelected:![cell isCellSelected]];
         if ([cell isCellSelected]) {
             [_selectArr addObject:[[_filesDic objectForKey:[_fileKeys objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row]];

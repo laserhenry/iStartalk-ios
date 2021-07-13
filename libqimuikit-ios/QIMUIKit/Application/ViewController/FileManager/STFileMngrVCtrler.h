@@ -1,14 +1,16 @@
 //
-//  QIMFileManagerViewController.h
+//  STFileMngrVCtrler.h
 //  qunarChatIphone
 //
 //  Created by chenjie on 15/7/24.
 //
 //
+//  Copyright © 2022 Startalk Ltd.
+
 
 #import "QIMCommonUIFramework.h"
 
-@interface QIMFileManagerViewController : QTalkViewController
+@interface STFileMngrVCtrler : QTalkViewController
 
 @property (nonatomic,assign) BOOL       isSelect;//是否是选择界面
 @property (nonatomic,copy) NSString         * userId;

@@ -1,30 +1,32 @@
 //
-//  STFileManager.m
+//  STFileMngr.m
 //  QIMCommon
 //
 //  Created by lilu on 2019/8/28.
 //
+// Copyright © 2022 Startalk LTD.
 
-#import "STFileManager.h"
+
+#import "STFileMngr.h"
 #import "QIMStringTransformTools.h"
 
 #define QIM_MAX_FILE_EXTENSION_LENGTH (NAME_MAX - CC_MD5_DIGEST_LENGTH * 2 - 1)
 #define kNewFileHashSalt    @"kNewFileHashSalt"
 
-@interface STFileManager ()
+@interface STFileMngr ()
 
 @property (nonatomic, copy) NSString *localCachePath;
 @property (nonatomic, copy) NSString *remoteCachePath;
 
 @end
 
-@implementation STFileManager
+@implementation STFileMngr
 
-static STFileManager *_newfileManager = nil;
+static STFileMngr *_newfileManager = nil;
 + (instancetype)sharedInstance {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _newfileManager = [[STFileManager alloc] init];
+        _newfileManager = [[STFileMngr alloc] init];
         [_newfileManager initCachePath];
     });
     return _newfileManager;

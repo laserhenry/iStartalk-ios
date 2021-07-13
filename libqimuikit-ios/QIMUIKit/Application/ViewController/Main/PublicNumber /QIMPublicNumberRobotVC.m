@@ -35,7 +35,7 @@
 #import "QIMContactSelectionViewController.h"
 #import "QIMChatBGImageSelectController.h"
 #import "QIMMessageBrowserVC.h"
-#import "QIMFileManagerViewController.h"
+#import "STFileMngrVCtrler.h"
 #import "QIMPreviewMsgVC.h"
 #import "QIMEmotionSpirits.h"
 #import "QIMZBarViewController.h"

@@ -1,17 +1,18 @@
 //
-//  QIMFileManagerCell.m
+//  STFileMngrCell.m
 //  qunarChatIphone
 //
 //  Created by chenjie on 15/7/24.
 //
 //
+// Copyright © Startalk Ltd.
 
-#import "QIMFileManagerCell.h"
+#import "STFileMngrCell.h"
 #import "QIMFileIconTools.h"
 #import "QIMJSONSerializer.h"
 #import "NSBundle+QIMLibrary.h"
 
-@interface QIMFileManagerCell()
+@interface STFileMngrCell()
 {
     UIImageView             * _fileIcon;
     UILabel                 * _nameLabel;
@@ -26,7 +27,7 @@
 
 @end
 
-@implementation QIMFileManagerCell
+@implementation STFileMngrCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

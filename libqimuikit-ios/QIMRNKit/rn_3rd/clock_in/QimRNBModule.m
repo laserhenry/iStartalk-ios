@@ -42,7 +42,7 @@
 #import "QIMPublicNumberVC.h"
 #import "QIMRNExternalAppManager.h"
 #import "QIMDressUpController.h"
-#import "QIMFileManagerViewController.h"
+#import "STFileMngrVCtrler.h"
 #import "QIMQNValidationFriendVC.h"
 #import "QIMValidationFriendVC.h"
 #import "QIMFriendSettingCell.h"

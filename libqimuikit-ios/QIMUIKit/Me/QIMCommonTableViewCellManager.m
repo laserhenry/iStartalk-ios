@@ -12,7 +12,7 @@
 #import "QIMWebView.h"
 #import "NSBundle+QIMLibrary.h"
 #import "STDataContraller.h"
-#import "QIMFileManagerViewController.h"
+#import "STFileMngrVCtrler.h"
 #import "QIMFeedBackViewController.h"
 #import "QIMAboutVC.h"
 #import "QIMMySettingController.h"
@@ -129,7 +129,7 @@
             break;
         case QIMCommonTableViewCellDataTypeMyFile: {
             
-            QIMFileManagerViewController *fileManagerVc = [[QIMFileManagerViewController alloc] init];
+            STFileMngrVCtrler *fileManagerVc = [[STFileMngrVCtrler alloc] init];
             [self.rootVC.navigationController pushViewController:fileManagerVc animated:YES];
         }
             break;

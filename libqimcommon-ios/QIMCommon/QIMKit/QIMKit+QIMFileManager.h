@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface STKit (QIMFileManager)
+@interface STKit (STFileMngr)
 
 #pragma mark - Public
 - (NSString * _Nonnull)qim_cachedFileNameForKey:(NSString * _Nullable) key;

@@ -1,14 +1,15 @@
 //
-//  QIMFileManagerCell.h
+//  STFileMngrCell.h
 //  qunarChatIphone
 //
 //  Created by chenjie on 15/7/24.
 //
 //
+// Copyright © Startalk Ltd.
 
 #import "QIMCommonUIFramework.h"
 
-@interface QIMFileManagerCell : UITableViewCell
+@interface STFileMngrCell : UITableViewCell
 
 - (void)setCellMessage:(STMsgModel *)message;
 

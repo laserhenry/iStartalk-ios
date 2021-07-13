@@ -41,7 +41,7 @@
 
 #import "QIMJSONSerializer.h"
 
-#import "STFileManager.h"
+#import "STFileMngr.h"
 #import "QIMDESHelper.h"
 
 #import <SystemConfiguration/CaptiveNetwork.h>
@@ -649,7 +649,7 @@ static QIMManager *__IMManager = nil;
             for (NSDictionary *dic in valueArray) {
                 NSString *configKey = [self transformClientConfigKeyWithType:type];
                 NSString *configValue = dic[@"httpUrl"];
-                NSString *subKey = [[STFileManager sharedInstance] md5fromUrl:configValue];
+                NSString *subKey = [[STFileMngr sharedInstance] md5fromUrl:configValue];
                 NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
                 [dict setQIMSafeObject:configKey forKey:@"key"];
                 [dict setQIMSafeObject:configValue forKey:@"value"];

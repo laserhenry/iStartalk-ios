@@ -1,9 +1,10 @@
 //
-//  STFileManager.h
+//  STFileMngr.h
 //  QIMCommon
 //
 //  Created by lilu on 2019/8/28.
 //
+// Copyright © 2022 Startalk LTD.
 
 #import "QIMPrivateHeader.h"
 
@@ -13,7 +14,7 @@ typedef void(^QIMKitCheckImageCallBack)(NSString *imageUrl);
 typedef void(^QIMKitCheckFileCallBack)(NSString *fileUrl);
 
 
-@interface STFileManager : NSObject
+@interface STFileMngr : NSObject
 
 + (instancetype)sharedInstance;
 

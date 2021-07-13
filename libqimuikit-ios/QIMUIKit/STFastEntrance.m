@@ -35,7 +35,7 @@
 
 #import <MessageUI/MFMailComposeViewController.h>
 #import "QIMPublicNumberRobotVC.h"
-#import "QIMFileManagerViewController.h"
+#import "STFileMngrVCtrler.h"
 #import "QIMOrganizationalVC.h"
 #import "QIMZBarViewController.h"
 #import "STJumpURLHandle.h"
@@ -1009,7 +1009,7 @@ static STFastEntrance *_sharedInstance = nil;
 }
 
 - (UIViewController *)getMyFileVC {
-    QIMFileManagerViewController *fileManagerVc = [[QIMFileManagerViewController alloc] init];
+    STFileMngrVCtrler *fileManagerVc = [[STFileMngrVCtrler alloc] init];
     return fileManagerVc;
 }
 
@@ -1019,7 +1019,7 @@ static STFastEntrance *_sharedInstance = nil;
         if (!navVC) {
             navVC = [[STFastEntrance sharedInstance] getQIMFastEntranceRootNav];
         }
-        QIMFileManagerViewController *fileManagerVc = [[QIMFileManagerViewController alloc] init];
+        STFileMngrVCtrler *fileManagerVc = [[STFileMngrVCtrler alloc] init];
         [navVC pushViewController:fileManagerVc animated:YES];
     });
 }

@@ -12,39 +12,39 @@
 
 #import "QIMKit+QIMFileManager.h"
 #import "QIMPrivateHeader.h"
-#import "STFileManager.h"
+#import "STFileMngr.h"
 
-@implementation STKit (QIMFileManager)
+@implementation STKit (STFileMngr)
 
 #pragma mark - Public
 - (NSString * _Nonnull)qim_cachedFileNameForKey:(NSString * _Nullable) key {
-    return [[STFileManager sharedInstance] qim_cachedFileNameForKey:key];
+    return [[STFileMngr sharedInstance] qim_cachedFileNameForKey:key];
 }
 
 - (NSString *)qim_getFileMD5WithPath:(NSString *)filePath {
-    return [[STFileManager sharedInstance] qim_getFileMD5WithPath:filePath];
+    return [[STFileMngr sharedInstance] qim_getFileMD5WithPath:filePath];
 }
 
 #pragma mark - 图片
 
 - (NSString *)qim_imageKey:(NSData *)imageData {
-    return [[STFileManager sharedInstance] qim_imageKey:imageData];
+    return [[STFileMngr sharedInstance] qim_imageKey:imageData];
 }
 
 - (NSString *)qim_saveImageData:(NSData *)imageData {
-    return [[STFileManager sharedInstance] qim_saveImageData:imageData];
+    return [[STFileMngr sharedInstance] qim_saveImageData:imageData];
 }
 
 - (NSString *)getFileExtFromUrl:(NSString *)url {
-    return [[STFileManager sharedInstance] getFileExtFromUrl:url];
+    return [[STFileMngr sharedInstance] getFileExtFromUrl:url];
 }
 
 - (NSString *)md5fromUrl:(NSString *)url {
-    return [[STFileManager sharedInstance] md5fromUrl:url];
+    return [[STFileMngr sharedInstance] md5fromUrl:url];
 }
 
 - (NSString *)getFileNameFromUrl:(NSString *)url {
-    return [[STFileManager sharedInstance] getFileNameFromUrl:url];
+    return [[STFileMngr sharedInstance] getFileNameFromUrl:url];
 }
 
 /**
@@ -54,7 +54,7 @@
  @param message 要发送的消息Model
  */
 - (void)qim_uploadImageWithImageKey:(NSString *)localImageKey forMessage:(STMsgModel *)message {
-    [[STFileManager sharedInstance] qim_uploadImageWithImageKey:localImageKey forMessage:message];
+    [[STFileMngr sharedInstance] qim_uploadImageWithImageKey:localImageKey forMessage:message];
 }
 
 /**
@@ -64,7 +64,7 @@
  @param message 要发送的消息Model
  */
 - (void)qim_uploadImageWithImagePath:(NSString *)localImagePath forMessage:(STMsgModel *)message {
-    [[STFileManager sharedInstance] qim_uploadImageWithImagePath:localImagePath forMessage:message];
+    [[STFileMngr sharedInstance] qim_uploadImageWithImagePath:localImagePath forMessage:message];
 }
 
 /**
@@ -74,7 +74,7 @@
  @param callback 返回图片地址
  */
 - (void)qim_uploadImageWithImagePath:(NSString *)localImagePath withCallback:(QIMKitUploadImageNewRequestSuccessedBlock)callback {
-    [[STFileManager sharedInstance] qim_uploadImageWithImagePath:localImagePath withCallback:callback];
+    [[STFileMngr sharedInstance] qim_uploadImageWithImagePath:localImagePath withCallback:callback];
 }
 
 /**
@@ -87,7 +87,7 @@
  @return 返回图片地址
  */
 - (void)qim_uploadImageWithImageData:(NSData *)fileData WithMsgId:(NSString *)key WithMsgType:(int)type WithPathExtension:(NSString *)extension withCallBack:(QIMKitUploadImageCallBack)callback {
-    [[STFileManager sharedInstance] qim_uploadImageWithImageData:fileData WithMsgId:key WithMsgType:type WithPathExtension:extension withCallBack:callback];
+    [[STFileMngr sharedInstance] qim_uploadImageWithImageData:fileData WithMsgId:key WithMsgType:type WithPathExtension:extension withCallBack:callback];
 }
 
 /**
@@ -97,42 +97,42 @@
  @param callback 返回头像地址
  */
 - (void)qim_uploadMyPhotoData:(NSData *)headerData withCallBack:(QIMKitUploadMyPhotoCallBack)callback {
-    [[STFileManager sharedInstance] qim_uploadMyPhotoData:headerData withCallBack:callback];
+    [[STFileMngr sharedInstance] qim_uploadMyPhotoData:headerData withCallBack:callback];
 }
 
 #pragma mark - 视频
 
 - (void)qim_uploadVideo:(NSString *)videoPath videoDic:(NSDictionary *)videoExt withCallBack:(QIMKitUploadVideoNewRequestSuccessedBlock)callback {
-    [[STFileManager sharedInstance] qim_uploadVideo:videoPath videoDic:videoExt withCallBack:callback];
+    [[STFileMngr sharedInstance] qim_uploadVideo:videoPath videoDic:videoExt withCallBack:callback];
 }
 
 - (void)qim_uploadVideoPath:(NSString *)LocalVideoOutPath forMessage:(STMsgModel *)message {
-    [[STFileManager sharedInstance] qim_uploadVideoPath:LocalVideoOutPath forMessage:message];
+    [[STFileMngr sharedInstance] qim_uploadVideoPath:LocalVideoOutPath forMessage:message];
 }
 
 #pragma mark - 文件
 
 - (void)qim_uploadFileWithFilePath:(NSString *)localFilePath forMessage:(STMsgModel *)message {
-    [[STFileManager sharedInstance] qim_uploadFileWithFilePath:localFilePath forMessage:message];
+    [[STFileMngr sharedInstance] qim_uploadFileWithFilePath:localFilePath forMessage:message];
 }
 
 - (void)qim_uploadFileWithFileData:(NSData *)fileData WithPathExtension:(NSString *)extension forMessage:(STMsgModel *)message {
-    [[STFileManager sharedInstance] qim_uploadFileWithFileData:fileData WithPathExtension:extension forMessage:message];
+    [[STFileMngr sharedInstance] qim_uploadFileWithFileData:fileData WithPathExtension:extension forMessage:message];
 }
 
 - (void)qim_uploadFileWithFilePath:(NSString *)localFilePath WithCallback:(QIMKitUploadFileNewRequestSuccessedBlock)callback {
-    [[STFileManager sharedInstance] qim_uploadFileWithFilePath:localFilePath WithCallback:callback];
+    [[STFileMngr sharedInstance] qim_uploadFileWithFilePath:localFilePath WithCallback:callback];
 }
 
 - (void)qim_uploadFileWithFileData:(NSData *)fileData WithPathExtension:(NSString *)extension WithCallback:(QIMKitUploadFileNewRequestSuccessedBlock)callback {
-    [[STFileManager sharedInstance] qim_uploadFileWithFileData:fileData WithPathExtension:extension WithCallback:callback];
+    [[STFileMngr sharedInstance] qim_uploadFileWithFileData:fileData WithPathExtension:extension WithCallback:callback];
 }
 
 - (NSString *)qim_getLocalFileDataWithFileName:(NSString *)fileName {
-    return [[STFileManager sharedInstance] qim_getLocalFileDataWithFileName:fileName];
+    return [[STFileMngr sharedInstance] qim_getLocalFileDataWithFileName:fileName];
 }
 
 - (NSString *)qim_saveLocalFileData:(NSData *)fileData withFileName:(NSString *)fileName {
-    return [[STFileManager sharedInstance] qim_saveLocalFileData:fileData withFileName:fileName];
+    return [[STFileMngr sharedInstance] qim_saveLocalFileData:fileData withFileName:fileName];
 }
 @end
