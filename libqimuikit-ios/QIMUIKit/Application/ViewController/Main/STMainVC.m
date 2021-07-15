@@ -54,7 +54,7 @@
     UIView *_loadingView;
     UIActivityIndicatorView *_loadingActivityView;
     BOOL _needLoading;
-
+    NSNotificationCenter *stnc;
 }
 
 @property(nonatomic, strong) QTalkSessionView *sessionView;
@@ -194,32 +194,35 @@ static dispatch_once_t __onceMainToken;
 }
 
 - (void)registerNSNotifications {
+    
+    NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+    
     //登录成功
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginNotify:) name:kNotificationLoginState object:nil];
+    [nc addObserver:self selector:@selector(loginNotify:) name:kNotificationLoginState object:nil];
     //更新App未读数
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotReadCount) name:kMsgNotReadCountChange object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotReadCount) name:kNotificationSessionListUpdate object:nil];
+    [nc addObserver:self selector:@selector(updateNotReadCount) name:kMsgNotReadCountChange object:nil];
+    [nc addObserver:self selector:@selector(updateNotReadCount) name:kNotificationSessionListUpdate object:nil];
     //更新骆驼帮未读数
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateExploreNotReadCount:) name:kExploreNotReadCountChange object:nil];
+    [nc addObserver:self selector:@selector(updateExploreNotReadCount:) name:kExploreNotReadCountChange object:nil];
     //更新驼圈未读数
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWorkFeedNotReadCount:) name:kNotifyNotReadWorkCountChange object:nil];
+    [nc addObserver:self selector:@selector(updateWorkFeedNotReadCount:) name:kNotifyNotReadWorkCountChange object:nil];
     //更新App网络状态
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWorkStateChange:) name:kAppWorkStateChange object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifySelectTab:) name:kNotifySelectTab object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshSwitchAccount:) name:kNotifySwichUserSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(otherPlatformLogin:) name:kPBPresenceCategoryNotifyOnline object:nil];
+    [nc addObserver:self selector:@selector(appWorkStateChange:) name:kAppWorkStateChange object:nil];
+    [nc addObserver:self selector:@selector(notifySelectTab:) name:kNotifySelectTab object:nil];
+    [nc addObserver:self selector:@selector(refreshSwitchAccount:) name:kNotifySwichUserSuccess object:nil];
+    [nc addObserver:self selector:@selector(otherPlatformLogin:) name:kPBPresenceCategoryNotifyOnline object:nil];
 
     //上传日志进度
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUpdateProgress:) name:KNotifyUploadProgress object:nil];
+    [nc addObserver:self selector:@selector(updateUpdateProgress:) name:KNotifyUploadProgress object:nil];
  
     //上传日志
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submitLog:) name:kNotifySubmitLog object:nil];
+    [nc addObserver:self selector:@selector(submitLog:) name:kNotifySubmitLog object:nil];
     //销毁群通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onChatRoomDestroy:) name:kChatRoomDestroy object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWorkFeedNotifyConfig:) name:kNotifyUpdateNotifyConfig object:nil];
+    [nc addObserver:self selector:@selector(onChatRoomDestroy:) name:kChatRoomDestroy object:nil];
+    [nc addObserver:self selector:@selector(updateWorkFeedNotifyConfig:) name:kNotifyUpdateNotifyConfig object:nil];
     
     //更新提醒
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateAppVersion:) name:kNotifyUpdateAppVersion object:nil];
+    [nc addObserver:self selector:@selector(updateAppVersion:) name:kNotifyUpdateAppVersion object:nil];
 }
 
 - (NSString *)navTitle {
@@ -264,7 +267,8 @@ static dispatch_once_t __onceMainToken;
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSNotificationCenter * nc =[NSNotificationCenter defaultCenter];
+    [nc removeObserver:self];
 }
 
 - (void)setLoadingViewWithHidden:(BOOL)hidden {
