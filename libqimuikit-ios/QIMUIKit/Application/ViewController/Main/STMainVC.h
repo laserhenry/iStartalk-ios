@@ -1,14 +1,14 @@
 //
-//  QIMMainVC.h
+//  STMainVC.h
 //  qunarChatIphone
 //
 //  Created by 平 薛 on 15/4/15.
 //  Copyright (c) 2015年 ping.xue. All rights reserved.
-//
+//  Copyright © 2021 Startalk Ltd.
 
 #import "QIMCommonUIFramework.h"
 
-@interface QIMMainVC : UIViewController
+@interface STMainVC : UIViewController
 
 @property (nonatomic, strong) UIView *rootView;
 

@@ -7,10 +7,10 @@
 //
 
 #import "QIMCommonUIFramework.h"
-@class QIMMainVC;
+@class STMainVC;
 
 @interface QIMUserListView : UIView
 
-@property (nonatomic, weak) QIMMainVC *rootViewController;
+@property (nonatomic, weak) STMainVC *rootViewController;
 
 @end

@@ -26,7 +26,7 @@
 
 - (void)qim_pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    Class mainClass = NSClassFromString(@"QIMMainVC");
+    Class mainClass = NSClassFromString(@"STMainVC");
     if ([[STKit sharedInstance] getIsIpad] == YES && [self.topViewController isKindOfClass:mainClass] && UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]) == NO) {
         [[QIMWindowManager shareInstance] showDetailVC:viewController];
 //        [self.topViewController showDetailViewController:viewController sender:nil];
@@ -36,7 +36,7 @@
 }
 
 //- (void)qim_presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion {
-//    Class mainClass = NSClassFromString(@"QIMMainVC");
+//    Class mainClass = NSClassFromString(@"STMainVC");
 //    if ([[QIMKit sharedInstance] getIsIpad] == YES) {
 //        viewControllerToPresent.modalPresentationStyle = UIModalPresentationCurrentContext;
 //        [self qim_presentViewController:viewControllerToPresent animated:flag completion:completion];

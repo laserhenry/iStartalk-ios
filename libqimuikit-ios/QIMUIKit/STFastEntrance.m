@@ -41,7 +41,7 @@
 #import "STJumpURLHandle.h"
 #import "QIMLoginVC.h"
 #import "QIMPublicLogin.h"
-#import "QIMMainVC.h"
+#import "STMainVC.h"
 #import "QIMLoginViewController.h"
 #import "QIMWebLoginVC.h"
 #import "QIMQRCodeViewDisplayController.h"
@@ -167,24 +167,24 @@ static STFastEntrance *_sharedInstance = nil;
         NSString *userName = [STKit getLastUserName];
         NSString *userToken = [[STKit sharedInstance] getLastUserToken];
         if (userName.length > 0 && userToken.length > 0 && [[STKit sharedInstance] getIsIpad] == NO) {
-            QIMMainVC *mainVC = [QIMMainVC sharedInstanceWithSkipLogin:YES];
+            STMainVC *mainVC = [STMainVC sharedInstanceWithSkipLogin:YES];
             QIMNavController *navVC = [[QIMNavController alloc] initWithRootViewController:mainVC];
             [[[[UIApplication sharedApplication] delegate] window] setRootViewController:navVC];
         } else {
             if (userName && userToken && [STKit getQIMProjectType] == QIMProjectTypeQTalk) {
                 QIMLoginVC *remoteVC = [[QIMLoginVC alloc] init];
-                [QIMMainVC setMainVCReShow:YES];
+                [STMainVC setMainVCReShow:YES];
                 UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:remoteVC];
                 [window setRootViewController:nav];
             } else {
                 if ([STKit getQIMProjectType] == QIMProjectTypeStartalk) {
                     QIMPublicLogin *remoteVC = [[QIMPublicLogin alloc] init];
-                    [QIMMainVC setMainVCReShow:YES];
+                    [STMainVC setMainVCReShow:YES];
                     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:remoteVC];
                     [window setRootViewController:nav];
                 } else {
                     QIMLoginVC *remoteVC = [[QIMLoginVC alloc] init];
-                    [QIMMainVC setMainVCReShow:YES];
+                    [STMainVC setMainVCReShow:YES];
                     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:remoteVC];
                     [window setRootViewController:nav];
                 }
@@ -207,11 +207,11 @@ static STFastEntrance *_sharedInstance = nil;
 }
 
 + (void)showMainVc {
-    if ([QIMMainVC checkMainVC] == NO || [QIMMainVC getMainVCReShow] == YES) {
+    if ([STMainVC checkMainVC] == NO || [STMainVC getMainVCReShow] == YES) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([[STKit sharedInstance] getIsIpad] == YES) {
                 /* mark by newipad
-                QIMMainVC *mainVC = [QIMMainVC sharedInstanceWithSkipLogin:NO];
+                STMainVC *mainVC = [STMainVC sharedInstanceWithSkipLogin:NO];
                 QIMNavController *navVC = [[QIMNavController alloc] initWithRootViewController:mainVC];
                 UIViewController *detailVc = [[UIViewController alloc] init];
                 detailVc.title = @"Detail";
@@ -229,7 +229,7 @@ static STFastEntrance *_sharedInstance = nil;
                 [[QIMIPadWindowManager sharedInstance] setiPadRootVc:mainVC];
 #endif
             } else {
-                QIMMainVC *mainVC = [QIMMainVC sharedInstanceWithSkipLogin:NO];
+                STMainVC *mainVC = [STMainVC sharedInstanceWithSkipLogin:NO];
                 QIMNavController *navVC = [[QIMNavController alloc] initWithRootViewController:mainVC];
                 [[[[UIApplication sharedApplication] delegate] window] setRootViewController:navVC];
             }
@@ -1364,12 +1364,12 @@ static STFastEntrance *_sharedInstance = nil;
                 if ([STKit getQIMProjectType] != QIMProjectTypeQChat) {
                     if ([STKit getQIMProjectType] == QIMProjectTypeStartalk) {
                         QIMPublicLogin *remoteVC = [[QIMPublicLogin alloc] init];
-                        [QIMMainVC setMainVCReShow:YES];
+                        [STMainVC setMainVCReShow:YES];
                         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:remoteVC];
                         [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
                     } else {
                         QIMLoginVC *remoteVC = [[QIMLoginVC alloc] init];
-                        [QIMMainVC setMainVCReShow:YES];
+                        [STMainVC setMainVCReShow:YES];
                         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:remoteVC];
                         [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
                     }
@@ -1377,13 +1377,13 @@ static STFastEntrance *_sharedInstance = nil;
                     if ([[STKit sharedInstance] qimNav_Debug] == 1) {
                         QIMLoginViewController *loginViewController = [[QIMLoginViewController alloc] initWithNibName:@"QIMLoginViewController" bundle:nil];
                         [loginViewController setLinkUrl:nil];
-                        [QIMMainVC setMainVCReShow:YES];
+                        [STMainVC setMainVCReShow:YES];
                         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginViewController];
                         [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
                     } else {
                         QIMWebLoginVC *loginVC = [[QIMWebLoginVC alloc] init];
                         [loginVC clearLoginCookie];
-                        [QIMMainVC setMainVCReShow:YES];
+                        [STMainVC setMainVCReShow:YES];
                         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
                         [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
                     }
@@ -1416,12 +1416,12 @@ static STFastEntrance *_sharedInstance = nil;
                         if ([STKit getQIMProjectType] != QIMProjectTypeQChat) {
                             if ([STKit getQIMProjectType] == QIMProjectTypeStartalk) {
                                 QIMPublicLogin *remoteVC = [[QIMPublicLogin alloc] init];
-                                [QIMMainVC setMainVCReShow:YES];
+                                [STMainVC setMainVCReShow:YES];
                                 UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:remoteVC];
                                 [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
                             } else {
                                 QIMLoginVC *remoteVC = [[QIMLoginVC alloc] init];
-                                [QIMMainVC setMainVCReShow:YES];
+                                [STMainVC setMainVCReShow:YES];
                                 UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:remoteVC];
                                 [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
                             }
@@ -1429,13 +1429,13 @@ static STFastEntrance *_sharedInstance = nil;
                             if ([[STKit sharedInstance] qimNav_Debug] == 1) {
                                 QIMLoginViewController *loginViewController = [[QIMLoginViewController alloc] initWithNibName:@"QIMLoginViewController" bundle:nil];
                                 [loginViewController setLinkUrl:nil];
-                                [QIMMainVC setMainVCReShow:YES];
+                                [STMainVC setMainVCReShow:YES];
                                 UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginViewController];
                                 [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
                             } else {
                                 QIMWebLoginVC *loginVC = [[QIMWebLoginVC alloc] init];
                                 [loginVC clearLoginCookie];
-                                [QIMMainVC setMainVCReShow:YES];
+                                [STMainVC setMainVCReShow:YES];
                                 UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
                                 [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
                             }
@@ -1485,19 +1485,19 @@ static STFastEntrance *_sharedInstance = nil;
                     [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
                 } else {
                     QIMLoginVC *remoteVC = [[QIMLoginVC alloc] init];
-                    [QIMMainVC setMainVCReShow:YES];
+                    [STMainVC setMainVCReShow:YES];
                     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:remoteVC];
                     [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
                 }
             } else {
                 if ([[STKit sharedInstance] qimNav_Debug] == 1) {
                     QIMLoginViewController *loginVC = [[QIMLoginViewController alloc] initWithNibName:@"QIMLoginViewController" bundle:nil];
-                    [QIMMainVC setMainVCReShow:YES];
+                    [STMainVC setMainVCReShow:YES];
                     [loginVC setLinkUrl:nil];
                     [[[[UIApplication sharedApplication] delegate] window] setRootViewController:loginVC];
                 } else {
                     QIMWebLoginVC *loginVC = [[QIMWebLoginVC alloc] init];
-                    [QIMMainVC setMainVCReShow:YES];
+                    [STMainVC setMainVCReShow:YES];
                     [loginVC clearLoginCookie];
                     [[[[UIApplication sharedApplication] delegate] window] setRootViewController:loginVC];
                 }

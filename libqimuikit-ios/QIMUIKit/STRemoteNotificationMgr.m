@@ -28,8 +28,8 @@
 {
     UIViewController *rootViewController = [[UIApplication sharedApplication] visibleViewController];
     NSLog(@"rootViewController : %@", rootViewController);
-    Class QIMMainVCClass = NSClassFromString(@"QIMMainVC");
-    if (userInfo.count && [rootViewController isKindOfClass:QIMMainVCClass]) {
+    Class STMainVCClass = NSClassFromString(@"STMainVC");
+    if (userInfo.count && [rootViewController isKindOfClass:STMainVCClass]) {
         NSString * userId = userInfo[@"userid"];
         if (userId.length) {
             if ([[[STKit sharedInstance] getCurrentSessionUserId] isEqualToString:userId]) {

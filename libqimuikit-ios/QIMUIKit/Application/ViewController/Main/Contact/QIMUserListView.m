@@ -14,7 +14,7 @@
 #import "QIMGroupListVC.h"
 #import "QIMMessageHelperVC.h"
 #import "QIMPublicNumberVC.h"
-#import "QIMMainVC.h"
+#import "STMainVC.h"
 #import "QIMFriendListViewController.h"
 #import "QIMAddIndexViewController.h"
 #import "QIMOrganizationalVC.h"

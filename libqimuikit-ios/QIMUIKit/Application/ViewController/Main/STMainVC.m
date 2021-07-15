@@ -1,12 +1,13 @@
 //
-//  QIMMainVC.m
+//  STMainVC.m
 //  qunarChatIphone
 //
 //  Created by 平 薛 on 15/4/15.
 //  Copyright (c) 2015年 ping.xue. All rights reserved.
+//  Copyright © 2021 Startalk Ltd.
 //
 
-#import "QIMMainVC.h"
+#import "STMainVC.h"
 #import "QIMUUIDTools.h"
 #import "UIApplication+QIMApplication.h"
 #import "QIMCustomTabBar.h"
@@ -44,7 +45,7 @@
 
 #define kTabBarHeight   49
 
-@interface QIMMainVC () <QIMCustomTabBarDelegate, UISearchControllerDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UIViewControllerPreviewingDelegate, UINavigationControllerDelegate, UISearchResultsUpdating, QIMUpdateAlertViewDelegate, SelectIndexPathDelegate> {
+@interface STMainVC () <QIMCustomTabBarDelegate, UISearchControllerDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UIViewControllerPreviewingDelegate, UINavigationControllerDelegate, UISearchResultsUpdating, QIMUpdateAlertViewDelegate, SelectIndexPathDelegate> {
 
     QIMCustomTabBar *_tabBar;
     UIView *_contentView;
@@ -102,9 +103,9 @@
 
 @end
 
-static BOOL _mainVCReShow = YES;
+static BOOL mainVCReShow = YES;
 
-@implementation QIMMainVC
+@implementation STMainVC
 
 - (UISearchBar *)searchBar {
     if (!_searchBar) {
@@ -122,9 +123,9 @@ static BOOL _mainVCReShow = YES;
     return _searchBar;
 }
 
-+ (void)setMainVCReShow:(BOOL)mainVCReShow {
-    _mainVCReShow = mainVCReShow;
-    if (mainVCReShow) {
++ (void)setMainVCReShow:(BOOL) mainVCRS {
+    mainVCReShow = mainVCRS;
+    if (mainVCRS) {
         [[NSNotificationCenter defaultCenter] removeObserver:__mainVc];
         __mainVc = nil;
         __onceMainToken = 0;
@@ -132,18 +133,18 @@ static BOOL _mainVCReShow = YES;
 }
 
 + (BOOL)getMainVCReShow {
-    return _mainVCReShow;
+    return mainVCReShow;
 }
 
 + (BOOL)checkMainVC {
     return __mainVc != nil;
 }
 
-static QIMMainVC *__mainVc = nil;
+static STMainVC *__mainVc = nil;
 static dispatch_once_t __onceMainToken;
 + (instancetype)sharedInstanceWithSkipLogin:(BOOL)skipLogin {
     dispatch_once(&__onceMainToken, ^{
-        __mainVc = [[QIMMainVC alloc] init];
+        __mainVc = [[STMainVC alloc] init];
     });
     __mainVc.skipLogin = skipLogin;
     return __mainVc;
@@ -155,7 +156,7 @@ static dispatch_once_t __onceMainToken;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _mainVCReShow = NO;
+    mainVCReShow = NO;
     /*
     if (@available(iOS 10.3, *)) {
         [self changeIcon];

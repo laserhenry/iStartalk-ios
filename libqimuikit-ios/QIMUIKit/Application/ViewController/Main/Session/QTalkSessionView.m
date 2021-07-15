@@ -8,7 +8,7 @@
 
 #import "QTalkSessionView.h"
 #import "QIMChatVC.h"
-#import "QIMMainVC.h"
+#import "STMainVC.h"
 #import "UIApplication+QIMApplication.h"
 #import "QIMJSONSerializer.h"
 #import "QIMGroupChatVC.h"
@@ -90,7 +90,7 @@
 
 @property(nonatomic, strong) NSMutableArray *appendHeaderViews;
 
-@property(nonatomic, strong) QIMMainVC *rootViewController;
+@property(nonatomic, strong) STMainVC *rootViewController;
 
 @end
 
@@ -179,7 +179,7 @@
 //        UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake(0, -self.tableView.height, self.tableView.width, self.tableView.height)];
 //        [logoView setBackgroundColor:[UIColor qim_colorWithHex:0xEEEEEE alpha:1]];
 //        [headerView addSubview:logoView];
-//        if ([self.rootViewController isKindOfClass:[QIMMainVC class]] && [[QIMKit sharedInstance] getIsIpad] == NO) {
+//        if ([self.rootViewController isKindOfClass:[STMainVC class]] && [[QIMKit sharedInstance] getIsIpad] == NO) {
 //            [headerView addSubview:self.searchBar];
 //        } else {
 //            [headerView addSubview:self.searchBar];
@@ -295,8 +295,8 @@
     self = [self initWithFrame:frame];
     if (self) {
         [self setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
-        if ([rootVc isKindOfClass:[QIMMainVC class]]) {
-            QIMMainVC *mainVc = (QIMMainVC *) rootVc;
+        if ([rootVc isKindOfClass:[STMainVC class]]) {
+            STMainVC *mainVc = (STMainVC *) rootVc;
             _rootViewController = mainVc;
         } else {
 
@@ -357,7 +357,7 @@
 
     dispatch_async(dispatch_get_main_queue(), ^{
         UIViewController *currentVc = [UIApplication sharedApplication].visibleViewController;
-        Class mainVC = NSClassFromString(@"QIMMainVC");
+        Class mainVC = NSClassFromString(@"STMainVC");
         Class helperVC = NSClassFromString(@"QIMMessageHelperVC");
 //        if ([currentVc isKindOfClass:[mainVC class]] || [currentVc isKindOfClass:[helperVC class]] || [[QIMKit sharedInstance] getIsIpad] == YES) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -521,7 +521,7 @@
         NSDictionary *infoDic = [model yy_modelToJSONObject];
         QTalkNewSessionTableViewCell *cell = (QTalkNewSessionTableViewCell *) [_tableView cellForRowAtIndexPath:indexPath];
         QTalkViewController *pushVc = [self sessionViewDidSelectRowAtIndexPath:indexPath infoDic:infoDic];
-        if ([self.rootViewController isKindOfClass:[QIMMainVC class]]) {
+        if ([self.rootViewController isKindOfClass:[STMainVC class]]) {
             [self.rootViewController.navigationController pushViewController:pushVc animated:YES];
         } else {
             UINavigationController *rootNav = [[UIApplication sharedApplication] visibleNavigationController];
