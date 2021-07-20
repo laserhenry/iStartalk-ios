@@ -1,12 +1,13 @@
 //
-//  QIMHTTPClient.m
+//  STHTTPClient.m
 //  QIMKitVendor
 //
 //  Created by 李露 on 2018/8/2.
 //  Copyright © 2018年 QIM. All rights reserved.
+//  Copyright © 2021 Startalk ltd
 //
 
-#import "QIMHTTPClient.h"
+#import "STHTTPClient.h"
 #import "QIMHTTPResponse.h"
 //#import "ASIHTTPRequest.h"
 //#import "ASIFormDataRequest.h"
@@ -17,7 +18,7 @@
 #import "QIMHttpRequestConfig.h"
 static NSString *baseUrl = nil;
 
-@implementation QIMHTTPClient
+@implementation STHTTPClient
 
 + (NSString *)baseUrl {
     return baseUrl;
@@ -29,11 +30,11 @@ static NSString *baseUrl = nil;
     }
 }
 
-+ (void)sendRequest:(QIMHTTPRequest *)request complete:(QIMCompleteHandler)completeHandler failure:(QIMFailureHandler)failureHandler {
++ (void)sendRequest:(STHTTPRequest *)request complete:(QIMCompleteHandler)completeHandler failure:(QIMFailureHandler)failureHandler {
     [self sendRequest:request progressBlock:nil complete:completeHandler failure:failureHandler];
 }
 
-+ (void)sendRequest:(QIMHTTPRequest *)request progressBlock:(QIMProgressHandler)progreeBlock complete:(QIMCompleteHandler)completeHandler failure:(QIMFailureHandler)failureHandler {
++ (void)sendRequest:(STHTTPRequest *)request progressBlock:(QIMProgressHandler)progreeBlock complete:(QIMCompleteHandler)completeHandler failure:(QIMFailureHandler)failureHandler {
     if (request.url.absoluteString.length <= 0 || request.url.absoluteString == nil) {
         if (failureHandler) {
             failureHandler([NSError errorWithDomain:@"Empty Url String" code:0 userInfo:nil]);
@@ -45,20 +46,20 @@ static NSString *baseUrl = nil;
         request.HTTPMethod = QIMHTTPMethodPOST;
     }
     if (request.HTTPMethod == QIMHTTPMethodGET) {
-        [QIMHTTPClient postAFMethodRequest:request progressBlock:progreeBlock complete:completeHandler failure:failureHandler];
+        [STHTTPClient postAFMethodRequest:request progressBlock:progreeBlock complete:completeHandler failure:failureHandler];
     } else if (request.HTTPMethod == QIMHTTPMethodPOST) {
-         [QIMHTTPClient postAFMethodRequest:request progressBlock:progreeBlock complete:completeHandler failure:failureHandler];
+         [STHTTPClient postAFMethodRequest:request progressBlock:progreeBlock complete:completeHandler failure:failureHandler];
     } else {
-        
+        NSLog(@"Something don't know what to do");
     }
 }
 
-+ (void)postAFMethodRequest:(QIMHTTPRequest *)request
++ (void)postAFMethodRequest:(STHTTPRequest *)request
               progressBlock:(QIMProgressHandler)progreeBlock
                    complete:(QIMCompleteHandler)completeHandler
                     failure:(QIMFailureHandler)failureHandler {
     
-    [[QIMHttpRequestManager sharedManger] sendRequest:^(QIMHTTPRequest * _Nonnull qtRequest) {
+    [[QIMHttpRequestManager sharedManger] sendRequest:^(STHTTPRequest * _Nonnull qtRequest) {
         qtRequest.url = request.url;
         qtRequest.httpRequestType = request.httpRequestType;
         qtRequest.HTTPMethod = request.HTTPMethod;

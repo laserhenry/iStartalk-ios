@@ -15,7 +15,7 @@
 
 + (STKit *)sharedInstance;
 
-- (void)clearQIMManager;
+- (void)clearSTManager;
 
 - (NSMutableDictionary *)timeStempDic;
 

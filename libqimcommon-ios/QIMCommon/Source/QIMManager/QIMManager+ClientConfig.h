@@ -6,10 +6,10 @@
 //  Copyright © 2018年 QIMKit. All rights reserved.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 #import "QIMPrivateHeader.h"
 
-@interface QIMManager (ClientConfig)
+@interface STManager (ClientConfig)
 
 /**
  转化个人配置枚举值为字符串

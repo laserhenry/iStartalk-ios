@@ -16,11 +16,11 @@
 @implementation STKit (QIMAPPFound)
 
 - (void)getRemoteFoundNavigation {
-    return [[QIMManager sharedInstance] getRemoteFoundNavigation];
+    return [[STManager sharedInstance] getRemoteFoundNavigation];
 }
 
 - (NSString *)getLocalFoundNavigation {
-    return [[QIMManager sharedInstance] getLocalFoundNavigation];
+    return [[STManager sharedInstance] getLocalFoundNavigation];
 }
 
 @end

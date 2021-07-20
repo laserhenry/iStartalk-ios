@@ -15,335 +15,335 @@
 @implementation STKit (QIMMessage)
 
 - (NSArray *)getMsgsForMsgType:(QIMMessageType)msgType {
-    return [[QIMManager sharedInstance] getMsgsForMsgType:msgType];
+    return [[STManager sharedInstance] getMsgsForMsgType:msgType];
 }
 
 - (NSDictionary *)getMsgDictByMsgId:(NSString *)msgId {
-    return [[QIMManager sharedInstance] getMsgDictByMsgId:msgId];
+    return [[STManager sharedInstance] getMsgDictByMsgId:msgId];
 }
 
 - (STMsgModel *)getMsgByMsgId:(NSString *)msgId {
-    return [[QIMManager sharedInstance] getMsgByMsgId:msgId];
+    return [[STManager sharedInstance] getMsgByMsgId:msgId];
 }
 
 - (void)checkMsgTimeWithJid:(NSString *)jid WithRealJid:(NSString *)realJid WithMsgDate:(long long)msgDate WithGroup:(BOOL)flag {
-    [[QIMManager sharedInstance] checkMsgTimeWithJid:jid WithRealJid:realJid WithMsgDate:msgDate WithGroup:flag];
+    [[STManager sharedInstance] checkMsgTimeWithJid:jid WithRealJid:realJid WithMsgDate:msgDate WithGroup:flag];
 }
 
 - (void)checkMsgTimeWithJid:(NSString *)jid WithMsgDate:(long long)msgDate WithGroup:(BOOL)flag {
-    [[QIMManager sharedInstance] checkMsgTimeWithJid:jid WithMsgDate:msgDate WithGroup:flag];
+    [[STManager sharedInstance] checkMsgTimeWithJid:jid WithMsgDate:msgDate WithGroup:flag];
 }
 
 - (void)checkMsgTimeWithJid:(NSString *)jid WithRealJid:(NSString *)realJid WithMsgDate:(long long)msgDate WithGroup:(BOOL)flag withFrontInsert:(BOOL)frontInsert {
-    [[QIMManager sharedInstance] checkMsgTimeWithJid:jid WithRealJid:realJid WithMsgDate:msgDate WithGroup:(BOOL)flag withFrontInsert:frontInsert];
+    [[STManager sharedInstance] checkMsgTimeWithJid:jid WithRealJid:realJid WithMsgDate:msgDate WithGroup:(BOOL)flag withFrontInsert:frontInsert];
 }
 
 - (void)checkMsgTimeWithJid:(NSString *)jid WithMsgDate:(long long)msgDate WithGroup:(BOOL)flag withFrontInsert:(BOOL)frontInsert {
-    [[QIMManager sharedInstance] checkMsgTimeWithJid:jid WithMsgDate:msgDate WithGroup:flag withFrontInsert:frontInsert];
+    [[STManager sharedInstance] checkMsgTimeWithJid:jid WithMsgDate:msgDate WithGroup:flag withFrontInsert:frontInsert];
 }
 
 - (void)setAppendInfo:(NSDictionary *)appendInfoDict ForUserId:(NSString *)userId {
-    [[QIMManager sharedInstance] setAppendInfo:appendInfoDict ForUserId:userId];
+    [[STManager sharedInstance] setAppendInfo:appendInfoDict ForUserId:userId];
 }
 
 - (NSDictionary *)getAppendInfoForUserId:(NSString *)userId {
-   return [[QIMManager sharedInstance] getAppendInfoForUserId:userId];
+   return [[STManager sharedInstance] getAppendInfoForUserId:userId];
 }
 
 - (void)setChannelInfo:(NSString *)channelId ForUserId:(NSString *)userId {
-    [[QIMManager sharedInstance] setChannelInfo:channelId ForUserId:userId];
+    [[STManager sharedInstance] setChannelInfo:channelId ForUserId:userId];
 }
 
 - (NSString *)getChancelInfoForUserId:(NSString *)userId {
-   return [[QIMManager sharedInstance] getChancelInfoForUserId:userId];
+   return [[STManager sharedInstance] getChancelInfoForUserId:userId];
 }
 
 - (void)setConversationParam:(NSDictionary *)param WithJid:(NSString *)jid {
-    [[QIMManager sharedInstance] setConversationParam:param WithJid:jid];
+    [[STManager sharedInstance] setConversationParam:param WithJid:jid];
 }
 
 - (NSDictionary *)conversationParamWithJid:(NSString *)jid {
-    return [[QIMManager sharedInstance] conversationParamWithJid:jid];
+    return [[STManager sharedInstance] conversationParamWithJid:jid];
 }
 
 - (void)sendTypingToUserId:(NSString *)userId {
-    [[QIMManager sharedInstance] sendTypingToUserId:userId];
+    [[STManager sharedInstance] sendTypingToUserId:userId];
 }
 
 - (void)saveMsg:(STMsgModel *)msg ByJid:(NSString *)sid {
-    [[QIMManager sharedInstance] saveMsg:msg ByJid:sid];
+    [[STManager sharedInstance] saveMsg:msg ByJid:sid];
 }
 
 - (void)updateMsg:(STMsgModel *)msg ByJid:(NSString *)sid {
-    [[QIMManager sharedInstance] updateMsg:msg ByJid:sid];
+    [[STManager sharedInstance] updateMsg:msg ByJid:sid];
 }
 
 - (void)deleteMsg:(STMsgModel *)msg ByJid:(NSString *)sid {
-    [[QIMManager sharedInstance] deleteMsg:msg ByJid:sid];
+    [[STManager sharedInstance] deleteMsg:msg ByJid:sid];
 }
 
 - (BOOL)sendControlStateWithMessagesIdArray:(NSArray *)messages WithXmppId:(NSString *)xmppId {
-    return [[QIMManager sharedInstance] sendControlStateWithMessagesIdArray:messages WithXmppId:xmppId];
+    return [[STManager sharedInstance] sendControlStateWithMessagesIdArray:messages WithXmppId:xmppId];
 }
 
 - (BOOL)sendReadStateWithMessagesIdArray:(NSArray *)messages WithMessageReadFlag:(QIMMessageReadFlag)msgReadFlag WithXmppId:(NSString *)xmppId {
-    return [[QIMManager sharedInstance] sendReadStateWithMessagesIdArray:messages WithMessageReadFlag:msgReadFlag WithXmppId:xmppId];
+    return [[STManager sharedInstance] sendReadStateWithMessagesIdArray:messages WithMessageReadFlag:msgReadFlag WithXmppId:xmppId];
 }
 
 - (BOOL)sendReadStateWithMessagesIdArray:(NSArray *)messages WithMessageReadFlag:(QIMMessageReadFlag)msgReadFlag WithXmppId:(NSString *)xmppId WithRealJid:(NSString *)realJid {
-    return [[QIMManager sharedInstance] sendReadStateWithMessagesIdArray:messages WithMessageReadFlag:msgReadFlag WithXmppId:xmppId WithRealJid:realJid];
+    return [[STManager sharedInstance] sendReadStateWithMessagesIdArray:messages WithMessageReadFlag:msgReadFlag WithXmppId:xmppId WithRealJid:realJid];
 }
 
 - (BOOL)sendReadstateWithGroupLastMessageTime:(long long) lastTime withGroupId:(NSString *) groupId {
-    return [[QIMManager sharedInstance] sendReadstateWithGroupLastMessageTime:lastTime withGroupId:groupId];
+    return [[STManager sharedInstance] sendReadstateWithGroupLastMessageTime:lastTime withGroupId:groupId];
 }
 
 - (STMsgModel *)sendShockToUserId:(NSString *)userId {
-    return [[QIMManager sharedInstance] sendShockToUserId:userId];
+    return [[STManager sharedInstance] sendShockToUserId:userId];
 }
 
 - (void)revokeMessageWithMessageId:(NSString *)messageId message:(NSString *)message ToJid:(NSString *)jid {
-    [[QIMManager sharedInstance] revokeMessageWithMessageId:messageId message:message ToJid:jid];
+    [[STManager sharedInstance] revokeMessageWithMessageId:messageId message:message ToJid:jid];
 }
 
 - (void)revokeConsultMessageWithMessageId:(NSString *)messageId message:(NSString *)message ToJid:(NSString *)jid realToJid:(NSString *)realToJid chatType:(int)chatType{
-    [[QIMManager sharedInstance] revokeConsultMessageWithMessageId:messageId message:message ToJid:jid realToJid:realToJid chatType:chatType];
+    [[STManager sharedInstance] revokeConsultMessageWithMessageId:messageId message:message ToJid:jid realToJid:realToJid chatType:chatType];
 }
 
 - (STMsgModel *)sendVoiceUrl:(NSString *)voiceUrl withVoiceName:(NSString *)voiceName withSeconds:(int)seconds ToUserId:(NSString *)userId {
-    return [[QIMManager sharedInstance] sendVoiceUrl:voiceUrl withVoiceName:voiceName withSeconds:seconds ToUserId:userId];
+    return [[STManager sharedInstance] sendVoiceUrl:voiceUrl withVoiceName:voiceName withSeconds:seconds ToUserId:userId];
 }
 
 - (STMsgModel *)sendMessage:(STMsgModel *)msg ToUserId:(NSString *)userId {
-    return [[QIMManager sharedInstance] sendMessage:msg ToUserId:userId];
+    return [[STManager sharedInstance] sendMessage:msg ToUserId:userId];
 }
 
 - (STMsgModel *)sendMessage:(NSString *)msg WithInfo:(NSString *)info ToUserId:(NSString *)userId WithMsgType:(int)msgType {
-    return [[QIMManager sharedInstance] sendMessage:msg WithInfo:info ToUserId:userId WithMsgType:msgType];
+    return [[STManager sharedInstance] sendMessage:msg WithInfo:info ToUserId:userId WithMsgType:msgType];
 }
 
 - (STMsgModel *)sendMessage:(NSString *)msg ToGroupId:(NSString *)groupId {
-    return [[QIMManager sharedInstance] sendMessage:msg ToGroupId:groupId];
+    return [[STManager sharedInstance] sendMessage:msg ToGroupId:groupId];
 }
 
 - (STMsgModel *)sendMessage:(NSString *)msg WithInfo:(NSString *)info ToGroupId:(NSString *)groupId WithMsgType:(int)msgType {
-    return [[QIMManager sharedInstance] sendMessage:msg WithInfo:info ToGroupId:groupId WithMsgType:msgType];
+    return [[STManager sharedInstance] sendMessage:msg WithInfo:info ToGroupId:groupId WithMsgType:msgType];
 }
 
 - (STMsgModel *)sendMessage:(NSString *)msg WithInfo:(NSString *)info ToGroupId:(NSString *)groupId WithMsgType:(int)msgType WithMsgId:(NSString *)msgId {
-    return [[QIMManager sharedInstance] sendMessage:msg WithInfo:info ToGroupId:groupId WithMsgType:msgType WithMsgId:msgId];
+    return [[STManager sharedInstance] sendMessage:msg WithInfo:info ToGroupId:groupId WithMsgType:msgType WithMsgId:msgId];
 }
 
 - (void)revokeGroupMessageWithMessageId:(NSString *)messageId message:(NSString *)message ToJid:(NSString *)jid {
-    [[QIMManager sharedInstance] revokeGroupMessageWithMessageId:messageId message:message ToJid:jid];
+    [[STManager sharedInstance] revokeGroupMessageWithMessageId:messageId message:message ToJid:jid];
 }
 
 // 发送音视频消息
 - (void)sendAudioVideoWithType:(int)msgType WithBody:(NSString *)body WithExtentInfo:(NSString *)extentInfo WithMsgId:(NSString *)msgId ToJid:(NSString *)jid {
-    [[QIMManager sharedInstance] sendAudioVideoWithType:msgType WithBody:body WithExtentInfo:extentInfo WithMsgId:msgId ToJid:jid];
+    [[STManager sharedInstance] sendAudioVideoWithType:msgType WithBody:body WithExtentInfo:extentInfo WithMsgId:msgId ToJid:jid];
 }
 
 - (void)sendWlanMessage:(NSString *)content to:(NSString *)targetID extendInfo:(NSString *)extendInfo msgType:(int)msgType completionHandler:(void (^)(NSData *, NSURLResponse *, NSError *))completionHandler {
-    [[QIMManager sharedInstance] sendWlanMessage:content to:targetID extendInfo:extendInfo msgType:msgType completionHandler:completionHandler];
+    [[STManager sharedInstance] sendWlanMessage:content to:targetID extendInfo:extendInfo msgType:msgType completionHandler:completionHandler];
 }
 
 - (STMsgModel *)createMessageWithMsg:(NSString *)msg extenddInfo:(NSString *)extendInfo userId:(NSString *)userId userType:(ChatType)userType msgType:(QIMMessageType)msgType forMsgId:(NSString *)mId willSave:(BOOL)willSave {
-    return [[QIMManager sharedInstance] createMessageWithMsg:msg extenddInfo:extendInfo userId:userId userType:userType msgType:msgType forMsgId:mId willSave:willSave];
+    return [[STManager sharedInstance] createMessageWithMsg:msg extenddInfo:extendInfo userId:userId userType:userType msgType:msgType forMsgId:mId willSave:willSave];
 }
 - (STMsgModel *)createMessageWithMsg:(NSString *)msg extenddInfo:(NSString *)extendInfo userId:(NSString *)userId realJid:(NSString *)realJid userType:(ChatType)userType msgType:(QIMMessageType)msgType forMsgId:(NSString *)mId msgState:(QIMMessageSendState)msgState willSave:(BOOL)willSave {
-    return [[QIMManager sharedInstance] createMessageWithMsg:msg extenddInfo:extendInfo userId:userId realJid:realJid userType:userType msgType:msgType forMsgId:mId msgState:msgState willSave:willSave];
+    return [[STManager sharedInstance] createMessageWithMsg:msg extenddInfo:extendInfo userId:userId realJid:realJid userType:userType msgType:msgType forMsgId:mId msgState:msgState willSave:willSave];
 }
 
 - (STMsgModel *)createMessageWithMsg:(NSString *)msg extenddInfo:(NSString *)extendInfo userId:(NSString *)userId realJid:(NSString *)realJid userType:(ChatType)userType msgType:(QIMMessageType)msgType forMsgId:(NSString *)mId willSave:(BOOL)willSave {
-    return [[QIMManager sharedInstance] createMessageWithMsg:msg extenddInfo:extendInfo userId:userId realJid:realJid userType:userType msgType:msgType forMsgId:mId willSave:willSave];
+    return [[STManager sharedInstance] createMessageWithMsg:msg extenddInfo:extendInfo userId:userId realJid:realJid userType:userType msgType:msgType forMsgId:mId willSave:willSave];
 }
 
 - (STMsgModel *)sendMessage:(STMsgModel *)msg withChatType:(ChatType)chatType channelInfo:(NSString *)channelInfo realFrom:(NSString *)realFrom realTo:(NSString *)realTo ochatJson:(NSString *)ochatJson {
-    return [[QIMManager sharedInstance] sendMessage:msg withChatType:chatType channelInfo:channelInfo realFrom:realFrom realTo:realTo ochatJson:ochatJson];
+    return [[STManager sharedInstance] sendMessage:msg withChatType:chatType channelInfo:channelInfo realFrom:realFrom realTo:realTo ochatJson:ochatJson];
 }
 
 - (STMsgModel *)createMessageWithMsg:(NSString *)msg extenddInfo:(NSString *)extendInfo userId:(NSString *)userId userType:(ChatType)userType msgType:(QIMMessageType)msgType {
-    return [[QIMManager sharedInstance] createMessageWithMsg:msg extenddInfo:extendInfo userId:userId userType:userType msgType:msgType];
+    return [[STManager sharedInstance] createMessageWithMsg:msg extenddInfo:extendInfo userId:userId userType:userType msgType:msgType];
 }
 
 - (STMsgModel *)createMessageWithMsg:(NSString *)msg extenddInfo:(NSString *)extendInfo userId:(NSString *)userId userType:(ChatType)userType msgType:(QIMMessageType)msgType backinfo:(NSString *)backInfo {
-    return [[QIMManager sharedInstance] createMessageWithMsg:msg extenddInfo:extendInfo userId:userId userType:userType msgType:msgType backinfo:backInfo];
+    return [[STManager sharedInstance] createMessageWithMsg:msg extenddInfo:extendInfo userId:userId userType:userType msgType:msgType backinfo:backInfo];
 }
 
 - (STMsgModel *)createMessageWithMsg:(NSString *)msg extenddInfo:(NSString *)extendInfo userId:(NSString *)userId userType:(ChatType)userType msgType:(QIMMessageType)msgType forMsgId:(NSString *)mId {
-    return [[QIMManager sharedInstance] createMessageWithMsg:msg extenddInfo:extendInfo userId:userId userType:userType msgType:msgType forMsgId:mId];
+    return [[STManager sharedInstance] createMessageWithMsg:msg extenddInfo:extendInfo userId:userId userType:userType msgType:msgType forMsgId:mId];
 }
 
 - (void)synchronizeChatSessionWithUserId:(NSString *)userId WithChatType:(ChatType)chatType WithRealJid:(NSString *)realJid {
-    [[QIMManager sharedInstance] synchronizeChatSessionWithUserId:userId WithChatType:chatType WithRealJid:realJid];
+    [[STManager sharedInstance] synchronizeChatSessionWithUserId:userId WithChatType:chatType WithRealJid:realJid];
 }
 
 #pragma mark - 位置共享
 
 - (STMsgModel *)sendShareLocationMessage:(NSString *)msg WithInfo:(NSString *)info ToJid:(NSString *)jid WithMsgType:(int)msgType {
-    return [[QIMManager sharedInstance] sendShareLocationMessage:msg WithInfo:info ToJid:jid WithMsgType:msgType];
+    return [[STManager sharedInstance] sendShareLocationMessage:msg WithInfo:info ToJid:jid WithMsgType:msgType];
 }
 
 - (STMsgModel *)beginShareLocationToUserId:(NSString *)userId WithShareLocationId:(NSString *)shareLocationId {
-    return [[QIMManager sharedInstance] beginShareLocationToUserId:userId WithShareLocationId:shareLocationId];
+    return [[STManager sharedInstance] beginShareLocationToUserId:userId WithShareLocationId:shareLocationId];
 }
 
 - (STMsgModel *)beginShareLocationToGroupId:(NSString *)GroupId WithShareLocationId:(NSString *)shareLocationId {
-    return [[QIMManager sharedInstance] beginShareLocationToGroupId:GroupId WithShareLocationId:shareLocationId];
+    return [[STManager sharedInstance] beginShareLocationToGroupId:GroupId WithShareLocationId:shareLocationId];
 }
 
 - (BOOL)joinShareLocationToUsers:(NSArray *)users WithShareLocationId:(NSString *)shareLocationId {
-    return [[QIMManager sharedInstance] joinShareLocationToUsers:users WithShareLocationId:shareLocationId];
+    return [[STManager sharedInstance] joinShareLocationToUsers:users WithShareLocationId:shareLocationId];
 }
 
 - (BOOL)sendMyLocationToUsers:(NSArray *)users WithLocationInfo:(NSString *)locationInfo ByShareLocationId:(NSString *)shareLocationId {
-    return [[QIMManager sharedInstance] sendMyLocationToUsers:users WithLocationInfo:locationInfo ByShareLocationId:shareLocationId];
+    return [[STManager sharedInstance] sendMyLocationToUsers:users WithLocationInfo:locationInfo ByShareLocationId:shareLocationId];
 }
 
 - (BOOL)quitShareLocationToUsers:(NSArray *)users WithShareLocationId:(NSString *)shareLocationId {
-    return [[QIMManager sharedInstance] quitShareLocationToUsers:users WithShareLocationId:shareLocationId];
+    return [[STManager sharedInstance] quitShareLocationToUsers:users WithShareLocationId:shareLocationId];
 }
 
 - (NSString *)getShareLocationIdByJid:(NSString *)jid {
-    return [[QIMManager sharedInstance] getShareLocationIdByJid:jid];
+    return [[STManager sharedInstance] getShareLocationIdByJid:jid];
 }
 
 - (NSString *)getShareLocationFromIdByShareLocationId:(NSString *)shareLocationId {
-    return [[QIMManager sharedInstance] getShareLocationFromIdByShareLocationId:shareLocationId];
+    return [[STManager sharedInstance] getShareLocationFromIdByShareLocationId:shareLocationId];
 }
 
 - (NSArray *)getShareLocationUsersByShareLocationId:(NSString *)shareLocationId {
-    return [[QIMManager sharedInstance] getShareLocationUsersByShareLocationId:shareLocationId];
+    return [[STManager sharedInstance] getShareLocationUsersByShareLocationId:shareLocationId];
 }
 
 
 #pragma mark - 未读数
 
 - (void)updateMsgReadCompensateSetWithMsgId:(NSString *)msgId WithAddFlag:(BOOL)flag WithState:(QIMMessageSendState)state{
-    [[QIMManager sharedInstance] updateMsgReadCompensateSetWithMsgId:msgId WithAddFlag:flag WithState:state];
+    [[STManager sharedInstance] updateMsgReadCompensateSetWithMsgId:msgId WithAddFlag:flag WithState:state];
 }
 
 - (NSMutableSet *)getLastMsgCompensateReadSet {
-    return [[QIMManager sharedInstance] getLastMsgCompensateReadSet];
+    return [[STManager sharedInstance] getLastMsgCompensateReadSet];
 }
 
 - (void)clearAllNoRead {
-    [[QIMManager sharedInstance] clearAllNoRead];
+    [[STManager sharedInstance] clearAllNoRead];
 }
 
 - (void)clearSystemMsgNotReadWithJid:(NSString *)jid {
-    [[QIMManager sharedInstance] clearSystemMsgNotReadWithJid:jid];
+    [[STManager sharedInstance] clearSystemMsgNotReadWithJid:jid];
 }
 
 - (void)clearNotReadMsgByJid:(NSString *)jid {
-    [[QIMManager sharedInstance] clearNotReadMsgByJid:jid];
+    [[STManager sharedInstance] clearNotReadMsgByJid:jid];
 }
 
 - (void)clearNotReadMsgByJid:(NSString *)jid ByRealJid:(NSString *)realJid {
-    [[QIMManager sharedInstance] clearNotReadMsgByJid:jid ByRealJid:realJid];
+    [[STManager sharedInstance] clearNotReadMsgByJid:jid ByRealJid:realJid];
 }
 
 - (void)clearNotReadMsgByGroupId:(NSString *)groupId {
-    [[QIMManager sharedInstance] clearNotReadMsgByGroupId:groupId];
+    [[STManager sharedInstance] clearNotReadMsgByGroupId:groupId];
 }
 
 - (NSInteger)getNotReadMsgCountByJid:(NSString *)jid WithRealJid:(NSString *)realJid {
-    return [[QIMManager sharedInstance] getNotReadMsgCountByJid:jid WithRealJid:realJid];
+    return [[STManager sharedInstance] getNotReadMsgCountByJid:jid WithRealJid:realJid];
 }
 
 - (NSInteger)getNotReadMsgCountByJid:(NSString *)jid WithRealJid:(NSString *)realJid withChatType:(ChatType)chatType {
-    return [[QIMManager sharedInstance] getNotReadMsgCountByJid:jid WithRealJid:realJid withChatType:chatType];
+    return [[STManager sharedInstance] getNotReadMsgCountByJid:jid WithRealJid:realJid withChatType:chatType];
 }
 
 - (void)updateAppNotReadCount {
-    [[QIMManager sharedInstance] updateAppNotReadCount];
+    [[STManager sharedInstance] updateAppNotReadCount];
 }
 
 - (NSInteger)getAppNotReaderCount {
-    return [[QIMManager sharedInstance] getAppNotReaderCount];
+    return [[STManager sharedInstance] getAppNotReaderCount];
 }
 
 - (NSInteger)getNotRemindNotReaderCount {
-    return [[QIMManager sharedInstance] getNotRemindNotReaderCount];
+    return [[STManager sharedInstance] getNotRemindNotReaderCount];
 }
 
 - (void)getExploreNotReaderCount {
-    [[QIMManager sharedInstance] getExploreNotReaderCount];
+    [[STManager sharedInstance] getExploreNotReaderCount];
 }
 
 - (void)getLeaveMsgNotReaderCountWithCallBack:(QIMKitGetLeaveMsgNotReaderCountBlock)callback {
-    [[QIMManager sharedInstance] getLeaveMsgNotReaderCountWithCallBack:callback];
+    [[STManager sharedInstance] getLeaveMsgNotReaderCountWithCallBack:callback];
 }
 
 - (void)updateNotReadCountCacheByJid:(NSString *)jid WithRealJid:(NSString *)realJid {
-    [[QIMManager sharedInstance] updateNotReadCountCacheByJid:jid WithRealJid:realJid];
+    [[STManager sharedInstance] updateNotReadCountCacheByJid:jid WithRealJid:realJid];
 }
 
 - (void)updateMessageStateWithNewState:(QIMMessageSendState)state ByMsgIdList:(NSArray *)MsgIdList {
-    [[QIMManager sharedInstance] updateMessageStateWithNewState:state ByMsgIdList:MsgIdList];
+    [[STManager sharedInstance] updateMessageStateWithNewState:state ByMsgIdList:MsgIdList];
 }
 
 - (void)updateNotReadCountCacheByJid:(NSString *)jid {
-    [[QIMManager sharedInstance] updateNotReadCountCacheByJid:jid];
+    [[STManager sharedInstance] updateNotReadCountCacheByJid:jid];
 }
 
 - (void)saveChatId:(NSString *)chatId ForUserId:(NSString *)userId {
-    [[QIMManager sharedInstance] saveChatId:chatId ForUserId:userId];
+    [[STManager sharedInstance] saveChatId:chatId ForUserId:userId];
 }
 
 - (void)setMsgSentFaild {
-    [[QIMManager sharedInstance] setMsgSentFaild];
+    [[STManager sharedInstance] setMsgSentFaild];
 }
 
 - (NSDictionary *)parseMessageByMsgRaw:(id)msgRaw {
-    return [[QIMManager sharedInstance] parseMessageByMsgRaw:msgRaw];
+    return [[STManager sharedInstance] parseMessageByMsgRaw:msgRaw];
 }
 
 - (NSDictionary *)parseOriginMessageByMsgRaw:(id)msgRaw {
-    return [[QIMManager sharedInstance] parseOriginMessageByMsgRaw:msgRaw];
+    return [[STManager sharedInstance] parseOriginMessageByMsgRaw:msgRaw];
 }
 
 - (NSArray *)getNotReadMsgIdListByUserId:(NSString *)userId WithRealJid:(NSString *)realJid {
-    return [[QIMManager sharedInstance] getNotReadMsgIdListByUserId:userId WithRealJid:realJid];
+    return [[STManager sharedInstance] getNotReadMsgIdListByUserId:userId WithRealJid:realJid];
 }
 
 - (void)getRemoteSearchMsgListByUserId:(NSString *)userId WithRealJid:(NSString *)realJid withVersion:(long long)lastUpdateTime withDirection:(QIMGetMsgDirection)direction WithLimit:(int)limit WithOffset:(int)offset WithComplete:(void (^)(NSArray *))complete {
-    [[QIMManager sharedInstance] getRemoteSearchMsgListByUserId:userId WithRealJid:realJid withVersion:lastUpdateTime withDirection:direction WithLimit:limit WithOffset:offset WithComplete:complete];
+    [[STManager sharedInstance] getRemoteSearchMsgListByUserId:userId WithRealJid:realJid withVersion:lastUpdateTime withDirection:direction WithLimit:limit WithOffset:offset WithComplete:complete];
 }
 
 - (void)getMsgListByUserId:(NSString *)userId WithRealJid:(NSString *)realJid WithLimit:(int)limit WithOffset:(int)offset withLoadMore:(BOOL)loadMore WithComplete:(void (^)(NSArray *))complete{
-    [[QIMManager sharedInstance] getMsgListByUserId:userId WithRealJid:realJid WithLimit:limit WithOffset:offset withLoadMore:loadMore WithComplete:complete];
+    [[STManager sharedInstance] getMsgListByUserId:userId WithRealJid:realJid WithLimit:limit WithOffset:offset withLoadMore:loadMore WithComplete:complete];
 }
 
 - (void)getMsgListByUserId:(NSString *)userId WithRealJid:(NSString *)realJid FromTimeStamp:(long long)timeStamp WithComplete:(void (^)(NSArray *))complete {
-    [[QIMManager sharedInstance] getMsgListByUserId:userId WithRealJid:realJid FromTimeStamp:timeStamp WithComplete:complete];
+    [[STManager sharedInstance] getMsgListByUserId:userId WithRealJid:realJid FromTimeStamp:timeStamp WithComplete:complete];
 }
 
 - (void)getConsultServerMsgLisByUserId:(NSString *)userId WithVirtualId:(NSString *)virtualId WithLimit:(int)limit WithOffset:(int)offset withLoadMore:(BOOL)loadMore WithComplete:(void (^)(NSArray *))complete {
-    [[QIMManager sharedInstance] getConsultServerMsgLisByUserId:userId WithVirtualId:virtualId WithLimit:limit WithOffset:offset withLoadMore:loadMore WithComplete:complete];
+    [[STManager sharedInstance] getConsultServerMsgLisByUserId:userId WithVirtualId:virtualId WithLimit:limit WithOffset:offset withLoadMore:loadMore WithComplete:complete];
 }
 
 - (NSMutableArray *)searchLocalMessageByKeyword:(NSString *)keyWord XmppId:(NSString *)xmppid RealJid:(NSString *)realJid {
-    return [[QIMManager sharedInstance] searchLocalMessageByKeyword:keyWord XmppId:xmppid RealJid:realJid];
+    return [[STManager sharedInstance] searchLocalMessageByKeyword:keyWord XmppId:xmppid RealJid:realJid];
 }
 
 
 #pragma mark - 本地消息搜索
 
 - (NSArray *)getLocalMediasByXmppId:(NSString *)xmppId ByRealJid:(NSString *)realJid {
-    return [[QIMManager sharedInstance] getLocalMediasByXmppId:xmppId ByRealJid:realJid];
+    return [[STManager sharedInstance] getLocalMediasByXmppId:xmppId ByRealJid:realJid];
 }
 
 - (NSArray *)getMsgsForMsgType:(NSArray *)msgTypes ByXmppId:(NSString *)xmppId ByReadJid:(NSString *)realJid {
-    return [[QIMManager sharedInstance] getMsgsForMsgType:msgTypes ByXmppId:xmppId ByReadJid:realJid];
+    return [[STManager sharedInstance] getMsgsForMsgType:msgTypes ByXmppId:xmppId ByReadJid:realJid];
 }
 
 - (NSArray *)getMsgsByKeyWord:(NSString *)keyWork ByXmppId:(NSString *)xmppId ByReadJid:(NSString *)realJid {
-    return [[QIMManager sharedInstance] getMsgsByKeyWord:keyWork ByXmppId:xmppId ByReadJid:realJid];
+    return [[STManager sharedInstance] getMsgsByKeyWord:keyWork ByXmppId:xmppId ByReadJid:realJid];
 }
 
 - (NSArray *)getMsgsForMsgType:(NSArray *)msgTypes ByXmppId:(NSString *)xmppId {
-    return [[QIMManager sharedInstance] getMsgsForMsgType:msgTypes ByXmppId:xmppId];
+    return [[STManager sharedInstance] getMsgsForMsgType:msgTypes ByXmppId:xmppId];
 }
 
 @end

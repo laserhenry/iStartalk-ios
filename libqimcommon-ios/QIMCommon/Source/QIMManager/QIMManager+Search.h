@@ -5,11 +5,11 @@
 //  Created by lilu on 2019/6/19.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QIMManager (Search)
+@interface STManager (Search)
 
 - (void)searchWithUrl:(NSString *)url withParams:(NSDictionary *)params withSuccessCallBack:(QIMKitSearchSuccessBlock)successCallback withFaildCallBack:(QIMKitSearchFaildBlock)faildCallback;
 

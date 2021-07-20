@@ -8,7 +8,7 @@
 #import "QIMManager+Search.h"
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (Search)
+@implementation STManager (Search)
 
 - (void)searchWithUrl:(NSString *)url withParams:(NSDictionary *)params withSuccessCallBack:(QIMKitSearchSuccessBlock)successCallback withFaildCallBack:(QIMKitSearchFaildBlock)faildCallback {
     

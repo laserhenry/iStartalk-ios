@@ -23,7 +23,7 @@
 #define DEFAULT_GROUPMSG_NUM 1500
 
 @class UserInfo,STMsgModel;
-@interface QIMManager : NSObject
+@interface STManager : NSObject
 
 #pragma mark - Definition Queue
 
@@ -215,7 +215,7 @@
 
 - (void)initUserDicts;
 
-- (void)clearQIMManager;
+- (void)clearSTManager;
 
 - (NSMutableDictionary *)timeStempDic;
 
@@ -232,14 +232,14 @@
 
 @end
 
-@interface QIMManager (Common)
+@interface STManager (Common)
 
 - (NSData *)updateOrganizationalStructure;
 
 @end
 
 
-@interface QIMManager (CommonConfig)
+@interface STManager (CommonConfig)
 
 /**
  UK，登录之后服务器下发下来，用作旧接口的验证

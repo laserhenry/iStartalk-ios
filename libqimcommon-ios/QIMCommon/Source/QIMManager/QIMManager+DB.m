@@ -8,7 +8,7 @@
 #import "QIMManager+DB.h"
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (DB)
+@implementation STManager (DB)
 
 - (NSString *)getDBPathWithUserXmppId:(NSString *)userJid {
     NSString *dbPath = [UserDocumentsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"/QIMNewDataBase/%@%@/", [userJid lowercaseString], UserPath]];

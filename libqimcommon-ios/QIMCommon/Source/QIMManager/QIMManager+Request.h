@@ -6,10 +6,10 @@
 //  Copyright © 2018 QIM. All rights reserved.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 #import "QIMPrivateHeader.h"
 
-@interface QIMManager (Request)
+@interface STManager (Request)
 
 - (void)sendTPPOSTRequestWithUrl:(NSString *)url withSuccessCallBack:(QIMKitSendTPRequesSuccessedBlock)sCallback withFailedCallBack:(QIMKitSendTPRequesFailedBlock)fCallback;
 

@@ -16,18 +16,18 @@
 @implementation STKit (QIMQuickReply)
 
 - (void)getRemoteQuickReply {
-    [[QIMManager sharedInstance] getRemoteQuickReply];
+    [[STManager sharedInstance] getRemoteQuickReply];
 }
 
 - (NSInteger)getQuickReplyGroupCount {
-    return [[QIMManager sharedInstance] getQuickReplyGroupCount];
+    return [[STManager sharedInstance] getQuickReplyGroupCount];
 }
 
 - (NSArray *)getQuickReplyGroup {
-    return [[QIMManager sharedInstance] getQuickReplyGroup];
+    return [[STManager sharedInstance] getQuickReplyGroup];
 }
 
 - (NSArray *)getQuickReplyContentWithGroupId:(long)groupId {
-    return [[QIMManager sharedInstance] getQuickReplyContentWithGroupId:groupId];
+    return [[STManager sharedInstance] getQuickReplyContentWithGroupId:groupId];
 }
 @end

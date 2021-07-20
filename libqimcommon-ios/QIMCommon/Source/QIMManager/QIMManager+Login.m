@@ -10,7 +10,7 @@
 #import "QIMPrivateHeader.h"
 #import "STRSACoder.h"
 
-@implementation QIMManager (Login)
+@implementation STManager (Login)
  
 #pragma mark - 登录
 
@@ -93,7 +93,7 @@
         }
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[QIMManager sharedInstance] loginWithUserName:lastUserName WithPassWord:token];
+        [[STManager sharedInstance] loginWithUserName:lastUserName WithPassWord:token];
     });
 }
 
@@ -135,7 +135,7 @@
 
 - (NSArray *)getLoginUsers {
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[[STUserCacheManager sharedInstance] userObjectForKey:@"Users"]];
-    [dict removeObjectForKey:[[QIMManager sharedInstance] getLastJid]];
+    [dict removeObjectForKey:[[STManager sharedInstance] getLastJid]];
     NSArray *users = [NSArray arrayWithArray:[dict allValues]];
     return users;
 }
@@ -187,10 +187,10 @@
     
     [[XmppImManager sharedInstance] quitLogin];
     //关闭数据库
-    [[QIMManager sharedInstance] closeDataBase];
+    [[STManager sharedInstance] closeDataBase];
     
     self.needTryRelogin = NO;
-    [self clearQIMManager];
+    [self clearSTManager];
     //广播退出登录通知
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLogout object:nil];
     [[STUserCacheManager sharedInstance] setCacheName:@""];
@@ -276,7 +276,7 @@
     [bodyDic setQIMSafeObject:userName forKey:@"rtx_id"];
     [bodyDic setQIMSafeObject:verifCode forKey:@"verify_code"];
 
-    [[QIMManager sharedInstance] sendFormatRequest:destUrl withPOSTBody:bodyDic withProgressBlock:nil withSuccessCallBack:^(NSData *responseData) {
+    [[STManager sharedInstance] sendFormatRequest:destUrl withPOSTBody:bodyDic withProgressBlock:nil withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         if (callback) {
             callback(result);
@@ -295,7 +295,7 @@
     NSMutableDictionary *bodyDic = [[NSMutableDictionary alloc] init];
     [bodyDic setQIMSafeObject:userName forKey:@"rtx_id"];
 
-    [[QIMManager sharedInstance] sendFormatRequest:destUrl withPOSTBody:bodyDic withProgressBlock:nil withSuccessCallBack:^(NSData *responseData) {
+    [[STManager sharedInstance] sendFormatRequest:destUrl withPOSTBody:bodyDic withProgressBlock:nil withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         if (callback) {
             callback(result);
@@ -315,14 +315,14 @@
 
     NSMutableDictionary *bodyDic = [[NSMutableDictionary alloc] init];
     [bodyDic setQIMSafeObject:userName forKey:@"u"];
-    [bodyDic setQIMSafeObject:[[QIMManager sharedInstance] getDomain] forKey:@"h"];
+    [bodyDic setQIMSafeObject:[[STManager sharedInstance] getDomain] forKey:@"h"];
     [bodyDic setQIMSafeObject:base64Result forKey:@"p"];
     [bodyDic setQIMSafeObject:[QIMUUIDTools deviceUUID] forKey:@"mk"];
     [bodyDic setQIMSafeObject:@"iOS" forKey:@"plat"];
 
     NSData *bodyData = [[QIMJSONSerializer sharedInstance] serializeObject:bodyDic error:nil];
 
-    [[QIMManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:bodyData withSuccessCallBack:^(NSData *responseData) {
+    [[STManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:bodyData withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         if (callback) {
             callback(result);

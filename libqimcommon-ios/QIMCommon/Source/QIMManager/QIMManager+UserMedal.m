@@ -8,7 +8,7 @@
 
 #import "QIMManager+UserMedal.h"
 
-@implementation QIMManager (UserMedal)
+@implementation STManager (UserMedal)
 
 - (NSArray *)getLocalUserMedalWithXmppJid:(NSString *)xmppId {
     return [[STDataMgr qimDB_SharedInstance] qimDB_getUserMedalsWithXmppId:xmppId];
@@ -51,7 +51,7 @@
  */
 - (void)userMedalStatusModifyWithStatus:(NSInteger)status withMedalId:(NSInteger)medalId withCallBack:(QIMKitUpdateMedalStatusCallBack)callback {
     NSString *destUrl = [NSString stringWithFormat:@"%@/medal/userMedalStatusModify.qunar", [[QIMNavConfigManager sharedInstance] newerHttpUrl]];
-    NSDictionary *bodyDic = @{@"userId":[QIMManager getLastUserName], @"host" : [[QIMManager sharedInstance] getDomain], @"medalStatus":@(status), @"medalId":@(medalId)};
+    NSDictionary *bodyDic = @{@"userId":[STManager getLastUserName], @"host" : [[STManager sharedInstance] getDomain], @"medalStatus":@(status), @"medalId":@(medalId)};
     NSData *bodyData = [[QIMJSONSerializer sharedInstance] serializeObject:bodyDic error:nil];
     [self sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:bodyData withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *responseDic = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
@@ -64,7 +64,7 @@
                 callback(YES, nil);
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateNewUserMedalList object:[[QIMManager sharedInstance] getLastJid]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateNewUserMedalList object:[[STManager sharedInstance] getLastJid]];
             });
         } else {
             NSString *errmsg = [responseDic objectForKey:@"errmsg"];

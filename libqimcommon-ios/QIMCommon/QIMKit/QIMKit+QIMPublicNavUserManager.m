@@ -16,7 +16,7 @@
 @implementation STKit (QIMPublicNavUserManager)
 
 - (void)getPublicNavCompanyWithKeyword:(NSString *)keyword withCallBack:(QIMKitgetPublicCompanySuccessedBlock)callback {
-    [[QIMManager sharedInstance] getPublicNavCompanyWithKeyword:keyword withCallBack:callback];
+    [[STManager sharedInstance] getPublicNavCompanyWithKeyword:keyword withCallBack:callback];
 }
 
 @end

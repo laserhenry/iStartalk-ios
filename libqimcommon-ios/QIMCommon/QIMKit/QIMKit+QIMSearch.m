@@ -16,25 +16,25 @@
 @implementation STKit (QIMSearch)
 
 - (void)searchWithUrl:(NSString *)url withParams:(NSDictionary *)params withSuccessCallBack:(QIMKitSearchSuccessBlock)successCallback withFaildCallBack:(QIMKitSearchFaildBlock)faildCallback {
-    [[QIMManager sharedInstance] searchWithUrl:url withParams:params withSuccessCallBack:successCallback withFaildCallBack:faildCallback];
+    [[STManager sharedInstance] searchWithUrl:url withParams:params withSuccessCallBack:successCallback withFaildCallBack:faildCallback];
 }
 
 #pragma mark - Searchkey History
 
 - (void)getRemoteSearchKeyHistory {
-    [[QIMManager sharedInstance] getRemoteSearchKeyHistory];
+    [[STManager sharedInstance] getRemoteSearchKeyHistory];
 }
 
 - (NSArray *)getLocalSearchKeyHistoryWithSearchType:(NSInteger)searchType withLimit:(NSInteger)limit {
-    return [[QIMManager sharedInstance] getLocalSearchKeyHistoryWithSearchType:searchType withLimit:limit];
+    return [[STManager sharedInstance] getLocalSearchKeyHistoryWithSearchType:searchType withLimit:limit];
 }
 
 - (void)updateLocalSearchKeyHistory:(NSDictionary *)searchDic {
-    [[QIMManager sharedInstance] updateLocalSearchKeyHistory:searchDic];
+    [[STManager sharedInstance] updateLocalSearchKeyHistory:searchDic];
 }
 
 - (void)deleteSearchKeyHistory {
-    [[QIMManager sharedInstance] deleteSearchKeyHistory];
+    [[STManager sharedInstance] deleteSearchKeyHistory];
 }
 
 @end

@@ -1,15 +1,16 @@
 //
-//  QIMHTTPRequest.m
+//  STHTTPRequest.m
 //  QIMKitVendor
 //
 //  Created by 李露 on 2018/8/2.
 //  Copyright © 2018年 QIM. All rights reserved.
+//  Copyright © 2021 Startalk Ltd.
 //
 
-#import "QIMHTTPRequest.h"
+#import "STHTTPRequest.h"
 #import "NSObject+QIMRuntime.h"
 
-@implementation QIMHTTPRequest
+@implementation STHTTPRequest
 
 - (instancetype)initWithURL:(NSURL *)url {
     if (self = [super init]) {

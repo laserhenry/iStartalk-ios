@@ -7,7 +7,7 @@
 
 #import "QIMManager+Collection.h"
 
-@implementation QIMManager (Collection)
+@implementation STManager (Collection)
 
 - (NSString *)getCollectionUserHeaderUrlWithXmppId:(NSString *)userId {
     NSDictionary *userInfoDic = [self getCollectionUserInfoByUserId:userId];
@@ -74,14 +74,14 @@
         NSURL *requestUrl = [[NSURL alloc] initWithString:destUrl];
         
         NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-        NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[QIMManager sharedInstance] thirdpartKeywithValue]];
+        NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[STManager sharedInstance] thirdpartKeywithValue]];
         [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
         
-        QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:requestUrl];
+        STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:requestUrl];
         [request setHTTPBody:requestData];
         [request setHTTPRequestHeaders:cookieProperties];
         [request setHTTPMethod:QIMHTTPMethodPOST];
-        [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+        [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
             if (response.code == 200) {
                 NSData *responseData = response.data;
                 NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
@@ -236,14 +236,14 @@
     NSString *javaUrl = [[QIMNavConfigManager sharedInstance] javaurl];
     if (javaUrl.length > 0) {
         NSString *getCollectionAccountUrl = [NSString stringWithFormat:@"%@/qtapi/common/collection/get.qunar", javaUrl];
-        QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:getCollectionAccountUrl]];
+        STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:getCollectionAccountUrl]];
         [request setUseCookiePersistence:NO];
         NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-        NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[QIMManager sharedInstance] thirdpartKeywithValue]];
+        NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[STManager sharedInstance] thirdpartKeywithValue]];
         [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
         [request setHTTPRequestHeaders:cookieProperties];
         
-        [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+        [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
             if (response.code == 200) {
                 NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:response.data error:nil];
                 BOOL ret = [[result objectForKey:@"ret"] boolValue];
@@ -353,15 +353,15 @@
         NSURL *requestUrl = [[NSURL alloc] initWithString:destUrl];
 
         NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-        NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[QIMManager sharedInstance] thirdpartKeywithValue]];
+        NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[STManager sharedInstance] thirdpartKeywithValue]];
         [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
         
-        QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:requestUrl];
+        STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:requestUrl];
         [request setHTTPMethod:QIMHTTPMethodPOST];
         [request setHTTPBody:[NSMutableData dataWithData:requestData]];
         [request setHTTPRequestHeaders:cookieProperties];
         
-        [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+        [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
             if (response.code) {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     NSData *responseData = response.data;

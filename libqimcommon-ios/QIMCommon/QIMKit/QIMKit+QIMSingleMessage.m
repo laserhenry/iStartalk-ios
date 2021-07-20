@@ -16,24 +16,24 @@
 @implementation STKit (QIMSingleMessage)
 
 - (void)checkSingleChatMsg {
-    [[QIMManager sharedInstance] checkSingleChatMsg];
+    [[STManager sharedInstance] checkSingleChatMsg];
 }
 
 - (void)updateLastMsgTime {
-    [[QIMManager sharedInstance] updateLastMsgTime];
+    [[STManager sharedInstance] updateLastMsgTime];
 }
 
 - (void)getReadFlag {
-    [[QIMManager sharedInstance] getReadFlag];
+    [[STManager sharedInstance] getReadFlag];
 }
 
 #warning 这里更新本地数据库已接收的消息状态 ，告诉对方已送达，readFlag=3，更新成功之后更新本地数据库状态
 - (void)sendRecevieMessageState {
-    [[QIMManager sharedInstance] sendRecevieMessageState];
+    [[STManager sharedInstance] sendRecevieMessageState];
 }
 
 - (BOOL)updateOfflineMessagesV2 {
-    return [[QIMManager sharedInstance] updateOfflineMessagesV2];
+    return [[STManager sharedInstance] updateOfflineMessagesV2];
 }
 
 @end

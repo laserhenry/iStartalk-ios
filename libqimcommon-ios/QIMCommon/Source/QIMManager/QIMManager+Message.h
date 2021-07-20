@@ -5,11 +5,11 @@
 //  Created by 李露 on 2018/4/1.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 
 #pragma mark - 消息
 
-@interface QIMManager (Message)
+@interface STManager (Message)
 
 - (NSArray *)getMsgsForMsgType:(QIMMessageType)msgType;
 - (NSDictionary *)getMsgDictByMsgId:(NSString *)msgId;

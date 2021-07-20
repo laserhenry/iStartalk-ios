@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "QIMHttpCommon.h"
-@class QIMHTTPRequest;
+@class STHTTPRequest;
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^QIMHttpCompletionHandler)(id _Nullable responseObject, NSInteger HTTPStatusCode, NSError * _Nullable error);
@@ -16,11 +16,11 @@ typedef void(^QIMHttpCompletionHandler)(id _Nullable responseObject, NSInteger H
 
 +(instancetype)shareEngine;
 
-- (void)sendRequest:(QIMHTTPRequest *)request completionHandle:(QIMHttpCompletionHandler)completionHandler;
+- (void)sendRequest:(STHTTPRequest *)request completionHandle:(QIMHttpCompletionHandler)completionHandler;
 
-- (QIMHTTPRequest *)cancelRequestIdentifier:(NSString *)identifier;
+- (STHTTPRequest *)cancelRequestIdentifier:(NSString *)identifier;
 
-- (QIMHTTPRequest *)getRequestWithIdentifier:(NSString *)identifier;
+- (STHTTPRequest *)getRequestWithIdentifier:(NSString *)identifier;
 
 - (void)setMaxCurrentOperationCount:(NSInteger)count;
 

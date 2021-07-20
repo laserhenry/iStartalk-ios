@@ -8,11 +8,11 @@
 
 //公共域用户管理
 
-#import "QIMManager.h"
+#import "STManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QIMManager (PublicNavUserManager)
+@interface STManager (PublicNavUserManager)
 
 - (void)getPublicNavCompanyWithKeyword:(NSString *)keyword withCallBack:(QIMKitgetPublicCompanySuccessedBlock)callback;
 

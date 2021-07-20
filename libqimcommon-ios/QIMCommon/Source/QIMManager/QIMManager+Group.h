@@ -5,10 +5,10 @@
 //  Created by 李露 on 2018/4/2.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 #import "QIMPrivateHeader.h"
 
-@interface QIMManager (Group)
+@interface STManager (Group)
 
 /**
  更新群消息时间戳

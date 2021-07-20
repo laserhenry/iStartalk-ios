@@ -12,7 +12,7 @@
 #import "STDataContraller.h"
 #import "NSString+QIMUtility.h"
 #import "STUtility.h"
-#import "QIMManager.h"
+#import "STManager.h"
 #import "QIMManager+Helper.h"
 #import "QIMNotificationKeys.h"
 #define kResourceCachePath                          @"Resource"
@@ -82,8 +82,8 @@ static STDataContraller *__globalDataController = nil;
 }
 
 - (long long)sizeOfDBPath {
-    NSString *dbPath = [UserDocumentsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"/QIMNewDataBase/%@%@/", [[QIMManager sharedInstance] getLastJid], UserPath]];
-    [[QIMManager sharedInstance] addSkipBackupAttributeToItemAtURL:[NSURL fileURLWithPath:[dbPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    NSString *dbPath = [UserDocumentsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"/QIMNewDataBase/%@%@/", [[STManager sharedInstance] getLastJid], UserPath]];
+    [[STManager sharedInstance] addSkipBackupAttributeToItemAtURL:[NSURL fileURLWithPath:[dbPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
     dbPath = [dbPath stringByAppendingPathComponent:@"data.dat"];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:dbPath]) {
@@ -95,8 +95,8 @@ static STDataContraller *__globalDataController = nil;
 }
     
 - (long long)sizeOfDBWALPath {
-    NSString *dbWalPath = [UserDocumentsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"/QIMNewDataBase/%@%@/", [[QIMManager sharedInstance] getLastJid], UserPath]];
-    [[QIMManager sharedInstance] addSkipBackupAttributeToItemAtURL:[NSURL fileURLWithPath:[dbWalPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    NSString *dbWalPath = [UserDocumentsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"/QIMNewDataBase/%@%@/", [[STManager sharedInstance] getLastJid], UserPath]];
+    [[STManager sharedInstance] addSkipBackupAttributeToItemAtURL:[NSURL fileURLWithPath:[dbWalPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 
     dbWalPath = [dbWalPath stringByAppendingPathComponent:@"data.dat-wal"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:dbWalPath]) {

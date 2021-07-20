@@ -8,7 +8,7 @@
 #import "QIMManager+resetLoginInfo.h"
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (resetLoginInfo)
+@implementation STManager (resetLoginInfo)
 
 - (void)resetIP:(NSString *)ip port:(int)port domain:(NSString *)domain httpServer:(NSString *)http fileServer:(NSString *)fileServer {
     //

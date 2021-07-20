@@ -10,11 +10,11 @@
 
 @implementation NSURLSessionTask (QIMHttpRequest)
 
-- (QIMHTTPRequest *)sessionBindRequest {
+- (STHTTPRequest *)sessionBindRequest {
     return objc_getAssociatedObject(self, _cmd);
 }
 
-- (void)setSessionBindRequest:(QIMHTTPRequest *)sessionBindRequest {
+- (void)setSessionBindRequest:(STHTTPRequest *)sessionBindRequest {
     objc_setAssociatedObject(self, @selector(sessionBindRequest), sessionBindRequest, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 

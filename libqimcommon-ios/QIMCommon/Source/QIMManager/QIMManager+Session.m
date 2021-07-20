@@ -8,7 +8,7 @@
 #import "QIMManager+Session.h"
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (Session)
+@implementation STManager (Session)
 
 - (NSString *)getCurrentSessionUserId {
     return self.currentSessionUserId;
@@ -33,7 +33,7 @@
     
     [[STDataMgr qimDB_SharedInstance] qimDB_deleteSessionList];
     [[STDataMgr qimDB_SharedInstance] qimDB_clearHistoryMsg];
-    NSMutableDictionary *stickList = [NSMutableDictionary dictionaryWithDictionary:[[QIMManager sharedInstance] stickList]];
+    NSMutableDictionary *stickList = [NSMutableDictionary dictionaryWithDictionary:[[STManager sharedInstance] stickList]];
     NSMutableArray *deleteStickList = [NSMutableArray arrayWithCapacity:3];
     for (NSDictionary *tempStickDic in [stickList allValues]) {
         NSString *combineXmppId = [tempStickDic objectForKey:@"ConfigSubKey"];

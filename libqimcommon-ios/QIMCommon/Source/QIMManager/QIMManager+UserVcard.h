@@ -5,10 +5,10 @@
 //  Created by 李露 on 2018/2/23.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 #import "QIMPrivateHeader.h"
 
-@interface QIMManager (UserVcard)
+@interface STManager (UserVcard)
 
 /**
  更新用户备注信息

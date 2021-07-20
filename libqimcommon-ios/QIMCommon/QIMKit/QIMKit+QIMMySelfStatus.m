@@ -17,31 +17,31 @@
 
 - (void)goOnline {
     
-    [[QIMManager sharedInstance] goOnline];
+    [[STManager sharedInstance] goOnline];
 }
 
 - (void)goAway {
     
-    [[QIMManager sharedInstance] goAway];
+    [[STManager sharedInstance] goAway];
 }
 
 - (void)goDnd {
     
-    [[QIMManager sharedInstance] goDnd];
+    [[STManager sharedInstance] goDnd];
 }
 
 - (void)goOffline {
     
-    [[QIMManager sharedInstance] quitLogin];
+    [[STManager sharedInstance] quitLogin];
 }
 
 - (void)deactiveReconnect {
-    [[QIMManager sharedInstance] deactiveReconnect];
+    [[STManager sharedInstance] deactiveReconnect];
     
 }
 
 - (void)activeReconnect {
-    [[QIMManager sharedInstance] activeReconnect];
+    [[STManager sharedInstance] activeReconnect];
 }
 
 @end

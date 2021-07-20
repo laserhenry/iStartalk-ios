@@ -6,9 +6,9 @@
 //  Copyright © 2018年 QIMKit. All rights reserved.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 
-@interface QIMManager (EncryptChat)
+@interface STManager (EncryptChat)
 
 - (void)sendEncryptionChatWithType:(int)type WithBody:(NSString *)body ToJid:(NSString *)jid;
 

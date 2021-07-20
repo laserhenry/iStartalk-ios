@@ -67,7 +67,7 @@ static STAppInfo *__globalAppInfo = nil;
             if (_pushToken) {
                 [[STUserCacheManager sharedInstance] setUserObject:_pushToken forKey:@"AppPushToken"];
             }
-            [[QIMManager sharedInstance] sendPushTokenWithMyToken:[[STAppInfo sharedInstance] pushToken] WithDeleteFlag:deleteFlag withCallback:nil];
+            [[STManager sharedInstance] sendPushTokenWithMyToken:[[STAppInfo sharedInstance] pushToken] WithDeleteFlag:deleteFlag withCallback:nil];
         });
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];

@@ -8,7 +8,7 @@
 #import "QIMManager+SingleMessage.h"
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (SingleMessage)
+@implementation STManager (SingleMessage)
 
 - (void)checkSingleChatMsg {
     long long errorTime = [[[STUserCacheManager sharedInstance] userObjectForKey:kGetNewSingleHistoryMsgError] longLongValue];
@@ -57,7 +57,7 @@
     NSString *destUrl = [NSString stringWithFormat:@"%@/qtapi/getreadflag.qunar?server=%@&c=qtalk&u=%@&k=%@&p=iphone&v=%@",
                          [[QIMNavConfigManager sharedInstance] javaurl],
                          [[XmppImManager sharedInstance] domain],
-                         [QIMManager getLastUserName],
+                         [STManager getLastUserName],
                          self.remoteKey,
                          [[STAppInfo sharedInstance] AppBuildVersion]];
     
@@ -73,14 +73,14 @@
     NSData *data = [[QIMJSONSerializer sharedInstance] serializeObject:jsonDic error:nil];
     
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [cookieProperties setObject:@"application/json" forKey:@"Content-type"];
     
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:destUrl]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:destUrl]];
     [request setHTTPBody:data];
     [request setHTTPRequestHeaders:cookieProperties];
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         
         NSDictionary *logDic = @{@"costTime":@([[QIMWatchDog sharedInstance] escapedTimewithStartTime:startTime]), @"reportTime":@([[NSDate date] timeIntervalSince1970]), @"threadName":@"", @"isMainThread":@([NSThread isMainThread]), @"url":destUrl, @"methodParams":jsonDic, @"requestHeaders":requestHeaders, @"describtion":@"请求单人离线消息阅读状态"};
         
@@ -212,7 +212,7 @@
 - (NSArray *)getUserChatlogSince:(NSTimeInterval)lastChatTime success:(BOOL *)flag timeOut:(NSTimeInterval)timeOut {
     
     __block NSArray *msgList = [[NSArray alloc] init];
-    NSString *jid = [QIMManager getLastUserName];
+    NSString *jid = [STManager getLastUserName];
     if ([jid length] > 0) {
         NSString *destUrl = [NSString stringWithFormat:@"%@/qtapi/gethistory.qunar?server=%@&c=qtalk&u=%@&k=%@&p=iphone&v=%@&f=t",
                              [[QIMNavConfigManager sharedInstance] javaurl],
@@ -226,7 +226,7 @@
             time = ([[NSDate date] timeIntervalSince1970] - self.serverTimeDiff - 3600 * 24 * 3) * 1000;
         }
         [self checkMsTimeInterval:&time];
-        NSDictionary *jsonDic = @{@"user": [QIMManager getLastUserName],
+        NSDictionary *jsonDic = @{@"user": [STManager getLastUserName],
                                   @"domain": [self getDomain],
                                   @"host": [self getDomain],
                                   @"time": @(time),
@@ -405,7 +405,7 @@
     NSString *destUrl = [NSString stringWithFormat:@"%@/qtapi/getconsultmsgs.qunar?server=%@&c=qtalk&u=%@&k=%@&p=iphone&v=%@",
                          [[QIMNavConfigManager sharedInstance] javaurl],
                          [[XmppImManager sharedInstance] domain],
-                         [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                         [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                          self.remoteKey,
                          [[STAppInfo sharedInstance] AppBuildVersion]];
     destUrl = [destUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -455,7 +455,7 @@
     NSString *destUrl = [NSString stringWithFormat:@"%@/qtapi/getmsgs.qunar?server=%@&c=qtalk&u=%@&k=%@&p=iphone&v=%@&f=t",
                          [[QIMNavConfigManager sharedInstance] javaurl],
                          [[XmppImManager sharedInstance] domain],
-                         [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                         [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                          self.remoteKey,
                          [[STAppInfo sharedInstance] AppBuildVersion]];
     destUrl = [destUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

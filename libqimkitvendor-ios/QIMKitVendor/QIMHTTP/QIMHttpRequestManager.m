@@ -8,7 +8,7 @@
 #import "QIMHttpRequestManager.h"
 #import "QIMHttpRequestEngine.h"
 #import "QIMHttpRequestConfig.h"
-#import "QIMHTTPRequest.h"
+#import "STHTTPRequest.h"
 
 @interface QIMHttpRequestManager ()
 @property(nonatomic, strong) QIMHttpRequestEngine *engine;
@@ -39,21 +39,21 @@
     config(self.httpRequestConfig);
 }
 
-- (void)sendRequest:(void (^)(QIMHTTPRequest *qtRequest))requestHandler
+- (void)sendRequest:(void (^)(STHTTPRequest *qtRequest))requestHandler
        successBlock:(QIMSuccessHandler)succsessHandler
        failureBlock:(QIMFailureHandler)failureHandler {
     [self qimSendRequest:requestHandler progressBLock:nil successBlock:succsessHandler failureBlock:failureHandler finishBlock:nil];
 }
 
 
-- (void)sendRequest:(void (^)(QIMHTTPRequest *qtRequest))requestHandler
+- (void)sendRequest:(void (^)(STHTTPRequest *qtRequest))requestHandler
        successBlock:(QIMSuccessHandler)succsessHandler
        failureBlock:(nonnull QIMFailureHandler)failureHandler
         finishBlock:(nonnull QIMFinishHandler)finishBlock {
     [self qimSendRequest:requestHandler progressBLock:nil successBlock:succsessHandler failureBlock:failureHandler finishBlock:finishBlock];
 }
 
-- (void)sendRequest:(void (^)(QIMHTTPRequest *qtRequest))requestHandler
+- (void)sendRequest:(void (^)(STHTTPRequest *qtRequest))requestHandler
       progressBLock:(QIMProgressHandler)progressHandlder
        successBlock:(QIMSuccessHandler)succsessHandler
        failureBlock:(QIMFailureHandler)failureHandler
@@ -62,19 +62,19 @@
 }
 
 
-- (void)qimSendRequest:(void (^)(QIMHTTPRequest *qtRequest))request
+- (void)qimSendRequest:(void (^)(STHTTPRequest *qtRequest))request
          progressBLock:(QIMProgressHandler)progressHandlder
           successBlock:(QIMSuccessHandler)succsessHandler
           failureBlock:(QIMFailureHandler)failureHandler
            finishBlock:(QIMFinishHandler)finishHandler {
-    QIMHTTPRequest *qimRequest = [[QIMHTTPRequest alloc] init];
+    STHTTPRequest *qimRequest = [[STHTTPRequest alloc] init];
     request(qimRequest);
     [self processRequest:qimRequest successBlock:succsessHandler progressBLock:progressHandlder failureBlock:failureHandler finishBlock:finishHandler];
     [self sentRequest:qimRequest];
 }
 
 
-- (void)processRequest:(QIMHTTPRequest *)request
+- (void)processRequest:(STHTTPRequest *)request
           successBlock:(QIMSuccessHandler)succsessHandler
          progressBLock:(QIMProgressHandler)progressHandlder
           failureBlock:(QIMFailureHandler)failureHandler
@@ -110,7 +110,7 @@
 }
 
 
-- (void)sentRequest:(QIMHTTPRequest *)request {
+- (void)sentRequest:(STHTTPRequest *)request {
     [self.engine sendRequest:request completionHandle:^(id _Nullable responseObject, NSInteger HTTPStatusCode, NSError *_Nullable error) {
         if (error == nil) {
             [self requestSuccessWithResponse:responseObject withHTTPCode:HTTPStatusCode forRequest:request];
@@ -121,12 +121,12 @@
 }
 
 
-- (void)requestSuccessWithResponse:(id)responseObjcet withHTTPCode:(NSInteger)httpCode forRequest:(QIMHTTPRequest *)request {
+- (void)requestSuccessWithResponse:(id)responseObjcet withHTTPCode:(NSInteger)httpCode forRequest:(STHTTPRequest *)request {
     request.successHandler(responseObjcet, httpCode);
     [request cleanCallbackBlocks];
 }
 
-- (void)reuqestFailedWithError:(NSError *)error forRequset:(QIMHTTPRequest *)requset {
+- (void)reuqestFailedWithError:(NSError *)error forRequset:(STHTTPRequest *)requset {
     requset.failuerHandler(error);
     [requset cleanCallbackBlocks];
 }

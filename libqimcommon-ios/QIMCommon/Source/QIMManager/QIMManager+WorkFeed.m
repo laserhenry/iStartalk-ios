@@ -9,7 +9,7 @@
 #import "QIMManager+WorkFeed.h"
 #import <objc/runtime.h>
 
-@implementation QIMManager (WorkFeed)
+@implementation STManager (WorkFeed)
 
 - (NSArray *)getHotCommentUUIdsForMomentId:(NSString *)momentId {
     return [self.hotCommentUUIdsDic objectForKey:momentId];
@@ -93,7 +93,7 @@
 
 - (void)getAnonyMouseDicWithMomentId:(NSString *)momentId WithCallBack:(QIMKitgetAnonymouseSuccessedBlock)callback {
     NSString *destUrl = [NSString stringWithFormat:@"%@/cricle_camel/anonymouse/getAnonymouse", [[QIMNavConfigManager sharedInstance] newerHttpUrl]];
-    NSDictionary *anonyDic = @{@"user" : [[QIMManager sharedInstance] getLastJid], @"postId": momentId ? momentId : [QIMUUIDTools UUID]};
+    NSDictionary *anonyDic = @{@"user" : [[STManager sharedInstance] getLastJid], @"postId": momentId ? momentId : [QIMUUIDTools UUID]};
     QIMVerboseLog(@"获取匿名Body : %@", [[QIMJSONSerializer sharedInstance] serializeObject:anonyDic]);
     NSData *momentBodyData = [[QIMJSONSerializer sharedInstance] serializeObject:anonyDic error:nil];
     
@@ -272,8 +272,8 @@
     [bodyDic setQIMSafeObject:@(likeFlag) forKey:@"likeType"];
     [bodyDic setQIMSafeObject:@(QIMWorkFeedTypeMoment) forKey:@"opType"];
     [bodyDic setQIMSafeObject:momentId forKey:@"postId"];
-    [bodyDic setQIMSafeObject:[QIMManager getLastUserName] forKey:@"userId"];
-    [bodyDic setQIMSafeObject:[[QIMManager sharedInstance] getDomain] forKey:@"userHost"];
+    [bodyDic setQIMSafeObject:[STManager getLastUserName] forKey:@"userId"];
+    [bodyDic setQIMSafeObject:[[STManager sharedInstance] getDomain] forKey:@"userHost"];
     [bodyDic setQIMSafeObject:[NSString stringWithFormat:@"2-%@", [QIMUUIDTools UUID]] forKey:@"likeId"];
     
     NSData *momentBodyData = [[QIMJSONSerializer sharedInstance] serializeObject:bodyDic error:nil];
@@ -321,8 +321,8 @@
     [bodyDic setQIMSafeObject:@(likeFlag) forKey:@"likeType"];
     [bodyDic setQIMSafeObject:@(QIMWorkFeedTypeComment) forKey:@"opType"];
     [bodyDic setQIMSafeObject:momentId forKey:@"postId"];
-    [bodyDic setQIMSafeObject:[QIMManager getLastUserName] forKey:@"userId"];
-    [bodyDic setQIMSafeObject:[[QIMManager sharedInstance] getDomain] forKey:@"userHost"];
+    [bodyDic setQIMSafeObject:[STManager getLastUserName] forKey:@"userId"];
+    [bodyDic setQIMSafeObject:[[STManager sharedInstance] getDomain] forKey:@"userHost"];
     [bodyDic setQIMSafeObject:[NSString stringWithFormat:@"2-%@",[QIMUUIDTools UUID]] forKey:@"likeId"];
     [bodyDic setQIMSafeObject:(superParentUUID.length > 0) ? superParentUUID : nil forKey:@"superParentUUID"];
     
@@ -696,8 +696,8 @@
     
     NSMutableDictionary *bodyDic = [[NSMutableDictionary alloc] init];
     [bodyDic setObject:@(createTime) forKey:@"createTime"];
-    [bodyDic setObject:[QIMManager getLastUserName] forKey:@"owner"];
-    [bodyDic setObject:[[QIMManager sharedInstance]getDomain] forKey:@"ownerHost"];
+    [bodyDic setObject:[STManager getLastUserName] forKey:@"owner"];
+    [bodyDic setObject:[[STManager sharedInstance]getDomain] forKey:@"ownerHost"];
     [bodyDic setObject:@(20) forKey:@"pgSize"];
     
     QIMVerboseLog(@"ownerCamel/getMyReply : %@", bodyDic);
@@ -751,8 +751,8 @@
     
     NSMutableDictionary *bodyDic = [[NSMutableDictionary alloc] init];
     [bodyDic setObject:@(createTime) forKey:@"createTime"];;
-    [bodyDic setObject:[QIMManager getLastUserName] forKey:@"owner"];
-    [bodyDic setObject:[[QIMManager sharedInstance]getDomain] forKey:@"ownerHost"];
+    [bodyDic setObject:[STManager getLastUserName] forKey:@"owner"];
+    [bodyDic setObject:[[STManager sharedInstance]getDomain] forKey:@"ownerHost"];
     [bodyDic setObject:@(20) forKey:@"pgSize"];
     
     QIMVerboseLog(@"ownerCamel/getAtList : %@", bodyDic);
@@ -866,8 +866,8 @@
     NSMutableDictionary *bodyDic = [[NSMutableDictionary alloc] init];
     long long maxTime = [[STDataMgr qimDB_SharedInstance] qimDB_getWorkNoticeMessagesMaxTime];
     [bodyDic setObject:@(self.lastWorkFeedMsgMsgTime) forKey:@"messageTime"];
-    [bodyDic setObject:[QIMManager getLastUserName] forKey:@"user"];
-    [bodyDic setObject:[[QIMManager sharedInstance] getDomain] forKey:@"userHost"];
+    [bodyDic setObject:[STManager getLastUserName] forKey:@"user"];
+    [bodyDic setObject:[[STManager sharedInstance] getDomain] forKey:@"userHost"];
     
     QIMVerboseLog(@"message/getMessageList Body : %@", bodyDic);
     NSData *noticeReadStateData = [[QIMJSONSerializer sharedInstance] serializeObject:bodyDic error:nil];
@@ -883,7 +883,7 @@
                 NSArray *msgList = [data objectForKey:@"msgList"];
                 if ([msgList isKindOfClass:[NSArray class]]) {
                     [[STDataMgr qimDB_SharedInstance] qimDB_bulkinsertNoticeMessage:msgList];
-                    NSInteger notReadMessageCount = [[QIMManager sharedInstance] getWorkNoticeMessagesCountWithEventType:@[@(QIMWorkFeedNotifyTypeComment), @(QIMWorkFeedNotifyTypePOSTAt), @(QIMWorkFeedNotifyTypeCommentAt)]];
+                    NSInteger notReadMessageCount = [[STManager sharedInstance] getWorkNoticeMessagesCountWithEventType:@[@(QIMWorkFeedNotifyTypeComment), @(QIMWorkFeedNotifyTypePOSTAt), @(QIMWorkFeedNotifyTypeCommentAt)]];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         //发送驼圈离线消息通知
                         [[NSNotificationCenter defaultCenter] postNotificationName:kPBPresenceCategoryNotifyWorkNoticeMessage object:nil];
@@ -948,8 +948,8 @@
 - (void)getRemoteWorkMomentSwitch {
     NSString *destUrl = [NSString stringWithFormat:@"%@/cricle_camel/notify_config/getNotifyConfig", [[QIMNavConfigManager sharedInstance] newerHttpUrl]];
     NSMutableDictionary *bodyDic = [[NSMutableDictionary alloc] init];
-    [bodyDic setQIMSafeObject:[QIMManager getLastUserName] forKey:@"notifyUser"];
-    [bodyDic setQIMSafeObject:[[QIMManager sharedInstance] getDomain] forKey:@"host"];
+    [bodyDic setQIMSafeObject:[STManager getLastUserName] forKey:@"notifyUser"];
+    [bodyDic setQIMSafeObject:[[STManager sharedInstance] getDomain] forKey:@"host"];
     NSData *bodyData = [[QIMJSONSerializer sharedInstance] serializeObject:bodyDic error:nil];
     [self sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:bodyData withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
@@ -971,8 +971,8 @@
 - (void)updateRemoteWorkMomentNotifyConfig:(BOOL)flag withCallBack:(QIMKitUpdateMomentNotifyConfigSuccessedBlock)callback {
     NSString *destUrl = [NSString stringWithFormat:@"%@/cricle_camel/notify_config/updateNotifyConfig", [[QIMNavConfigManager sharedInstance] newerHttpUrl]];
     NSMutableDictionary *bodyDic = [[NSMutableDictionary alloc] init];
-    [bodyDic setQIMSafeObject:[QIMManager getLastUserName] forKey:@"notifyUser"];
-    [bodyDic setQIMSafeObject:[[QIMManager sharedInstance] getDomain] forKey:@"host"];
+    [bodyDic setQIMSafeObject:[STManager getLastUserName] forKey:@"notifyUser"];
+    [bodyDic setQIMSafeObject:[[STManager sharedInstance] getDomain] forKey:@"host"];
     [bodyDic setQIMSafeObject:@(flag) forKey:@"flag"];
     NSData *bodyData = [[QIMJSONSerializer sharedInstance] serializeObject:bodyDic error:nil];
     [self sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:bodyData withSuccessCallBack:^(NSData *responseData) {
@@ -1126,7 +1126,7 @@
     NSLog(@"getLastWorkOnlineMomentWithDic : %@", dic);
     NSMutableDictionary *momentDic = [[NSMutableDictionary alloc] init];
     NSString *userId = [NSString stringWithFormat:@"%@@%@", [dic objectForKey:@"owner"], [dic objectForKey:@"ownerHost"]];
-    NSString *userName = [[QIMManager sharedInstance] getUserMarkupNameWithUserId:userId];
+    NSString *userName = [[STManager sharedInstance] getUserMarkupNameWithUserId:userId];
     NSString *photoUrl = nil;
     
     BOOL fromIsAnonymous = [[dic objectForKey:@"isAnyonous"] boolValue];
@@ -1137,7 +1137,7 @@
             photoUrl = [NSString stringWithFormat:@"%@/%@", [[QIMNavConfigManager sharedInstance] innerFileHttpHost], photoUrl];
         }
     } else {
-        NSDictionary *userInfo = [[QIMManager sharedInstance] getUserInfoByUserId:userId];
+        NSDictionary *userInfo = [[STManager sharedInstance] getUserInfoByUserId:userId];
         NSString *department = [userInfo objectForKey:@"DescInfo"]?[userInfo objectForKey:@"DescInfo"]:@"";
         NSString *lastDp = [[department componentsSeparatedByString:@"/"] objectAtIndex:2];
         photoUrl = [userInfo objectForKey:@"HeaderSrc"];
@@ -1151,7 +1151,7 @@
     
     [momentDic setQIMSafeObject:(content.length > 0) ? content : @"分享图片" forKey:@"content"];
     [momentDic setQIMSafeObject:(userName.length > 0) ? userName : @"" forKey:@"name"];
-    [momentDic setQIMSafeObject:(photoUrl.length > 0) ? photoUrl : [QIMManager defaultUserHeaderImagePath] forKey:@"photo"];
+    [momentDic setQIMSafeObject:(photoUrl.length > 0) ? photoUrl : [STManager defaultUserHeaderImagePath] forKey:@"photo"];
     QIMVerboseLog(@"RN getLastWorkOnlineMomentWithDic : %@", momentDic);
     return momentDic;
 }
@@ -1160,7 +1160,7 @@
     NSLog(@"getLastWorkMomentWithDic : %@", dic);
     NSMutableDictionary *momentDic = [[NSMutableDictionary alloc] init];
     NSString *userId = [NSString stringWithFormat:@"%@@%@", [dic objectForKey:@"owner"], [dic objectForKey:@"ownerHost"]];
-    NSString *userName = [[QIMManager sharedInstance] getUserMarkupNameWithUserId:userId];
+    NSString *userName = [[STManager sharedInstance] getUserMarkupNameWithUserId:userId];
     NSString *photoUrl = nil;
     
     BOOL fromIsAnonymous = [[dic objectForKey:@"isAnonymous"] boolValue];
@@ -1171,7 +1171,7 @@
             photoUrl = [NSString stringWithFormat:@"%@/%@", [[QIMNavConfigManager sharedInstance] innerFileHttpHost], photoUrl];
         }
     } else {
-        NSDictionary *userInfo = [[QIMManager sharedInstance] getUserInfoByUserId:userId];
+        NSDictionary *userInfo = [[STManager sharedInstance] getUserInfoByUserId:userId];
         NSString *department = [userInfo objectForKey:@"DescInfo"]?[userInfo objectForKey:@"DescInfo"]:@"";
         NSString *lastDp = [[department componentsSeparatedByString:@"/"] objectAtIndex:2];
         photoUrl = [userInfo objectForKey:@"HeaderSrc"];
@@ -1187,7 +1187,7 @@
     
     [momentDic setQIMSafeObject:(showContent.length > 0) ? showContent : @"分享图片" forKey:@"content"];
     [momentDic setQIMSafeObject:(userName.length > 0) ? userName : @"" forKey:@"name"];
-    [momentDic setQIMSafeObject:(photoUrl.length > 0) ? photoUrl : [QIMManager defaultUserHeaderImagePath] forKey:@"photo"];
+    [momentDic setQIMSafeObject:(photoUrl.length > 0) ? photoUrl : [STManager defaultUserHeaderImagePath] forKey:@"photo"];
     QIMVerboseLog(@"RN getLastWorkMoment : %@", momentDic);
     return momentDic;
 }
@@ -1220,7 +1220,7 @@
                         self.load_history_msg = dispatch_queue_create("Load History", 0);
                     }
                     dispatch_async(self.load_history_msg, ^{
-                        [[QIMManager sharedInstance] getMomentHistoryWithLastUpdateTime:time withOwnerXmppId:xmppId withPostType:7 withCallBack:^(NSArray *moments) {
+                        [[STManager sharedInstance] getMomentHistoryWithLastUpdateTime:time withOwnerXmppId:xmppId withPostType:7 withCallBack:^(NSArray *moments) {
                             [list addObjectsFromArray:moments];
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 complete(list);
@@ -1232,7 +1232,7 @@
         });
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            [[QIMManager sharedInstance] getMomentHistoryWithLastUpdateTime:lastMomentTime withOwnerXmppId:xmppId withPostType:7 withCallBack:^(NSArray *moments) {
+            [[STManager sharedInstance] getMomentHistoryWithLastUpdateTime:lastMomentTime withOwnerXmppId:xmppId withPostType:7 withCallBack:^(NSArray *moments) {
                 if (moments) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         complete(moments);
@@ -1267,7 +1267,7 @@
                         self.load_history_msg = dispatch_queue_create("Load History", 0);
                     }
                     dispatch_async(self.load_history_msg, ^{
-                        [[QIMManager sharedInstance] getMomentHistoryWithLastUpdateTime:time withOwnerXmppId:xmppId withPostType:1 withCallBack:^(NSArray *moments) {
+                        [[STManager sharedInstance] getMomentHistoryWithLastUpdateTime:time withOwnerXmppId:xmppId withPostType:1 withCallBack:^(NSArray *moments) {
                             [list addObjectsFromArray:moments];
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 complete(list);
@@ -1279,7 +1279,7 @@
         });
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            [[QIMManager sharedInstance] getMomentHistoryWithLastUpdateTime:lastMomentTime withOwnerXmppId:xmppId withPostType:1 withCallBack:^(NSArray *moments) {
+            [[STManager sharedInstance] getMomentHistoryWithLastUpdateTime:lastMomentTime withOwnerXmppId:xmppId withPostType:1 withCallBack:^(NSArray *moments) {
                 if (moments) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         complete(moments);
@@ -1315,7 +1315,7 @@
                         self.load_history_msg = dispatch_queue_create("Load History", 0);
                     }
                      dispatch_async(self.load_history_msg, ^{
-                        [[QIMManager sharedInstance] getRemoteCommentsHistoryWithLastCommentId:commentRId withMomentId:momentId withCommentCallBack:^(NSArray *comments) {
+                        [[STManager sharedInstance] getRemoteCommentsHistoryWithLastCommentId:commentRId withMomentId:momentId withCommentCallBack:^(NSArray *comments) {
                             [list addObjectsFromArray:comments];
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 complete(list);
@@ -1327,7 +1327,7 @@
         });
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            [[QIMManager sharedInstance] getRemoteCommentsHistoryWithLastCommentId:lastCommentRId withMomentId:momentId withCommentCallBack:^(NSArray *comments) {
+            [[STManager sharedInstance] getRemoteCommentsHistoryWithLastCommentId:lastCommentRId withMomentId:momentId withCommentCallBack:^(NSArray *comments) {
                 if (comments) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         complete(comments);

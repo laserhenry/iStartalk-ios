@@ -6,10 +6,10 @@
 //  Copyright © 2018年 QIMKit. All rights reserved.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 #import "QIMPrivateHeader.h"
 
-@interface QIMManager (Calendar)
+@interface STManager (Calendar)
 
 - (NSArray *)selectTripByYearMonth:(NSString *)date;
 

@@ -10,7 +10,7 @@
 #import <objc/runtime.h>
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (PublicRobot)
+@implementation STManager (PublicRobot)
 
 #pragma mark - setter and getter
 
@@ -68,15 +68,15 @@
 
 - (void)updatePublicNumberCardByIds:(NSArray *)publicNumberIdList WithNeedUpdate:(BOOL)flag withCallBack:(QIMKitUpdatePublicNumberCardCallBack)callback {
     
-    if ([[[QIMManager getLastUserName] lowercaseString] isEqualToString:@"appstore"] ||
-        [[[QIMManager getLastUserName] lowercaseString] isEqualToString:@"ctrip"]) {
+    if ([[[STManager getLastUserName] lowercaseString] isEqualToString:@"appstore"] ||
+        [[[STManager getLastUserName] lowercaseString] isEqualToString:@"ctrip"]) {
 //        return nil;
         if (callback) {
             callback(nil);
         }
     }
     
-    NSString *destUrl = [NSString stringWithFormat:@"%@/get_robot?u=%@&k=%@&p=iphone&v=%@", [[QIMNavConfigManager sharedInstance] httpHost], [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
+    NSString *destUrl = [NSString stringWithFormat:@"%@/get_robot?u=%@&k=%@&p=iphone&v=%@", [[QIMNavConfigManager sharedInstance] httpHost], [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
     NSData *data = [[QIMJSONSerializer sharedInstance] serializeObject:publicNumberIdList error:nil];
     
     [self sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:data withSuccessCallBack:^(NSData *responseData) {
@@ -137,23 +137,23 @@
 - (void)updatePublicNumberList {
     // 获取公众号列表
     
-    if ([[[QIMManager getLastUserName] lowercaseString] isEqualToString:@"appstore"] ||
-        [[[QIMManager getLastUserName] lowercaseString] isEqualToString:@"ctrip"]) {
+    if ([[[STManager getLastUserName] lowercaseString] isEqualToString:@"appstore"] ||
+        [[[STManager getLastUserName] lowercaseString] isEqualToString:@"ctrip"]) {
         return;
     }
     
-    NSString *destUrl = [NSString stringWithFormat:@"%@/user_robot?u=%@&k=%@&p=iphone&v=%@", [[QIMNavConfigManager sharedInstance] httpHost], [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
+    NSString *destUrl = [NSString stringWithFormat:@"%@/user_robot?u=%@&k=%@&p=iphone&v=%@", [[QIMNavConfigManager sharedInstance] httpHost], [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
     
     NSURL *requestUrl = [[NSURL alloc] initWithString:destUrl];
-    NSData *data = [[QIMJSONSerializer sharedInstance] serializeObject:@{@"user": [QIMManager getLastUserName] ? [QIMManager getLastUserName] : @"", @"method": @"get"} error:nil];
+    NSData *data = [[QIMJSONSerializer sharedInstance] serializeObject:@{@"user": [STManager getLastUserName] ? [STManager getLastUserName] : @"", @"method": @"get"} error:nil];
 
     NSMutableDictionary *requestHeader = [NSMutableDictionary dictionaryWithCapacity:1];
     [requestHeader setObject:@"application/json" forKey:@"content-type"];
     
-    QIMHTTPRequest *requeset = [[QIMHTTPRequest alloc] initWithURL:requestUrl];
+    STHTTPRequest *requeset = [[STHTTPRequest alloc] initWithURL:requestUrl];
     [requeset setHTTPRequestHeaders:requestHeader];
     [requeset setHTTPBody:data];
-    [QIMHTTPClient sendRequest:requeset complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:requeset complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             NSError *errol = nil;
             NSDictionary *value = [[QIMJSONSerializer sharedInstance] deserializeObject:response.data error:&errol];
@@ -185,15 +185,15 @@
             callback(NO);
         }
     }
-    if ([[[QIMManager getLastUserName] lowercaseString] isEqualToString:@"appstore"] ||
-        [[[QIMManager getLastUserName] lowercaseString] isEqualToString:@"ctrip"]) {
+    if ([[[STManager getLastUserName] lowercaseString] isEqualToString:@"appstore"] ||
+        [[[STManager getLastUserName] lowercaseString] isEqualToString:@"ctrip"]) {
         if (callback) {
             callback(NO);
         }
     }
     
-    NSString *destUrl = [NSString stringWithFormat:@"%@/user_robot?u=%@&k=%@&p=iphone&v=%@", [[QIMNavConfigManager sharedInstance] httpHost], [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
-    NSData *data = [[QIMJSONSerializer sharedInstance] serializeObject:@{@"user": [QIMManager getLastUserName], @"rbt": publicNumberId, @"method": @"add"} error:nil];
+    NSString *destUrl = [NSString stringWithFormat:@"%@/user_robot?u=%@&k=%@&p=iphone&v=%@", [[QIMNavConfigManager sharedInstance] httpHost], [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
+    NSData *data = [[QIMJSONSerializer sharedInstance] serializeObject:@{@"user": [STManager getLastUserName], @"rbt": publicNumberId, @"method": @"add"} error:nil];
 
     [self sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:data withSuccessCallBack:^(NSData *responseData) {
         NSError *errol = nil;
@@ -222,15 +222,15 @@
 
 - (void)cancelFocusOnPublicNumberId:(NSString *)publicNumberId withCallBack:(QIMKitCancelFocusPublicNumberCallBack)callback {
     
-    if ([[[QIMManager getLastUserName] lowercaseString] isEqualToString:@"appstore"] ||
-        [[[QIMManager getLastUserName] lowercaseString] isEqualToString:@"ctrip"]) {
+    if ([[[STManager getLastUserName] lowercaseString] isEqualToString:@"appstore"] ||
+        [[[STManager getLastUserName] lowercaseString] isEqualToString:@"ctrip"]) {
         if (callback) {
             callback(NO);
         }
     }
     
-    NSString *destUrl = [NSString stringWithFormat:@"%@/user_robot?u=%@&k=%@&p=iphone&v=%@", [[QIMNavConfigManager sharedInstance] httpHost], [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
-    NSData *data = [[QIMJSONSerializer sharedInstance] serializeObject:@{@"user": [QIMManager getLastUserName], @"rbt": publicNumberId, @"method": @"del"} error:nil];
+    NSString *destUrl = [NSString stringWithFormat:@"%@/user_robot?u=%@&k=%@&p=iphone&v=%@", [[QIMNavConfigManager sharedInstance] httpHost], [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
+    NSData *data = [[QIMJSONSerializer sharedInstance] serializeObject:@{@"user": [STManager getLastUserName], @"rbt": publicNumberId, @"method": @"del"} error:nil];
 
     [self sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:data withSuccessCallBack:^(NSData *responseData) {
         NSError *errol = nil;
@@ -270,7 +270,7 @@
     [mesg setMessageDirection:QIMMessageDirection_Sent];
     [mesg setMessage:msg];
     [mesg setTo:publicNumberId];
-    [mesg setFrom:[[QIMManager sharedInstance] getLastJid]];
+    [mesg setFrom:[[STManager sharedInstance] getLastJid]];
     [mesg setMessageDate:msgDate];
     [mesg setMessageSendState:QIMMessageSendState_Waiting];
     [mesg setExtendInformation:extendInfo];
@@ -372,14 +372,14 @@
 
 - (void)searchRobotByKeyStr:(NSString *)keyStr withCallBack:(QIMKitSearchRobotByKeyStrCallBack)callback {
     
-    if ([[[QIMManager getLastUserName] lowercaseString] isEqualToString:@"appstore"] ||
-        [[[QIMManager getLastUserName] lowercaseString] isEqualToString:@"ctrip"]) {
+    if ([[[STManager getLastUserName] lowercaseString] isEqualToString:@"appstore"] ||
+        [[[STManager getLastUserName] lowercaseString] isEqualToString:@"ctrip"]) {
         if (callback) {
             callback(nil);
         }
     }
     
-    NSString *destUrl = [NSString stringWithFormat:@"%@/search_robot?u=%@&k=%@&p=iphone&v=%@", [[QIMNavConfigManager sharedInstance] httpHost], [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
+    NSString *destUrl = [NSString stringWithFormat:@"%@/search_robot?u=%@&k=%@&p=iphone&v=%@", [[QIMNavConfigManager sharedInstance] httpHost], [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
     NSData *data = [[QIMJSONSerializer sharedInstance] serializeObject:@{@"type": @"1", @"keyword": keyStr} error:nil];
     [self sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:data withSuccessCallBack:^(NSData *responseData) {
         NSError *errol = nil;

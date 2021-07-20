@@ -14,20 +14,20 @@
 @implementation STKit (QIMHelper)
 
 - (void)playHongBaoSound {
-    [[QIMManager sharedInstance] playHongBaoSound];
+    [[STManager sharedInstance] playHongBaoSound];
 }
 
 - (void)playSound {
     
-    [[QIMManager sharedInstance] playSound];
+    [[STManager sharedInstance] playSound];
 }
 
 - (void)shockWindow {
-    [[QIMManager sharedInstance] shockWindow];
+    [[STManager sharedInstance] shockWindow];
 }
 
 - (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL {
-    return [[QIMManager sharedInstance] addSkipBackupAttributeToItemAtURL:URL];
+    return [[STManager sharedInstance] addSkipBackupAttributeToItemAtURL:URL];
 }
 
 @end

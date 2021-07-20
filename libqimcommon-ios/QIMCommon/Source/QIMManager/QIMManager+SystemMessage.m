@@ -8,7 +8,7 @@
 #import "QIMManager+SystemMessage.h"
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (SystemMessage)
+@implementation STManager (SystemMessage)
 
 #pragma mark - 系统消息
 
@@ -50,7 +50,7 @@
         [self updateRemoteLoginKey];
     }
     NSString *from = @"SystemMessage";
-    [self getSystemMsgHistoryListWithUserId:from WithDomain:[[QIMManager sharedInstance] getDomain] WithVersion:self.lastSingleMsgTime];
+    [self getSystemMsgHistoryListWithUserId:from WithDomain:[[STManager sharedInstance] getDomain] WithVersion:self.lastSingleMsgTime];
 }
 
 - (void)getSystemMsgLisByUserId:(NSString *)userId WithFromHost:(NSString *)fromHost WithLimit:(int)limit WithOffset:(int)offset withLoadMore:(BOOL)loadMore WithComplete:(void (^)(NSArray *))complete {
@@ -72,7 +72,7 @@
                 dispatch_async(self.load_history_msg, ^{
                     long long version = [[STDataMgr qimDB_SharedInstance] qimDB_getMinMsgTimeStampByXmppId:userId] - timeChange;
                     
-                    [self getSystemMsgListWithDirection:0 WithUserId:userId WithFromHost:fromHost WithLimit:limit - list.count withTimeVersion:version toId:[QIMManager getLastUserName] toHost:fromHost withCallBack:^(NSArray *result) {
+                    [self getSystemMsgListWithDirection:0 WithUserId:userId WithFromHost:fromHost WithLimit:limit - list.count withTimeVersion:version toId:[STManager getLastUserName] toHost:fromHost withCallBack:^(NSArray *result) {
                         if (result.count > 0) {
                             [[STDataMgr qimDB_SharedInstance] qimDB_bulkInsertHistoryChatJSONMsg:result];
                         }
@@ -86,7 +86,7 @@
                 }
                 dispatch_async(self.load_history_msg, ^{
                     long long version = [[STDataMgr qimDB_SharedInstance] qimDB_getMinMsgTimeStampByXmppId:userId] - timeChange;
-                    [self getSystemMsgListWithDirection:0 WithUserId:userId WithFromHost:fromHost WithLimit:limit withTimeVersion:version toId:[QIMManager getLastUserName] toHost:fromHost withCallBack:^(NSArray *resultList) {
+                    [self getSystemMsgListWithDirection:0 WithUserId:userId WithFromHost:fromHost WithLimit:limit withTimeVersion:version toId:[STManager getLastUserName] toHost:fromHost withCallBack:^(NSArray *resultList) {
                         if (resultList.count > 0) {
                             [[STDataMgr qimDB_SharedInstance] qimDB_bulkInsertHistoryChatJSONMsg:resultList];
                             NSArray *datas = [[STDataMgr qimDB_SharedInstance] qimDB_getMgsListBySessionId:userId WithRealJid:nil WithLimit:(int)(resultList.count) WithOffset:offset];
@@ -128,7 +128,7 @@
     [params setObject:toHost forKey:@"thost"];
     [params setObject:@"t" forKey:@"f"];
     NSData *requestData = [[QIMJSONSerializer sharedInstance] serializeObject:params error:nil];
-    NSString *destUrl = [NSString stringWithFormat:@"%@/qtapi/get_system_msgs.qunar?v=%@&p=iOS&u=%@&k=%@&f=t", [[QIMNavConfigManager sharedInstance] javaurl], [[STAppInfo sharedInstance] AppBuildVersion], [QIMManager getLastUserName], self.remoteKey];
+    NSString *destUrl = [NSString stringWithFormat:@"%@/qtapi/get_system_msgs.qunar?v=%@&p=iOS&u=%@&k=%@&f=t", [[QIMNavConfigManager sharedInstance] javaurl], [[STAppInfo sharedInstance] AppBuildVersion], [STManager getLastUserName], self.remoteKey];
     [self sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:requestData withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         BOOL ret = [[result objectForKey:@"ret"] boolValue];
@@ -160,20 +160,20 @@
     [params setObject:@(DEFAULT_CHATMSG_NUM) forKey:@"num"];
     [params setObject:@"t" forKey:@"f"];
     NSData *requestData = [[QIMJSONSerializer sharedInstance] serializeObject:params error:nil];
-    NSString *destUrl = [NSString stringWithFormat:@"%@/qtapi/get_system_history.qunar?v=%@&p=iOS&u=%@&k=%@&f=t", [[QIMNavConfigManager sharedInstance] javaurl], [[STAppInfo sharedInstance] AppBuildVersion], [QIMManager getLastUserName], self.remoteKey];
+    NSString *destUrl = [NSString stringWithFormat:@"%@/qtapi/get_system_history.qunar?v=%@&p=iOS&u=%@&k=%@&f=t", [[QIMNavConfigManager sharedInstance] javaurl], [[STAppInfo sharedInstance] AppBuildVersion], [STManager getLastUserName], self.remoteKey];
     NSURL *requestUrl = [[NSURL alloc] initWithString:destUrl];
     
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [cookieProperties setObject:@"application/json" forKey:@"Content-type"];
     
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:requestUrl];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:requestUrl];
     [request setHTTPMethod:QIMHTTPMethodPOST];
     [request setHTTPBody:requestData];
     [request setHTTPRequestHeaders:cookieProperties];
     __weak __typeof(self) weakSelf = self;
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         
         NSDictionary *logDic = @{@"costTime":@([[QIMWatchDog sharedInstance] escapedTimewithStartTime:startTime]), @"reportTime":@([[NSDate date] timeIntervalSince1970]), @"threadName":@"", @"isMainThread":@([NSThread isMainThread]), @"url":destUrl, @"methodParams":params, @"requestHeaders":requestHeaders, @"describtion":@"请求HeadLine离线消息"};
         

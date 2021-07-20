@@ -34,7 +34,7 @@ static STKit *__global_QIMKit = nil;
 - (void)initQIMKit {
     QIMInfoLog(@"QIMKit initialize");
     [QIMFilteredProtocol start];
-    [QIMManager sharedInstance];
+    [STManager sharedInstance];
     [AvoidCrash makeAllEffective];
     NSArray *noneSelClassStrings = @[
                                      @"NSNull",
@@ -57,80 +57,80 @@ static STKit *__global_QIMKit = nil;
     QIMErrorLog(@"QIMKit dealwithCrashMessage : %@",note.userInfo);
 }
 
-- (void)clearQIMManager {
-    [[QIMManager sharedInstance] clearQIMManager];
+- (void)clearSTManager {
+    [[STManager sharedInstance] clearSTManager];
 }
 
 - (NSMutableDictionary *)timeStempDic {
-    return [[QIMManager sharedInstance] timeStempDic];
+    return [[STManager sharedInstance] timeStempDic];
 }
 
 - (dispatch_queue_t)getLastQueue {
-    return [[QIMManager sharedInstance] lastQueue];
+    return [[STManager sharedInstance] lastQueue];
 }
 
 - (dispatch_queue_t)getLoadSessionNameQueue {
-    return [[[QIMManager sharedInstance] load_session_name] queue];
+    return [[[STManager sharedInstance] load_session_name] queue];
 }
 
 - (dispatch_queue_t)getLoadHeaderImageQueue {
-    return [[[QIMManager sharedInstance] load_user_header] queue];
+    return [[[STManager sharedInstance] load_user_header] queue];
 }
 
 - (dispatch_queue_t)getLoadSessionContentQueue {
-    return [[[QIMManager sharedInstance] load_session_content] queue];
+    return [[[STManager sharedInstance] load_session_content] queue];
 }
 
 - (dispatch_queue_t)getLoadSessionUnReadCountQueue {
-    return [[[QIMManager sharedInstance] load_session_unreadcount] queue];
+    return [[[STManager sharedInstance] load_session_unreadcount] queue];
 }
 
 - (dispatch_queue_t)getLoadGroupCardFromDBQueue {
-    return [[[QIMManager sharedInstance] load_groupDB_VCard] queue];
+    return [[[STManager sharedInstance] load_groupDB_VCard] queue];
 }
 
 - (dispatch_queue_t)getLoadMsgNickNameQueue {
-    return [[[QIMManager sharedInstance] load_msgNickName] queue];
+    return [[[STManager sharedInstance] load_msgNickName] queue];
 }
 
 - (dispatch_queue_t)getLoadMsgMedalListQueue {
-    return [[[QIMManager sharedInstance] load_msgMedalList] queue];
+    return [[[STManager sharedInstance] load_msgMedalList] queue];
 }
 
 - (dispatch_queue_t)getLoad_msgHeaderImageQueue {
-    return [[[QIMManager sharedInstance] load_msgHeaderImage] queue];
+    return [[[STManager sharedInstance] load_msgHeaderImage] queue];
 }
 
 - (NSString *)getOpsFoundRNDebugUrl {
-    return [[QIMManager sharedInstance] opsFoundRNDebugUrl];
+    return [[STManager sharedInstance] opsFoundRNDebugUrl];
 }
 
 - (void)setOpsFoundRNDebugUrl:(NSString *)opsFoundRNDebugUrl {
-    [[QIMManager sharedInstance] setOpsFoundRNDebugUrl:opsFoundRNDebugUrl];
+    [[STManager sharedInstance] setOpsFoundRNDebugUrl:opsFoundRNDebugUrl];
 }
 
 - (NSString *)qtalkFoundRNDebugUrl {
-    return [[QIMManager sharedInstance] qtalkFoundRNDebugUrl];
+    return [[STManager sharedInstance] qtalkFoundRNDebugUrl];
 }
 
 - (void)setQtalkFoundRNDebugUrl:(NSString *)qtalkFoundRNDebugUrl {
-    [[QIMManager sharedInstance] setQtalkFoundRNDebugUrl:qtalkFoundRNDebugUrl];
+    [[STManager sharedInstance] setQtalkFoundRNDebugUrl:qtalkFoundRNDebugUrl];
 }
 
 - (NSString *)qtalkSearchRNDebugUrl {
-    return [[QIMManager sharedInstance] qtalkSearchRNDebugUrl];
+    return [[STManager sharedInstance] qtalkSearchRNDebugUrl];
 }
 
 - (void)setQtalkSearchRNDebugUrl:(NSString *)qtalkSearchRNDebugUrl {
-    [[QIMManager sharedInstance] setQtalkSearchRNDebugUrl:qtalkSearchRNDebugUrl];
+    [[STManager sharedInstance] setQtalkSearchRNDebugUrl:qtalkSearchRNDebugUrl];
 }
 
 - (NSString *)getImagerCache {
-    return [[QIMManager sharedInstance] getImagerCache];
+    return [[STManager sharedInstance] getImagerCache];
 }
 
 - (NSString *)updateRemoteLoginKey {
-    return [[QIMManager sharedInstance] updateRemoteLoginKey];
+    return [[STManager sharedInstance] updateRemoteLoginKey];
 }
 
 @end
@@ -138,7 +138,7 @@ static STKit *__global_QIMKit = nil;
 @implementation STKit (Common)
 
 - (NSData *)updateOrganizationalStructure {
-    return [[QIMManager sharedInstance] updateOrganizationalStructure];
+    return [[STManager sharedInstance] updateOrganizationalStructure];
 }
 
 @end
@@ -146,27 +146,27 @@ static STKit *__global_QIMKit = nil;
 @implementation STKit (CommonConfig)
 
 - (NSString *)remoteKey {
-    return [[QIMManager sharedInstance] remoteKey];
+    return [[STManager sharedInstance] remoteKey];
 }
 
 - (NSString *)myRemotelogginKey {
-    return [[QIMManager sharedInstance] myRemotelogginKey];
+    return [[STManager sharedInstance] myRemotelogginKey];
 }
 
 - (NSString *) thirdpartKeywithValue {
-    return [[QIMManager sharedInstance] thirdpartKeywithValue];
+    return [[STManager sharedInstance] thirdpartKeywithValue];
 }
 
 - (void)setIsMerchant:(BOOL)isMerchant {
-    [[QIMManager sharedInstance] setIsMerchant:isMerchant];
+    [[STManager sharedInstance] setIsMerchant:isMerchant];
 }
 
 - (BOOL)isMerchant {
-    return [[QIMManager sharedInstance] isMerchant];
+    return [[STManager sharedInstance] isMerchant];
 }
 
 + (NSString *)getLastUserName {
-    return [QIMManager getLastUserName];
+    return [STManager getLastUserName];
 }
 
 /**
@@ -175,7 +175,7 @@ static STKit *__global_QIMKit = nil;
  @param token 用户token
  */
 - (void)updateLastTempUserToken:(NSString *)token {
-    [[QIMManager sharedInstance] updateLastTempUserToken:token];
+    [[STManager sharedInstance] updateLastTempUserToken:token];
 }
 
 /**
@@ -184,7 +184,7 @@ static STKit *__global_QIMKit = nil;
  @return 用户token
  */
 - (NSString *)getLastTempUserToken {
-    return [[QIMManager sharedInstance] getLastTempUserToken];
+    return [[STManager sharedInstance] getLastTempUserToken];
 }
 
 /**
@@ -193,7 +193,7 @@ static STKit *__global_QIMKit = nil;
  @param tempUserToken 用户token
  */
 - (void)updateLastUserToken:(NSString *)tempUserToken {
-    [[QIMManager sharedInstance] updateLastUserToken:tempUserToken];
+    [[STManager sharedInstance] updateLastUserToken:tempUserToken];
 }
 
 /**
@@ -202,198 +202,198 @@ static STKit *__global_QIMKit = nil;
  @return 用户token
  */
 - (NSString *)getLastUserToken {
-    return [[QIMManager sharedInstance] getLastUserToken];
+    return [[STManager sharedInstance] getLastUserToken];
 }
 
 - (NSString *)getLastPassword {
-    return [[QIMManager sharedInstance] getLastPassword];
+    return [[STManager sharedInstance] getLastPassword];
 }
 
 - (NSString *)getLastJid {
-    return [[QIMManager sharedInstance] getLastJid];
+    return [[STManager sharedInstance] getLastJid];
 }
 
 - (NSString *)getMyNickName {
-    return [[QIMManager sharedInstance] getMyNickName];
+    return [[STManager sharedInstance] getMyNickName];
 }
 
 - (NSString *)getDomain {
-    return [[QIMManager sharedInstance] getDomain];
+    return [[STManager sharedInstance] getDomain];
 }
 
 - (long long)getCurrentServerTime {
-    return [[QIMManager sharedInstance] getCurrentServerTime];
+    return [[STManager sharedInstance] getCurrentServerTime];
 }
 
 - (int)getServerTimeDiff {
-    return [[QIMManager sharedInstance] getServerTimeDiff];
+    return [[STManager sharedInstance] getServerTimeDiff];
 }
 
 - (NSHTTPCookie *)cookie {
-    return [[QIMManager sharedInstance] cookie];
+    return [[STManager sharedInstance] cookie];
 }
 
 // 更新导航配置
 - (void)updateNavigationConfig {
-    [[QIMManager sharedInstance] updateNavigationConfig];
+    [[STManager sharedInstance] updateNavigationConfig];
 }
 
 - (void)checkClientConfig {
-    [[QIMManager sharedInstance] checkClientConfig];
+    [[STManager sharedInstance] checkClientConfig];
 }
 
 - (NSArray *)trdExtendInfo {
-    return [[QIMManager sharedInstance] trdExtendInfo];
+    return [[STManager sharedInstance] trdExtendInfo];
 }
 
 - (NSString *)aaCollectionUrlHost {
-    return [[QIMManager sharedInstance] aaCollectionUrlHost];
+    return [[STManager sharedInstance] aaCollectionUrlHost];
 }
 
 - (NSString *)redPackageUrlHost {
-    return [[QIMManager sharedInstance] redPackageUrlHost];
+    return [[STManager sharedInstance] redPackageUrlHost];
 }
 
 - (NSString *)redPackageBalanceUrl {
-    return [[QIMManager sharedInstance] redPackageBalanceUrl];
+    return [[STManager sharedInstance] redPackageBalanceUrl];
 }
 
 - (NSString *)myRedpackageUrl {
-    return [[QIMManager sharedInstance] myRedpackageUrl];
+    return [[STManager sharedInstance] myRedpackageUrl];
 }
 
 #pragma mark get user agent
 - (NSString *)getDefaultUserAgentString {
-    return [[QIMManager sharedInstance] getDefaultUserAgentString];
+    return [[STManager sharedInstance] getDefaultUserAgentString];
 }
 
 - (BOOL)isNewMsgNotify {
-    return [[QIMManager sharedInstance] isNewMsgNotify];
+    return [[STManager sharedInstance] isNewMsgNotify];
 }
 
 - (void)setNewMsgNotify:(BOOL)flag {
-    [[QIMManager sharedInstance] setNewMsgNotify:flag];
+    [[STManager sharedInstance] setNewMsgNotify:flag];
 }
 
 - (BOOL)pickerPixelOriginal {
-    return [[QIMManager sharedInstance] pickerPixelOriginal];
+    return [[STManager sharedInstance] pickerPixelOriginal];
 }
 
 - (void)setPickerPixelOriginal:(BOOL)flag {
-    [[QIMManager sharedInstance] setPickerPixelOriginal:flag];
+    [[STManager sharedInstance] setPickerPixelOriginal:flag];
 }
 
 - (BOOL)moodshow {
-    return [[QIMManager sharedInstance] moodshow];
+    return [[STManager sharedInstance] moodshow];
 }
 
 - (void)setMoodshow:(BOOL)flag {
-    [[QIMManager sharedInstance] setMoodshow:flag];
+    [[STManager sharedInstance] setMoodshow:flag];
 }
 
 //是否展示水印
 - (BOOL)waterMarkState {
-    return [[QIMManager sharedInstance] waterMarkState];
+    return [[STManager sharedInstance] waterMarkState];
 }
 
 - (void)setWaterMarkState:(BOOL)flag {
-    [[QIMManager sharedInstance] setWaterMarkState:flag];
+    [[STManager sharedInstance] setWaterMarkState:flag];
 }
 
 //艾特消息
 - (NSArray *)getHasAtMeByJid:(NSString *)jid  {
-    return [[QIMManager sharedInstance] getHasAtMeByJid:jid];
+    return [[STManager sharedInstance] getHasAtMeByJid:jid];
 }
 
 - (void)updateAtMeMessageWithJid:(NSString *)groupId withMsgIds:(NSArray *)msgIds withReadState:(QIMAtMsgReadState)readState {
-    [[QIMManager sharedInstance] updateAtMeMessageWithJid:groupId withMsgIds:msgIds withReadState:readState];
+    [[STManager sharedInstance] updateAtMeMessageWithJid:groupId withMsgIds:msgIds withReadState:readState];
 }
 
 - (void)clearAtMeMessageWithJid:(NSString *)groupId {
-    [[QIMManager sharedInstance] clearAtMeMessageWithJid:groupId];
+    [[STManager sharedInstance] clearAtMeMessageWithJid:groupId];
 }
 
 - (void)addOfflineAtMeMessageByJid:(NSString *)groupId withType:(QIMAtType)atType withMsgId:(NSString *)msgId withMsgTime:(long long)msgTime {
-    [[QIMManager sharedInstance] addOfflineAtMeMessageByJid:groupId withType:atType withMsgId:msgId withMsgTime:msgTime];
+    [[STManager sharedInstance] addOfflineAtMeMessageByJid:groupId withType:atType withMsgId:msgId withMsgTime:msgTime];
 }
 
 - (void)addAtMeMessageByJid:(NSString *)groupId withType:(QIMAtType)atType withMsgId:(NSString *)msgId withMsgTime:(long long)msgTime {
-    [[QIMManager sharedInstance] addAtMeMessageByJid:groupId withType:atType withMsgId:msgId withMsgTime:msgTime];
+    [[STManager sharedInstance] addAtMeMessageByJid:groupId withType:atType withMsgId:msgId withMsgTime:msgTime];
 }
 
 //输入框草稿
 - (NSDictionary *)getNotSendTextByJid:(NSString *)jid {
-    return [[QIMManager sharedInstance] getNotSendTextByJid:jid];
+    return [[STManager sharedInstance] getNotSendTextByJid:jid];
 }
 
 - (void)setNotSendText:(NSString *)text inputItems:(NSArray *)inputItems ForJid:(NSString *)jid {
-    [[QIMManager sharedInstance] setNotSendText:text inputItems:inputItems ForJid:jid];
+    [[STManager sharedInstance] setNotSendText:text inputItems:inputItems ForJid:jid];
 }
 
 - (void)getQChatTokenWithBusinessLineName:(NSString *)businessLineName withCallBack:(QIMKitGetQChatTokenSuccessBlock)callback {
-    [[QIMManager sharedInstance] getQChatTokenWithBusinessLineName:businessLineName withCallBack:callback];
+    [[STManager sharedInstance] getQChatTokenWithBusinessLineName:businessLineName withCallBack:callback];
 }
 
 - (NSDictionary *)getQVTForQChat {
-    return [[QIMManager sharedInstance] getQVTForQChat];
+    return [[STManager sharedInstance] getQVTForQChat];
 }
 
 - (void)removeQVTForQChat {
-    [[QIMManager sharedInstance] removeQVTForQChat];
+    [[STManager sharedInstance] removeQVTForQChat];
 }
 
 - (NSString *)getDownloadFilePath {
-    return [[QIMManager sharedInstance] getDownloadFilePath];
+    return [[STManager sharedInstance] getDownloadFilePath];
 }
 
 - (void)clearcache {
-    [[QIMManager sharedInstance] clearcache];
+    [[STManager sharedInstance] clearcache];
 }
 
 - (void)setStickWithCombineJid:(NSString *)combineJid WithChatType:(ChatType)chatType withCallback:(QIMKitUpdateRemoteClientConfig)callback {
-    [[QIMManager sharedInstance] setStickWithCombineJid:combineJid WithChatType:chatType withCallback:callback];
+    [[STManager sharedInstance] setStickWithCombineJid:combineJid WithChatType:chatType withCallback:callback];
 }
 
 - (void)removeStickWithCombineJid:(NSString *)jid WithChatType:(ChatType)chatType withCallback:(QIMKitUpdateRemoteClientConfig)callback{
-    [[QIMManager sharedInstance] removeStickWithCombineJid:jid WithChatType:chatType withCallback:callback];
+    [[STManager sharedInstance] removeStickWithCombineJid:jid WithChatType:chatType withCallback:callback];
 }
 
 - (BOOL)isStickWithCombineJid:(NSString *)jid {
-    return [[QIMManager sharedInstance] isStickWithCombineJid:jid];
+    return [[STManager sharedInstance] isStickWithCombineJid:jid];
 }
 
 - (NSDictionary *)stickList {
-    return [[QIMManager sharedInstance] stickList];
+    return [[STManager sharedInstance] stickList];
 }
 
 - (void)setMsgNotifySettingWithIndex:(QIMMSGSETTING)setting WithSwitchOn:(BOOL)switchOn withCallBack:(QIMKitSetMsgNotifySettingSuccessBlock)callback {
-    [[QIMManager sharedInstance] setMsgNotifySettingWithIndex:setting WithSwitchOn:switchOn withCallBack:callback];
+    [[STManager sharedInstance] setMsgNotifySettingWithIndex:setting WithSwitchOn:switchOn withCallBack:callback];
 }
 
 - (BOOL)getLocalMsgNotifySettingWithIndex:(QIMMSGSETTING)setting {
-    return [[QIMManager sharedInstance] getLocalMsgNotifySettingWithIndex:setting];
+    return [[STManager sharedInstance] getLocalMsgNotifySettingWithIndex:setting];
 }
 
 - (void)getMsgNotifyRemoteSettings {
-    [[QIMManager sharedInstance] getMsgNotifyRemoteSettings];
+    [[STManager sharedInstance] getMsgNotifyRemoteSettings];
 }
 
 #pragma mark - kNotificationSetting
 
 - (void)sendNoPush {
-    [[QIMManager sharedInstance] sendNoPush];
+    [[STManager sharedInstance] sendNoPush];
 }
 
 - (void)sendServer:(NSString *)notificationToken withUsername:(NSString *)username withParamU:(NSString *)paramU withParamK:(NSString *)paramK WithDelete:(BOOL)deleteFlag withCallback:(QIMKitRegisterPushTokenSuccessBlock)callback {
-    [[QIMManager sharedInstance] sendServer:notificationToken withUsername:username withParamU:paramU withParamK:paramK WithDelete:deleteFlag withCallback:callback];
+    [[STManager sharedInstance] sendServer:notificationToken withUsername:username withParamU:paramU withParamK:paramK WithDelete:deleteFlag withCallback:callback];
 }
 
 - (void)sendPushTokenWithMyToken:(NSString *)myToken WithDeleteFlag:(BOOL)deleteFlag withCallback:(QIMKitRegisterPushTokenSuccessBlock)callback {
-    [[QIMManager sharedInstance] sendPushTokenWithMyToken:myToken WithDeleteFlag:deleteFlag withCallback:callback];
+    [[STManager sharedInstance] sendPushTokenWithMyToken:myToken WithDeleteFlag:deleteFlag withCallback:callback];
 }
 
 - (void)checkClearCache {
-    [[QIMManager sharedInstance] checkClearCache];
+    [[STManager sharedInstance] checkClearCache];
 }
 
 @end

@@ -14,8 +14,8 @@
 
 #import "QIMEmotionManager.h"
 #import "ZipArchive.h"
-#import "QIMHTTPClient.h"
-#import "QIMHTTPRequest.h"
+#import "STHTTPClient.h"
+#import "STHTTPRequest.h"
 #import "QIMJSONSerializer.h"
 
 @interface Emotion () {
@@ -739,8 +739,8 @@
     NSString *destUrl = [NSString stringWithFormat:@"%@/file/v1/emo/d/e/config?p=%@", [[STKit sharedInstance] qimNav_InnerFileHttpHost], [STKit getQIMProjectType] == QIMProjectTypeQChat ? @"qchat" : @"qtalk"];
 
     NSURL *requestUrl = [[NSURL alloc] initWithString:destUrl];
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:requestUrl];
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:requestUrl];
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             NSError *errol = nil;
             NSArray *result = [[QIMJSONSerializer sharedInstance] deserializeObject:response.data error:&errol];
@@ -817,8 +817,8 @@
                                                                [[STKit getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                                                [[STKit sharedInstance] myRemotelogginKey]];
 
-            QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
-            [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+            STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
+            [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
                 if (response.code == 200) {
                     NSData *data = response.data;
                     if (data) {

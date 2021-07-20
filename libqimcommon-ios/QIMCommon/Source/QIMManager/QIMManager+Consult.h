@@ -5,10 +5,10 @@
 //  Created by 李露 on 2018/3/31.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 #import "QIMPrivateHeader.h"
 
-@interface QIMManager (Consult)
+@interface STManager (Consult)
 
 /**
  虚拟账号列表

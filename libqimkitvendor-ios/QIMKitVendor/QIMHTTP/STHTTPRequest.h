@@ -11,7 +11,7 @@
 #import "QIMHTTPResponse.h"
 #import "QIMHttpCommon.h"
 
-@interface QIMHTTPRequest : NSObject
+@interface STHTTPRequest : NSObject
 
 //request唯一标识
 @property(nonatomic, copy, readonly) NSString *identifier;

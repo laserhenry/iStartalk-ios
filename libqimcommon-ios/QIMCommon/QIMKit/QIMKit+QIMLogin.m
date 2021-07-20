@@ -16,106 +16,106 @@
 #pragma mark - setter and getter
 
 - (void)setIsBackgroundLogin:(BOOL)isBackgroundLogin {
-    [[QIMManager sharedInstance] setIsBackgroundLogin:isBackgroundLogin];
+    [[STManager sharedInstance] setIsBackgroundLogin:isBackgroundLogin];
 }
 
 - (BOOL)isBackgroundLogin {
-    return [[QIMManager sharedInstance] isBackgroundLogin];
+    return [[STManager sharedInstance] isBackgroundLogin];
 }
 
 - (void)setWillCancelLogin:(BOOL)willCancelLogin {
-    [[QIMManager sharedInstance] setWillCancelLogin:willCancelLogin];
+    [[STManager sharedInstance] setWillCancelLogin:willCancelLogin];
 }
 
 - (BOOL)willCancelLogin {
-    return [[QIMManager sharedInstance] willCancelLogin];
+    return [[STManager sharedInstance] willCancelLogin];
 }
 
 - (void)setNeedTryRelogin:(BOOL)needTryRelogin {
-    [[QIMManager sharedInstance] setNeedTryRelogin:needTryRelogin];
+    [[STManager sharedInstance] setNeedTryRelogin:needTryRelogin];
 }
 
 - (BOOL)needTryRelogin {
-    return [[QIMManager sharedInstance] needTryRelogin];
+    return [[STManager sharedInstance] needTryRelogin];
 }
 
 #pragma mark - 登录
 
 - (void)cancelLogin {
     
-    [[QIMManager sharedInstance] cancelLogin];
+    [[STManager sharedInstance] cancelLogin];
 }
 
 - (void)sendHeartBeat {
-    [[QIMManager sharedInstance] sendHeartBeat];
+    [[STManager sharedInstance] sendHeartBeat];
 }
 
 - (BOOL)isLogin {
-    return [[QIMManager sharedInstance] isLogin];
+    return [[STManager sharedInstance] isLogin];
 }
 
 - (void)loginWithUserName:(NSString *)userName WithPassWord:(NSString *)pwd {
-    [[QIMManager sharedInstance] loginWithUserName:userName WithPassWord:pwd];
+    [[STManager sharedInstance] loginWithUserName:userName WithPassWord:pwd];
 }
 
 - (void)loginWithUserName:(NSString *)userName WithPassWord:(NSString *)pwd WithLoginNavDict:(NSDictionary *)navDict {
-    [[QIMManager sharedInstance] loginWithUserName:userName WithPassWord:pwd WithLoginNavDict:navDict];
+    [[STManager sharedInstance] loginWithUserName:userName WithPassWord:pwd WithLoginNavDict:navDict];
 }
 
 - (void)addUserCacheWithUserId:(NSString *)userId WithUserFullJid:(NSString *)userFullJid WithNavDict:(NSDictionary *)navDict {
-    [[QIMManager sharedInstance] addUserCacheWithUserId:userId WithUserFullJid:userFullJid WithNavDict:navDict];
+    [[STManager sharedInstance] addUserCacheWithUserId:userId WithUserFullJid:userFullJid WithNavDict:navDict];
 }
 
 - (NSArray *)getLoginUsers {
-    return [[QIMManager sharedInstance] getLoginUsers];
+    return [[STManager sharedInstance] getLoginUsers];
 }
 
 - (void)clearLogginUser {
-    [[QIMManager sharedInstance] clearLogginUser];
+    [[STManager sharedInstance] clearLogginUser];
 }
 
 - (void)clearUserToken {
-    [[QIMManager sharedInstance] clearUserToken];
+    [[STManager sharedInstance] clearUserToken];
 }
 
 - (void)saveUserInfoWithName:(NSString *)userName passWord:(NSString *)pwd {
-    [[QIMManager sharedInstance] saveUserInfoWithName:userName passWord:pwd];
+    [[STManager sharedInstance] saveUserInfoWithName:userName passWord:pwd];
 }
 
 - (void)quitLogin {
     
-    [[QIMManager sharedInstance] quitLogin];
+    [[STManager sharedInstance] quitLogin];
 }
 
 - (void)QChatLoginWithUserId:(NSString *)userId rsaPassword:(NSString *)password type:(NSString *)type withCallback:(QIMKitGetQChatBetaLoginTokenDic)callback {
-    [[QIMManager sharedInstance] QChatLoginWithUserId:userId rsaPassword:password type:type withCallback:callback];
+    [[STManager sharedInstance] QChatLoginWithUserId:userId rsaPassword:password type:type withCallback:callback];
 }
 
 - (NSString *)getFormStringByDiction:(NSDictionary *)diction {
     
-    return [[QIMManager sharedInstance] getFormStringByDiction:diction];
+    return [[STManager sharedInstance] getFormStringByDiction:diction];
 }
 
 - (void)relogin {
-    [[QIMManager sharedInstance] relogin];
+    [[STManager sharedInstance] relogin];
 }
 
 - (BOOL)forgelogin {
-    return [[QIMManager sharedInstance] forgelogin];
+    return [[STManager sharedInstance] forgelogin];
 }
 
 #pragma mark - 验证码
 
 - (void)getUserTokenWithUserName:(NSString *)userName WithVerifyCode:(NSString *)verifCode withCallback:(QIMKitGetUserTokenSuccessBlock)callback {
-    [[QIMManager sharedInstance] getUserTokenWithUserName:userName WithVerifyCode:verifCode withCallback:callback];
+    [[STManager sharedInstance] getUserTokenWithUserName:userName WithVerifyCode:verifCode withCallback:callback];
 }
 
 - (void)getVerifyCodeWithUserName:(NSString *)userName withCallback:(QIMKitGetVerifyCodeSuccessBlock)callback {
-    [[QIMManager sharedInstance] getVerifyCodeWithUserName:userName withCallback:callback];
+    [[STManager sharedInstance] getVerifyCodeWithUserName:userName withCallback:callback];
 }
 
 - (void)getNewUserTokenWithUserName:(NSString *)userName WithPassword:(NSString *)password withCallback:(QIMKitGetUserNewTokenSuccessBlock)callback {
-    [[QIMManager sharedInstance] getNewUserTokenWithUserName:userName WithPassword:password withCallback:callback];
+    [[STManager sharedInstance] getNewUserTokenWithUserName:userName WithPassword:password withCallback:callback];
 }
 
 @end

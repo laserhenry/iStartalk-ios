@@ -9,8 +9,8 @@
 #import "QIMBusinessModleUpdate.h"
 #import "NSBundle+QIMLibrary.h"
 #import "QIMJSONSerializer.h"
-#import "QIMHTTPRequest.h"
-#import "QIMHTTPClient.h"
+#import "STHTTPRequest.h"
+#import "STHTTPClient.h"
 
 @implementation QIMBusinessModleUpdate
 
@@ -22,10 +22,10 @@
     [requestHeader setObject:@"application/json; encoding=utf-8" forKey:@"Content-Type"];
     [requestHeader setObject:@"application/json" forKey:@"Accept"];
     
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:url];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:url];
     [request setTimeoutInterval:2];
     [request setHTTPRequestHeaders:requestHeader];
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             NSDictionary *resultDic = [[QIMJSONSerializer sharedInstance] deserializeObject:response.data error:nil];
             BOOL ret = [[resultDic objectForKey:@"ret"] boolValue];

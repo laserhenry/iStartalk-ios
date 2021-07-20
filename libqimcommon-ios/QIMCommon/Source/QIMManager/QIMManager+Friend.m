@@ -9,7 +9,7 @@
 #import "XmppImManager.h"
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (Friend)
+@implementation STManager (Friend)
 
 /**
  *  获取好友列表
@@ -167,11 +167,11 @@
 
 - (void)updateFriendInviteList {
     
-    if ([QIMManager getLastUserName]) {
+    if ([STManager getLastUserName]) {
         
-        NSString *destUrl = [NSString stringWithFormat:@"%@/get_invite_info?server=%@&c=qtalk&u=%@&k=%@&p=iphone&v=%@", [[QIMNavConfigManager sharedInstance] httpHost], [[XmppImManager sharedInstance] domain], [QIMManager getLastUserName], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
+        NSString *destUrl = [NSString stringWithFormat:@"%@/get_invite_info?server=%@&c=qtalk&u=%@&k=%@&p=iphone&v=%@", [[QIMNavConfigManager sharedInstance] httpHost], [[XmppImManager sharedInstance] domain], [STManager getLastUserName], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
         long long maxTime = [[STDataMgr qimDB_SharedInstance] qimDB_getMaxTimeFriendNotify];
-        NSDictionary *jsonDic = @{@"user": [QIMManager getLastUserName], @"time": @(maxTime), @"d":[[XmppImManager sharedInstance] domain]};
+        NSDictionary *jsonDic = @{@"user": [STManager getLastUserName], @"time": @(maxTime), @"d":[[XmppImManager sharedInstance] domain]};
         destUrl = [destUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL *requestUrl = [[NSURL alloc] initWithString:destUrl];
         
@@ -180,12 +180,12 @@
         
         NSData *data = [[QIMJSONSerializer sharedInstance] serializeObject:jsonDic error:nil];
 
-        QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:requestUrl];
+        STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:requestUrl];
         [request setHTTPRequestHeaders:requestHeader];
         
         [request setHTTPBody:data];
         [request setTimeoutInterval:1];
-        [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+        [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
             if (response.code == 200) {
                 NSDictionary *resultDic = [[QIMJSONSerializer sharedInstance] deserializeObject:response.data error:nil];
                 int errCode = [[resultDic objectForKey:@"errcode"] intValue];

@@ -7,10 +7,10 @@
 
 #import "QIMManager+Pay.h"
 
-@implementation QIMManager (Pay)
+@implementation STManager (Pay)
 //获取绑定的支付宝账户信息
 - (void)getBindPayAccount:(NSString *)userid withCallBack:(QIMKitPayCheckAccountBlock)callBack{
-    NSString *destUrl = [NSString stringWithFormat:@"%@/red_envelope/get_bind_pay_account?user_id=%@&d=%@", [[QIMNavConfigManager sharedInstance] payurl], userid,[[QIMManager sharedInstance] getDomain]];
+    NSString *destUrl = [NSString stringWithFormat:@"%@/red_envelope/get_bind_pay_account?user_id=%@&d=%@", [[QIMNavConfigManager sharedInstance] payurl], userid,[[STManager sharedInstance] getDomain]];
     QIMVerboseLog(@"destUrl : %@", destUrl);
     [self sendTPGetRequestWithUrl:destUrl withSuccessCallBack:^(NSData *responseData) {
         
@@ -40,11 +40,11 @@
 
 //绑定支付宝账户
 - (void)bindAlipayAccount:(NSString *)aliOpenid withAliUid:(NSString*)aliUid userId:(NSString *)userid;{
-    NSString *destUrl = [NSString stringWithFormat:@"%@/red_envelope/bind_alipay_account?user_id=%@&d=%@",[[QIMNavConfigManager sharedInstance] payurl],userid,[[QIMManager sharedInstance] getDomain]];
+    NSString *destUrl = [NSString stringWithFormat:@"%@/red_envelope/bind_alipay_account?user_id=%@&d=%@",[[QIMNavConfigManager sharedInstance] payurl],userid,[[STManager sharedInstance] getDomain]];
     QIMVerboseLog(@"destUrl : %@", destUrl);
     NSDictionary *params = @{@"account": aliUid ,@"openId": aliOpenid};
     NSData *versionData = [[QIMJSONSerializer sharedInstance] serializeObject:params error:nil];
-    [[QIMManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:versionData withSuccessCallBack:^(NSData *responseData) {
+    [[STManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:versionData withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *responseDic = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         if ([responseDic isKindOfClass:[NSDictionary class]]) {
             BOOL ret = [[responseDic objectForKey:@"ret"] boolValue];
@@ -61,7 +61,7 @@
 
 //获取支付宝登录认证信息
 - (void)getAlipayLoginParams{
-    NSString *destUrl = [NSString stringWithFormat:@"%@/red_envelope/alipay_app_login?d=%@",[[QIMNavConfigManager sharedInstance] payurl],[[QIMManager sharedInstance] getDomain]];
+    NSString *destUrl = [NSString stringWithFormat:@"%@/red_envelope/alipay_app_login?d=%@",[[QIMNavConfigManager sharedInstance] payurl],[[STManager sharedInstance] getDomain]];
     QIMVerboseLog(@"destUrl : %@", destUrl);
     [self sendTPGetRequestWithUrl:destUrl withSuccessCallBack:^(NSData *responseData) {
         
@@ -86,9 +86,9 @@
 
 //发送红包
 - (void)sendRedEnvelop:(NSDictionary *)params withCallBack:(nonnull QIMKitPayCreateRedEnvelopBlock)callBack{
-    NSString *destUrl = [NSString stringWithFormat:@"%@/red_envelope/create?d=%@", [[QIMNavConfigManager sharedInstance] payurl],[[QIMManager sharedInstance] getDomain]];
+    NSString *destUrl = [NSString stringWithFormat:@"%@/red_envelope/create?d=%@", [[QIMNavConfigManager sharedInstance] payurl],[[STManager sharedInstance] getDomain]];
     NSData *versionData = [[QIMJSONSerializer sharedInstance] serializeObject:params error:nil];
-    [[QIMManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:versionData withSuccessCallBack:^(NSData *responseData) {
+    [[STManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:versionData withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *responseDic = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         if ([responseDic isKindOfClass:[NSDictionary class]]) {
             BOOL ret = [[responseDic objectForKey:@"ret"] boolValue];
@@ -115,7 +115,7 @@
 
 //红包详情
 - (void)getRedEnvelopDetail:(NSString *)xmppid RedRid:(NSString *)rid IsChatRoom:(NSInteger)isRoom withCallBack:(nonnull QIMKitPayRedEnvelopDetailBlock)callBack{
-    NSString* destUrl = [NSString stringWithFormat:@"%@/red_envelope/get?%@%@&rid=%@&d=%@",[[QIMNavConfigManager sharedInstance] payurl],isRoom ? @"group_id=" : @"user_id=",xmppid,rid,[[QIMManager sharedInstance] getDomain]];
+    NSString* destUrl = [NSString stringWithFormat:@"%@/red_envelope/get?%@%@&rid=%@&d=%@",[[QIMNavConfigManager sharedInstance] payurl],isRoom ? @"group_id=" : @"user_id=",xmppid,rid,[[STManager sharedInstance] getDomain]];
     QIMVerboseLog(@"destUrl : %@", destUrl);
     [self sendTPGetRequestWithUrl:destUrl withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
@@ -129,7 +129,7 @@
 
 //打开红包第一步 查看红包状态
 - (void)openRedEnvelop:(NSString *)xmppid RedRid:(NSString *)rid IsChatRoom:(NSInteger)isRoom withCallBack:(nonnull QIMkitPayRedEnvelopOpenBlock)callBack{
-    NSString* destUrl = [NSString stringWithFormat:@"%@/red_envelope/open?%@%@&rid=%@&action=open_red_envelope&d=%@",[[QIMNavConfigManager sharedInstance] payurl],isRoom ? @"group_id=" : @"user_id=",xmppid,rid,[[QIMManager sharedInstance] getDomain]];
+    NSString* destUrl = [NSString stringWithFormat:@"%@/red_envelope/open?%@%@&rid=%@&action=open_red_envelope&d=%@",[[QIMNavConfigManager sharedInstance] payurl],isRoom ? @"group_id=" : @"user_id=",xmppid,rid,[[STManager sharedInstance] getDomain]];
     QIMVerboseLog(@"destUrl : %@", destUrl);
     [self sendTPGetRequestWithUrl:destUrl withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
@@ -148,7 +148,7 @@
 
 //d打开红包第二步 拆红包（红包状态为可拆前提下）
 - (void)grapRedEnvelop:(NSString *)xmppid RedRid:(NSString *)rid IsChatRoom:(NSInteger)isRoom withCallBack:(nonnull QIMKitPayRedEnvelopGrapBlock)callBack{
-    NSString* destUrl = [NSString stringWithFormat:@"%@/red_envelope/grab?%@%@&rid=%@&action=grab_red_envelope&d=%@",[[QIMNavConfigManager sharedInstance] payurl],isRoom ? @"group_id=" : @"user_id=",xmppid,rid,[[QIMManager sharedInstance] getDomain]];
+    NSString* destUrl = [NSString stringWithFormat:@"%@/red_envelope/grab?%@%@&rid=%@&action=grab_red_envelope&d=%@",[[QIMNavConfigManager sharedInstance] payurl],isRoom ? @"group_id=" : @"user_id=",xmppid,rid,[[STManager sharedInstance] getDomain]];
     QIMVerboseLog(@"destUrl : %@", destUrl);
     [self sendTPGetRequestWithUrl:destUrl withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
@@ -175,7 +175,7 @@
 
 //我收到的红包
 - (void)redEnvelopReceive:(NSInteger)page PageSize:(NSInteger)pageSize WithYear:(NSInteger)year withCallBack:(nonnull QIMKitPayRedEnvelopReceiveBlock)callBack{
-    NSString* destUrl = [NSString stringWithFormat:@"%@/red_envelope/my_receive?page=%@&get_count=1&pagesize=%@&year=%@&d=%@",[[QIMNavConfigManager sharedInstance] payurl],@(page),@(pageSize),@(year),[[QIMManager sharedInstance] getDomain]];
+    NSString* destUrl = [NSString stringWithFormat:@"%@/red_envelope/my_receive?page=%@&get_count=1&pagesize=%@&year=%@&d=%@",[[QIMNavConfigManager sharedInstance] payurl],@(page),@(pageSize),@(year),[[STManager sharedInstance] getDomain]];
     QIMVerboseLog(@"destUrl : %@", destUrl);
     [self sendTPGetRequestWithUrl:destUrl withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
@@ -197,7 +197,7 @@
 
 //我发出的红包
 - (void)redEnvelopSend:(NSInteger)page PageSize:(NSInteger)pageSize WithYear:(NSInteger)year withCallBack:(nonnull QIMKitPayRedEnvelopSendBlock)callBack{
-    NSString* destUrl = [NSString stringWithFormat:@"%@/red_envelope/my_send?page=%@&get_count=1&pagesize=%@&year=%@&d=%@",[[QIMNavConfigManager sharedInstance] payurl],@(page),@(pageSize),@(year),[[QIMManager sharedInstance] getDomain]];
+    NSString* destUrl = [NSString stringWithFormat:@"%@/red_envelope/my_send?page=%@&get_count=1&pagesize=%@&year=%@&d=%@",[[QIMNavConfigManager sharedInstance] payurl],@(page),@(pageSize),@(year),[[STManager sharedInstance] getDomain]];
     QIMVerboseLog(@"destUrl : %@", destUrl);
     [self sendTPGetRequestWithUrl:destUrl withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];

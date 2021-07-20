@@ -7,7 +7,7 @@
 
 #import "QIMHttpRequestEngine.h"
 #import "AFURLSessionManager.h"
-#import "QIMHTTPRequest.h"
+#import "STHTTPRequest.h"
 #import "NSURLSessionTask+QIMHttpRequest.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #import "QIMHttpSerializer.h"
@@ -62,7 +62,7 @@ static dispatch_queue_t qim_request_complete_callback_quene() {
 }
 
 
-- (void)sendRequest:(QIMHTTPRequest *)request completionHandle:(QIMHttpCompletionHandler)completionHandler {
+- (void)sendRequest:(STHTTPRequest *)request completionHandle:(QIMHttpCompletionHandler)completionHandler {
     if (request.httpRequestType == QIMHTTPRequestTypeNormal) {
         [self normalrequestTaskWithRequest:request completionHandler:completionHandler];
     } else if (request.httpRequestType == QIMHTTPRequestTypeDownload) {
@@ -75,7 +75,7 @@ static dispatch_queue_t qim_request_complete_callback_quene() {
 }
 
 
-- (void)normalrequestTaskWithRequest:(QIMHTTPRequest *)request
+- (void)normalrequestTaskWithRequest:(STHTTPRequest *)request
                    completionHandler:(QIMHttpCompletionHandler)completionHandler {
     NSString *httpMethdod = nil;
     if (request.HTTPMethod == QIMHTTPMethodGET) {
@@ -122,7 +122,7 @@ static dispatch_queue_t qim_request_complete_callback_quene() {
     [dataTask resume];
 }
 
-- (void)sendUploadRequestTaskWithRequest:(QIMHTTPRequest *)request completionHandler:(QIMHttpCompletionHandler)completionHandler {
+- (void)sendUploadRequestTaskWithRequest:(STHTTPRequest *)request completionHandler:(QIMHttpCompletionHandler)completionHandler {
 
     __block NSError *serializerErr = nil;
 
@@ -186,7 +186,7 @@ static dispatch_queue_t qim_request_complete_callback_quene() {
     [uploadTask resume];
 }
 
-- (void)downLoadRequestTaskWithRequest:(QIMHTTPRequest *)request completionHandler:(QIMHttpCompletionHandler)completionHandler {
+- (void)downLoadRequestTaskWithRequest:(STHTTPRequest *)request completionHandler:(QIMHttpCompletionHandler)completionHandler {
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:request.url];
     [self setUrlHttpRequest:urlRequest WithQImHttpRequest:request];
 
@@ -260,12 +260,12 @@ static dispatch_queue_t qim_request_complete_callback_quene() {
     }
 }
 
-- (void)setRequsetIdentifierForRequest:(QIMHTTPRequest *)request taskIdentifier:(NSUInteger)taskIdentifier {
+- (void)setRequsetIdentifierForRequest:(STHTTPRequest *)request taskIdentifier:(NSUInteger)taskIdentifier {
     NSString *identifier = [NSString stringWithFormat:@"%lu", taskIdentifier];
     [request setValue:identifier forKey:@"_identifier"];
 }
 
-- (void)setUrlHttpRequest:(NSMutableURLRequest *)urlReqeuest WithQImHttpRequest:(QIMHTTPRequest *)qImRequest {
+- (void)setUrlHttpRequest:(NSMutableURLRequest *)urlReqeuest WithQImHttpRequest:(STHTTPRequest *)qImRequest {
     if (qImRequest.HTTPRequestHeaders.count > 0) {
         [qImRequest.HTTPRequestHeaders enumerateKeysAndObjectsUsingBlock:^(NSString *_Nonnull key, NSString *_Nonnull obj, BOOL *_Nonnull stop) {
             [urlReqeuest setValue:obj forHTTPHeaderField:key];
@@ -274,10 +274,10 @@ static dispatch_queue_t qim_request_complete_callback_quene() {
     urlReqeuest.timeoutInterval = qImRequest.timeoutInterval;
 }
 
-- (QIMHTTPRequest *)getRequestWithIdentifier:(NSString *)identifier {
+- (STHTTPRequest *)getRequestWithIdentifier:(NSString *)identifier {
     if (identifier != nil) {
         NSArray *tasks = self.sessionManager.tasks;
-        __block QIMHTTPRequest *request;
+        __block STHTTPRequest *request;
         [tasks enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
             NSURLSessionTask *task = obj;
             if ([task.sessionBindRequest.identifier isEqualToString:identifier]) {
@@ -290,10 +290,10 @@ static dispatch_queue_t qim_request_complete_callback_quene() {
     return nil;
 }
 
-- (QIMHTTPRequest *)cancelRequestIdentifier:(NSString *)identifier {
+- (STHTTPRequest *)cancelRequestIdentifier:(NSString *)identifier {
     if (identifier != nil) {
         NSArray *tasks = self.sessionManager.tasks;
-        __block QIMHTTPRequest *request;
+        __block STHTTPRequest *request;
         [tasks enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
             NSURLSessionTask *dataTask = obj;
             if ([dataTask.sessionBindRequest.identifier isEqualToString:identifier]) {

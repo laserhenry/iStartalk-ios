@@ -328,12 +328,12 @@ static NSString *LocalZipLogsPath = @"ZipLogs";
     NSMutableDictionary *requestHeader = [NSMutableDictionary dictionaryWithCapacity:1];
     [requestHeader setObject:@"application/json;" forKey:@"Content-type"];
 
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:requestUrl];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:requestUrl];
     [request setHTTPMethod:QIMHTTPMethodPOST];
     [request setHTTPBody:requestData];
     [request setTimeoutInterval:10];
     request.HTTPRequestHeaders = requestHeader;
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             QIMVerboseLog(@"提交日志成功");
             if (initiative == YES) {

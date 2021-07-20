@@ -275,8 +275,8 @@ static QIMWebRTCMeetingClient *instance = nil;
 //
         NSString *httpUrl = [NSString stringWithFormat:@"%@getTurnServers?username=%@", [[STKit sharedInstance] qimNav_VideoUrl], [[[STKit sharedInstance] thirdpartKeywithValue] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         NSURL *url = [NSURL URLWithString:httpUrl];
-        QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:url];
-        [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+        STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:url];
+        [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
             if (response.code == 200) {
                 NSDictionary *infoDic = [[QIMJSONSerializer sharedInstance] deserializeObject:response.data error:nil];
                 int errorCode = [[infoDic objectForKey:@"error"] intValue];

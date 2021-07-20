@@ -17,70 +17,70 @@
 
 
 - (NSMutableDictionary *)getFriendListDict {
-    return [[QIMManager sharedInstance] getFriendListDict];
+    return [[STManager sharedInstance] getFriendListDict];
 }
 
 
 - (NSDictionary *)getVerifyFreindModeWithXmppId:(NSString *)xmppId {
-    return [[QIMManager sharedInstance] getVerifyFreindModeWithXmppId:xmppId];
+    return [[STManager sharedInstance] getVerifyFreindModeWithXmppId:xmppId];
 }
 
 - (BOOL)setVerifyFreindMode:(int)mode WithQuestion:(NSString *)question WithAnswer:(NSString *)answer {
     
-    return [[QIMManager sharedInstance] setVerifyFreindMode:mode WithQuestion:question WithAnswer:answer];
+    return [[STManager sharedInstance] setVerifyFreindMode:mode WithQuestion:question WithAnswer:answer];
 }
 
 - (NSString *)getFriendsJson {
-    return [[QIMManager sharedInstance] getFriendsJson];
+    return [[STManager sharedInstance] getFriendsJson];
 }
 
 - (void)updateFriendList {
-    [[QIMManager sharedInstance] updateFriendList];
+    [[STManager sharedInstance] updateFriendList];
 }
 
 - (void)addFriendPresenceWithXmppId:(NSString *)xmppId WithAnswer:(NSString *)answer {
-    [[QIMManager sharedInstance] addFriendPresenceWithXmppId:xmppId WithAnswer:answer];
+    [[STManager sharedInstance] addFriendPresenceWithXmppId:xmppId WithAnswer:answer];
 }
 
 - (void)validationFriendWithXmppId:(NSString *)xmppId WithReason:(NSString *)reason {
-    [[QIMManager sharedInstance] validationFriendWithXmppId:xmppId WithReason:reason];
+    [[STManager sharedInstance] validationFriendWithXmppId:xmppId WithReason:reason];
 }
 
 - (void)agreeFriendRequestWithXmppId:(NSString *)xmppId {
-    [[QIMManager sharedInstance] agreeFriendRequestWithXmppId:xmppId];
+    [[STManager sharedInstance] agreeFriendRequestWithXmppId:xmppId];
 }
 
 - (void)refusedFriendRequestWithXmppId:(NSString *)xmppId {
-    [[QIMManager sharedInstance] refusedFriendRequestWithXmppId:xmppId];
+    [[STManager sharedInstance] refusedFriendRequestWithXmppId:xmppId];
 }
 
 //1.删除好友,客户端请求，其中mode1为单项删除，mode为2为双项删除
 - (BOOL)deleteFriendWithXmppId:(NSString *)xmppId WithMode:(int)mode {
     
-    return [[QIMManager sharedInstance] deleteFriendWithXmppId:xmppId WithMode:mode];
+    return [[STManager sharedInstance] deleteFriendWithXmppId:xmppId WithMode:mode];
 }
 
 - (int)getReceiveMsgLimitWithXmppId:(NSString *)xmppId {
     
-    return [[QIMManager sharedInstance] getReceiveMsgLimitWithXmppId:xmppId];
+    return [[STManager sharedInstance] getReceiveMsgLimitWithXmppId:xmppId];
 }
 
 - (BOOL)setReceiveMsgLimitWithMode:(int)mode {
     
-    return [[QIMManager sharedInstance] setReceiveMsgLimitWithMode:mode];
+    return [[STManager sharedInstance] setReceiveMsgLimitWithMode:mode];
 }
 
 - (void)updateFriendInviteList {
     
-    [[QIMManager sharedInstance] updateFriendInviteList];
+    [[STManager sharedInstance] updateFriendInviteList];
 }
 
 - (NSDictionary *)getLastFriendNotify {
-    return [[QIMManager sharedInstance]  getLastFriendNotify];
+    return [[STManager sharedInstance]  getLastFriendNotify];
 }
 
 - (NSInteger)getFriendNotifyCount {
-    return [[QIMManager sharedInstance] getFriendNotifyCount];
+    return [[STManager sharedInstance] getFriendNotifyCount];
 }
 
 @end

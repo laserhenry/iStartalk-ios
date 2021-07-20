@@ -8,20 +8,20 @@
 
 #import "QIMManager+Request.h"
 
-@implementation QIMManager (Request)
+@implementation STManager (Request)
 
 - (void)sendTPPOSTRequestWithUrl:(NSString *)url withSuccessCallBack:(QIMKitSendTPRequesSuccessedBlock)sCallback withFailedCallBack:(QIMKitSendTPRequesFailedBlock)fCallback{
 
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
     [request setHTTPMethod:QIMHTTPMethodPOST];
     
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [QIMManager getLastUserName], [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [STManager getLastUserName], [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [cookieProperties setObject:@"application/json;" forKey:@"Content-type"];
 
     [request setHTTPRequestHeaders:cookieProperties];
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             NSData *responseData = [response data];
             if (sCallback) {
@@ -42,18 +42,18 @@
 
 - (void)sendTPPOSTRequestWithUrl:(NSString *)url withRequestBodyData:(NSData *)bodyData withSuccessCallBack:(QIMKitSendTPRequesSuccessedBlock)sCallback withFailedCallBack:(QIMKitSendTPRequesFailedBlock)fCallback{
     
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
     [request setHTTPMethod:QIMHTTPMethodPOST];
     [request setHTTPBody:bodyData];
     [request setShouldASynchronous:YES];
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [QIMManager getLastUserName], [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [STManager getLastUserName], [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [cookieProperties setObject:@"application/json;" forKey:@"Content-type"];
 
     [request setHTTPRequestHeaders:cookieProperties];
 
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             NSData *responseData = [response data];
             if (sCallback) {
@@ -74,24 +74,24 @@
 
 - (void)sendTPPOSTRequestWithUrl:(NSString *)url withChatId:(NSString *)chatId withRealJid:(NSString *)realJid withChatType:(ChatType)chatType {
     
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
     [request setHTTPMethod:QIMHTTPMethodPOST];
     
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [QIMManager getLastUserName], [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [STManager getLastUserName], [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [cookieProperties setObject:@"application/json;" forKey:@"Content-type"];
     [request setHTTPRequestHeaders:cookieProperties];
     
     NSMutableDictionary *bodyProperties = [NSMutableDictionary dictionary];
-    [bodyProperties setQIMSafeObject:[[QIMManager sharedInstance] getLastJid] forKey:@"from"];
+    [bodyProperties setQIMSafeObject:[[STManager sharedInstance] getLastJid] forKey:@"from"];
     [bodyProperties setQIMSafeObject:chatId forKey:@"to"];
     [bodyProperties setQIMSafeObject:realJid forKey:@"realjid"];
     [bodyProperties setQIMSafeObject:[NSString stringWithFormat:@"%lld", chatType] forKey:@"chatType"];
     
     [request setHTTPBody:[[QIMJSONSerializer sharedInstance] serializeObject:bodyProperties error:nil]];
     
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             
         }
@@ -102,12 +102,12 @@
 
 - (void)synchronizeDujiaWarningWithJid:(NSString *)dujiaJid {
     NSString *destUrl = [NSString stringWithFormat:@"%@/warning/nck/sendtips", [[QIMNavConfigManager sharedInstance] javaurl]];
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:destUrl]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:destUrl]];
     [request setHTTPMethod:QIMHTTPMethodPOST];
     [request setShouldASynchronous:YES];
 
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [QIMManager getLastUserName], [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [STManager getLastUserName], [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [cookieProperties setObject:@"application/json;" forKey:@"Content-type"];
     [request setHTTPRequestHeaders:cookieProperties];
@@ -115,12 +115,12 @@
     NSMutableDictionary *bodyProperties = [NSMutableDictionary dictionary];
     [bodyProperties setQIMSafeObject:dujiaJid forKey:@"tag"];
     [bodyProperties setQIMSafeObject:@"prod" forKey:@"conf"];
-    [bodyProperties setQIMSafeObject:[QIMManager getLastUserName] forKey:@"to"];
-    [bodyProperties setQIMSafeObject:[[QIMManager sharedInstance] getDomain] forKey:@"tohost"];
+    [bodyProperties setQIMSafeObject:[STManager getLastUserName] forKey:@"to"];
+    [bodyProperties setQIMSafeObject:[[STManager sharedInstance] getDomain] forKey:@"tohost"];
     
     [request setHTTPBody:[[QIMJSONSerializer sharedInstance] serializeObject:bodyProperties error:nil]];
     
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             
         }
@@ -133,16 +133,16 @@
            withProgressCallBack:(QIMKitSendTPRequesProgressBlock)pCallback
             withSuccessCallBack:(QIMKitSendTPRequesSuccessedBlock)sCallback
              withFailedCallBack:(QIMKitSendTPRequesFailedBlock)fCallback {
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
     [request setHTTPMethod:QIMHTTPMethodGET];
     [request setShouldASynchronous:YES];
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [QIMManager getLastUserName], [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [STManager getLastUserName], [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [cookieProperties setObject:@"application/json;" forKey:@"Content-type"];
     
     [request setHTTPRequestHeaders:cookieProperties];
-    [QIMHTTPClient sendRequest:request progressBlock:^(NSProgress *progress) {
+    [STHTTPClient sendRequest:request progressBlock:^(NSProgress *progress) {
         if (pCallback) {
             pCallback(progress.fractionCompleted);
         }
@@ -170,7 +170,7 @@
 }
 
 - (void)uploadFileRequest:(NSString *)uploadUrl withFileData:(NSData *)fileData withProgressBlock:(QIMKitSendTPRequesProgressBlock)pCallback withSuccessCallBack:(QIMKitSendTPRequesSuccessedBlock)sCallback withFailedCallBack:(QIMKitSendTPRequesFailedBlock)fCallback {
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:uploadUrl]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:uploadUrl]];
     [request setShouldASynchronous:YES];
 
     QIMHTTPUploadComponent *uploadComponent = [[QIMHTTPUploadComponent alloc] initWithDataKey:@"file" fileData:fileData];
@@ -179,11 +179,11 @@
     [request setHttpRequestType:QIMHTTPRequestTypeUpload];
 
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [QIMManager getLastUserName], [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [STManager getLastUserName], [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [request setHTTPRequestHeaders:cookieProperties];
     [request setTimeoutInterval:600];
-    [QIMHTTPClient sendRequest:request progressBlock:^(NSProgress *progress) {
+    [STHTTPClient sendRequest:request progressBlock:^(NSProgress *progress) {
         if (pCallback) {
             pCallback(progress.fractionCompleted);
         }
@@ -206,7 +206,7 @@
 }
 
 - (void)uploadFileRequest:(NSString *)uploadUrl withFileData:(NSData *)fileData withPOSTBody:(NSDictionary *)bodyDic withProgressBlock:(QIMKitSendTPRequesProgressBlock)pCallback withSuccessCallBack:(QIMKitSendTPRequesSuccessedBlock)sCallback withFailedCallBack:(QIMKitSendTPRequesFailedBlock)fCallback {
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:uploadUrl]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:uploadUrl]];
     [request setShouldASynchronous:YES];
 
     QIMHTTPUploadComponent *uploadComponent = [[QIMHTTPUploadComponent alloc] initWithDataKey:@"file" fileData:fileData];
@@ -216,11 +216,11 @@
     [request setHttpRequestType:QIMHTTPRequestTypeUpload];
 
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [QIMManager getLastUserName], [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [STManager getLastUserName], [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [request setHTTPRequestHeaders:cookieProperties];
     [request setTimeoutInterval:600];
-    [QIMHTTPClient sendRequest:request progressBlock:^(NSProgress *progress) {
+    [STHTTPClient sendRequest:request progressBlock:^(NSProgress *progress) {
         if (pCallback) {
             pCallback(progress.fractionCompleted);
         }
@@ -243,7 +243,7 @@
 }
 
 - (void)uploadFileRequest:(NSString *)uploadUrl withFilePath:(NSString *)filePath withProgressBlock:(QIMKitSendTPRequesProgressBlock)pCallback withSuccessCallBack:(QIMKitSendTPRequesSuccessedBlock)sCallback withFailedCallBack:(QIMKitSendTPRequesFailedBlock)fCallback {
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:uploadUrl]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:uploadUrl]];
     [request setShouldASynchronous:YES];
 
     QIMHTTPUploadComponent *uploadComponent = [[QIMHTTPUploadComponent alloc] initWithDataKey:@"file" filePath:filePath];
@@ -252,11 +252,11 @@
     [request setHttpRequestType:QIMHTTPRequestTypeUpload];
 
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [QIMManager getLastUserName], [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [STManager getLastUserName], [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [request setHTTPRequestHeaders:cookieProperties];
     [request setTimeoutInterval:600];
-    [QIMHTTPClient sendRequest:request progressBlock:^(NSProgress *progress) {
+    [STHTTPClient sendRequest:request progressBlock:^(NSProgress *progress) {
         if (pCallback) {
             pCallback(progress.fractionCompleted);
         }
@@ -279,7 +279,7 @@
 }
 
 - (void)uploadFileRequest:(NSString *)uploadUrl withFilePath:(NSString *)filePath withPOSTBody:(NSDictionary *)bodyDic withProgressBlock:(QIMKitSendTPRequesProgressBlock)pCallback withSuccessCallBack:(QIMKitSendTPRequesSuccessedBlock)sCallback withFailedCallBack:(QIMKitSendTPRequesFailedBlock)fCallback {
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:uploadUrl]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:uploadUrl]];
     [request setShouldASynchronous:YES];
 
     QIMHTTPUploadComponent *uploadComponent = [[QIMHTTPUploadComponent alloc] initWithDataKey:@"file" filePath:filePath];
@@ -289,11 +289,11 @@
     [request setHttpRequestType:QIMHTTPRequestTypeUpload];
 
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [QIMManager getLastUserName], [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [STManager getLastUserName], [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [request setHTTPRequestHeaders:cookieProperties];
     [request setTimeoutInterval:600];
-    [QIMHTTPClient sendRequest:request progressBlock:^(NSProgress *progress) {
+    [STHTTPClient sendRequest:request progressBlock:^(NSProgress *progress) {
         if (pCallback) {
             pCallback(progress.fractionCompleted);
         }
@@ -317,7 +317,7 @@
 }
 
 - (void)downloadFileRequest:(NSString *)downloadFileUrl withTargetFilePath:(NSString *)targetFilePath withProgressBlock:(QIMKitSendTPRequesProgressBlock)pCallback withSuccessCallBack:(QIMKitSendTPRequesSuccessedBlock)sCallback withFailedCallBack:(QIMKitSendTPRequesFailedBlock)fCallback {
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:downloadFileUrl]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:downloadFileUrl]];
     [request setShouldASynchronous:YES];
     [request setDownloadDestinationPath:targetFilePath];
 
@@ -325,11 +325,11 @@
     [request setHttpRequestType:QIMHTTPRequestTypeDownload];
 
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [QIMManager getLastUserName], [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [STManager getLastUserName], [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [request setHTTPRequestHeaders:cookieProperties];
     [request setTimeoutInterval:600];
-     [QIMHTTPClient sendRequest:request progressBlock:^(NSProgress *progress) {
+     [STHTTPClient sendRequest:request progressBlock:^(NSProgress *progress) {
         if (pCallback) {
             pCallback(progress.fractionCompleted);
         }
@@ -353,7 +353,7 @@
 }
 
 - (void)sendFormatRequest:(NSString *)destUrl withPOSTBody:(NSDictionary *)bodyDic withProgressBlock:(QIMKitSendTPRequesProgressBlock)pCallback withSuccessCallBack:(QIMKitSendTPRequesSuccessedBlock)sCallback withFailedCallBack:(QIMKitSendTPRequesFailedBlock)fCallback {
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:destUrl]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:destUrl]];
     [request setShouldASynchronous:YES];
 
     QIMHTTPUploadComponent *uploadComponent = [[QIMHTTPUploadComponent alloc] init];
@@ -362,12 +362,12 @@
     [request setHttpRequestType:QIMHTTPRequestTypeUpload];
 
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [QIMManager getLastUserName], [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [STManager getLastUserName], [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
 //    [cookieProperties setObject:@"application/json;" forKey:@"Content-type"];
     [request setHTTPRequestHeaders:cookieProperties];
     [request setTimeoutInterval:600];
-    [QIMHTTPClient sendRequest:request progressBlock:^(NSProgress *progress) {
+    [STHTTPClient sendRequest:request progressBlock:^(NSProgress *progress) {
         if (pCallback) {
             pCallback(progress.fractionCompleted);
         }
@@ -391,19 +391,19 @@
 
 - (void)sendTPPOSTFormUrlEncodedRequestWithUrl:(NSString *)url withRequestBodyData:(NSData *)bodyData withSuccessCallBack:(QIMKitSendTPRequesSuccessedBlock)sCallback withFailedCallBack:(QIMKitSendTPRequesFailedBlock)fCallback {
 
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
     [request setHTTPMethod:QIMHTTPMethodPOST];
     [request setHTTPBody:bodyData];
     [request setShouldASynchronous:YES];
     [request setTimeoutInterval:10];
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [QIMManager getLastUserName], [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [STManager getLastUserName], [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [cookieProperties setObject:@"application/x-www-form-urlencoded" forKey:@"Content-type"];
 
     [request setHTTPRequestHeaders:cookieProperties];
 
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             NSData *responseData = [response data];
             if (sCallback) {
@@ -424,19 +424,19 @@
 
 - (void)sendTPGETFormUrlEncodedRequestWithUrl:(NSString *)url withSuccessCallBack:(QIMKitSendTPRequesSuccessedBlock)sCallback withFailedCallBack:(QIMKitSendTPRequesFailedBlock)fCallback {
 
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
     [request setHTTPMethod:QIMHTTPMethodPOST];
 //    [request setHTTPBody:bodyData];
     [request setShouldASynchronous:YES];
     [request setTimeoutInterval:10];
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [QIMManager getLastUserName], [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"p_user=%@;q_ckey=%@", [STManager getLastUserName], [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [cookieProperties setObject:@"application/x-www-form-urlencoded" forKey:@"Content-type"];
 
     [request setHTTPRequestHeaders:cookieProperties];
 
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             NSData *responseData = [response data];
             if (sCallback) {

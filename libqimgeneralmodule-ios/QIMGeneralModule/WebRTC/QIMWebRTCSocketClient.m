@@ -182,8 +182,8 @@ NSString *NSStringFromWebRTCRoomEvent(WebRTCRoomEvent value) {
 //    NSString * url = [NSString stringWithFormat:@"http://150.242.184.16:8080/room/rtc?action=conference&method=get_servers&username=%@",remoteKey];
 //
     NSString * url = [NSString stringWithFormat:@"%@rtc?action=conference&method=get_servers&username=%@",[[STKit sharedInstance]qimNav_VideoUrl],remoteKey];
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:response.data error:nil];
             BOOL ret = [[result objectForKey:@"ret"] boolValue];

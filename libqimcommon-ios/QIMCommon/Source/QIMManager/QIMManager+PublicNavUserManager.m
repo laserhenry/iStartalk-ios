@@ -9,7 +9,7 @@
 #import "QIMManager+PublicNavUserManager.h"
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (PublicNavUserManager)
+@implementation STManager (PublicNavUserManager)
 
 - (void)getPublicNavCompanyWithKeyword:(NSString *)keyword withCallBack:(QIMKitgetPublicCompanySuccessedBlock)callback {
     if (keyword.length <= 0) {

@@ -17,11 +17,11 @@
 @implementation STKit (QIMConsult)
 
 - (NSArray *)getAllHotLines {
-    return [[QIMManager sharedInstance] getAllHotLines];
+    return [[STManager sharedInstance] getAllHotLines];
 }
 
 - (NSArray *)getMyhotLinelist {
-    return [[QIMManager sharedInstance] getMyhotLinelist];
+    return [[STManager sharedInstance] getMyhotLinelist];
 }
 
 /**
@@ -37,19 +37,19 @@
  @return 消息对象Message
  */
 - (STMsgModel *)sendConsultMessageId:(NSString *)msgId WithMessage:(NSString *)msg WithInfo:(NSString *)info toJid:(NSString *)toJid realToJid:(NSString *)realToJid WithChatType:(ChatType)chatType WithMsgType:(int)msgType {
-    return [[QIMManager sharedInstance] sendConsultMessageId:msgId WithMessage:msg WithInfo:info toJid:toJid realToJid:realToJid WithChatType:chatType WithMsgType:msgType];
+    return [[STManager sharedInstance] sendConsultMessageId:msgId WithMessage:msg WithInfo:info toJid:toJid realToJid:realToJid WithChatType:chatType WithMsgType:msgType];
 }
 
 /**
  获取远程的热线账号列表
  */
 - (void)getRemoteHotlineShopList {
-    [[QIMManager sharedInstance] getRemoteHotlineShopList];
+    [[STManager sharedInstance] getRemoteHotlineShopList];
 }
 
 //V2版获取客服坐席列表：支持多店铺
 - (void)getSeatSeStatusWithCallback:(QIMKitGetSeatSeStatusBlock)callback {
-    [[QIMManager sharedInstance] getSeatSeStatusWithCallback:callback];
+    [[STManager sharedInstance] getSeatSeStatusWithCallback:callback];
 }
 
 //V2版区别Shop来设置服务模式upSeatSeStatusWithSid.qunar
@@ -62,7 +62,7 @@
  @return 是否设置成功
  */
 - (void)updateSeatSeStatusWithShopId:(NSInteger)shopId WithStatus:(NSInteger)shopServiceStatus withCallBack:(QIMKitUpdateSeatSeStatusBlock)callback {
-    [[QIMManager sharedInstance] updateSeatSeStatusWithShopId:shopId WithStatus:shopServiceStatus withCallBack:callback];
+    [[STManager sharedInstance] updateSeatSeStatusWithShopId:shopId WithStatus:shopServiceStatus withCallBack:callback];
 }
 
 /**
@@ -71,18 +71,18 @@
  @param userStatus 服务模式
  */
 - (NSDictionary *)userSeatStatusDict:(int)userStatus {
-    return [[QIMManager sharedInstance] userSeatStatusDict:userStatus];
+    return [[STManager sharedInstance] userSeatStatusDict:userStatus];
 }
 
 - (NSString *)userStatusTitleWithStatus:(int)userStatus {
-    return [[QIMManager sharedInstance] userStatusTitleWithStatus:userStatus];
+    return [[STManager sharedInstance] userStatusTitleWithStatus:userStatus];
 }
 
 /**
  获取状态坐席状态列表
  */
 - (NSArray *)availableUserSeatStatus {
-    return [[QIMManager sharedInstance] availableUserSeatStatus];
+    return [[STManager sharedInstance] availableUserSeatStatus];
 }
 
 /**
@@ -93,11 +93,11 @@
  @return 关闭之后的提示语
  */
 - (void)closeSessionWithShopId:(NSString *)shopId WithVisitorId:(NSString *)visitorId withBlock:(QIMCloseSessionBlock)block {
-    [[QIMManager sharedInstance] closeSessionWithShopId:shopId WithVisitorId:visitorId withBlock:block];
+    [[STManager sharedInstance] closeSessionWithShopId:shopId WithVisitorId:visitorId withBlock:block];
 }
 
 - (void)getConsultServerMsgLisByUserId:(NSString *)userId WithVirtualId:(NSString *)virtualId WithLimit:(int)limit WithOffset:(int)offset withLoadMore:(BOOL)loadMore WithComplete:(void (^)(NSArray *))complete {
-    [[QIMManager sharedInstance] getConsultServerMsgLisByUserId:userId WithVirtualId:virtualId WithLimit:limit WithOffset:offset withLoadMore:loadMore WithComplete:complete];
+    [[STManager sharedInstance] getConsultServerMsgLisByUserId:userId WithVirtualId:virtualId WithLimit:limit WithOffset:offset withLoadMore:loadMore WithComplete:complete];
 }
 
 @end

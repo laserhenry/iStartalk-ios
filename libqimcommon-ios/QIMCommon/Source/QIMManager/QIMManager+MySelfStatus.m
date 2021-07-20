@@ -9,7 +9,7 @@
 #import "XmppImManager.h"
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (MySelfStatus)
+@implementation STManager (MySelfStatus)
 
 - (void)goOnline {
     

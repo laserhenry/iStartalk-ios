@@ -15,31 +15,31 @@
 @implementation STKit (QIMKeyChain)
 
 + (void)updateSessionListToKeyChain {
-    [QIMManager updateSessionListToKeyChain];
+    [STManager updateSessionListToKeyChain];
 }
 
 + (void)updateGroupListToKeyChain {
-    [QIMManager updateGroupListToKeyChain];
+    [STManager updateGroupListToKeyChain];
 }
 
 + (void)updateFriendListToKeyChain {
-    [QIMManager updateFriendListToKeyChain];
+    [STManager updateFriendListToKeyChain];
 }
 
 + (void)updateRequestFileURL {
-    [QIMManager updateRequestFileURL];
+    [STManager updateRequestFileURL];
 }
 
 + (void)updateRequestURL {
-    [QIMManager updateRequestURL];
+    [STManager updateRequestURL];
 }
 
 + (void)updateNewHttpRequestURL {
-    [QIMManager updateNewHttpRequestURL];
+    [STManager updateNewHttpRequestURL];
 }
 
 + (void)updateRequestDomain {
-    [QIMManager updateRequestDomain];
+    [STManager updateRequestDomain];
 }
 
 @end

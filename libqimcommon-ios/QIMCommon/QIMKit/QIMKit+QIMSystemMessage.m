@@ -18,19 +18,19 @@
 #pragma mark - 系统消息
 
 - (void)checkHeadlineMsg {
-    [[QIMManager sharedInstance] checkHeadlineMsg];
+    [[STManager sharedInstance] checkHeadlineMsg];
 }
 
 - (void)updateLastSystemMsgTime {
-    [[QIMManager sharedInstance] updateLastSystemMsgTime];
+    [[STManager sharedInstance] updateLastSystemMsgTime];
 }
 
 - (void)updateOfflineSystemNoticeMessages {
-    [[QIMManager sharedInstance] updateOfflineSystemNoticeMessages];
+    [[STManager sharedInstance] updateOfflineSystemNoticeMessages];
 }
 
 - (void)getSystemMsgLisByUserId:(NSString *)userId WithFromHost:(NSString *)fromHost WithLimit:(int)limit WithOffset:(int)offset withLoadMore:(BOOL)loadMore WithComplete:(void (^)(NSArray *))complete {
-    [[QIMManager sharedInstance] getSystemMsgLisByUserId:userId WithFromHost:fromHost WithLimit:limit WithOffset:offset withLoadMore:loadMore WithComplete:complete];
+    [[STManager sharedInstance] getSystemMsgLisByUserId:userId WithFromHost:fromHost WithLimit:limit WithOffset:offset withLoadMore:loadMore WithComplete:complete];
 }
 
 @end

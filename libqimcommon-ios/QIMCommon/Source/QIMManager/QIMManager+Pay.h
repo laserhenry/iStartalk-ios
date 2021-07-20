@@ -5,12 +5,12 @@
 //  Created by lihaibin on 2019/10/16.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 #import "QIMPrivateHeader.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QIMManager (Pay)
+@interface STManager (Pay)
 
 - (void)getBindPayAccount:(NSString *)userid withCallBack:(QIMKitPayCheckAccountBlock)callBack;
 - (void)bindAlipayAccount:(NSString *)aliOpenid withAliUid:(NSString *)aliUid userId:(NSString *)userid;

@@ -16,35 +16,35 @@
 @implementation STKit (QIMCalendar)
 
 - (NSArray *)selectTripByYearMonth:(NSString *)date {
-    return [[QIMManager sharedInstance] selectTripByYearMonth:date];
+    return [[STManager sharedInstance] selectTripByYearMonth:date];
 }
 
 - (void)createTrip:(NSDictionary *)param callBack:(QIMKitCreateTripBlock)callback {
-    [[QIMManager sharedInstance] createTrip:param callBack:callback];
+    [[STManager sharedInstance] createTrip:param callBack:callback];
 }
 
 - (void)getTripAreaAvailableRoom:(NSDictionary *)dateDic callBack:(QIMKitGetTripAreaAvailableRoomBlock)callback {
-    [[QIMManager sharedInstance] getTripAreaAvailableRoom:dateDic callBack:callback];
+    [[STManager sharedInstance] getTripAreaAvailableRoom:dateDic callBack:callback];
 }
 
 - (void)tripMemberCheck:(NSDictionary *)params callback:(QIMKitGetTripMemberCheckBlock)callback {
-    [[QIMManager sharedInstance] tripMemberCheck:params callback:callback];
+    [[STManager sharedInstance] tripMemberCheck:params callback:callback];
 }
 
 - (void)getAllCityList:(QIMKitGetTripAllCitysBlock)callback {
-    [[QIMManager sharedInstance] getAllCityList:callback];
+    [[STManager sharedInstance] getAllCityList:callback];
 }
 
 - (void)getAreaByCityId:(NSDictionary *)params :(QIMKitGetTripAreaAvailableRoomByCityIdBlock)callback {
-    [[QIMManager sharedInstance] getAreaByCityId:params :callback];
+    [[STManager sharedInstance] getAreaByCityId:params :callback];
 }
 
 - (NSArray *)getLocalAreaList {
-    return [[QIMManager sharedInstance] getLocalAreaList];
+    return [[STManager sharedInstance] getLocalAreaList];
 }
 
 - (void)getRemoteAreaList {
-    [[QIMManager sharedInstance] getRemoteAreaList];
+    [[STManager sharedInstance] getRemoteAreaList];
 }
 
 @end

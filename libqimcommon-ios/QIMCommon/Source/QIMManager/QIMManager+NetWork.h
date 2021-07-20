@@ -5,9 +5,9 @@
 //  Created by 李露 on 2018/4/3.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 
-@interface QIMManager (NetWork)
+@interface STManager (NetWork)
 
 @property (nonatomic, assign) AppWorkState appWorkState; // 应用的登陆状态
 

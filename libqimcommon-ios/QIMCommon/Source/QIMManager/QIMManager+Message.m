@@ -11,7 +11,7 @@
 #import <objc/runtime.h>
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (Message)
+@implementation STManager (Message)
 
 #pragma mark - setter and getter
 
@@ -274,7 +274,7 @@
     [mesg setMessage:msg];
     [mesg setTo:userId];
     [mesg setBackupInfo:backInfo];
-    [mesg setFrom:[[QIMManager sharedInstance] getLastJid]];
+    [mesg setFrom:[[STManager sharedInstance] getLastJid]];
     [mesg setRealJid:nil];
     if (userType == ChatType_Consult) {
         [mesg setRealJid:userId];
@@ -307,7 +307,7 @@
     [mesg setMessageDirection:QIMMessageDirection_Sent];
     [mesg setMessage:msg];
     [mesg setTo:userId];
-    [mesg setFrom:[[QIMManager sharedInstance] getLastJid]];
+    [mesg setFrom:[[STManager sharedInstance] getLastJid]];
     [mesg setRealJid:realJid];
     if (userType == ChatType_Consult) {
         [mesg setRealJid:userId];
@@ -342,7 +342,7 @@
     [mesg setMessage:msg];
     [mesg setTo:userId];
     [mesg setXmppId:userId];
-    [mesg setFrom:[[QIMManager sharedInstance] getLastJid]];
+    [mesg setFrom:[[STManager sharedInstance] getLastJid]];
     if (userType == ChatType_Consult) {
         [mesg setRealJid:userId];
     } else {
@@ -372,7 +372,7 @@
     NSMutableDictionary *resultParams = [NSMutableDictionary dictionary];
     
     [resultParams setQIMSafeObject:content forKey:@"body"];
-    [resultParams setQIMSafeObject:[[QIMManager sharedInstance] getLastJid] forKey:@"from"];
+    [resultParams setQIMSafeObject:[[STManager sharedInstance] getLastJid] forKey:@"from"];
     NSDictionary *channelId = @{@"cn":@"consult", @"d":@"send", @"usrType":@"usr"};
     [resultParams setQIMSafeObject:@[@{@"user" : targetID}] forKey:@"to"];
     [resultParams setQIMSafeObject:[NSString stringWithFormat:@"%d", msgType] forKey:@"msg_type"];
@@ -395,7 +395,7 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:@[resultParams] options:NSJSONWritingPrettyPrinted error:&error];
     params = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:url];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:url];
     [request setHTTPMethod:QIMHTTPMethodPOST];
     [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
     NSMutableDictionary *cookieProperties = [[NSMutableDictionary alloc] init];
@@ -403,7 +403,7 @@
     
     [request setHTTPRequestHeaders:cookieProperties];
     
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         QIMInfoLog(@"快捷回复返回结果： %@", response);
     } failure:^(NSError *error) {
         QIMErrorLog(@"快捷回复错误 : %@", error);
@@ -622,7 +622,7 @@
     [mesg setTo:userId];
     [mesg setRealJid:userId];
     [mesg setMessageDate:msgDate];
-    [mesg setFrom:[[QIMManager sharedInstance] getLastJid]];
+    [mesg setFrom:[[STManager sharedInstance] getLastJid]];
     [mesg setMessageDate:msgDate];
     [mesg setExtendInformation:info];
     [mesg setMessageSendState:QIMMessageSendState_Waiting];
@@ -877,7 +877,7 @@
 - (void)updateAppNotReadCount {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSInteger notReadCount = [[STDataMgr qimDB_SharedInstance] qimDB_getAppNotReadCount];
-        NSInteger notRemindCount = [[QIMManager sharedInstance] getNotRemindNotReaderCount];
+        NSInteger notRemindCount = [[STManager sharedInstance] getNotRemindNotReaderCount];
         dispatch_async(dispatch_get_main_queue(), ^{
             [[UIApplication sharedApplication] setApplicationIconBadgeNumber:notReadCount-notRemindCount];
         });
@@ -894,7 +894,7 @@
     //防止有些cell没有刷新到，字典中未包含GroupId，将未读数计算进去
     
     NSMutableArray *groupIdList = [[NSMutableArray alloc] initWithCapacity:3];
-    NSArray *array = [[QIMManager sharedInstance] getClientConfigInfoArrayWithType:QIMClientConfigTypeKNoticeStickJidDic];
+    NSArray *array = [[STManager sharedInstance] getClientConfigInfoArrayWithType:QIMClientConfigTypeKNoticeStickJidDic];
     for (NSDictionary *groupInfoDic in array) {
         NSString *groupId = [groupInfoDic objectForKey:@"ConfigSubKey"];
         if (groupId.length > 0) {
@@ -917,12 +917,12 @@
     int value = [[NSDate date] timeIntervalSince1970];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/ops/opsapp/role/count?c=%@&p=iphone&v=%@&t=%d", [[QIMNavConfigManager sharedInstance] opsHost],[self thirdpartKeywithValue], [[STAppInfo sharedInstance] AppBuildVersion], value]];
     
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:url];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:url];
     
     NSMutableDictionary *requestHeader = [NSMutableDictionary dictionaryWithCapacity:1];
     [requestHeader setQIMSafeObject:@"application/x-www-form-urlencoded;" forKey:@"Content-type"];
     [request setHTTPRequestHeaders:requestHeader];
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 NSError *errol = nil;
@@ -1167,7 +1167,7 @@
         NSMutableDictionary *presenceMsgDict = [NSMutableDictionary dictionaryWithCapacity:5];
         [presenceMsgDict setQIMSafeObject:@(QIMCategoryNotifyMsgTypeSession) forKey:@"PresenceMsgType"];
         [presenceMsgDict setQIMSafeObject:msg forKey:@"PresenceMsg"];
-        [[XmppImManager sharedInstance] sendNotifyPresenceMsg:presenceMsgDict ToJid:[[QIMManager sharedInstance] getLastJid]];
+        [[XmppImManager sharedInstance] sendNotifyPresenceMsg:presenceMsgDict ToJid:[[STManager sharedInstance] getLastJid]];
     });
 }
 

@@ -8,7 +8,7 @@
 #import "QIMManager+XmppImManagerEvent.h"
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (XmppImManagerEvent)
+@implementation STManager (XmppImManagerEvent)
 
 - (void)registerEvent {
     
@@ -136,7 +136,7 @@
                 if ([from containsString:@"conference."]) {
                     
                 } else {
-                   STMsgModel *msg = [[QIMManager sharedInstance] createMessageWithMsg:@"消息已发出，但被对方拒收了。" extenddInfo:nil userId:from realJid:from userType:ChatType_SingleChat msgType:QIMMessageType_Time forMsgId:[QIMUUIDTools UUID] willSave:YES];
+                   STMsgModel *msg = [[STManager sharedInstance] createMessageWithMsg:@"消息已发出，但被对方拒收了。" extenddInfo:nil userId:from realJid:from userType:ChatType_SingleChat msgType:QIMMessageType_Time forMsgId:[QIMUUIDTools UUID] willSave:YES];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[NSNotificationCenter defaultCenter] postNotificationName:kXmppStreamSendMessageFailed object:@{@"messageId":msgId}];
                         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationMessageUpdate object:from userInfo:@{@"message": msg}];
@@ -183,7 +183,7 @@
             case QIMCategoryNotifyMsgTypeNavigation: {
                 long long navVersion = [[notifyMsg objectForKey:@"navversion"] longLongValue];
                 if (navVersion > [[QIMNavConfigManager sharedInstance] navVersion]) {
-                    [[STUserCacheManager sharedInstance] setUserObject:[QIMManager getLastUserName] forKey:@"currentLoginUserName"];
+                    [[STUserCacheManager sharedInstance] setUserObject:[STManager getLastUserName] forKey:@"currentLoginUserName"];
                     [[QIMNavConfigManager sharedInstance] qimNav_updateNavigationConfigWithCheck:YES];
                 }
                 QIMVerboseLog(@"下发导航版本通知");
@@ -242,7 +242,7 @@
             case QIMCategoryNotifyMsgTypeCalendar: {
                 QIMVerboseLog(@"收到日历同步通知");
                 long long newVersion = [[notifyMsg objectForKey:@"updateTime"] longLongValue];
-                long long oldVersion = [[[STDataMgr qimDB_SharedInstance] qimDB_getConfigInfoWithConfigKey:[self transformClientConfigKeyWithType:QIMClientConfigTypeKLocalTripUpdateTime] WithSubKey:[[QIMManager sharedInstance] getLastJid] WithDeleteFlag:NO] longLongValue];
+                long long oldVersion = [[[STDataMgr qimDB_SharedInstance] qimDB_getConfigInfoWithConfigKey:[self transformClientConfigKeyWithType:QIMClientConfigTypeKLocalTripUpdateTime] WithSubKey:[[STManager sharedInstance] getLastJid] WithDeleteFlag:NO] longLongValue];
                 if (newVersion > oldVersion) {
                     QIMVerboseLog(@"本次服务器下发的版本号 大于本地版本号 %lld，更新远程数据", oldVersion);
                     [self getRemoteUserTripList];
@@ -349,7 +349,7 @@
             }
                 break;
             case QIMCategoryNotifyMsgTypeHotLineSync:{
-                [[QIMManager sharedInstance] getRemoteHotlineShopList];
+                [[STManager sharedInstance] getRemoteHotlineShopList];
             }
                 break;
             case QIMCategoryNotifyMsgTypeTickUserWorkWorldNotice: {
@@ -361,7 +361,7 @@
                     QIMVerboseLog(@"online Comment 通知 : %@", onlineDict);
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[NSNotificationCenter defaultCenter] postNotificationName:kPBPresenceCategoryNotifyWorkNoticeMessage object:nil];
-                        NSInteger notReadMessageCount = [[QIMManager sharedInstance] getWorkNoticeMessagesCountWithEventType:@[@(QIMWorkFeedNotifyTypeComment), @(QIMWorkFeedNotifyTypePOSTAt), @(QIMWorkFeedNotifyTypeCommentAt)]];
+                        NSInteger notReadMessageCount = [[STManager sharedInstance] getWorkNoticeMessagesCountWithEventType:@[@(QIMWorkFeedNotifyTypeComment), @(QIMWorkFeedNotifyTypePOSTAt), @(QIMWorkFeedNotifyTypeCommentAt)]];
                         QIMVerboseLog(@"发送驼圈在线消息小红点通知数: %ld", notReadMessageCount);
                         [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyNotReadWorkCountChange object:@{@"newWorkNoticeCount":@(notReadMessageCount)}];
                     });
@@ -370,7 +370,7 @@
                     NSString *owner = [onlineDict objectForKey:@"owner"];
                     NSString *ownerHost = [onlineDict objectForKey:@"ownerHost"];
                     NSString *ownerId = [NSString stringWithFormat:@"%@@%@", owner, ownerHost];
-                    if (![ownerId isEqualToString:[[QIMManager sharedInstance] getLastJid]]) {
+                    if (![ownerId isEqualToString:[[STManager sharedInstance] getLastJid]]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyNotReadWorkCountChange object:@{@"newWorkMoment":@(YES)}];
                             [[NSNotificationCenter defaultCenter] postNotificationName:kNotify_RN_QTALK_SUGGEST_WorkFeed_UPDATE object:[self getLastWorkOnlineMomentWithDic:onlineDict]];
@@ -382,7 +382,7 @@
                     QIMVerboseLog(@"online Comment 通知 : %@", onlineDict);
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[NSNotificationCenter defaultCenter] postNotificationName:kPBPresenceCategoryNotifyWorkNoticeMessage object:nil];
-                        NSInteger notReadMessageCount = [[QIMManager sharedInstance] getWorkNoticeMessagesCountWithEventType:@[@(QIMWorkFeedNotifyTypeComment), @(QIMWorkFeedNotifyTypePOSTAt), @(QIMWorkFeedNotifyTypeCommentAt)]];
+                        NSInteger notReadMessageCount = [[STManager sharedInstance] getWorkNoticeMessagesCountWithEventType:@[@(QIMWorkFeedNotifyTypeComment), @(QIMWorkFeedNotifyTypePOSTAt), @(QIMWorkFeedNotifyTypeCommentAt)]];
                         QIMVerboseLog(@"发送驼圈在线消息小红点通知数: %ld", notReadMessageCount);
                         [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyNotReadWorkCountChange object:@{@"newWorkNoticeCount":@(notReadMessageCount)}];
                     });
@@ -392,7 +392,7 @@
                     QIMVerboseLog(@"online Comment 通知 : %@", onlineDict);
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[NSNotificationCenter defaultCenter] postNotificationName:kPBPresenceCategoryNotifyWorkNoticeMessage object:nil];
-                        NSInteger notReadMessageCount = [[QIMManager sharedInstance] getWorkNoticeMessagesCountWithEventType:@[@(QIMWorkFeedNotifyTypeComment), @(QIMWorkFeedNotifyTypePOSTAt), @(QIMWorkFeedNotifyTypeCommentAt)]];
+                        NSInteger notReadMessageCount = [[STManager sharedInstance] getWorkNoticeMessagesCountWithEventType:@[@(QIMWorkFeedNotifyTypeComment), @(QIMWorkFeedNotifyTypePOSTAt), @(QIMWorkFeedNotifyTypeCommentAt)]];
                         QIMVerboseLog(@"发送驼圈在线消息小红点通知数: %ld", notReadMessageCount);
                         [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyNotReadWorkCountChange object:@{@"newWorkNoticeCount":@(notReadMessageCount)}];
                     });
@@ -404,13 +404,13 @@
             case QIMCategoryNotifyMsgTypeMedalListUpdateNotice: {
                 QIMVerboseLog(@"online 更新勋章列表");
                 NSInteger version = [[notifyMsg objectForKey:@"medalVersion"] integerValue];
-                [[QIMManager sharedInstance] getRemoteMedalList];
+                [[STManager sharedInstance] getRemoteMedalList];
             }
                 break;
             case QIMCategoryNotifyMsgTypeUserMedalUpdateNotice: {
                 QIMVerboseLog(@"online 更新用户的勋章");
                 NSInteger version = [[notifyMsg objectForKey:@"userMedalVersion"] integerValue];
-                [[QIMManager sharedInstance] getRemoteUserMedalListWithUserId:nil];
+                [[STManager sharedInstance] getRemoteUserMedalListWithUserId:nil];
             }
                 break;
             default: {
@@ -476,7 +476,7 @@
         if (msgType == QIMMessageType_RedPackInfo || msgType == QIMMessageType_AAInfo) {
             NSDictionary *redPackInfoDic = [[QIMJSONSerializer sharedInstance] deserializeObject:extendInfo error:nil];
             NSString *jid = [redPackInfoDic objectForKey:@"From_User"];
-            if ([jid isEqualToString:[QIMManager getLastUserName]] == NO) {
+            if ([jid isEqualToString:[STManager getLastUserName]] == NO) {
                 return;
             }
         }
@@ -502,7 +502,7 @@
         [mesg setMessageReadState:QIMMessageRemoteReadStateDidSent];
         [mesg setMessageDate:msgDate];
         [mesg setExtendInformation:extendInfo];
-        [mesg setTo:[[QIMManager sharedInstance] getLastJid]];
+        [mesg setTo:[[STManager sharedInstance] getLastJid]];
         [mesg setMsgRaw:msgRaw];
         // 消息落地
         [self addSessionByType:ChatType_SingleChat ById:sid ByMsgId:mesg.messageId WithMsgTime:mesg.messageDate WithNeedUpdate:YES];
@@ -556,7 +556,7 @@
         if (msgType == QIMMessageType_RedPackInfo || msgType == QIMMessageType_AAInfo) {
             NSDictionary *infoDic = [[QIMJSONSerializer sharedInstance] deserializeObject:extendInfo error:nil];
             NSString *fid = [infoDic objectForKey:@"From_User"];
-            if ([fid isEqualToString:[QIMManager getLastUserName]] == NO) {
+            if ([fid isEqualToString:[STManager getLastUserName]] == NO) {
                 return;
             }
         }
@@ -580,7 +580,7 @@
         [mesg setMessageReadState:QIMMessageRemoteReadStateDidSent];
         [mesg setMessageDate:msgDate];
         [mesg setExtendInformation:extendInfo];
-        [mesg setTo:[[QIMManager sharedInstance] getLastJid]];
+        [mesg setTo:[[STManager sharedInstance] getLastJid]];
         [mesg setBackupInfo:backupInfo];
         [mesg setMsgRaw:msgRaw];
         [self addSessionByType:ChatType_GroupChat ById:sid ByMsgId:mesg.messageId WithMsgTime:mesg.messageDate WithNeedUpdate:YES];
@@ -600,7 +600,7 @@
                         NSDictionary *groupAtDic = [array firstObject];
                         for (NSDictionary *someOneAtDic in [groupAtDic objectForKey:@"data"]) {
                             NSString *someOneJid = [someOneAtDic objectForKey:@"jid"];
-                            if ([someOneJid isEqualToString:[[QIMManager sharedInstance] getLastJid]]) {
+                            if ([someOneJid isEqualToString:[[STManager sharedInstance] getLastJid]]) {
                                 atMe = YES;
                             }
                         }
@@ -731,7 +731,7 @@
                 [mesg setMessage:msg];
                 [mesg setMessageDate:msgDate];
                 [mesg setExtendInformation:extendInfo];
-                [mesg setTo:[[QIMManager sharedInstance] getLastJid]];
+                [mesg setTo:[[STManager sharedInstance] getLastJid]];
                 [mesg setMsgRaw:msgRaw];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [[NSNotificationCenter defaultCenter] postNotificationName:kShareLocationInfo object:sid userInfo:@{@"message": mesg}];
@@ -975,7 +975,7 @@
         if ([[STDataMgr qimDB_SharedInstance] qimDB_checkMsgId:msgId]) {
             return;
         }
-        [[QIMManager sharedInstance] checkMsgTimeWithJid:sid WithMsgDate:msgDate WithGroup:NO];
+        [[STManager sharedInstance] checkMsgTimeWithJid:sid WithMsgDate:msgDate WithGroup:NO];
         
         STMsgModel *mesg = [STMsgModel new];
         [mesg setXmppId:sid];
@@ -989,7 +989,7 @@
         [mesg setMessageDate:msgDate];
         [mesg setMessageReadState:QIMMessageRemoteReadStateDidSent];
         [mesg setExtendInformation:extendInfo];
-        [mesg setTo:[[QIMManager sharedInstance] getLastJid]];
+        [mesg setTo:[[STManager sharedInstance] getLastJid]];
         [mesg setMsgRaw:msgRaw];
         [mesg setMessageSendState:QIMMessageSendState_Success];
         [self addSessionByType:ChatType_CollectionChat ById:sid ByMsgId:mesg.messageId WithMsgTime:mesg.messageDate WithNeedUpdate:NO];
@@ -1075,7 +1075,7 @@
         STMsgModel *mesg = [STMsgModel new];
         [mesg setMessageId:msgId];
         [mesg setFrom:[msgDic objectForKey:@"realfrom"]];
-        [mesg setTo:[[QIMManager sharedInstance] getLastJid]];
+        [mesg setTo:[[STManager sharedInstance] getLastJid]];
         [mesg setMessageType:messageType];
         [mesg setMessageDirection:(isCarbon == YES) ? QIMMessageDirection_Sent : QIMMessageDirection_Received];
         [mesg setMessage:msg];
@@ -1276,7 +1276,7 @@
             QIMErrorLog(@"清除导航缓存");
             [[STUserCacheManager sharedInstance] removeUserObjectForKey:@"NavConfig"];
             QIMErrorLog(@"重新获取导航");
-            [[STUserCacheManager sharedInstance] setUserObject:[QIMManager getLastUserName] forKey:@"currentLoginName"];
+            [[STUserCacheManager sharedInstance] setUserObject:[STManager getLastUserName] forKey:@"currentLoginName"];
             [[QIMNavConfigManager sharedInstance] qimNav_updateNavigationConfigWithCheck:YES withCallBack:^(BOOL success) {
                 if (success == NO) {
                     QIMErrorLog(@"获取导航失败，请稍后再试");
@@ -1571,7 +1571,7 @@
         }
         NSMutableDictionary *tcookieProperties = [NSMutableDictionary dictionary];
         [tcookieProperties setQIMSafeObject:@"_u" forKey:NSHTTPCookieName];
-        [tcookieProperties setQIMSafeObject:[QIMManager getLastUserName] forKey:NSHTTPCookieValue];
+        [tcookieProperties setQIMSafeObject:[STManager getLastUserName] forKey:NSHTTPCookieValue];
         [tcookieProperties setQIMSafeObject:@".startalk.im" forKey:NSHTTPCookieDomain];
         [tcookieProperties setQIMSafeObject:@"/" forKey:NSHTTPCookiePath];
         [tcookieProperties setQIMSafeObject:@"0" forKey:NSHTTPCookieVersion];

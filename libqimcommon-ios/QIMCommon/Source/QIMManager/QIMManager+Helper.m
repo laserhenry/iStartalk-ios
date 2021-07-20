@@ -10,7 +10,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (Helper)
+@implementation STManager (Helper)
 static SystemSoundID _ringSystemSoundID;
 
 - (void)playHongBaoSound {
@@ -68,7 +68,7 @@ static void ringAudioServicesSystemSoundCompletionProc(SystemSoundID ssID, void 
         if ([[NSDate date] timeIntervalSince1970] - lastPlay > 2.0) {
             UIApplicationState applicationState = [[UIApplication sharedApplication] applicationState];
             if (applicationState == UIApplicationStateActive) {
-                NSString *soundName = [[QIMManager sharedInstance] soundName];
+                NSString *soundName = [[STManager sharedInstance] soundName];
                 if (!soundName) {
                     // 非租车业务才播放声音
                     SystemSoundID soundID;

@@ -8,14 +8,14 @@
 
 #import "QIMManager+MiddleVirtualAccountManager.h"
 
-@implementation QIMManager (MiddleVirtualAccountManager)
+@implementation STManager (MiddleVirtualAccountManager)
 
 - (NSArray *)getMiddleVirtualAccounts {
-    NSString *fileTransId = [NSString stringWithFormat:@"%@@%@", @"file-transfer", [[QIMManager sharedInstance] getDomain]];
-    NSString *dujiaId = [NSString stringWithFormat:@"%@@%@", @"dujia_warning", [[QIMManager sharedInstance] getDomain]];
-    NSString *qtalktips = [NSString stringWithFormat:@"%@@%@", @"qtalktips", [[QIMManager sharedInstance] getDomain]];
-    NSString *icrobot = [NSString stringWithFormat:@"%@@%@", @"ic-robot", [[QIMManager sharedInstance] getDomain]];
-    NSString *worknotice = [NSString stringWithFormat:@"%@@%@", @"worknotice", [[QIMManager sharedInstance] getDomain]];
+    NSString *fileTransId = [NSString stringWithFormat:@"%@@%@", @"file-transfer", [[STManager sharedInstance] getDomain]];
+    NSString *dujiaId = [NSString stringWithFormat:@"%@@%@", @"dujia_warning", [[STManager sharedInstance] getDomain]];
+    NSString *qtalktips = [NSString stringWithFormat:@"%@@%@", @"qtalktips", [[STManager sharedInstance] getDomain]];
+    NSString *icrobot = [NSString stringWithFormat:@"%@@%@", @"ic-robot", [[STManager sharedInstance] getDomain]];
+    NSString *worknotice = [NSString stringWithFormat:@"%@@%@", @"worknotice", [[STManager sharedInstance] getDomain]];
 //    NSString *myId = [[QIMManager sharedInstance] getLastJid];
     return @[fileTransId, dujiaId, qtalktips, icrobot, worknotice];
 }

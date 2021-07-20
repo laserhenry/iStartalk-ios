@@ -8,8 +8,8 @@
 #import "QIMNotifyView.h"
 #import "QIMAttributedLabel.h"
 #import "QIMJSONSerializer.h"
-#import "QIMHTTPRequest.h"
-#import "QIMHTTPClient.h"
+#import "STHTTPRequest.h"
+#import "STHTTPClient.h"
 
 @interface QIMNotifyView () <QIMAttributedLabelDelegate>
 
@@ -145,9 +145,9 @@ static QIMNotifyView *_notifyView = nil;
             NSString *url = [linkData objectForKey:@"url"];
             if (url) {
                 
-                QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
+                STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
                 [request setTimeoutInterval:10];
-                [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+                [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
                     if (response.code == 200) {
                         NSData *data = response.data;
                         NSDictionary *requestDic = [[QIMJSONSerializer sharedInstance] deserializeObject:data error:nil];

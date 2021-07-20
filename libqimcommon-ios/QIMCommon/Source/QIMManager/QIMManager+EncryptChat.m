@@ -9,7 +9,7 @@
 #import "QIMManager+EncryptChat.h"
 #import "XmppImManager.h"
 
-@implementation QIMManager (EncryptChat)
+@implementation STManager (EncryptChat)
 
 - (void)sendEncryptionChatWithType:(int)type WithBody:(NSString *)body ToJid:(NSString *)jid {
     [[XmppImManager sharedInstance] sendEncryptionChatWithType:type WithBody:body ToJid:jid];

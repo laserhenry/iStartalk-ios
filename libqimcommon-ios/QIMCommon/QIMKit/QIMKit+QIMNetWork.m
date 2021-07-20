@@ -16,27 +16,27 @@
 @implementation STKit (QIMNetWork)
 
 - (AppWorkState)appWorkState {
-    return [[QIMManager sharedInstance] appWorkState];
+    return [[STManager sharedInstance] appWorkState];
 }
 
 #pragma mark - 网络状态监测
 
 - (void)checkNetWorkWithCallBack:(QIMKitCheckNetWorkBlock)callback {
-    [[QIMManager sharedInstance] checkNetWorkWithCallBack:callback];
+    [[STManager sharedInstance] checkNetWorkWithCallBack:callback];
 }
 
 
 - (void)checkNetworkStatus{
-    [[QIMManager sharedInstance] checkNetworkStatus];
+    [[STManager sharedInstance] checkNetworkStatus];
 }
 
 - (void)onNetworkChange:(NSNotification *)notify{
     
-    [[QIMManager sharedInstance] onNetworkChange:notify];
+    [[STManager sharedInstance] onNetworkChange:notify];
 }
 
 - (void)updateAppWorkState:(AppWorkState)appWorkState {
-    [[QIMManager sharedInstance] updateAppWorkState:appWorkState];
+    [[STManager sharedInstance] updateAppWorkState:appWorkState];
 }
 
 @end

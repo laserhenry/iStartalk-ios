@@ -16,7 +16,7 @@
 @implementation STKit (QIMEncryptChat)
 
 - (void)sendEncryptionChatWithType:(int)type WithBody:(NSString *)body ToJid:(NSString *)jid {
-    [[QIMManager sharedInstance] sendEncryptionChatWithType:type WithBody:body ToJid:jid];
+    [[STManager sharedInstance] sendEncryptionChatWithType:type WithBody:body ToJid:jid];
 }
 
 @end

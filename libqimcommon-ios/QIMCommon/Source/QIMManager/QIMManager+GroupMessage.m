@@ -8,7 +8,7 @@
 #import "QIMManager+GroupMessage.h"
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (GroupMessage)
+@implementation STManager (GroupMessage)
 
 - (void)updateLastGroupMsgTime {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -107,7 +107,7 @@
         return NO;
     }
     __block BOOL getMucHistorySuccess = NO;
-    NSString *jid = [QIMManager getLastUserName];
+    NSString *jid = [STManager getLastUserName];
     if ([jid length] > 0) {
         NSString *destUrl = [NSString stringWithFormat:@"%@/qtapi/getmuchistory.qunar?server=%@&c=qtalk&u=%@&k=%@&p=iOS&v=%@",
                              [[QIMNavConfigManager sharedInstance] javaurl],
@@ -136,7 +136,7 @@
         QIMVerboseLog(@"JSON请求群历史消息参数为:%@", params);
         NSData *data = [[QIMJSONSerializer sharedInstance] serializeObject:params error:nil];
         NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-        NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[QIMManager sharedInstance] thirdpartKeywithValue]];
+        NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[STManager sharedInstance] thirdpartKeywithValue]];
         [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
         QIMVerboseLog(@"JSON请求群历史消息Ckey为:%@", cookieProperties);
         __block NSDictionary *result = nil;
@@ -333,13 +333,13 @@
     [params setQIMSafeObject:[NSString stringWithFormat:@"%lld", version] forKey:@"time"];
     [params setQIMSafeObject:[NSString stringWithFormat:@"%d", limit] forKey:@"num"];
     [params setQIMSafeObject:@"1" forKey:@"type"];
-    [params setQIMSafeObject:[QIMManager getLastUserName] forKey:@"u"];
+    [params setQIMSafeObject:[STManager getLastUserName] forKey:@"u"];
     [params setQIMSafeObject:[NSString stringWithFormat:@"%d", direction] forKey:@"direction"];
     if (YES == include) {
         [params setQIMSafeObject:@"t" forKey:@"include"];
     }
     NSData *requestData = [[QIMJSONSerializer sharedInstance] serializeObject:params error:nil];
-    NSString *destUrl = [NSString stringWithFormat:@"%@/qtapi/getmucmsgs.qunar?u=%@&k=%@&platform=iphone&version=%@", [[QIMNavConfigManager sharedInstance] javaurl], [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
+    NSString *destUrl = [NSString stringWithFormat:@"%@/qtapi/getmucmsgs.qunar?u=%@&k=%@&platform=iphone&version=%@", [[QIMNavConfigManager sharedInstance] javaurl], [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
     QIMVerboseLog(@"JSON请求群翻页历史记录URL为:%@", destUrl);
     QIMVerboseLog(@"JSON请求群翻页历史记录参数为:%@", params);
     
@@ -370,7 +370,7 @@
         [self updateRemoteLoginKey];
     }
     __block BOOL getMucReadMarkSuccess = NO;
-    NSString *jid = [QIMManager getLastUserName];
+    NSString *jid = [STManager getLastUserName];
     if ([jid length] > 0) {        
         NSString *destUrl = [NSString stringWithFormat:@"%@/qtapi/get_muc_readmark1.qunar?server=%@&c=qtalk&u=%@&k=%@&p=iOS&v=%@",
                              [[QIMNavConfigManager sharedInstance] javaurl],
@@ -387,17 +387,17 @@
         QIMVerboseLog(@"JSON请求群ReadMark阅读指针参数为:%@", params);
         NSData *data = [[QIMJSONSerializer sharedInstance] serializeObject:params error:nil];
         NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-        NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[QIMManager sharedInstance] thirdpartKeywithValue]];
+        NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[STManager sharedInstance] thirdpartKeywithValue]];
         [cookieProperties setObject:@"application/json" forKey:@"content-type"];
         [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
         QIMVerboseLog(@"JSON请求群ReadMark阅读指针Ckey为 : %@", cookieProperties);
         
-        QIMHTTPRequest *request = [QIMHTTPRequest requestWithURL:[NSURL URLWithString:destUrl]];
+        STHTTPRequest *request = [STHTTPRequest requestWithURL:[NSURL URLWithString:destUrl]];
         request.HTTPMethod = QIMHTTPMethodPOST;
         request.HTTPBody = data;
         request.HTTPRequestHeaders = cookieProperties;
         __block NSDictionary *result = nil;
-        [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+        [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
             
             NSDictionary *logDic = @{@"costTime":@([[QIMWatchDog sharedInstance] escapedTimewithStartTime:startTime]), @"reportTime":@([[NSDate date] timeIntervalSince1970]), @"threadName":@"", @"isMainThread":@([NSThread isMainThread]), @"url":destUrl, @"methodParams":params, @"requestHeaders":requestHeaders, @"describtion":@"请求群离线阅读指针"};
             

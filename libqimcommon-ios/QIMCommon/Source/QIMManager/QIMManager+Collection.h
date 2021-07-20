@@ -5,10 +5,10 @@
 //  Created by 李露 on 2018/3/30.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 #import "QIMPrivateHeader.h"
 
-@interface QIMManager (Collection)
+@interface STManager (Collection)
 
 
 #pragma mark - 代收账号

@@ -15,11 +15,11 @@
 @implementation STKit (QIMUserMedal)
 
 - (NSArray *)getLocalUserMedalWithXmppJid:(NSString *)xmppId {
-    return [[QIMManager sharedInstance] getLocalUserMedalWithXmppJid:xmppId];
+    return [[STManager sharedInstance] getLocalUserMedalWithXmppJid:xmppId];
 }
 
 - (void)getRemoteUserMedalWithXmppJid:(NSString *)xmppId {
-    [[QIMManager sharedInstance] getRemoteUserMedalWithXmppJid:xmppId];
+    [[STManager sharedInstance] getRemoteUserMedalWithXmppJid:xmppId];
 }
 
 /**
@@ -29,29 +29,29 @@
  @param medalId 勋章Id
  */
 - (void)userMedalStatusModifyWithStatus:(NSInteger)status withMedalId:(NSInteger)medalId withCallBack:(QIMKitUpdateMedalStatusCallBack)callback {
-    [[QIMManager sharedInstance] userMedalStatusModifyWithStatus:status withMedalId:medalId withCallBack:callback];
+    [[STManager sharedInstance] userMedalStatusModifyWithStatus:status withMedalId:medalId withCallBack:callback];
 }
 
 #pragma mark - Local UserMedal
 
 - (NSDictionary *)getUserMedalWithMedalId:(NSInteger)medalId withUserId:(NSString *)userId {
-    return [[QIMManager sharedInstance] getUserMedalWithMedalId:medalId withUserId:userId];
+    return [[STManager sharedInstance] getUserMedalWithMedalId:medalId withUserId:userId];
 }
 
 - (NSArray *)getUserWearMedalStatusByUserid:(NSString *)userId {
-    return [[QIMManager sharedInstance] getUserWearMedalStatusByUserid:userId];
+    return [[STManager sharedInstance] getUserWearMedalStatusByUserid:userId];
 }
 
 - (NSArray *)getUsersInMedal:(NSInteger)medalId withLimit:(NSInteger)limit withOffset:(NSInteger)offset {
-    return [[QIMManager sharedInstance] getUsersInMedal:medalId withLimit:limit withOffset:offset];
+    return [[STManager sharedInstance] getUsersInMedal:medalId withLimit:limit withOffset:offset];
 }
 
 - (NSArray *)getUserWearMedalSmallIconListByUserid:(NSString *)xmppId {
-    return [[QIMManager sharedInstance] getUserWearMedalSmallIconListByUserid:xmppId];
+    return [[STManager sharedInstance] getUserWearMedalSmallIconListByUserid:xmppId];
 }
 
 - (NSArray *)getUserHaveMedalSmallIconListByUserid:(NSString *)xmppId {
-    return [[QIMManager sharedInstance] getUserHaveMedalSmallIconListByUserid:xmppId];
+    return [[STManager sharedInstance] getUserHaveMedalSmallIconListByUserid:xmppId];
 }
 
 @end

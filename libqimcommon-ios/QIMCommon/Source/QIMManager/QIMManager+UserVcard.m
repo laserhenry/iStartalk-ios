@@ -6,7 +6,7 @@
 //
 
 #import "QIMManager+UserVcard.h"
-@implementation QIMManager (UserVcard)
+@implementation STManager (UserVcard)
 
 /**
  第三方Cell默认头像
@@ -55,7 +55,7 @@
 #pragma mark - 用户备注
 
 - (void)updateUserMarkupNameWithUserId:(NSString *)userId WithMarkupName:(NSString *)markUpName {
-    [[QIMManager sharedInstance] updateRemoteClientConfigWithType:QIMClientConfigTypeKMarkupNames WithSubKey:userId WithConfigValue:markUpName WithDel:(markUpName.length > 0) ? NO : YES withCallback:nil];
+    [[STManager sharedInstance] updateRemoteClientConfigWithType:QIMClientConfigTypeKMarkupNames WithSubKey:userId WithConfigValue:markUpName WithDel:(markUpName.length > 0) ? NO : YES withCallback:nil];
 }
 
 - (NSString *)getUserMarkupNameWithUserId:(NSString *)userId {
@@ -102,14 +102,14 @@
     NSMutableDictionary *usersVCardInfo = [NSMutableDictionary dictionaryWithDictionary:[[STUserCacheManager sharedInstance] userObjectForKey:kUsersVCardInfo]];
     
     NSMutableDictionary *userParam = [NSMutableDictionary dictionaryWithCapacity:1];
-    [userParam setQIMSafeObject:[QIMManager getLastUserName] forKey:@"user"];
+    [userParam setQIMSafeObject:[STManager getLastUserName] forKey:@"user"];
     [userParam setQIMSafeObject:(signature.length > 0) ? signature : @"" forKey:@"mood"];
-    [userParam setQIMSafeObject:[[QIMManager sharedInstance] getDomain] forKey:@"domain"];
+    [userParam setQIMSafeObject:[[STManager sharedInstance] getDomain] forKey:@"domain"];
     __weak __typeof(self) weakSelf = self;
     
     NSData *requestData = [[QIMJSONSerializer sharedInstance] serializeObject:@[userParam] error:nil];
     NSString *destUrl = [NSString stringWithFormat:@"%@/profile/set_profile.qunar", [[QIMNavConfigManager sharedInstance] newerHttpUrl]];
-    [[QIMManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:requestData withSuccessCallBack:^(NSData *responseData) {
+    [[STManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:requestData withSuccessCallBack:^(NSData *responseData) {
         __typeof(self) strongSelf = weakSelf;
         if (!strongSelf) {
             return;
@@ -153,11 +153,11 @@
             [self.userVCardDict removeObjectForKey:userXmppId];
             NSMutableDictionary *usersVCardInfo = [NSMutableDictionary dictionaryWithDictionary:[[STUserCacheManager sharedInstance] userObjectForKey:kUsersVCardInfo]];
             
-            NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithDictionary:usersVCardInfo[[QIMManager getLastUserName]]];
+            NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithDictionary:usersVCardInfo[[STManager getLastUserName]]];
             if (userInfo.count <= 0) {
                 
                 userInfo = [NSMutableDictionary dictionaryWithCapacity:1];
-                [userInfo setQIMSafeObject:[QIMManager getLastUserName] forKey:@"U"];
+                [userInfo setQIMSafeObject:[STManager getLastUserName] forKey:@"U"];
                 [userInfo setQIMSafeObject:@"0" forKey:@"V"];
             }
             [userInfo setQIMSafeObject:mood ? mood : @"" forKey:@"M"];
@@ -166,7 +166,7 @@
                 
                 [userInfo setQIMSafeObject:version forKey:@"V"];
             }
-            [usersVCardInfo setQIMSafeObject:userInfo forKey:[[QIMManager sharedInstance] getLastJid]];
+            [usersVCardInfo setQIMSafeObject:userInfo forKey:[[STManager sharedInstance] getLastJid]];
             [[STUserCacheManager sharedInstance] setUserObject:usersVCardInfo forKey:kUsersVCardInfo];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateMyPersonalSignature object:mood ? mood : @""];
@@ -314,15 +314,15 @@ static NSMutableArray *cacheUserCardHttpList = nil;
         NSURL *requestUrl = [[NSURL alloc] initWithString:destUrl];
         QIMVerboseLog(@"更新用户名片参数 : %@", [[QIMJSONSerializer sharedInstance] serializeObject:params]);
         NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-        NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[QIMManager sharedInstance] thirdpartKeywithValue]];
+        NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[STManager sharedInstance] thirdpartKeywithValue]];
         [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
         [cookieProperties setObject:@"application/json;" forKey:@"Content-type"];
-        QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:requestUrl];
+        STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:requestUrl];
         [request setHTTPMethod:QIMHTTPMethodPOST];
         [request setHTTPRequestHeaders:cookieProperties];
         [request setHTTPBody:[NSMutableData dataWithData:requestData]];
         NSString * myUserID = [[[STUserCacheManager sharedInstance] userObjectForKey:kLastUserId] lowercaseString];
-        [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+        [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
             QIMVerboseLog(@"用户名片结果 : %@", response);
             if (response.code == 200) {
                 NSData *responseData = response.data;
@@ -359,11 +359,11 @@ static NSMutableArray *cacheUserCardHttpList = nil;
                             [dataDic setQIMSafeObject:data forKey:@"I"];
                             [dataDic setQIMSafeObject:version ? version : @"0" forKey:@"V"];
                             [dataDic setQIMSafeObject:type forKey:@"type"];
-                            if ([xmppId isEqualToString:[[QIMManager sharedInstance] getLastJid]]) {
+                            if ([xmppId isEqualToString:[[STManager sharedInstance] getLastJid]]) {
                                 if ([type isEqualToString:@"merchant"]) {
-                                    [[QIMManager sharedInstance] setIsMerchant:YES];
+                                    [[STManager sharedInstance] setIsMerchant:YES];
                                 } else {
-                                    [[QIMManager sharedInstance] setIsMerchant:NO];
+                                    [[STManager sharedInstance] setIsMerchant:NO];
                                 }
                             }
                             [dataDic setQIMSafeObject:mood forKey:@"mood"];
@@ -398,7 +398,7 @@ static NSMutableArray *cacheUserCardHttpList = nil;
 - (void)updateMyCard {
     
     [self updateUserCard:@[[self getLastJid]]];
-    NSString *headerSrc = [[QIMManager sharedInstance] getUserBigHeaderImageUrlWithUserId:[self getLastJid]];
+    NSString *headerSrc = [[STManager sharedInstance] getUserBigHeaderImageUrlWithUserId:[self getLastJid]];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:kMyHeaderImgaeUpdateSuccess object:@{@"ok":@(YES), @"headerUrl":(headerSrc.length > 0) ? headerSrc : @""}];
@@ -408,10 +408,10 @@ static NSMutableArray *cacheUserCardHttpList = nil;
 - (void)updateMyPhoto:(NSData *)photoData {
     [[STFileMngr sharedInstance] qim_uploadMyPhotoData:photoData withCallBack:^(NSString *myPhotoUrl) {
         if (myPhotoUrl.length > 0) {
-            NSDictionary *cardDic = @{@"user": [QIMManager getLastUserName], @"url": myPhotoUrl, @"domain":[[XmppImManager sharedInstance] domain]};
+            NSDictionary *cardDic = @{@"user": [STManager getLastUserName], @"url": myPhotoUrl, @"domain":[[XmppImManager sharedInstance] domain]};
             NSData *data = [[QIMJSONSerializer sharedInstance] serializeObject:@[cardDic] error:nil];
             NSString *destUrl = [NSString stringWithFormat:@"%@/profile/set_profile.qunar", [[QIMNavConfigManager sharedInstance] newerHttpUrl]];
-            [[QIMManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:data withSuccessCallBack:^(NSData *responseData) {
+            [[STManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:data withSuccessCallBack:^(NSData *responseData) {
                 NSDictionary *resultDic = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
                 BOOL ret = [[resultDic objectForKey:@"ret"] boolValue];
                 NSInteger errcode = [[resultDic objectForKey:@"errcode"] integerValue];
@@ -445,14 +445,14 @@ static NSMutableArray *cacheUserCardHttpList = nil;
 - (void)dealWithUpdateMyVCard:(NSArray *)resultData {
     if ([resultData isKindOfClass:[NSArray class]]) {
         NSDictionary *resultDic = [resultData firstObject];
-        [self.userNormalHeaderDic removeObjectForKey:[[QIMManager sharedInstance] getLastJid]];
-        [self.userVCardDict removeObjectForKey:[[QIMManager sharedInstance] getLastJid]];
+        [self.userNormalHeaderDic removeObjectForKey:[[STManager sharedInstance] getLastJid]];
+        [self.userVCardDict removeObjectForKey:[[STManager sharedInstance] getLastJid]];
         NSString *headerUrl = [resultDic objectForKey:@"url"];
         NSString *mood = [resultDic objectForKey:@"mood"];
         if (![headerUrl qim_hasPrefixHttpHeader]) {
             headerUrl = [NSString stringWithFormat:@"%@/%@", [[QIMNavConfigManager sharedInstance] innerFileHttpHost], headerUrl];
         }
-        [self updateUserBigHeaderImageUrl:headerUrl WithUserMood:mood WithVersion:[resultDic objectForKey:@"version"] ForUserId:[[QIMManager sharedInstance] getLastJid]];
+        [self updateUserBigHeaderImageUrl:headerUrl WithUserMood:mood WithVersion:[resultDic objectForKey:@"version"] ForUserId:[[STManager sharedInstance] getLastJid]];
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:kMyHeaderImgaeUpdateSuccess object:@{@"ok":@(YES), @"headerUrl":(headerUrl.length > 0) ? headerUrl : @""}];
         });
@@ -472,7 +472,7 @@ static NSMutableArray *cacheUserCardHttpList = nil;
             NSString *userWorkInfoStr = [tempDic objectForKey:@"UserWorkInfo"];
             result = [[QIMJSONSerializer sharedInstance] deserializeObject:userWorkInfoStr error:nil];
         } else {
-            [[QIMManager sharedInstance] getRemoteUserWorkInfoWithUserId:userId withCallBack:^(NSDictionary *userWorkInfo) {
+            [[STManager sharedInstance] getRemoteUserWorkInfoWithUserId:userId withCallBack:^(NSDictionary *userWorkInfo) {
                 result = userWorkInfo;
             }];
         }
@@ -490,8 +490,8 @@ static NSMutableArray *cacheUserCardHttpList = nil;
     NSString *qtalkId = [[userId componentsSeparatedByString:@"@"] firstObject];
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithCapacity:4];
     [param setQIMSafeObject:qtalkId forKey:@"qtalk_id"];
-    [param setQIMSafeObject:[QIMManager getLastUserName] forKey:@"user_id"];
-    [param setQIMSafeObject:[[QIMManager sharedInstance] thirdpartKeywithValue] forKey:@"ckey"];
+    [param setQIMSafeObject:[STManager getLastUserName] forKey:@"user_id"];
+    [param setQIMSafeObject:[[STManager sharedInstance] thirdpartKeywithValue] forKey:@"ckey"];
     [param setQIMSafeObject:@"ios" forKey:@"platform"];
     QIMVerboseLog(@"查看用户%@直属领导参数 : %@", userId, [[QIMJSONSerializer sharedInstance] serializeObject:param]);
     NSData *requestData = [[QIMJSONSerializer sharedInstance] serializeObject:param error:nil];
@@ -549,8 +549,8 @@ static NSMutableArray *cacheUserCardHttpList = nil;
     
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithCapacity:4];
     [param setQIMSafeObject:qtalkId forKey:@"qtalk_id"];
-    [param setQIMSafeObject:[QIMManager getLastUserName] forKey:@"user_id"];
-    [param setQIMSafeObject:[[QIMManager sharedInstance] thirdpartKeywithValue] forKey:@"ckey"];
+    [param setQIMSafeObject:[STManager getLastUserName] forKey:@"user_id"];
+    [param setQIMSafeObject:[[STManager sharedInstance] thirdpartKeywithValue] forKey:@"ckey"];
     [param setQIMSafeObject:@"ios" forKey:@"platform"];
     QIMVerboseLog(@"查看用户%@手机号参数 : %@", qtalkId, [[QIMJSONSerializer sharedInstance] serializeObject:param]);
     NSData *requestData = [[QIMJSONSerializer sharedInstance] serializeObject:param error:nil];
@@ -587,7 +587,7 @@ static NSMutableArray *cacheUserCardHttpList = nil;
 
 - (void)searchQunarUserBySearchStr:(NSString *)searchStr withCallback:(QIMKitSearchQunarUserBlock)callback {
     if (searchStr.length > 0) {
-        NSString *destUrl = [NSString stringWithFormat:@"%@/domain/search_vcard?keyword=%@&server=%@&c=qtalk&u=%@&k=%@&p=iphone&v=%@", searchStr, [[QIMNavConfigManager sharedInstance] httpHost], [self getDomain], [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
+        NSString *destUrl = [NSString stringWithFormat:@"%@/domain/search_vcard?keyword=%@&server=%@&c=qtalk&u=%@&k=%@&p=iphone&v=%@", searchStr, [[QIMNavConfigManager sharedInstance] httpHost], [self getDomain], [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], self.remoteKey, [[STAppInfo sharedInstance] AppBuildVersion]];
         destUrl = [destUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
         [self sendTPGetRequestWithUrl:destUrl withSuccessCallBack:^(NSData *responseData) {
@@ -687,9 +687,9 @@ static NSMutableArray *cacheUserCardHttpList = nil;
         
         long long time = ([[NSDate date] timeIntervalSince1970]) * 1000;
         
-        NSString *k2 = [NSString stringWithFormat:@"%@%lld",[[QIMManager sharedInstance] remoteKey],time];
+        NSString *k2 = [NSString stringWithFormat:@"%@%lld",[[STManager sharedInstance] remoteKey],time];
         
-        NSString *newString = [NSString stringWithFormat:@"u=%@&k=%@&t=%lld", [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [k2 qim_getMD5], time];
+        NSString *newString = [NSString stringWithFormat:@"u=%@&k=%@&t=%lld", [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [k2 qim_getMD5], time];
         NSString *destUrl = [searchURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL *requestUrl = [[NSURL alloc] initWithString:destUrl];
         

@@ -6,12 +6,12 @@
 //  Copyright © 2018 QIM. All rights reserved.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 #import "QIMPrivateHeader.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QIMManager (UserMedal)
+@interface STManager (UserMedal)
 
 - (NSArray *)getLocalUserMedalWithXmppJid:(NSString *)xmppId;
 

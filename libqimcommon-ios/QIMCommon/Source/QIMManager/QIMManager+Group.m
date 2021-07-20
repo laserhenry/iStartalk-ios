@@ -8,7 +8,7 @@
 #import "QIMManager+Group.h"
 #import <objc/runtime.h>
 
-@implementation QIMManager (Group)
+@implementation STManager (Group)
 
 - (void)setGroupList:(NSMutableArray *)groupList {
     objc_setAssociatedObject(self, "groupList", groupList, OBJC_ASSOCIATION_COPY_NONATOMIC);
@@ -167,7 +167,7 @@
     }
     NSInteger groupPush = [[self.notMindGroupDic objectForKey:groupName] integerValue];
     if (groupPush == 0) {
-        NSInteger remind = [[QIMManager sharedInstance] getClientConfigDeleteFlagWithType:QIMClientConfigTypeKNoticeStickJidDic WithSubKey:groupName];
+        NSInteger remind = [[STManager sharedInstance] getClientConfigDeleteFlagWithType:QIMClientConfigTypeKNoticeStickJidDic WithSubKey:groupName];
         if (remind == 0) {
             groupPush = NO;
             dispatch_block_t block = ^{
@@ -205,7 +205,7 @@
     }
     NSString *configValue = (on == YES) ? @"0" : @"1";
     __block BOOL success = NO;
-    [[QIMManager sharedInstance] updateRemoteClientConfigWithType:QIMClientConfigTypeKNoticeStickJidDic WithSubKey:groupId WithConfigValue:configValue WithDel:on withCallback:^(BOOL successed) {
+    [[STManager sharedInstance] updateRemoteClientConfigWithType:QIMClientConfigTypeKNoticeStickJidDic WithSubKey:groupId WithConfigValue:configValue WithDel:on withCallback:^(BOOL successed) {
         success = successed;
         if (callback) {
             callback(success);
@@ -390,14 +390,14 @@ static NSMutableArray *cacheGroupCardHttpList = nil;
         NSURL *requestUrl = [[NSURL alloc] initWithString:destUrl];
         NSMutableDictionary *requestHeaders = [[NSMutableDictionary alloc] initWithCapacity:2];
         [requestHeaders setObject:@"application/json;" forKey:@"Content-type"];
-        [requestHeaders setObject:[NSString stringWithFormat:@"q_ckey=%@", [[QIMManager sharedInstance] thirdpartKeywithValue]] forKey:@"Cookie"];
+        [requestHeaders setObject:[NSString stringWithFormat:@"q_ckey=%@", [[STManager sharedInstance] thirdpartKeywithValue]] forKey:@"Cookie"];
 
         
-        QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:requestUrl];
+        STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:requestUrl];
         [request setHTTPMethod:QIMHTTPMethodPOST];
         [request setHTTPRequestHeaders:requestHeaders];
         [request setHTTPBody:[NSMutableData dataWithData:requestData]];
-        [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+        [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
             if (response.code == 200) {
                 QIMErrorLog(@"群名片获取当前线程 : %@", [NSThread currentThread]);
                 NSData *responseData = response.data;
@@ -443,17 +443,17 @@ static NSMutableArray *cacheGroupCardHttpList = nil;
     NSURL *requestUrl = [[NSURL alloc] initWithString:destUrl];
     NSMutableDictionary *requestHeaders = [[NSMutableDictionary alloc] initWithCapacity:2];
     [requestHeaders setObject:@"application/json;" forKey:@"Content-type"];
-    [requestHeaders setObject:[NSString stringWithFormat:@"q_ckey=%@", [[QIMManager sharedInstance] thirdpartKeywithValue]] forKey:@"Cookie"];
+    [requestHeaders setObject:[NSString stringWithFormat:@"q_ckey=%@", [[STManager sharedInstance] thirdpartKeywithValue]] forKey:@"Cookie"];
 
     NSInteger maxUTLastTime = [[STDataMgr qimDB_SharedInstance] qimDB_getGroupListMaxUTLastUpdateTime];
-    NSDictionary *paramDic = @{@"lastupdtime":[NSString stringWithFormat:@"%ld", maxUTLastTime], @"userid":[QIMManager getLastUserName]};
+    NSDictionary *paramDic = @{@"lastupdtime":[NSString stringWithFormat:@"%ld", maxUTLastTime], @"userid":[STManager getLastUserName]};
     NSData *requestData = [[QIMJSONSerializer sharedInstance] serializeObject:paramDic error:nil];
 
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:requestUrl];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:requestUrl];
     [request setHTTPMethod:QIMHTTPMethodPOST];
     [request setHTTPRequestHeaders:requestHeaders];
     [request setHTTPBody:[NSMutableData dataWithData:requestData]];
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             QIMErrorLog(@"群名片获取当前线程 : %@", [NSThread currentThread]);
             NSData *responseData = response.data;
@@ -508,7 +508,7 @@ static NSMutableArray *cacheGroupCardHttpList = nil;
     NSDictionary *dict = [[XmppImManager sharedInstance] groupMembersByGroupId:groupId];
     if (dict.count > 0) {
         if (initiative) {
-            [self joinGroupWithBuddies:groupId groupName:groupId WithInviteMember:@[[[QIMManager sharedInstance] getLastJid]] withCallback:nil];
+            [self joinGroupWithBuddies:groupId groupName:groupId WithInviteMember:@[[[STManager sharedInstance] getLastJid]] withCallback:nil];
         } else {
             
             [self joinGroupWithBuddies:groupId groupName:groupId WithInviteMember:dict withCallback:nil];
@@ -731,7 +731,7 @@ static NSMutableArray *cacheGroupCardHttpList = nil;
         QIMVerboseLog(@" ======= 开始通过增量群列表拉群列表数据 =========");
         
         NSString *destUrl = [NSString stringWithFormat:@"%@/muc/get_increment_mucs.qunar", [[QIMNavConfigManager sharedInstance] newerHttpUrl]];
-        NSDictionary *param = @{@"u" : [QIMManager getLastUserName], @"t" : @(lastTime) ? @(lastTime) : @(0), @"d": [[XmppImManager sharedInstance] domain]};
+        NSDictionary *param = @{@"u" : [STManager getLastUserName], @"t" : @(lastTime) ? @(lastTime) : @(0), @"d": [[XmppImManager sharedInstance] domain]};
         QIMVerboseLog(@"增量群列表拉群列表参数 : %@", [[QIMJSONSerializer sharedInstance] serializeObject:param]);
         NSData *data = [[QIMJSONSerializer sharedInstance] serializeObject:param error:nil];
         

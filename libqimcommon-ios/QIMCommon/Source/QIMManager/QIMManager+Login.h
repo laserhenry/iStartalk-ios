@@ -5,9 +5,9 @@
 //  Created by 李露 on 2018/4/3.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 
-@interface QIMManager (Login)
+@interface STManager (Login)
 
 /**
  获取当前登录状态

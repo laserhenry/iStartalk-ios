@@ -9,7 +9,7 @@
 #import "QIMHttpCommon.h"
 
 @class QIMHttpRequestConfig;
-@class QIMHTTPRequest;
+@class STHTTPRequest;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QIMHttpRequestManager : NSObject
@@ -18,16 +18,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setQIMHttpRequestConfig:(void (^)(QIMHttpRequestConfig *requestConfig))config;
 
-- (void)sendRequest:(void (^)(QIMHTTPRequest *qtRequest))rqeuestHandler
+- (void)sendRequest:(void (^)(STHTTPRequest *qtRequest))rqeuestHandler
        successBlock:(QIMSuccessHandler)succsessHandler
        failureBlock:(QIMFailureHandler)failureHandler;
 
-- (void)sendRequest:(void (^)(QIMHTTPRequest *qtRequest))requestHandler
+- (void)sendRequest:(void (^)(STHTTPRequest *qtRequest))requestHandler
        successBlock:(QIMSuccessHandler)succsessHandler
        failureBlock:(QIMFailureHandler)failureHandler
         finishBlock:(QIMFinishHandler)finishBlock;
 
-- (void)sendRequest:(void (^)(QIMHTTPRequest *qtRequest))requestHandler
+- (void)sendRequest:(void (^)(STHTTPRequest *qtRequest))requestHandler
       progressBLock:(QIMProgressHandler)progressHandlder
        successBlock:(QIMSuccessHandler)succsessHandler
        failureBlock:(QIMFailureHandler)failureHandler

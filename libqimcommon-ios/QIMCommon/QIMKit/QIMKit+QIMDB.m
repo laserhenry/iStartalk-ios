@@ -16,22 +16,22 @@
 @implementation STKit (QIMDB)
 
 - (NSString *)getDBPathWithUserXmppId:(NSString *)userJid {
-    return [[QIMManager sharedInstance] getDBPathWithUserXmppId:userJid];
+    return [[STManager sharedInstance] getDBPathWithUserXmppId:userJid];
 }
 
 - (void)removeDataBase {
     //关闭数据库
-    [[QIMManager sharedInstance] removeDataBase];
+    [[STManager sharedInstance] removeDataBase];
 }
 
 - (void)closeDataBase {
     QIMWarnLog(@"关闭数据库");
-    [[QIMManager sharedInstance] closeDataBase];
+    [[STManager sharedInstance] closeDataBase];
 }
 
 - (void)clearDataBase {
     //清理数据库
-    [[QIMManager sharedInstance] clearDataBase];
+    [[STManager sharedInstance] clearDataBase];
 }
 
 @end

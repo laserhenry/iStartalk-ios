@@ -6,9 +6,9 @@
 //  Copyright © 2018年 QIMKit. All rights reserved.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 
-@interface QIMManager (QuickReply)
+@interface STManager (QuickReply)
 
 - (void)getRemoteQuickReply;
 

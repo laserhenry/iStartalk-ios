@@ -199,12 +199,12 @@
         _tokenSmsUrl = [self.defaultSettings objectForKey:@"tokenSmsUrl"];
     }
 
-    [[QIMManager sharedInstance] setImLoginType:_loginType];
-    [[QIMManager sharedInstance] setImLoginDomain:_domain];
-    [[QIMManager sharedInstance] setImLoginXmppHost:_xmppHost];
-    [[QIMManager sharedInstance] setImLoginProtobufPort:_protobufPort];
-    [[QIMManager sharedInstance] setImLoginPort:_port];
-    [[QIMManager sharedInstance] updateNavigationConfig];
+    [[STManager sharedInstance] setImLoginType:_loginType];
+    [[STManager sharedInstance] setImLoginDomain:_domain];
+    [[STManager sharedInstance] setImLoginXmppHost:_xmppHost];
+    [[STManager sharedInstance] setImLoginProtobufPort:_protobufPort];
+    [[STManager sharedInstance] setImLoginPort:_port];
+    [[STManager sharedInstance] updateNavigationConfig];
 }
 
 - (BOOL)debug {
@@ -588,24 +588,24 @@
 
     NSString *navConfigStr = [[QIMJSONSerializer sharedInstance] serializeObject:navConfig];
     [[STUserCacheManager sharedInstance] setUserObject:navConfigStr forKey:@"NavConfig"];
-    [[QIMManager sharedInstance] setImLoginType:_loginType];
-    [[QIMManager sharedInstance] setImLoginDomain:_domain];
-    [[QIMManager sharedInstance] setImLoginXmppHost:_xmppHost];
-    [[QIMManager sharedInstance] setImLoginProtobufPort:_protobufPort];
-    [[QIMManager sharedInstance] setImLoginPort:_port];
-    [[QIMManager sharedInstance] updateNavigationConfig];
+    [[STManager sharedInstance] setImLoginType:_loginType];
+    [[STManager sharedInstance] setImLoginDomain:_domain];
+    [[STManager sharedInstance] setImLoginXmppHost:_xmppHost];
+    [[STManager sharedInstance] setImLoginProtobufPort:_protobufPort];
+    [[STManager sharedInstance] setImLoginPort:_port];
+    [[STManager sharedInstance] updateNavigationConfig];
 }
 
 //更新Hash策略后的导航配置
 - (void)qimNav_updateNavigationConfigWithHashHost:(NSString *)hashHost {
     NSString *userName = [[STUserCacheManager sharedInstance] userObjectForKey:@"currentLoginName"];
     if (![hashHost containsString:@"u="] && userName) {
-        hashHost = [_hashHosts stringByAppendingFormat:@"&u=%@", [QIMManager getLastUserName]];
+        hashHost = [_hashHosts stringByAppendingFormat:@"&u=%@", [STManager getLastUserName]];
     }
 
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:hashHost]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:hashHost]];
     [request setTimeoutInterval:3.0f];
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             NSDictionary *hashNavConfig = [[QIMJSONSerializer sharedInstance] deserializeObject:response.data error:nil];
             NSDictionary *baseAddess = [hashNavConfig objectForKey:@"baseaddess"];
@@ -636,9 +636,9 @@
 - (void)qimNav_updateNavigationConfigWithNavDict:(NSDictionary *)navDict NavStr:(NSString *)navConfigUrl Check:(BOOL)check withCallBack:(QIMKitGetNavConfigCallBack)callBack {
     NSString *userName = [[STUserCacheManager sharedInstance] userObjectForKey:@"currentLoginName"];
     if (![navConfigUrl containsString:@"u="] && userName) {
-        navConfigUrl = [navConfigUrl stringByAppendingFormat:@"&u=%@", [QIMManager getLastUserName]];
+        navConfigUrl = [navConfigUrl stringByAppendingFormat:@"&u=%@", [STManager getLastUserName]];
     }
-    [[QIMManager sharedInstance] sendTPGetRequestWithUrl:navConfigUrl withSuccessCallBack:^(NSData *responseData) {
+    [[STManager sharedInstance] sendTPGetRequestWithUrl:navConfigUrl withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *navConfig = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         if (navConfig.count > 0) {
             [self setNavConfig:navConfig];
@@ -832,7 +832,7 @@
     } else {
         [self setNavConfig:navConfig];
     }
-    [[QIMManager sharedInstance] clearQIMManager];
+    [[STManager sharedInstance] clearSTManager];
 }
 
 - (NSString *)qimNav_getAdvertImageFilePath {
@@ -846,8 +846,8 @@
 - (void)qimNav_updateAdvertImageFileWithImageUrl:(NSString *)imageUrl {
 
     NSURL *requestUrl = [[NSURL alloc] initWithString:[imageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:requestUrl];
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:requestUrl];
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                 NSData *responseData = response.data;
@@ -876,9 +876,9 @@
         NSString *host = [url host];
         NSString *advertConfigUrl = [NSString stringWithFormat:@"https://uk.startalk.im/ads", [[STAppInfo sharedInstance] appName], appVersion, @"iphone", [user ? user : @"unknow" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [self debug] ? @"true" : @"false", oldVersion, host ? host : @"unkown", @"v2"];
 
-        QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:advertConfigUrl]];
+        STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:advertConfigUrl]];
         request.shouldASynchronous = YES;
-        [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+        [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
             if (response.code == 200) {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                     NSDictionary *oldAdvertConfig = [[STUserCacheManager sharedInstance] userObjectForKey:@"AdvertConfig"];
@@ -970,7 +970,7 @@
 
 - (void)qimNav_getRSACodePublicKeyFromRemote {
     NSString *url = [NSString stringWithFormat:@"%@/qtapi/nck/rsa/get_public_key.do", self.javaurl];
-    [[QIMManager sharedInstance] sendTPGetRequestWithUrl:url withSuccessCallBack:^(NSData *responseData) {
+    [[STManager sharedInstance] sendTPGetRequestWithUrl:url withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *resultDic = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         if (resultDic.count) {
             BOOL ret = [[resultDic objectForKey:@"ret"] boolValue];

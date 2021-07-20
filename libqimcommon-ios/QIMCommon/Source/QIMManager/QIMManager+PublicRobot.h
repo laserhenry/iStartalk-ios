@@ -6,9 +6,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "QIMManager.h"
+#import "STManager.h"
 
-@interface QIMManager (PublicRobot)
+@interface STManager (PublicRobot)
 
 - (int)getDealIdState:(NSString *)dealId;
 - (void)setDealId:(NSString *)dealId ForState:(int)state;

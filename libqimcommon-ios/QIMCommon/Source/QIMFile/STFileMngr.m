@@ -271,10 +271,10 @@ static STFileMngr *_newfileManager = nil;
                          [QIMNavConfigManager sharedInstance].innerFileHttpHost,
                          method,
                          fileName,
-                         [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                         [[QIMManager sharedInstance] myRemotelogginKey],
+                         [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                         [[STManager sharedInstance] myRemotelogginKey],
                          [[STAppInfo sharedInstance] AppBuildVersion],fileKey,size];
-    [[QIMManager sharedInstance] uploadFileRequest:destUrl withFileData:headerData withProgressBlock:^(float progressValue) {
+    [[STManager sharedInstance] uploadFileRequest:destUrl withFileData:headerData withProgressBlock:^(float progressValue) {
         NSLog(@"progressValue : %lf", progressValue);
     } withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
@@ -300,10 +300,10 @@ static STFileMngr *_newfileManager = nil;
     NSString *method = @"file/v2/inspection/img";
     NSString *destUrl = [NSString stringWithFormat:@"%@/%@?key=%@&size=%lld&name=%@&platform=iphone&u=%@&k=%@&version=%@",
                          [QIMNavConfigManager sharedInstance].innerFileHttpHost, method, imageKey, (long long)ceil(fileLength / 1024.0 / 1024.0), [NSString stringWithFormat:@"%@.%@",imageKey, extension],
-                         [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                         [[QIMManager sharedInstance] myRemotelogginKey],
+                         [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                         [[STManager sharedInstance] myRemotelogginKey],
                          [[STAppInfo sharedInstance] AppBuildVersion]];
-    [[QIMManager sharedInstance] sendTPGetRequestWithUrl:destUrl withSuccessCallBack:^(NSData *responseData) {
+    [[STManager sharedInstance] sendTPGetRequestWithUrl:destUrl withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         //        BOOL ret = [[result objectForKey:@"ret"] boolValue];
         //        if (ret) {
@@ -332,15 +332,15 @@ static STFileMngr *_newfileManager = nil;
     
     NSString *destUrl = [NSString stringWithFormat:@"%@/%@?name=%@&p=ios&u=%@&k=%@&v=%@&key=%@&size=%lld",
                          [QIMNavConfigManager sharedInstance].innerFileHttpHost, method, fileName,
-                         [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                         [[QIMManager sharedInstance] myRemotelogginKey],
+                         [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                         [[STManager sharedInstance] myRemotelogginKey],
                          [[STAppInfo sharedInstance] AppBuildVersion],key,size];
     NSLog(@"上传图片destUrl : %@", destUrl);
     //这里上报一下上传图片的进度，渲染图片进度
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:kQIMUploadImageProgress object:@{@"ImageUploadKey":fileName, @"ImageUploadProgress":@(0)}];
     });
-    [[QIMManager sharedInstance] uploadFileRequest:destUrl withFileData:fileData withProgressBlock:^(float progressValue) {
+    [[STManager sharedInstance] uploadFileRequest:destUrl withFileData:fileData withProgressBlock:^(float progressValue) {
         NSLog(@"privateUpLoadImage : %lf", progressValue);
         //这里上报一下上传图片的进度，渲染图片进度
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -396,9 +396,9 @@ static STFileMngr *_newfileManager = nil;
         }
 #endif
         if (message.chatType == ChatType_ConsultServer || message.chatType == ChatType_Consult) {
-            [[QIMManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
+            [[STManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
         } else {
-            [[QIMManager sharedInstance] sendMessage:message ToUserId:message.to];
+            [[STManager sharedInstance] sendMessage:message ToUserId:message.to];
         }
     } else if (QIMMessageType_LocalShare == msgType) {
         NSDictionary *dic = [[QIMJSONSerializer sharedInstance] deserializeObject:message.originalExtendedInfo error:nil];
@@ -416,9 +416,9 @@ static STFileMngr *_newfileManager = nil;
         }
 #endif
         if (message.chatType == ChatType_Consult || message.chatType == ChatType_ConsultServer) {
-            [[QIMManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
+            [[STManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
         } else{
-            [[QIMManager sharedInstance] sendMessage:message ToUserId:message.to];
+            [[STManager sharedInstance] sendMessage:message ToUserId:message.to];
         }
     } else {
         
@@ -430,7 +430,7 @@ static STFileMngr *_newfileManager = nil;
     NSString *destUrl = [NSString stringWithFormat:@"%@/video/check", [[QIMNavConfigManager sharedInstance] newerHttpUrl]];
     NSDictionary *bodyDic = @{@"videoMd5":fileMd5};
     NSMutableData *postData = [NSMutableData dataWithData:[[QIMJSONSerializer sharedInstance] serializeObject:bodyDic error:nil]];
-    [[QIMManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:postData withSuccessCallBack:^(NSData *responseData) {
+    [[STManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:postData withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         BOOL ret = [[result objectForKey:@"ret"] boolValue];
         if (ret) {
@@ -498,7 +498,7 @@ static STFileMngr *_newfileManager = nil;
                 
                 NSString *destUrl = [NSString stringWithFormat:@"%@/video/upload", [[QIMNavConfigManager sharedInstance] newerHttpUrl]];
                 NSDictionary *bodyDic = @{@"needTrans":needTransStr};
-                [[QIMManager sharedInstance] uploadFileRequest:destUrl withFilePath:videoPath withPOSTBody:bodyDic withProgressBlock:^(float progressValue) {
+                [[STManager sharedInstance] uploadFileRequest:destUrl withFilePath:videoPath withPOSTBody:bodyDic withProgressBlock:^(float progressValue) {
                     
                 } withSuccessCallBack:^(NSData *responseData) {
                     NSDictionary *resultDic = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
@@ -580,11 +580,11 @@ static STFileMngr *_newfileManager = nil;
 #endif
                     
                     if (message.chatType == ChatType_PublicNumber) {
-                        [[QIMManager sharedInstance] sendMessage:msg ToPublicNumberId:message.to WithMsgId:message.messageId WithMsgType:message.messageType];
+                        [[STManager sharedInstance] sendMessage:msg ToPublicNumberId:message.to WithMsgId:message.messageId WithMsgType:message.messageType];
                     } else if (message.chatType == ChatType_Consult || message.chatType == ChatType_ConsultServer) {
-                        [[QIMManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
+                        [[STManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
                     } else {
-                        [[QIMManager sharedInstance] sendMessage:message ToUserId:message.to];
+                        [[STManager sharedInstance] sendMessage:message ToUserId:message.to];
                     }
                 }
             }];
@@ -619,11 +619,11 @@ static STFileMngr *_newfileManager = nil;
 #endif
                         
                         if (message.chatType == ChatType_PublicNumber) {
-                            [[QIMManager sharedInstance] sendMessage:msg ToPublicNumberId:message.to WithMsgId:message.messageId WithMsgType:message.messageType];
+                            [[STManager sharedInstance] sendMessage:msg ToPublicNumberId:message.to WithMsgId:message.messageId WithMsgType:message.messageType];
                         } else if (message.chatType == ChatType_Consult || message.chatType == ChatType_ConsultServer) {
-                            [[QIMManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
+                            [[STManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
                         } else {
-                            [[QIMManager sharedInstance] sendMessage:message ToUserId:message.to];
+                            [[STManager sharedInstance] sendMessage:message ToUserId:message.to];
                         }
                     }
                 }];
@@ -704,10 +704,10 @@ static STFileMngr *_newfileManager = nil;
     
     NSString *destUrl = [NSString stringWithFormat:@"%@/%@?key=%@&size=%lld&name=%@&platform=iphone&u=%@&k=%@&version=%@",
                          [QIMNavConfigManager sharedInstance].innerFileHttpHost, method, fileKey, (long long)ceil(fileLength / 1024.0 / 1024.0), [NSString stringWithFormat:@"%@.%@",fileKey,extension],
-                         [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                         [[QIMManager sharedInstance] myRemotelogginKey],
+                         [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                         [[STManager sharedInstance] myRemotelogginKey],
                          [[STAppInfo sharedInstance] AppBuildVersion]];
-    [[QIMManager sharedInstance] sendTPGetRequestWithUrl:destUrl withSuccessCallBack:^(NSData *responseData) {
+    [[STManager sharedInstance] sendTPGetRequestWithUrl:destUrl withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         BOOL ret = [[result objectForKey:@"ret"] boolValue];
         if (ret) {
@@ -740,10 +740,10 @@ static STFileMngr *_newfileManager = nil;
     long long size = ceil(fileData.length / 1024.0 / 1024.0);
     NSString *destUrl = [NSString stringWithFormat:@"%@/%@?name=%@&p=ios&u=%@&k=%@&v=%@&key=%@&size=%lld",
                          [QIMNavConfigManager sharedInstance].innerFileHttpHost, method, fileName,
-                         [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                         [[QIMManager sharedInstance] myRemotelogginKey],
+                         [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                         [[STManager sharedInstance] myRemotelogginKey],
                          [[STAppInfo sharedInstance] AppBuildVersion],fileKey,size];
-    [[QIMManager sharedInstance] uploadFileRequest:destUrl withFileData:fileData withProgressBlock:^(float progressValue) {
+    [[STManager sharedInstance] uploadFileRequest:destUrl withFileData:fileData withProgressBlock:^(float progressValue) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:kQIMUploadFileProgress object:@{@"FileUploadKey":fileKey, @"MessageId":msgId, @"ImageUploadProgress":@(progressValue)}];
         });
@@ -798,9 +798,9 @@ static STFileMngr *_newfileManager = nil;
         }
 #endif
         if (message.chatType == ChatType_ConsultServer || message.chatType == ChatType_Consult) {
-            [[QIMManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
+            [[STManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
         } else {
-            [[QIMManager sharedInstance] sendMessage:message ToUserId:message.to];
+            [[STManager sharedInstance] sendMessage:message ToUserId:message.to];
         }
     } else if (QIMMessageType_Voice == msgType) {
         
@@ -823,9 +823,9 @@ static STFileMngr *_newfileManager = nil;
 #endif
 
         if (message.chatType == ChatType_ConsultServer || message.chatType == ChatType_Consult) {
-            [[QIMManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
+            [[STManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
         } else {
-            [[QIMManager sharedInstance] sendMessage:message ToUserId:message.to];
+            [[STManager sharedInstance] sendMessage:message ToUserId:message.to];
         }
     } else if (QIMMessageType_CommonTrdInfo == msgType || QIMMessageType_CommonTrdInfoPer == msgType) {
         NSMutableDictionary *mulDic = [NSMutableDictionary dictionaryWithDictionary:infoDic];
@@ -848,9 +848,9 @@ static STFileMngr *_newfileManager = nil;
         }
 #endif
         if (message.chatType == ChatType_Consult || message.chatType == ChatType_ConsultServer) {
-            [[QIMManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
+            [[STManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
         } else {
-            [[QIMManager sharedInstance] sendMessage:message ToUserId:message.to];
+            [[STManager sharedInstance] sendMessage:message ToUserId:message.to];
         }
     } else if (QIMMessageType_LocalShare == msgType) {
         NSDictionary *dic = [[QIMJSONSerializer sharedInstance] deserializeObject:message.originalExtendedInfo error:nil];
@@ -869,11 +869,11 @@ static STFileMngr *_newfileManager = nil;
         }
 #endif
         if (message.chatType == ChatType_Consult) {
-            [[QIMManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
+            [[STManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
         } else if (message.chatType == ChatType_ConsultServer) {
-            [[QIMManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
+            [[STManager sharedInstance] sendConsultMessageId:message.messageId WithMessage:message.message WithInfo:message.extendInformation toJid:message.to realToJid:message.realJid WithChatType:message.chatType WithMsgType:message.messageType];
         } else{
-            [[QIMManager sharedInstance] sendMessage:message ToUserId:message.to];
+            [[STManager sharedInstance] sendMessage:message ToUserId:message.to];
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyFileManagerUpdate object:[NSDictionary dictionaryWithObjectsAndKeys:message,@"message",@"1.1",@"propress",@"uploading",@"status", nil]];
     } else {

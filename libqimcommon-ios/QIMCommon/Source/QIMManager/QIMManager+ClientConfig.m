@@ -8,7 +8,7 @@
 
 #import "QIMManager+ClientConfig.h"
 
-@implementation QIMManager (ClientConfig)
+@implementation STManager (ClientConfig)
 
 - (NSString *)transformClientConfigKeyWithType:(QIMClientConfigType)type {
 
@@ -68,7 +68,7 @@
     switch (type) {
         case QIMClientConfigTypeKCollectionCacheKey: {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyResetFaceCollectionManager object:[[QIMManager sharedInstance] getClientConfigValueArrayWithType:QIMClientConfigTypeKCollectionCacheKey]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyResetFaceCollectionManager object:[[STManager sharedInstance] getClientConfigValueArrayWithType:QIMClientConfigTypeKCollectionCacheKey]];
             });
         }
             break;
@@ -217,7 +217,7 @@
             for (NSDictionary *markupInfo in configInfoData) {
                 NSString *subkey = [markupInfo objectForKey:@"subkey"];
                 if ([subkey isEqualToString:@"ios"]) {
-                    self.soundName = [[QIMManager sharedInstance] getClientNotificationSoundName];
+                    self.soundName = [[STManager sharedInstance] getClientNotificationSoundName];
                 }
             }
         } else {
@@ -230,8 +230,8 @@
     NSString *destUrl = [NSString stringWithFormat:@"%@/configuration/setclientconfig.qunar", [[QIMNavConfigManager sharedInstance] newerHttpUrl]];
     
     NSMutableDictionary *bodyProperties = [NSMutableDictionary dictionary];
-    [bodyProperties setQIMSafeObject:[QIMManager getLastUserName] forKey:@"username"];
-    [bodyProperties setQIMSafeObject:[[QIMManager sharedInstance] getDomain] forKey:@"host"];
+    [bodyProperties setQIMSafeObject:[STManager getLastUserName] forKey:@"username"];
+    [bodyProperties setQIMSafeObject:[[STManager sharedInstance] getDomain] forKey:@"host"];
     [bodyProperties setQIMSafeObject:configInfoArray forKey:@"batchProcess"];
     [bodyProperties setQIMSafeObject:@"iOS" forKey:@"operate_plat"];
     [bodyProperties setQIMSafeObject:[[XmppImManager sharedInstance] resource] forKey:@"resource"];
@@ -271,8 +271,8 @@
     QIMVerboseLog(@"单独设置远端个人配置信息 url : %@", destUrl);
 
     NSMutableDictionary *bodyProperties = [NSMutableDictionary dictionary];
-    [bodyProperties setQIMSafeObject:[QIMManager getLastUserName] forKey:@"username"];
-    [bodyProperties setQIMSafeObject:[[QIMManager sharedInstance] getDomain] forKey:@"host"];
+    [bodyProperties setQIMSafeObject:[STManager getLastUserName] forKey:@"username"];
+    [bodyProperties setQIMSafeObject:[[STManager sharedInstance] getDomain] forKey:@"host"];
     [bodyProperties setQIMSafeObject:[self transformClientConfigKeyWithType:type] forKey:@"key"];
     [bodyProperties setQIMSafeObject:subKey forKey:@"subkey"];
     [bodyProperties setQIMSafeObject:configValue forKey:@"value"];
@@ -312,25 +312,25 @@
 
     
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [cookieProperties setObject:@"application/json;" forKey:@"Content-type"];
     QIMVerboseLog(@"获取远端个人配置q_ckey : %@", requestHeaders);
 
     NSMutableDictionary *bodyProperties = [NSMutableDictionary dictionary];
-    [bodyProperties setQIMSafeObject:[QIMManager getLastUserName] forKey:@"username"];
-    [bodyProperties setQIMSafeObject:[[QIMManager sharedInstance] getDomain] forKey:@"host"];
+    [bodyProperties setQIMSafeObject:[STManager getLastUserName] forKey:@"username"];
+    [bodyProperties setQIMSafeObject:[[STManager sharedInstance] getDomain] forKey:@"host"];
     [bodyProperties setQIMSafeObject:@([[STDataMgr qimDB_SharedInstance] qimDB_getConfigVersion]) forKey:@"version"];
     NSData *requestData = [[QIMJSONSerializer sharedInstance] serializeObject:bodyProperties error:nil];
     QIMVerboseLog(@"获取远端个人配置Body体 : %@", [[QIMJSONSerializer sharedInstance] serializeObject:bodyProperties]);
     
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:destUrl]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:destUrl]];
     request.useCookiePersistence = NO;
     request.HTTPMethod = QIMHTTPMethodPOST;
     request.HTTPRequestHeaders = cookieProperties;
     request.HTTPBody = requestData;
     __weak __typeof(self) weakSelf = self;
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             __typeof(self) strongSelf = weakSelf;
             if (!strongSelf) {
@@ -364,9 +364,9 @@
 
 - (BOOL)isStarOrBlackContact:(NSString *)subkey ConfigKey:(NSString *)pkey {
     if([@"kStarContact" isEqualToString:pkey]){
-        return [[QIMManager sharedInstance] getClientConfigDeleteFlagWithType:QIMClientConfigTypeKStarContact WithSubKey:subkey] == 0;
+        return [[STManager sharedInstance] getClientConfigDeleteFlagWithType:QIMClientConfigTypeKStarContact WithSubKey:subkey] == 0;
     }else if([@"kBlackList" isEqualToString:pkey]){
-        return [[QIMManager sharedInstance] getClientConfigDeleteFlagWithType:QIMClientConfigTypeKBlackList WithSubKey:subkey] == 0;
+        return [[STManager sharedInstance] getClientConfigDeleteFlagWithType:QIMClientConfigTypeKBlackList WithSubKey:subkey] == 0;
     }else{
         return NO;
     }
@@ -374,9 +374,9 @@
 
 - (void)setStarOrblackContact:(NSString *)subkey ConfigKey:(NSString *)pkey Flag:(BOOL)value withCallback:(QIMKitUpdateRemoteClientConfig)callback {
     if([@"kStarContact" isEqualToString:pkey]){
-        [[QIMManager sharedInstance] updateRemoteClientConfigWithType:QIMClientConfigTypeKStarContact WithSubKey:subkey WithConfigValue:value?@"1":@"0" WithDel:!value withCallback:callback];
+        [[STManager sharedInstance] updateRemoteClientConfigWithType:QIMClientConfigTypeKStarContact WithSubKey:subkey WithConfigValue:value?@"1":@"0" WithDel:!value withCallback:callback];
     } else if([@"kBlackList" isEqualToString:pkey]){
-        [[QIMManager sharedInstance] updateRemoteClientConfigWithType:QIMClientConfigTypeKBlackList WithSubKey:subkey WithConfigValue:value?@"1":@"0" WithDel:!value withCallback:callback];
+        [[STManager sharedInstance] updateRemoteClientConfigWithType:QIMClientConfigTypeKBlackList WithSubKey:subkey WithConfigValue:value?@"1":@"0" WithDel:!value withCallback:callback];
     } else{
         
     }
@@ -401,15 +401,15 @@
         [dict setQIMSafeObject:configvalue forKey:@"value"];
         [deleteStickList addObject:dict];
     }
-    [[QIMManager sharedInstance] updateRemoteClientConfigWithType:configType BatchProcessConfigInfo:deleteStickList WithDel:!value withCallback:callback];
+    [[STManager sharedInstance] updateRemoteClientConfigWithType:configType BatchProcessConfigInfo:deleteStickList WithDel:!value withCallback:callback];
 }
 
 - (NSString *)getClientNotificationSoundName {
-    return [[QIMManager sharedInstance] getClientConfigInfoWithType:QIMClientConfigTypeKNotificationSound WithSubKey:@"ios"];
+    return [[STManager sharedInstance] getClientConfigInfoWithType:QIMClientConfigTypeKNotificationSound WithSubKey:@"ios"];
 }
 
 - (void)setClientNotificationSound:(NSString *)soundName withCallback:(QIMKitUpdateRemoteClientConfig)callback {
-    [[QIMManager sharedInstance] updateRemoteClientConfigWithType:QIMClientConfigTypeKNotificationSound WithSubKey:@"ios" WithConfigValue:soundName WithDel:NO withCallback:callback];
+    [[STManager sharedInstance] updateRemoteClientConfigWithType:QIMClientConfigTypeKNotificationSound WithSubKey:@"ios" WithConfigValue:soundName WithDel:NO withCallback:callback];
 }
 
 @end

@@ -9,7 +9,7 @@
 #import "QIMManager+Consult.h"
 #import <objc/runtime.h>
 
-@implementation QIMManager (Consult)
+@implementation STManager (Consult)
 
 #pragma mark - setter and getter
 
@@ -88,7 +88,7 @@
 
 - (void)getRemoteHotlineShopList {
     NSString *destUrl = [NSString stringWithFormat:@"%@/admin/outer/qtalk/getHotlineList", [[QIMNavConfigManager sharedInstance] newerHttpUrl]];
-    NSDictionary *body = @{@"username":[QIMManager getLastUserName], @"host":[[QIMManager sharedInstance] getDomain]};
+    NSDictionary *body = @{@"username":[STManager getLastUserName], @"host":[[STManager sharedInstance] getDomain]};
     NSData *bodyData = [[QIMJSONSerializer sharedInstance] serializeObject:body error:nil];
     __weak __typeof(self) weakSelf = self;
     [self sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:bodyData withSuccessCallBack:^(NSData *responseData) {
@@ -119,7 +119,7 @@
 - (void)getSeatSeStatusWithCallback:(QIMKitGetSeatSeStatusBlock)callback {
     NSString *urlHost = @"https://qcadmin.qunar.com";
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/seat/getSeatSeStatusWithSid.qunar", urlHost]];
-    NSString *postDataStr = [NSString stringWithFormat:@"qName=%@", [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString *postDataStr = [NSString stringWithFormat:@"qName=%@", [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSMutableData *postData = [NSMutableData dataWithData:[postDataStr dataUsingEncoding:NSUTF8StringEncoding]];
     [self sendTPPOSTFormUrlEncodedRequestWithUrl:url.absoluteString withRequestBodyData:postData withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *resDic = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
@@ -151,7 +151,7 @@
 - (void)updateSeatSeStatusWithShopId:(NSInteger)shopId WithStatus:(NSInteger)shopServiceStatus withCallBack:(QIMKitUpdateSeatSeStatusBlock)callback {
     NSString *urlHost = @"https://qcadmin.qunar.com";
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/api/seat/upSeatSeStatusWithSid.qunar", urlHost]];
-    NSString *postDataStr = [NSString stringWithFormat:@"qName=%@&st=%ld&sid=%ld", [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], shopServiceStatus, shopId];
+    NSString *postDataStr = [NSString stringWithFormat:@"qName=%@&st=%ld&sid=%ld", [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], shopServiceStatus, shopId];
     NSMutableData *postData = [NSMutableData dataWithData:[postDataStr dataUsingEncoding:NSUTF8StringEncoding]];
     [self sendTPPOSTFormUrlEncodedRequestWithUrl:url.absoluteString withRequestBodyData:postData withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *resDic = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
@@ -169,7 +169,7 @@
 - (NSDictionary *)userSeatStatusDict:(int)userStatus {
     
     NSDictionary *userStatusDict = nil;
-    for (NSDictionary *dict in [[QIMManager sharedInstance] availableUserSeatStatus]) {
+    for (NSDictionary *dict in [[STManager sharedInstance] availableUserSeatStatus]) {
         int status = [[dict objectForKey:@"Status"] intValue];
         if (userStatus == status) {
             userStatusDict = dict;
@@ -180,7 +180,7 @@
 
 - (NSString *)userStatusTitleWithStatus:(int)userStatus {
     NSString *statusTitlt = nil;
-    for (NSDictionary *dict in [[QIMManager sharedInstance] availableUserSeatStatus]) {
+    for (NSDictionary *dict in [[STManager sharedInstance] availableUserSeatStatus]) {
         int status = [[dict objectForKey:@"Status"] intValue];
         if (userStatus == status) {
             statusTitlt = [dict objectForKey:@"StatusTitle"];
@@ -204,7 +204,7 @@
             }
         });
     }
-    NSString *destUrl = [NSString stringWithFormat:@"%@/admin/api/seat/closeSession.qunar?userName=%@&seatName=%@&virtualname=%@", [[QIMNavConfigManager sharedInstance] javaurl], visitorId, [[QIMManager sharedInstance] getLastJid], shopId];
+    NSString *destUrl = [NSString stringWithFormat:@"%@/admin/api/seat/closeSession.qunar?userName=%@&seatName=%@&virtualname=%@", [[QIMNavConfigManager sharedInstance] javaurl], visitorId, [[STManager sharedInstance] getLastJid], shopId];
     [self sendTPPOSTRequestWithUrl:destUrl withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *responseDic = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         BOOL ret = [[responseDic objectForKey:@"ret"] boolValue];

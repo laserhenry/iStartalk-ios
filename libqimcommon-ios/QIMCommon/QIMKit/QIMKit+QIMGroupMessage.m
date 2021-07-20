@@ -15,21 +15,21 @@
 @implementation STKit (QIMGroupMessage)
 
 - (void)updateLastGroupMsgTime {
-    [[QIMManager sharedInstance] updateLastGroupMsgTime];
+    [[STManager sharedInstance] updateLastGroupMsgTime];
 }
 
 - (void)checkGroupChatMsg {
-    [[QIMManager sharedInstance] checkGroupChatMsg];
+    [[STManager sharedInstance] checkGroupChatMsg];
 }
 
 - (void)updateOfflineGroupMessages {
-    [[QIMManager sharedInstance] updateOfflineGroupMessages];
+    [[STManager sharedInstance] updateOfflineGroupMessages];
 }
 
 //更新群阅读指针，三次重试
 - (void)updateMucReadMark {
     
-    [[QIMManager sharedInstance] updateMucReadMark];
+    [[STManager sharedInstance] updateMucReadMark];
 }
 
 @end

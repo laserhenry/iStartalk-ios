@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 May. All rights reserved.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 #import "QIMManager+Calendar.h"
 #import "QIMManager+MiddleVirtualAccountManager.h"
 #import "QIMManager+ClientConfig.h"
@@ -78,24 +78,24 @@
 #import "QIMHttpRequestMonitor.h"
 #import "QIMWatchDog.h"
 
-static QIMManager *__IMManager = nil;
+static STManager *__IMManager = nil;
 
-@implementation QIMManager
+@implementation STManager
 
 + (instancetype)sharedInstance {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        __IMManager = [[QIMManager alloc] init];
+        __IMManager = [[STManager alloc] init];
         [__IMManager initManager];
     });
     if (!__IMManager) {
-        __IMManager = [[QIMManager alloc] init];
+        __IMManager = [[STManager alloc] init];
         [__IMManager initManager];
     }
     return __IMManager;
 }
 
-- (void)clearQIMManager {
+- (void)clearSTManager {
     _imageCachePath = nil;
     _downLoadFile = nil;
     _currentSessionUserId = nil;
@@ -323,12 +323,12 @@ static QIMManager *__IMManager = nil;
             }
         }
     }
-    _soundName = [[QIMManager sharedInstance] getClientNotificationSoundName];
+    _soundName = [[STManager sharedInstance] getClientNotificationSoundName];
 }
 
 @end
 
-@implementation QIMManager (RegisterEvent)
+@implementation STManager (RegisterEvent)
 
 - (void)refreshSwitchAccount:(NSDictionary *)notify {
     [self checkClientConfig];
@@ -361,7 +361,7 @@ static QIMManager *__IMManager = nil;
 - (void)loginComplate {
     QIMVerboseLog(@"初始化一下日志统计组件");
     Class autoTrackerDataManager = NSClassFromString(@"QIMAutoTrackerDataManager");
-    [autoTrackerDataManager performSelector:@selector(qimDB_sharedLogDBInstanceWithDBFullJid:) withObject:[[QIMManager sharedInstance] getLastJid]];
+    [autoTrackerDataManager performSelector:@selector(qimDB_sharedLogDBInstanceWithDBFullJid:) withObject:[[STManager sharedInstance] getLastJid]];
     
     NSOperationQueue *loginComplateQueue = [[NSOperationQueue alloc] init];
     [loginComplateQueue setMaxConcurrentOperationCount:1];
@@ -390,7 +390,7 @@ static QIMManager *__IMManager = nil;
     _latestSingleMessageFlag = YES;
     _latestSystemMessageFlag = YES;
     
-    [[STUserCacheManager sharedInstance] setCacheName:[[QIMManager sharedInstance] getLastJid]];
+    [[STUserCacheManager sharedInstance] setCacheName:[[STManager sharedInstance] getLastJid]];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         NSString *userName = [[STUserCacheManager sharedInstance] userObjectForKey:kLastUserId];
         NSString *userFullJid = [userName stringByAppendingFormat:@"@%@", [[XmppImManager sharedInstance] domain]];
@@ -407,13 +407,13 @@ static QIMManager *__IMManager = nil;
         [self addUserCacheWithUserId:userName WithUserFullJid:userFullJid WithNavDict:navDict];
         
         NSString *oldLoginUser = [[STUserCacheManager sharedInstance] userObjectForKey:@"LastestLoginUser"];
-        if (oldLoginUser && ![oldLoginUser isEqualToString:[[QIMManager sharedInstance] getLastJid]]) {
+        if (oldLoginUser && ![oldLoginUser isEqualToString:[[STManager sharedInstance] getLastJid]]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 QIMVerboseLog(@"抛出通知 : kNotifySwichUserSuccess");
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotifySwichUserSuccess object:@(YES)];
             });
         }
-        [[STUserCacheManager sharedInstance] setUserObject:[[QIMManager sharedInstance] getLastJid] forKey:@"LastestLoginUser"];
+        [[STUserCacheManager sharedInstance] setUserObject:[[STManager sharedInstance] getLastJid] forKey:@"LastestLoginUser"];
     });
     QIMVerboseLog(@"userDocuments : %@", UserDocumentsPath);
     QIMVerboseLog(@"userPath : %@", UserPath);
@@ -606,12 +606,12 @@ static QIMManager *__IMManager = nil;
         [self getRemoteMedalList];
         
         QIMVerboseLog(@"登录之后获取我的勋章列表");
-        [self getRemoteUserMedalListWithUserId:[[QIMManager sharedInstance] getLastJid]];
+        [self getRemoteUserMedalListWithUserId:[[STManager sharedInstance] getLastJid]];
     }
     if ([[STAppInfo sharedInstance] appType] == QIMProjectTypeQTalk) {
         QIMVerboseLog(@"登录之后请求一下骆驼帮未读数");
         
-        [[QIMManager sharedInstance] getExploreNotReaderCount];
+        [[STManager sharedInstance] getExploreNotReaderCount];
     }
     
     if ([[STAppInfo sharedInstance] appType] == QIMProjectTypeStartalk && [[STAppInfo sharedInstance] applicationState] == QIMApplicationStateLaunch) {
@@ -692,7 +692,7 @@ static QIMManager *__IMManager = nil;
             NSDictionary *valueDict = (NSDictionary *)valueArr;
             NSString *configKey = [self transformClientConfigKeyWithType:type];
             NSString *configValue = [[QIMJSONSerializer sharedInstance] serializeObject:valueDict];
-            NSString *subKey = [[QIMManager sharedInstance] getLastJid];
+            NSString *subKey = [[STManager sharedInstance] getLastJid];
             NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
             [dict setQIMSafeObject:configKey forKey:@"key"];
             [dict setQIMSafeObject:configValue forKey:@"value"];
@@ -704,7 +704,7 @@ static QIMManager *__IMManager = nil;
             NSDictionary *valueDict = (NSDictionary *)valueArr;
             NSString *configKey = [self transformClientConfigKeyWithType:type];
             NSString *configValue = [[QIMJSONSerializer sharedInstance] serializeObject:valueDict];
-            NSString *subKey = [[QIMManager sharedInstance] getLastJid];
+            NSString *subKey = [[STManager sharedInstance] getLastJid];
             NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
             [dict setQIMSafeObject:configKey forKey:@"key"];
             [dict setQIMSafeObject:configValue forKey:@"value"];
@@ -740,7 +740,7 @@ static QIMManager *__IMManager = nil;
 
 @end
 
-@implementation QIMManager (Common)
+@implementation STManager (Common)
 
 //获取组织架构
 - (void)updateOrganizationalStructure {
@@ -748,7 +748,7 @@ static QIMManager *__IMManager = nil;
     NSInteger userMaxVersion = [[STDataMgr qimDB_SharedInstance] qimDB_getUserCacheDataWithKey:kGetUpdateUsersV2Version withType:7];
     NSDictionary *versionDic = @{@"version":@(userMaxVersion)};
     NSData *versionData = [[QIMJSONSerializer sharedInstance] serializeObject:versionDic error:nil];
-    [[QIMManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:versionData withSuccessCallBack:^(NSData *responseData) {
+    [[STManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:versionData withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *responseDic = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         if ([responseDic isKindOfClass:[NSDictionary class]]) {
             BOOL ret = [[responseDic objectForKey:@"ret"] boolValue];
@@ -774,7 +774,7 @@ static QIMManager *__IMManager = nil;
 
 @end
 
-@implementation QIMManager (CommonConfig)
+@implementation STManager (CommonConfig)
 
 - (void)setIsMerchant:(BOOL)isMerchant {
     _isLoadMerchant = YES;
@@ -834,8 +834,8 @@ static QIMManager *__IMManager = nil;
  *  @return JID
  */
 - (NSString *)getLastJid {
-    if ([QIMManager getLastUserName]) {
-        return [[NSString stringWithFormat:@"%@@%@", [QIMManager getLastUserName], [[XmppImManager sharedInstance] domain]] lowercaseString];
+    if ([STManager getLastUserName]) {
+        return [[NSString stringWithFormat:@"%@@%@", [STManager getLastUserName], [[XmppImManager sharedInstance] domain]] lowercaseString];
     }
     return nil;
 }
@@ -849,7 +849,7 @@ static QIMManager *__IMManager = nil;
     
     NSString *myNickName = nil;
     if ([[STAppInfo sharedInstance] appType] == QIMProjectTypeQChat) {
-        myNickName = [QIMManager getLastUserName];
+        myNickName = [STManager getLastUserName];
     } else {
         
         NSDictionary *myProfile = [self getUserInfoByUserId:[self getLastJid]];
@@ -887,7 +887,7 @@ static QIMManager *__IMManager = nil;
                     time];
     
     NSString *newString = [NSString stringWithFormat:@"u=%@&d=%@&k=%@&t=%lld",
-                           [[QIMManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                           [[STManager getLastUserName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                            [[XmppImManager sharedInstance] domain],
                            [k2 qim_getMD5],
                            time];
@@ -914,7 +914,7 @@ static QIMManager *__IMManager = nil;
 
 - (NSHTTPCookie *)cookie {
     NSDictionary *properties = [[NSMutableDictionary alloc] init];
-    [properties setValue:[[QIMManager sharedInstance] thirdpartKeywithValue] forKey:NSHTTPCookieValue];
+    [properties setValue:[[STManager sharedInstance] thirdpartKeywithValue] forKey:NSHTTPCookieValue];
     [properties setValue:@"q_ckey" forKey:NSHTTPCookieName];
     [properties setValue:@".startalk.im" forKey:NSHTTPCookieDomain];
     [properties setValue:@"/" forKey:NSHTTPCookiePath];
@@ -1050,11 +1050,11 @@ static QIMManager *__IMManager = nil;
     
     NSString *url = [NSString stringWithFormat:@"%@/config/check_config.qunar", [[QIMNavConfigManager sharedInstance] newerHttpUrl]];
     NSURL *requestUrl = [NSURL URLWithString:url];
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:requestUrl];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:requestUrl];
     
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
 
-    NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [cookieProperties setObject:@"application/json;" forKey:@"Content-type"];
     
@@ -1070,7 +1070,7 @@ static QIMManager *__IMManager = nil;
     [request setHTTPBody:[[QIMJSONSerializer sharedInstance] serializeObject:bodyProperties error:nil]];
     [request setHTTPRequestHeaders:cookieProperties];
     
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             NSDictionary *resDic = [[QIMJSONSerializer sharedInstance] deserializeObject:response.data error:nil];
             if (resDic.count > 0) {
@@ -1194,7 +1194,7 @@ static QIMManager *__IMManager = nil;
 
 //新消息提醒
 - (BOOL)isNewMsgNotify {
-    BOOL state = [[QIMManager sharedInstance] getLocalMsgNotifySettingWithIndex:QIMMSGSETTINGSOUND_INAPP];
+    BOOL state = [[STManager sharedInstance] getLocalMsgNotifySettingWithIndex:QIMMSGSETTINGSOUND_INAPP];
     return state;
 }
 
@@ -1204,7 +1204,7 @@ static QIMManager *__IMManager = nil;
 
 //新消息震动
 - (BOOL)isNewMsgVibrate {
-    BOOL state = [[QIMManager sharedInstance] getLocalMsgNotifySettingWithIndex:QIMMSGSETTINGVIBRATE_INAPP];
+    BOOL state = [[STManager sharedInstance] getLocalMsgNotifySettingWithIndex:QIMMSGSETTINGVIBRATE_INAPP];
     return state;
 }
 
@@ -1476,7 +1476,7 @@ static QIMManager *__IMManager = nil;
     
     NSDictionary *dict = @{@"topType":@(1), @"chatType":@(chatType)};
     NSString *value = [[QIMJSONSerializer sharedInstance] serializeObject:dict];
-    [[QIMManager sharedInstance] updateRemoteClientConfigWithType:QIMClientConfigTypeKStickJidDic WithSubKey:combineJid WithConfigValue:value WithDel:NO withCallback:callback];
+    [[STManager sharedInstance] updateRemoteClientConfigWithType:QIMClientConfigTypeKStickJidDic WithSubKey:combineJid WithConfigValue:value WithDel:NO withCallback:callback];
 }
 
 - (void)removeStickWithCombineJid:(NSString *)combineJid WithChatType:(ChatType)chatType withCallback:(QIMKitUpdateRemoteClientConfig)callback {
@@ -1495,7 +1495,7 @@ static QIMManager *__IMManager = nil;
     __block BOOL result = NO;
     NSInteger stickState = [[self.stickJidDic objectForKey:combineJid] integerValue];
     if (stickState == 0) {
-        NSInteger tempStickState = [[QIMManager sharedInstance] getClientConfigDeleteFlagWithType:QIMClientConfigTypeKStickJidDic WithSubKey:combineJid];
+        NSInteger tempStickState = [[STManager sharedInstance] getClientConfigDeleteFlagWithType:QIMClientConfigTypeKStickJidDic WithSubKey:combineJid];
         if (tempStickState == 0) {
             stickState = YES;
             dispatch_block_t block = ^{
@@ -1528,7 +1528,7 @@ static QIMManager *__IMManager = nil;
 
 - (NSDictionary *)stickList {
     
-    return [[QIMManager sharedInstance] getClientConfigDicWithType:QIMClientConfigTypeKStickJidDic];
+    return [[STManager sharedInstance] getClientConfigDicWithType:QIMClientConfigTypeKStickJidDic];
 }
 
 - (void)setMsgNotifySettingWithIndex:(QIMMSGSETTING)setting WithSwitchOn:(BOOL)switchOn withCallBack:(QIMKitSetMsgNotifySettingSuccessBlock)callback{
@@ -1543,7 +1543,7 @@ http://url/push/qtapi/token/setmsgsettings.qunar?username=hubo.hu&domain=ejabhos
     index=1//开关标记
     status=0//开关状态  0：关 1、开
 */
-    NSString *str = [NSString stringWithFormat:@"%@/push/qtapi/token/setmsgsettings.qunar?username=%@&domain=%@&os=ios&version=%@&index=%@&status=%@", [[QIMNavConfigManager sharedInstance] javaurl], [QIMManager getLastUserName], [[QIMNavConfigManager sharedInstance] domain], [[STAppInfo sharedInstance] AppBuildVersion], @(setting), @(switchOn)];
+    NSString *str = [NSString stringWithFormat:@"%@/push/qtapi/token/setmsgsettings.qunar?username=%@&domain=%@&os=ios&version=%@&index=%@&status=%@", [[QIMNavConfigManager sharedInstance] javaurl], [STManager getLastUserName], [[QIMNavConfigManager sharedInstance] domain], [[STAppInfo sharedInstance] AppBuildVersion], @(setting), @(switchOn)];
     [self sendTPGetRequestWithUrl:str withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         BOOL ret = [[result objectForKey:@"ret"] boolValue];
@@ -1579,14 +1579,14 @@ http://url/push/qtapi/token/setmsgsettings.qunar?username=hubo.hu&domain=ejabhos
 }
 
 - (void)getMsgNotifyRemoteSettings {
-    NSString *str = [NSString stringWithFormat:@"%@/push/qtapi/token/getmsgsettings.qunar?username=%@&domain=%@&os=ios&version=%@", [[QIMNavConfigManager sharedInstance] javaurl], [QIMManager getLastUserName], [[QIMNavConfigManager sharedInstance] domain], [[STAppInfo sharedInstance] AppBuildVersion]];
+    NSString *str = [NSString stringWithFormat:@"%@/push/qtapi/token/getmsgsettings.qunar?username=%@&domain=%@&os=ios&version=%@", [[QIMNavConfigManager sharedInstance] javaurl], [STManager getLastUserName], [[QIMNavConfigManager sharedInstance] domain], [[STAppInfo sharedInstance] AppBuildVersion]];
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:str]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:str]];
     [request setHTTPRequestHeaders:cookieProperties];
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 NSData *responseData = response.data;
@@ -1609,8 +1609,8 @@ http://url/push/qtapi/token/setmsgsettings.qunar?username=hubo.hu&domain=ejabhos
 
 - (void)sendQChatOnlineNotification {
     NSString *str = [NSString stringWithFormat:@"%@/%@", [[QIMNavConfigManager sharedInstance] qcHost], @"css/online"];
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:str]];
-    [QIMHTTPClient sendRequest:request complete:nil failure:nil];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:str]];
+    [STHTTPClient sendRequest:request complete:nil failure:nil];
 }
 
 - (void)sendNoPush {
@@ -1659,7 +1659,7 @@ http://url/push/qtapi/token/setmsgsettings.qunar?username=hubo.hu&domain=ejabhos
 }
 
 - (void)sendPushTokenWithMyToken:(NSString *)myToken WithDeleteFlag:(BOOL)deleteFlag withCallback:(QIMKitRegisterPushTokenSuccessBlock)callback {
-    if ([QIMManager getLastUserName].length > 0) {
+    if ([STManager getLastUserName].length > 0) {
         if (self.remoteKey.length <= 0) {
             [self updateRemoteLoginKey];
         }
@@ -1690,9 +1690,9 @@ http://url/push/qtapi/token/setmsgsettings.qunar?username=hubo.hu&domain=ejabhos
     } else {
         updateAppVersion = [[[STAppInfo sharedInstance] AppBuildVersion] integerValue];
     }
-    NSString *destUrl = [NSString stringWithFormat:@"%@/nck/client/get_version.qunar?clientname=%@&ver=%ld&u=%@&d=%@", [[QIMNavConfigManager sharedInstance] newerHttpUrl], @"qtalk_ios", updateAppVersion, [QIMManager getLastUserName], [[QIMManager sharedInstance] getDomain]];
+    NSString *destUrl = [NSString stringWithFormat:@"%@/nck/client/get_version.qunar?clientname=%@&ver=%ld&u=%@&d=%@", [[QIMNavConfigManager sharedInstance] newerHttpUrl], @"qtalk_ios", updateAppVersion, [STManager getLastUserName], [[STManager sharedInstance] getDomain]];
 
-    [[QIMManager sharedInstance] sendTPGetRequestWithUrl:destUrl withSuccessCallBack:^(NSData *responseData) {
+    [[STManager sharedInstance] sendTPGetRequestWithUrl:destUrl withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *responseDic = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         BOOL ret = [[responseDic objectForKey:@"ret"] boolValue];
         NSInteger errcode = [[responseDic objectForKey:@"errcode"] integerValue];

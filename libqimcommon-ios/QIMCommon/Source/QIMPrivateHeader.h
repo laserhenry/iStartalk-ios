@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import "QIMManager.h"
+#import "STManager.h"
 #import "QIMManager+Calendar.h"
 #import "QIMManager+MiddleVirtualAccountManager.h"
 #import "QIMManager+WorkFeed.h"

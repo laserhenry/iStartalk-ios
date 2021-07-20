@@ -7,8 +7,8 @@
 
 #import "QIMQRCodeLoginManager.h"
 #import "QIMJSONSerializer.h"
-#import "QIMHTTPRequest.h"
-#import "QIMHTTPClient.h"
+#import "STHTTPRequest.h"
+#import "STHTTPClient.h"
 
 static QIMQRCodeLoginManager *__qrcodeLoginManager = nil;
 @interface QIMQRCodeLoginManager ()
@@ -63,11 +63,11 @@ static QIMQRCodeLoginManager *__qrcodeLoginManager = nil;
     NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[STKit sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:[NSURL URLWithString:confirmURL]];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:[NSURL URLWithString:confirmURL]];
     [request setHTTPMethod:QIMHTTPMethodPOST];
     [request setHTTPRequestHeaders:cookieProperties];
     [request setHTTPBody:postData];
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             QIMVerboseLog(@"确认扫码操作");
         }

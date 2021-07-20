@@ -16,11 +16,11 @@
 @implementation STKit (QIMMiddleVirtualAccountManager)
 
 - (NSArray *)getMiddleVirtualAccounts {
-    return [[QIMManager sharedInstance] getMiddleVirtualAccounts];
+    return [[STManager sharedInstance] getMiddleVirtualAccounts];
 }
 
 - (BOOL)isMiddleVirtualAccountWithJid:(NSString *)jid {
-    return [[QIMManager sharedInstance] isMiddleVirtualAccountWithJid:jid];
+    return [[STManager sharedInstance] isMiddleVirtualAccountWithJid:jid];
 }
 
 @end

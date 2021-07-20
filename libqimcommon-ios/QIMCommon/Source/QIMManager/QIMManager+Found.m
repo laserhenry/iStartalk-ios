@@ -8,24 +8,24 @@
 
 #import "QIMManager+Found.h"
 
-@implementation QIMManager (Found)
+@implementation STManager (Found)
 
 - (void)getRemoteFoundNavigation {
     NSString *destUrl = [[QIMNavConfigManager sharedInstance] foundConfigUrl];
     
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [cookieProperties setObject:@"application/json;" forKey:@"Content-type"];
     QIMVerboseLog(@"获取发现页应用列表q_ckey : %@", requestHeaders);
     
     NSMutableDictionary *bodyProperties = [NSMutableDictionary dictionary];
-    long long version = [[[STDataMgr qimDB_SharedInstance] qimDB_getConfigInfoWithConfigKey:[self transformClientConfigKeyWithType:QIMClientConfigTypeKLocalTripUpdateTime] WithSubKey:[[QIMManager sharedInstance] getLastJid] WithDeleteFlag:NO] longLongValue];
+    long long version = [[[STDataMgr qimDB_SharedInstance] qimDB_getConfigInfoWithConfigKey:[self transformClientConfigKeyWithType:QIMClientConfigTypeKLocalTripUpdateTime] WithSubKey:[[STManager sharedInstance] getLastJid] WithDeleteFlag:NO] longLongValue];
     
     [bodyProperties setQIMSafeObject:@([[[STAppInfo sharedInstance] AppBuildVersion] integerValue]) forKey:@"version"];
     [bodyProperties setQIMSafeObject:@"IOS" forKey:@"platform"];
     
-    [[QIMManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:[[QIMJSONSerializer sharedInstance] serializeObject:bodyProperties error:nil] withSuccessCallBack:^(NSData *responseData) {
+    [[STManager sharedInstance] sendTPPOSTRequestWithUrl:destUrl withRequestBodyData:[[QIMJSONSerializer sharedInstance] serializeObject:bodyProperties error:nil] withSuccessCallBack:^(NSData *responseData) {
         NSDictionary *responseDic = [[QIMJSONSerializer sharedInstance] deserializeObject:responseData error:nil];
         BOOL ret = [[responseDic objectForKey:@"ret"] boolValue];
         NSInteger errcode = [[responseDic objectForKey:@"errcode"] integerValue];

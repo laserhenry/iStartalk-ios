@@ -11,7 +11,7 @@
 #import <objc/runtime.h>
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (NetWork)
+@implementation STManager (NetWork)
 
 - (void)setAppWorkState:(AppWorkState)appWorkState {
     NSNumber *appWorkStateNumber = [NSNumber numberWithInteger:appWorkState];

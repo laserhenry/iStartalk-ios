@@ -9,7 +9,7 @@
 #import "QIMManager+QuickReply.h"
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (QuickReply)
+@implementation STManager (QuickReply)
 
 - (void)getRemoteQuickReply {
     
@@ -17,22 +17,22 @@
     NSURL *destUrl = [NSURL URLWithString:url];
     
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithCapacity:4];
-    [param setQIMSafeObject:[QIMManager getLastUserName] forKey:@"username"];
-    [param setQIMSafeObject:[[QIMManager sharedInstance] getDomain] forKey:@"host"];
+    [param setQIMSafeObject:[STManager getLastUserName] forKey:@"username"];
+    [param setQIMSafeObject:[[STManager sharedInstance] getDomain] forKey:@"host"];
     [param setQIMSafeObject:@([[STDataMgr qimDB_SharedInstance] qimDB_getQuickReplyGroupVersion]) forKey:@"groupver"];
     [param setQIMSafeObject:@([[STDataMgr qimDB_SharedInstance] qimDB_getQuickReplyContentVersion]) forKey:@"contentver"];
     NSData *requestData = [[QIMJSONSerializer sharedInstance] serializeObject:param error:nil];
 
     NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-    NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[QIMManager sharedInstance] thirdpartKeywithValue]];
+    NSString *requestHeaders = [NSString stringWithFormat:@"q_ckey=%@", [[STManager sharedInstance] thirdpartKeywithValue]];
     [cookieProperties setObject:requestHeaders forKey:@"Cookie"];
     [cookieProperties setObject:@"application/json;" forKey:@"Content-type"];
 
-    QIMHTTPRequest *request = [[QIMHTTPRequest alloc] initWithURL:destUrl];
+    STHTTPRequest *request = [[STHTTPRequest alloc] initWithURL:destUrl];
     [request setHTTPMethod:QIMHTTPMethodPOST];
     [request setHTTPBody:requestData];
     [request setHTTPRequestHeaders:cookieProperties];
-    [QIMHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
+    [STHTTPClient sendRequest:request complete:^(QIMHTTPResponse *response) {
         if (response.code == 200) {
             NSDictionary *result = [[QIMJSONSerializer sharedInstance] deserializeObject:response.data error:nil];
             BOOL ret = [[result objectForKey:@"ret"] boolValue];

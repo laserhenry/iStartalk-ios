@@ -9,8 +9,8 @@
 #ifndef QIMNetwork_h
 #define QIMNetwork_h
 
-#import "QIMHTTPClient.h"
-#import "QIMHTTPRequest.h"
+#import "STHTTPClient.h"
+#import "STHTTPRequest.h"
 #import "QIMHTTPResponse.h"
 #import "QIMHTTPUploadComponent.h"
 

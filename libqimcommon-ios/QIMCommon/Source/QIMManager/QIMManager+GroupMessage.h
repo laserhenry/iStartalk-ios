@@ -5,9 +5,9 @@
 //  Created by 李露 on 2018/4/12.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 
-@interface QIMManager (GroupMessage)
+@interface STManager (GroupMessage)
 
 - (void)updateLastGroupMsgTime;
 

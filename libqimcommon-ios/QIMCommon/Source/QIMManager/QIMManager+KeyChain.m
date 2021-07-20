@@ -8,10 +8,10 @@
 #import "QIMManager+KeyChain.h"
 #import "QIMPrivateHeader.h"
 
-@implementation QIMManager (KeyChain)
+@implementation STManager (KeyChain)
  
 + (void)updateSessionListToKeyChain {
-    NSArray *itemArray = [[QIMManager sharedInstance] getFullSessionList];
+    NSArray *itemArray = [[STManager sharedInstance] getFullSessionList];
     if (itemArray.count > 0) {
         __block id tempDic = nil;
         __block NSMutableArray *temp = [NSMutableArray arrayWithArray:itemArray];

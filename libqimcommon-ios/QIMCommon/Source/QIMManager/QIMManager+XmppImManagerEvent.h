@@ -5,9 +5,9 @@
 //  Created by 李露 on 2018/4/2.
 //
 
-#import "QIMManager.h"
+#import "STManager.h"
 
-@interface QIMManager (XmppImManagerEvent)
+@interface STManager (XmppImManagerEvent)
 
 - (void)registerEvent;
 
