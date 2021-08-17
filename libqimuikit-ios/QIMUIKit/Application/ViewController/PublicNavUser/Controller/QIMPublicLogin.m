@@ -336,9 +336,9 @@ static const int companyTag = 10001;
     //
     // some special code to let appstore user login for App Store test
     //
-    if([[self.userNameTextField.text lowercaseString] isEqualToString:@"appstore"]){
+    //if([[self.userNameTextField.text lowercaseString] isEqualToString:@"appstore"]){
         [self updateLoginEnable:YES];
-    }
+    //}
     return YES;
 }
 
