@@ -75,6 +75,15 @@
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self becomeFirstResponder];
+
+    //disable transparent feature
+    if (@available(iOS 13, *)) {
+        UINavigationBarAppearance *navigationBarAppearance = [UINavigationBarAppearance new];
+        [navigationBarAppearance configureWithOpaqueBackground];
+        self.navigationBar.standardAppearance = navigationBarAppearance;
+        self.navigationBar.scrollEdgeAppearance = navigationBarAppearance;
+        self.navigationBar.compactAppearance = navigationBarAppearance;
+    }
 }
 
 - (void)goBack:(id)sender{
