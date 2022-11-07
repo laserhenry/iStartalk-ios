@@ -15,7 +15,7 @@
 - (instancetype)initWithURL:(NSURL *)url {
     if (self = [super init]) {
         _url = url;
-        _timeoutInterval = 60;
+        _timeoutInterval = 5.0;
         _HTTPMethod = QIMHTTPMethodGET;
     }
     return self;
@@ -30,7 +30,7 @@
     if (self) {
         _httpRequestType = QIMHTTPRequestTypeNormal;
         _HTTPMethod = QIMHTTPMethodPOST;
-        _timeoutInterval = 60.0;
+        _timeoutInterval = 5.0;
         _retryCount = 3;
         _requestSerializer = QIMHttpRequestSerializerJSON;
         _responseSerializer = QIMHttpResponseSerializerJSON;
