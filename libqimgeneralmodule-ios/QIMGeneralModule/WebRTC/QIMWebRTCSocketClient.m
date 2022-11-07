@@ -259,7 +259,7 @@ NSString *NSStringFromWebRTCRoomEvent(WebRTCRoomEvent value) {
     [pingDic setObject:@{@"interval": @(450000)} forKey:@"params"];
     NSString *message = [[QIMJSONSerializer sharedInstance] serializeObject:pingDic];
     if ([self.webSocket readyState] == SR_OPEN) {
-        [self.webSocket sendPing:[message dataUsingEncoding:NSUTF8StringEncoding]];
+        [self.webSocket sendPing:[message dataUsingEncoding:NSUTF8StringEncoding] error: nil];
         [self performSelector:@selector(sendPing) withObject:nil afterDelay:30];
     }
 }

@@ -6,7 +6,7 @@
 //
 //
 
-#import "MJRefreshBackFooter.h"
+#import "MJRefresh.h"
 
 @interface TodoListUpArrowFooter : MJRefreshBackFooter
 

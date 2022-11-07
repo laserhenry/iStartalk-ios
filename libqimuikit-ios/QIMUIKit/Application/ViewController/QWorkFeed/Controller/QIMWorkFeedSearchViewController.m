@@ -16,7 +16,7 @@
 #import "QIMWorkFeedDetailViewController.h"
 #import "YYModel.h"
 #import "MBProgressHUD.h"
-#import "MJRefreshAutoNormalFooter.h"
+#import "MJRefresh.h"
 
 static const NSInteger searchMinCharacterCount = 2;
 @interface QIMWorkFeedSearchField : UITextField
