@@ -1661,6 +1661,10 @@ http://url/push/qtapi/token/setmsgsettings.qunar?username=hubo.hu&domain=ejabhos
 - (void)sendPushTokenWithMyToken:(NSString *)myToken WithDeleteFlag:(BOOL)deleteFlag withCallback:(QIMKitRegisterPushTokenSuccessBlock)callback {
     if ([STManager getLastUserName].length > 0) {
         if (self.remoteKey.length <= 0) {
+            if(deleteFlag){
+                callback(NO);
+                return;
+            }
             [self updateRemoteLoginKey];
         }
         if (self.remoteKey.length > 0) {
