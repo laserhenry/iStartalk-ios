@@ -32,7 +32,6 @@
         _progreeHUD.minSize = CGSizeMake(120, 120);
         _progreeHUD.minShowTime = 1.0f;
         [_progreeHUD setLabelText:@""];
-        [[UIApplication sharedApplication].keyWindow addSubview:_progreeHUD];
     }
     [_progreeHUD show:YES];
     return _progreeHUD;
@@ -41,6 +40,7 @@
 - (void)showProgressHUDWithTest:(NSString *)text {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.progreeHUD setDetailsLabelText:text];
+        [[UIApplication sharedApplication].keyWindow addSubview:_progreeHUD];
         [self.progreeHUD show:YES];
     });
 }

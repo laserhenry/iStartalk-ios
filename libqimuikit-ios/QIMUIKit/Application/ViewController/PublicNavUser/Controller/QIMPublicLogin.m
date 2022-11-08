@@ -702,7 +702,7 @@ static const int companyTag = 10001;
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:errmsg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
                                 [alertView show];
-                                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                [[QIMProgressHUD sharedInstance] closeHUD];
                             });
                         }
                     }
@@ -710,9 +710,13 @@ static const int companyTag = 10001;
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [weakSelf showNetWorkUnableAlert];
                         });
+                    [[QIMProgressHUD sharedInstance] closeHUD];
                     }
                 }];
-            }}];
+                }else{
+                    [[QIMProgressHUD sharedInstance] closeHUD];
+                }
+            }];
 
 
         } else {
@@ -742,13 +746,14 @@ static const int companyTag = 10001;
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:errmsg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
                                     [alertView show];
-                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                    [[QIMProgressHUD sharedInstance] closeHUD];
                                 });
                             }
                         } else {
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [weakSelf showNetWorkUnableAlert];
                             });
+                            [[QIMProgressHUD sharedInstance] closeHUD];
                         }
                     }];
                 }];
