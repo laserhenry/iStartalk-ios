@@ -1371,6 +1371,7 @@ static NSMutableDictionary *__checkGroupMembersCardDic = nil;
                 [[[QIMIPadWindowManager sharedInstance] detailVC] presentViewController:nav animated:YES completion:nil];
 #endif
             } else {
+                nav.modalPresentationStyle = UIModalPresentationFullScreen;
                 [self presentViewController:nav animated:YES completion:nil];
             }
         
@@ -1450,6 +1451,7 @@ static NSMutableDictionary *__checkGroupMembersCardDic = nil;
                     [[[QIMIPadWindowManager sharedInstance] detailVC] presentViewController:userLct animated:YES completion:nil];
 #endif
                 } else {
+                    userLct.modalPresentationStyle = UIModalPresentationFullScreen;
                     [self.navigationController presentViewController:userLct animated:YES completion:nil];
                 }
                 /* mark by newipad

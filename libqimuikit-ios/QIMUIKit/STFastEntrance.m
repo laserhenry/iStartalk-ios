@@ -915,7 +915,15 @@ static STFastEntrance *_sharedInstance = nil;
 #else
         UIViewController *reactVC = [[STFastEntrance sharedInstance] getRNSearchVC];
         UINavigationController *reactNav = [[UINavigationController alloc] initWithRootViewController:reactVC];
-        [navVC presentViewController:reactNav animated:NO completion:nil];
+        if (@available(iOS 13, *)) {
+            UINavigationBarAppearance *navigationBarAppearance = [UINavigationBarAppearance new];
+            [navigationBarAppearance configureWithOpaqueBackground];
+            reactNav.navigationBar.standardAppearance = navigationBarAppearance;
+            reactNav.navigationBar.scrollEdgeAppearance = navigationBarAppearance;
+            reactNav.navigationBar.compactAppearance = navigationBarAppearance;
+        }
+        reactNav.modalPresentationStyle = UIModalPresentationFullScreen;
+        [navVC presentViewController:reactNav animated:YES completion:nil];
 #endif
     });
 #endif

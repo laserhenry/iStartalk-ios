@@ -1860,9 +1860,7 @@ static dispatch_once_t __publicNumberTextBarOnceToken;
                 [[[QIMIPadWindowManager sharedInstance] detailVC] presentViewController:picker animated:YES completion:nil];
 #endif
             } else {
-                if ([[STKit sharedInstance] getIsIpad] == YES) {
-                    picker.modalPresentationStyle = UIModalPresentationCurrentContext;
-                }
+                picker.modalPresentationStyle = UIModalPresentationFullScreen;
                 [[[UIApplication sharedApplication] visibleViewController] presentViewController:picker animated:YES completion:nil];
             }
         });
@@ -1883,6 +1881,7 @@ static dispatch_once_t __publicNumberTextBarOnceToken;
             CameraViewController * cameraVC = [[CameraViewController alloc] init];
             cameraVC.delegate = self;
             QIMNavController * nav = [[QIMNavController alloc] initWithRootViewController:cameraVC];
+            nav.modalPresentationStyle = UIModalPresentationFullScreen;
             [(UIViewController *)self.delegate presentViewController:nav animated:YES completion:nil];
         });
     };

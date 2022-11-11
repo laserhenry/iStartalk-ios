@@ -1887,6 +1887,7 @@
                 [[[QIMIPadWindowManager sharedInstance] detailVC] presentViewController:nav animated:YES completion:nil];
 #endif
             } else {
+                nav.modalPresentationStyle = UIModalPresentationFullScreen;
                 [self presentViewController:nav animated:YES completion:nil];
             }
         } else if ([trId isEqualToString:QIMTextBarExpandViewItem_ChatTransfer]) {
@@ -1944,6 +1945,7 @@
                     [[[QIMIPadWindowManager sharedInstance] detailVC] presentViewController:userLct animated:YES completion:nil];
 #endif
                 } else {
+                    userLct.modalPresentationStyle = UIModalPresentationFullScreen;
                     [self.navigationController presentViewController:userLct animated:YES completion:nil];
                 }
             };

@@ -804,7 +804,7 @@ static dispatch_once_t __onceMainToken;
 
         //导航中返回RNMineView == NO，展示Native界面
         QIMVerboseLog(@"RNMineView : %d", [[STKit sharedInstance] qimNav_RNMineView]);
-        if ([[STKit sharedInstance] qimNav_RNMineView] == NO) {
+        if ([[STKit sharedInstance] qimNav_RNMineView] == YES) {
             QIMVerboseLog(@"打开Native 我的页面");
             QIMMineTableView *mineNativeView = [[QIMMineTableView alloc] initWithFrame:CGRectMake(0, 0, _contentView.width, _contentView.height)];
             [mineNativeView setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
