@@ -1,0 +1,715 @@
+PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - AlipaySDK-iOS (15.8.11)
+  - AMap3DMap (8.0.0):
+    - AMapFoundation (~> 1.6.8)
+  - AMapFoundation (1.6.9)
+  - AMapLocation (2.8.0):
+    - AMapFoundation (~> 1.6.9)
+  - AMapSearch (9.2.0):
+    - AMapFoundation (~> 1.6.9)
+  - AvoidCrash (2.5.2)
+  - boost-for-react-native (1.63.0)
+  - CocoaAsyncSocket (7.6.5)
+  - CocoaLumberjack (3.7.4):
+    - CocoaLumberjack/Core (= 3.7.4)
+  - CocoaLumberjack/Core (3.7.4)
+  - DACircularProgress (2.3.1)
+  - DoubleConversion (1.1.5)
+  - FDFullscreenPopGesture (1.1)
+  - Folly (2016.09.26.00):
+    - boost-for-react-native
+    - DoubleConversion
+    - glog
+  - glog (0.3.4)
+  - GoogleWebRTC (1.1.26989)
+  - LCActionSheet (3.5.4):
+    - Masonry (~> 1.1.0)
+  - Masonry (1.1.0)
+  - MBProgressHUD (0.9.2)
+  - MDHTMLLabel (1.0.2)
+  - MGSwipeTableCell (1.6.11)
+  - MJRefresh (3.7.5)
+  - MMLayout (0.3.0)
+  - MMMarkdown (0.5.5)
+  - ProtocolBuffers (1.9.11)
+  - QIMCommon (4.0.52):
+    - AvoidCrash
+    - CocoaAsyncSocket
+    - CocoaLumberjack
+    - ProtocolBuffers
+    - QIMCommon/Base (= 4.0.52)
+    - QIMCommon/QIMPrivatePBCommon (= 4.0.52)
+    - QIMOpenSSL
+    - UICKeyChainStore
+    - WCDB
+    - YYCache
+    - YYDispatchQueuePool
+    - YYModel
+  - QIMCommon/Base (4.0.52):
+    - AvoidCrash
+    - CocoaAsyncSocket
+    - CocoaLumberjack
+    - ProtocolBuffers
+    - QIMOpenSSL
+    - UICKeyChainStore
+    - WCDB
+    - YYCache
+    - YYDispatchQueuePool
+    - YYModel
+  - QIMCommon/QIMPrivatePBCommon (4.0.52):
+    - AvoidCrash
+    - CocoaAsyncSocket
+    - CocoaLumberjack
+    - ProtocolBuffers
+    - QIMOpenSSL
+    - UICKeyChainStore
+    - WCDB
+    - YYCache
+    - YYDispatchQueuePool
+    - YYModel
+  - QIMCommonCategories (4.0.55)
+  - QIMDataBase (4.0.55)
+  - QIMGeneralModule (4.0.52):
+    - Masonry
+    - QIMGeneralModule/AutoMonitor (= 4.0.52)
+    - QIMGeneralModule/Calendars (= 4.0.52)
+    - QIMGeneralModule/Log (= 4.0.52)
+    - QIMGeneralModule/Note (= 4.0.52)
+    - QIMGeneralModule/Notify (= 4.0.52)
+    - QIMGeneralModule/WebRTC (= 4.0.52)
+    - SCLAlertView-Objective-C
+  - QIMGeneralModule/AutoMonitor (4.0.52):
+    - Masonry
+    - SCLAlertView-Objective-C
+  - QIMGeneralModule/Calendars (4.0.52):
+    - Masonry
+    - SCLAlertView-Objective-C
+  - QIMGeneralModule/Log (4.0.52):
+    - Masonry
+    - SCLAlertView-Objective-C
+  - QIMGeneralModule/Note (4.0.52):
+    - Masonry
+    - SCLAlertView-Objective-C
+  - QIMGeneralModule/Notify (4.0.52):
+    - Masonry
+    - SCLAlertView-Objective-C
+  - QIMGeneralModule/WebRTC (4.0.52):
+    - GoogleWebRTC (= 1.1.26989)
+    - Masonry
+    - SCLAlertView-Objective-C
+    - SocketRocket
+  - QIMKitVendor (4.0.53):
+    - CocoaLumberjack
+    - QIMKitVendor/Audio (= 4.0.53)
+    - QIMKitVendor/DES (= 4.0.53)
+    - QIMKitVendor/DOG (= 4.0.53)
+    - QIMKitVendor/GCD (= 4.0.53)
+    - QIMKitVendor/Helper (= 4.0.53)
+    - QIMKitVendor/HTTP (= 4.0.53)
+    - QIMKitVendor/JSON (= 4.0.53)
+    - QIMKitVendor/libwebp (= 4.0.53)
+    - QIMKitVendor/PinYin (= 4.0.53)
+    - QIMKitVendor/PublicRedefineHeader (= 4.0.53)
+    - QIMKitVendor/UUID (= 4.0.53)
+    - QIMKitVendor/Zip (= 4.0.53)
+    - Reachability
+    - ZipArchive
+  - QIMKitVendor/Audio (4.0.53):
+    - CocoaLumberjack
+    - QIMKitVendor/PublicRedefineHeader
+    - Reachability
+    - ZipArchive
+  - QIMKitVendor/DES (4.0.53):
+    - CocoaLumberjack
+    - QIMKitVendor/PublicRedefineHeader
+    - Reachability
+    - ZipArchive
+  - QIMKitVendor/DOG (4.0.53):
+    - CocoaLumberjack
+    - QIMKitVendor/PublicRedefineHeader
+    - Reachability
+    - ZipArchive
+  - QIMKitVendor/GCD (4.0.53):
+    - CocoaLumberjack
+    - QIMKitVendor/PublicRedefineHeader
+    - Reachability
+    - ZipArchive
+  - QIMKitVendor/Helper (4.0.53):
+    - CocoaLumberjack
+    - QIMKitVendor/PublicRedefineHeader
+    - Reachability
+    - ZipArchive
+  - QIMKitVendor/HTTP (4.0.53):
+    - AFNetworking
+    - CocoaLumberjack
+    - QIMKitVendor/DOG
+    - QIMKitVendor/JSON
+    - QIMKitVendor/PublicRedefineHeader
+    - Reachability
+    - ZipArchive
+  - QIMKitVendor/JSON (4.0.53):
+    - CocoaLumberjack
+    - QIMKitVendor/PublicRedefineHeader
+    - Reachability
+    - ZipArchive
+  - QIMKitVendor/libwebp (4.0.53):
+    - CocoaLumberjack
+    - Reachability
+    - ZipArchive
+  - QIMKitVendor/PinYin (4.0.53):
+    - CocoaLumberjack
+    - QIMKitVendor/PublicRedefineHeader
+    - Reachability
+    - ZipArchive
+  - QIMKitVendor/PublicRedefineHeader (4.0.53):
+    - CocoaLumberjack
+    - Reachability
+    - ZipArchive
+  - QIMKitVendor/UUID (4.0.53):
+    - CocoaLumberjack
+    - QIMKitVendor/PublicRedefineHeader
+    - Reachability
+    - UICKeyChainStore
+    - ZipArchive
+  - QIMKitVendor/Zip (4.0.53):
+    - CocoaLumberjack
+    - QIMKitVendor/PublicRedefineHeader
+    - Reachability
+    - ZipArchive
+  - QIMOpenSSL (1.0.4)
+  - QIMReactNativeLibrary (4.0.55):
+    - QIMReactNativeLibrary/ART (= 4.0.55)
+    - QIMReactNativeLibrary/Core (= 4.0.55)
+    - QIMReactNativeLibrary/CxxBridge (= 4.0.55)
+    - QIMReactNativeLibrary/cxxreact (= 4.0.55)
+    - QIMReactNativeLibrary/DevSupport (= 4.0.55)
+    - QIMReactNativeLibrary/jschelpers (= 4.0.55)
+    - QIMReactNativeLibrary/jsinspector (= 4.0.55)
+    - QIMReactNativeLibrary/PrivateDatabase (= 4.0.55)
+    - QIMReactNativeLibrary/RCTActionSheet (= 4.0.55)
+    - QIMReactNativeLibrary/RCTAnimation (= 4.0.55)
+    - QIMReactNativeLibrary/RCTBlob (= 4.0.55)
+    - QIMReactNativeLibrary/RCTGeolocation (= 4.0.55)
+    - QIMReactNativeLibrary/RCTImage (= 4.0.55)
+    - QIMReactNativeLibrary/RCTLinkingIOS (= 4.0.55)
+    - QIMReactNativeLibrary/RCTNetwork (= 4.0.55)
+    - QIMReactNativeLibrary/RCTSettings (= 4.0.55)
+    - QIMReactNativeLibrary/RCTText (= 4.0.55)
+    - QIMReactNativeLibrary/RCTVibration (= 4.0.55)
+    - QIMReactNativeLibrary/RCTWebSocket (= 4.0.55)
+    - QIMReactNativeLibrary/react-native-image-picker (= 4.0.55)
+    - QIMReactNativeLibrary/RNI18n (= 4.0.55)
+    - QIMReactNativeLibrary/RNSVG (= 4.0.55)
+    - QIMReactNativeLibrary/RNVectorIcons (= 4.0.55)
+    - QIMReactNativeLibrary/yoga (= 4.0.55)
+  - QIMReactNativeLibrary/ART (4.0.55):
+    - QIMReactNativeLibrary/Core
+  - QIMReactNativeLibrary/Core (4.0.55):
+    - QIMReactNativeLibrary/yoga
+  - QIMReactNativeLibrary/CxxBridge (4.0.55):
+    - Folly (= 2016.09.26.00)
+    - QIMReactNativeLibrary/Core
+    - QIMReactNativeLibrary/cxxreact
+  - QIMReactNativeLibrary/cxxreact (4.0.55):
+    - boost-for-react-native (= 1.63.0)
+    - Folly (= 2016.09.26.00)
+    - QIMReactNativeLibrary/jschelpers
+    - QIMReactNativeLibrary/jsinspector
+  - QIMReactNativeLibrary/DevSupport (4.0.55):
+    - QIMReactNativeLibrary/Core
+    - QIMReactNativeLibrary/RCTWebSocket
+  - QIMReactNativeLibrary/fishhook (4.0.55)
+  - QIMReactNativeLibrary/jschelpers (4.0.55):
+    - Folly (= 2016.09.26.00)
+    - QIMReactNativeLibrary/PrivateDatabase
+  - QIMReactNativeLibrary/jsinspector (4.0.55)
+  - QIMReactNativeLibrary/PrivateDatabase (4.0.55)
+  - QIMReactNativeLibrary/RCTActionSheet (4.0.55):
+    - QIMReactNativeLibrary/Core
+  - QIMReactNativeLibrary/RCTAnimation (4.0.55):
+    - QIMReactNativeLibrary/Core
+  - QIMReactNativeLibrary/RCTBlob (4.0.55):
+    - QIMReactNativeLibrary/Core
+  - QIMReactNativeLibrary/RCTGeolocation (4.0.55):
+    - QIMReactNativeLibrary/Core
+  - QIMReactNativeLibrary/RCTImage (4.0.55):
+    - QIMReactNativeLibrary/Core
+    - QIMReactNativeLibrary/RCTNetwork
+  - QIMReactNativeLibrary/RCTLinkingIOS (4.0.55):
+    - QIMReactNativeLibrary/Core
+  - QIMReactNativeLibrary/RCTNetwork (4.0.55):
+    - QIMReactNativeLibrary/Core
+  - QIMReactNativeLibrary/RCTSettings (4.0.55):
+    - QIMReactNativeLibrary/Core
+  - QIMReactNativeLibrary/RCTText (4.0.55):
+    - QIMReactNativeLibrary/Core
+  - QIMReactNativeLibrary/RCTVibration (4.0.55):
+    - QIMReactNativeLibrary/Core
+  - QIMReactNativeLibrary/RCTWebSocket (4.0.55):
+    - QIMReactNativeLibrary/Core
+    - QIMReactNativeLibrary/fishhook
+    - QIMReactNativeLibrary/RCTBlob
+  - QIMReactNativeLibrary/react-native-image-picker (4.0.55):
+    - QIMReactNativeLibrary/Core
+  - QIMReactNativeLibrary/RNI18n (4.0.55)
+  - QIMReactNativeLibrary/RNSVG (4.0.55):
+    - QIMReactNativeLibrary/Core
+    - QIMReactNativeLibrary/RCTImage
+  - QIMReactNativeLibrary/RNVectorIcons (4.0.55):
+    - QIMReactNativeLibrary/Core
+  - QIMReactNativeLibrary/yoga (4.0.55)
+  - QIMUIKit (4.0.58):
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QIMUIKit/QIMUIKit-FULL (= 4.0.58)
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/ImagePicker (4.0.58):
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QIMUIKit/PublicUIHeader
+    - QIMUIKit/QIMAppUIConfig
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/PublicUIHeader (4.0.58):
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/QIMAppUI (4.0.58):
+    - AlipaySDK-iOS
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QIMUIKit/PublicUIHeader
+    - QIMUIKit/QIMAppUIConfig
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/QIMAppUIConfig (4.0.58):
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/QIMCells (4.0.58):
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QIMUIKit/PublicUIHeader
+    - QIMUIKit/QIMAppUIConfig
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/QIMFlutter (4.0.58):
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/QIMGeneralUI (4.0.58):
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QIMUIKit/PublicUIHeader
+    - QIMUIKit/QIMAppUIConfig
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/QIMMeUI (4.0.58):
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QIMUIKit/PublicUIHeader
+    - QIMUIKit/QIMAppUIConfig
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/QIMMWPhotoBrowser (4.0.58):
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - DACircularProgress
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MBProgressHUD (~> 0.9.2)
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QIMUIKit/PublicUIHeader
+    - QIMUIKit/QIMAppUIConfig
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SDWebImage (~> 5.0)
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/QIMNote (4.0.58):
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QIMUIKit/PublicUIHeader
+    - QIMUIKit/QIMAppUIConfig
+    - QIMUIKit/QIMUIVendorKit
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/QIMRN (4.0.58):
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/QIMSuperPlayer (4.0.58):
+    - AFNetworking
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - Masonry
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMLayout
+    - MMMarkdown
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SDWebImage
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/QIMUIKit-FULL (4.0.58):
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QIMUIKit/ImagePicker
+    - QIMUIKit/PublicUIHeader
+    - QIMUIKit/QIMAppUI
+    - QIMUIKit/QIMAppUIConfig
+    - QIMUIKit/QIMCells
+    - QIMUIKit/QIMFlutter
+    - QIMUIKit/QIMGeneralUI
+    - QIMUIKit/QIMMeUI
+    - QIMUIKit/QIMMWPhotoBrowser
+    - QIMUIKit/QIMNote
+    - QIMUIKit/QIMRN
+    - QIMUIKit/QIMSuperPlayer
+    - QIMUIKit/QIMUISDK
+    - QIMUIKit/QIMUIVendorKit
+    - QIMUIKit/SDWebImageWebPCoder
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/QIMUISDK (4.0.58):
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QIMUIKit/QIMAppUIConfig
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/QIMUIVendorKit (4.0.58):
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SwipeTableView
+    - YYKeyboardManager
+  - QIMUIKit/SDWebImageWebPCoder (4.0.58):
+    - AMap3DMap (= 8.0.0)
+    - AMapLocation
+    - AMapSearch
+    - FDFullscreenPopGesture
+    - LCActionSheet
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMMarkdown
+    - QRCodeGenerator
+    - SCLAlertView-Objective-C
+    - SDWebImage/Core (~> 5.0)
+    - SwipeTableView
+    - YYKeyboardManager
+  - QRCodeGenerator (1.SourceCode)
+  - QRCodeReaderViewController (4.0.2)
+  - Reachability (3.2)
+  - SCLAlertView-Objective-C (1.2.0)
+  - SDWebImage (5.14.2):
+    - SDWebImage/Core (= 5.14.2)
+  - SDWebImage/Core (5.14.2)
+  - SocketRocket (0.6.0)
+  - SQLiteRepairKit (1.2.2):
+    - WCDBOptimizedSQLCipher (~> 1.2.0)
+  - SwipeTableView (0.2.6)
+  - UICKeyChainStore (2.2.1)
+  - WCDB (1.0.7.5):
+    - SQLiteRepairKit (~> 1.2.0)
+    - WCDBOptimizedSQLCipher (~> 1.2.0)
+  - WCDBOptimizedSQLCipher (1.2.1)
+  - YYCache (1.0.4)
+  - YYDispatchQueuePool (1.0)
+  - YYKeyboardManager (1.0.1)
+  - YYModel (1.0.4)
+  - ZBarSDK (1.3.2)
+  - ZipArchive (1.4.0)
+
+DEPENDENCIES:
+  - QIMCommon (from `./libqimcommon-ios`)
+  - QIMCommonCategories (from `./libqimcommoncategories-ios`)
+  - QIMDataBase (from `./libqimdatabase-ios`)
+  - QIMGeneralModule (from `./libqimgeneralmodule-ios`)
+  - QIMKitVendor (from `./libqimkitvendor-ios`)
+  - QIMReactNativeLibrary (from `./QIMReactNativeLibrary`)
+  - QIMUIKit (from `./libqimuikit-ios`)
+  - QRCodeGenerator (from `./QRCodeGenerator`)
+  - QRCodeReaderViewController (~> 4.0.2)
+  - ZBarSDK (from `https://github.com/phucdanghuu/ZBar.git`, commit `b82be9cf11ec7045472e69b033461de438c1aa35`)
+
+SPEC REPOS:
+  https://github.com/startalkIM/libqimkit-ios-cook.git:
+    - QIMOpenSSL
+  trunk:
+    - AFNetworking
+    - AlipaySDK-iOS
+    - AMap3DMap
+    - AMapFoundation
+    - AMapLocation
+    - AMapSearch
+    - AvoidCrash
+    - boost-for-react-native
+    - CocoaAsyncSocket
+    - CocoaLumberjack
+    - DACircularProgress
+    - DoubleConversion
+    - FDFullscreenPopGesture
+    - Folly
+    - glog
+    - GoogleWebRTC
+    - LCActionSheet
+    - Masonry
+    - MBProgressHUD
+    - MDHTMLLabel
+    - MGSwipeTableCell
+    - MJRefresh
+    - MMLayout
+    - MMMarkdown
+    - ProtocolBuffers
+    - QRCodeReaderViewController
+    - Reachability
+    - SCLAlertView-Objective-C
+    - SDWebImage
+    - SocketRocket
+    - SQLiteRepairKit
+    - SwipeTableView
+    - UICKeyChainStore
+    - WCDB
+    - WCDBOptimizedSQLCipher
+    - YYCache
+    - YYDispatchQueuePool
+    - YYKeyboardManager
+    - YYModel
+    - ZipArchive
+
+EXTERNAL SOURCES:
+  QIMCommon:
+    :path: "./libqimcommon-ios"
+  QIMCommonCategories:
+    :path: "./libqimcommoncategories-ios"
+  QIMDataBase:
+    :path: "./libqimdatabase-ios"
+  QIMGeneralModule:
+    :path: "./libqimgeneralmodule-ios"
+  QIMKitVendor:
+    :path: "./libqimkitvendor-ios"
+  QIMReactNativeLibrary:
+    :path: "./QIMReactNativeLibrary"
+  QIMUIKit:
+    :path: "./libqimuikit-ios"
+  QRCodeGenerator:
+    :path: "./QRCodeGenerator"
+  ZBarSDK:
+    :commit: b82be9cf11ec7045472e69b033461de438c1aa35
+    :git: https://github.com/phucdanghuu/ZBar.git
+
+CHECKOUT OPTIONS:
+  ZBarSDK:
+    :commit: b82be9cf11ec7045472e69b033461de438c1aa35
+    :git: https://github.com/phucdanghuu/ZBar.git
+
+SPEC CHECKSUMS:
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  AlipaySDK-iOS: a07b6eafa847a5b29acb6c150ea16d9792d5d167
+  AMap3DMap: 89b82eaad00f9246f59d2a6103eff18be5b9dd4f
+  AMapFoundation: 8d8ecbb0b2e9ce5487995360d26c885d94642bfd
+  AMapLocation: 5ef44a1117be7dc541cb7a7d43d03c5ee91e4387
+  AMapSearch: b461cdf25b39cdca8957017de2f376cd1ac5da85
+  AvoidCrash: 28c6916fe19bd2b84126b8dec7cbe61c9a12741d
+  boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
+  CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
+  DoubleConversion: e22e0762848812a87afd67ffda3998d9ef29170c
+  FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
+  Folly: 211775e49d8da0ca658aebc8eab89d642935755c
+  glog: 1de0bb937dccdc981596d3b5825ebfb765017ded
+  GoogleWebRTC: ee984407e3a0fa1183d605900d9c71eee8cbcbdf
+  LCActionSheet: a015dee43c54c8f6631e86facd9e2ad59dc1b5ab
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MDHTMLLabel: 18bf09ec7d6c1ae396497345c005857c0493ee0a
+  MGSwipeTableCell: b804e4e450dee439c42250be90bd50458bf67fce
+  MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
+  MMLayout: d559edecd69fbcb348368ba90917e047ab1c544e
+  MMMarkdown: 1af97166ce0f6d6e0cb05695665492195d27c3f1
+  ProtocolBuffers: d509225eb2ea43d9582a59e94348fcf86e2abd65
+  QIMCommon: 509de4b26fd942c67e7cdb04a23fe2722eab30e4
+  QIMCommonCategories: 834e0b801c5e63afcefdf904a68d622a7b5d51a3
+  QIMDataBase: d7c2eccd06326064d0143ce22c2d8898ef80a1e1
+  QIMGeneralModule: 2c5115f11e178100d30de3af3dac377cea2ba131
+  QIMKitVendor: 7ec8f3cd222057a14227f7991288e1bd0b0b7cb9
+  QIMOpenSSL: 6058a67cc078ee7b8777435be5db87317f384f08
+  QIMReactNativeLibrary: 701eadd6aefee292cd97aba082409231b148ca91
+  QIMUIKit: 6621736734b3a8b14a7d731820ad4877083f42d7
+  QRCodeGenerator: 75868df4a5f9cf43bbd68dbdfe380e21b11d528d
+  QRCodeReaderViewController: e8f27d035b3e72b1d4b1c61ff66458287e3be0ff
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SCLAlertView-Objective-C: 84f12f66d779dadad7f293e5e8b7697ba4254ee0
+  SDWebImage: b9a731e1d6307f44ca703b3976d18c24ca561e84
+  SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
+  SQLiteRepairKit: 35aaae5a8838adb85f5b1eb4d796055be6060a4b
+  SwipeTableView: 67d8a2e6e18bd38c188fd4fabda0b278eaa08d2f
+  UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
+  WCDB: 8e90babdeb7784c569353a4bd22a66c0a175a882
+  WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
+  YYDispatchQueuePool: 3dfb2274bcc74207688dde8ac6f7bdd46871dd7b
+  YYKeyboardManager: ff53d2e80d1808567a7f004028bd200d9469a89f
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+  ZBarSDK: bcb9c813e120191b7894df50e14cec3c5ded4d76
+  ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
+
+PODFILE CHECKSUM: b75208d79da65533bee46af9c69a5b762078c7f5
+
+COCOAPODS: 1.11.3
