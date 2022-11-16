@@ -40,8 +40,13 @@
         }
         CGFloat containerWidth = imageViewWidth + 20;
         CGFloat containerHeight = imageViewHeight + 20 + 40;
+        CGRect containerFrame = CGRectMake((viewSize.width - containerWidth) / 2, (viewSize.height - containerHeight) / 2, containerWidth, containerHeight);
         
-        UIView* container = [[UIView alloc] initWithFrame: CGRectMake((viewSize.width - containerWidth) / 2, (viewSize.height - containerHeight) / 2, containerWidth, containerHeight)];
+        CGRect safeAreaFrame = CGRectMake(CGRectGetMinX(containerFrame) - 10, CGRectGetMinY(containerFrame) - 10, CGRectGetWidth(containerFrame) + 20, CGRectGetHeight(containerFrame) + 20);
+        UIView* safeArea = [[UIView alloc] initWithFrame: safeAreaFrame];
+        [self.view addSubview: safeArea];
+        
+        UIView* container = [[UIView alloc] initWithFrame: containerFrame];
         if (@available(iOS 13.0, *)) {
             container.backgroundColor = UIColor.systemBackgroundColor;
         } else {
@@ -58,7 +63,7 @@
         UIButton* cancelButton = [UIButton buttonWithType: UIButtonTypeCustom];
         [cancelButton setTitle: [NSBundle qim_localizedStringForKey:@"common_cancel"] forState: UIControlStateNormal];
         [cancelButton addTarget: self action: @selector(cancel) forControlEvents: UIControlEventTouchUpInside];
-        cancelButton.frame = CGRectMake(0, containerHeight - 40,  containerWidth / 2, 40);
+        cancelButton.frame = CGRectMake(0, containerHeight - 50,  containerWidth / 2, 50);
         [cancelButton setTitleColor: UIColor.systemBlueColor forState: UIControlStateNormal];
         [cancelButton setTitleColor: UIColor.systemGrayColor forState: UIControlStateHighlighted];
         [container addSubview: cancelButton];
@@ -66,7 +71,7 @@
         UIButton* sendButton = [UIButton buttonWithType: UIButtonTypeCustom];
         [sendButton setTitle: [NSBundle qim_localizedStringForKey:@"common_send"] forState: UIControlStateNormal];
         [sendButton addTarget: self action: @selector(send) forControlEvents: UIControlEventTouchUpInside];
-        sendButton.frame = CGRectMake(containerWidth / 2, containerHeight - 40,  containerWidth / 2, 40);
+        sendButton.frame = CGRectMake(containerWidth / 2, containerHeight - 50,  containerWidth / 2, 50);
         [sendButton setTitleColor: UIColor.systemBlueColor forState: UIControlStateNormal];
         [sendButton setTitleColor: UIColor.systemGrayColor forState: UIControlStateHighlighted];
         [container addSubview: sendButton];
