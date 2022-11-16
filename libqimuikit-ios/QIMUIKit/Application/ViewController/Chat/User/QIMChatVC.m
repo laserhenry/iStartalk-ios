@@ -3072,6 +3072,7 @@ static CGPoint tableOffsetPoint;
             
             //初始化navigation
             QIMPhotoBrowserNavController *nc = [[QIMPhotoBrowserNavController alloc] initWithRootViewController:browser];
+            nc.modalPresentationStyle = UIModalPresentationFullScreen;
             nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentViewController:nc animated:YES completion:nil];
             return;

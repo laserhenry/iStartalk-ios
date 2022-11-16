@@ -30,31 +30,31 @@
         CGSize viewSize = self.view.bounds.size;
         CGSize imageSize = _image.size;
     
-        CGFloat containerWidth = viewSize.width * 0.8;
-        CGFloat containerHeight = containerWidth / imageSize.width * imageSize.height;
-        CGFloat suspectedContainerHeight = viewSize.height * 0.8;
-        if(containerHeight > suspectedContainerHeight){
-            containerHeight = suspectedContainerHeight;
+        CGFloat imageViewWidth = viewSize.width * 0.8;
+        CGFloat imageViewHeight = imageViewWidth / imageSize.width * imageSize.height;
+        CGFloat suspectedImageHeight = viewSize.height * 0.7;
+        if(imageViewHeight > suspectedImageHeight){
+            imageViewHeight = suspectedImageHeight;
         }
-        CGFloat imageViewWidth = containerWidth - 10;
-        CGFloat imageViewHeight = containerHeight - 10;
-        containerHeight = containerHeight + 40;
+        CGFloat containerWidth = imageViewWidth + 20;
+        CGFloat containerHeight = imageViewHeight + 20 + 40;
         
-        UIView* container = [[UIView alloc] initWithFrame: CGRectMake((viewSize.width - containerWidth) / 2, (viewSize.height - containerWidth) / 2, containerWidth, containerHeight)];
+        UIView* container = [[UIView alloc] initWithFrame: CGRectMake((viewSize.width - containerWidth) / 2, (viewSize.height - containerHeight) / 2, containerWidth, containerHeight)];
         if (@available(iOS 13.0, *)) {
             container.backgroundColor = UIColor.systemBackgroundColor;
         } else {
             container.backgroundColor = UIColor.whiteColor;
         }
+        container.layer.cornerRadius = 5;
         [self.view addSubview: container];
         
         UIImageView* imageView = [[UIImageView alloc] initWithImage: _image];
-        imageView.frame = CGRectMake((containerWidth - imageViewWidth) / 2, (containerHeight - 40 - imageViewHeight) / 2, imageViewWidth, imageViewHeight);
+        imageView.frame = CGRectMake(10, 10, imageViewWidth, imageViewHeight);
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         [container addSubview: imageView];
         
         UIButton* cancelButton = [UIButton buttonWithType: UIButtonTypeCustom];
-        [cancelButton setTitle: @"Cancel" forState: UIControlStateNormal];
+        [cancelButton setTitle: [NSBundle qim_localizedStringForKey:@"common_cancel"] forState: UIControlStateNormal];
         [cancelButton addTarget: self action: @selector(cancel) forControlEvents: UIControlEventTouchUpInside];
         [cancelButton sizeToFit];
         cancelButton.center = CGPointMake(containerWidth / 4, containerHeight - 20);
@@ -62,7 +62,7 @@
         [container addSubview: cancelButton];
         
         UIButton* sendButton = [UIButton buttonWithType: UIButtonTypeCustom];
-        [sendButton setTitle: @"Send" forState: UIControlStateNormal];
+        [sendButton setTitle: [NSBundle qim_localizedStringForKey:@"common_send"] forState: UIControlStateNormal];
         [sendButton addTarget: self action: @selector(send) forControlEvents: UIControlEventTouchUpInside];
         [sendButton sizeToFit];
         sendButton.center = CGPointMake(containerWidth / 4 * 3, containerHeight - 20);
