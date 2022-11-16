@@ -3,6 +3,7 @@
 #import "QIMChatKeyBoardMacroDefine.h"
 #import "QIMATGroupMemberTextAttachment.h"
 #import "QIMEmojiTextAttachment.h"
+#import "STImagePasteVC.h"
 
 @implementation QTalkTextView
 
@@ -201,6 +202,30 @@
     return @{ NSFontAttributeName : self.font,
               NSForegroundColorAttributeName : self.placeHolderTextColor,
               NSParagraphStyleAttributeName : paragraphStyle };
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+    if (action == @selector(paste:) && [[UIPasteboard generalPasteboard] hasImages])
+        return YES;
+    else
+        return [super canPerformAction:action withSender:sender];
+}
+
+- (void)paste:(id)sender {
+    if ([UIPasteboard generalPasteboard].image){
+        STImagePasteVC* imagePasteVC = [STImagePasteVC new];
+        imagePasteVC.image = [UIPasteboard generalPasteboard].image;
+        UIViewController* viewController = [self viewController];
+        imagePasteVC.delegate = viewController;
+        
+        imagePasteVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        imagePasteVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [viewController presentViewController: imagePasteVC animated: true completion:^{
+
+        }];
+    }else{
+        [super paste: sender];
+    }
 }
 
 @end
