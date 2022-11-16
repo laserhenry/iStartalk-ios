@@ -23,9 +23,11 @@
 
 - (void) setViews{
     if (_image){
-        self.view.backgroundColor = [[UIColor alloc] initWithWhite: 0 alpha: 0.3];
+        UIView* background = [[UIView alloc] initWithFrame: self.view.bounds];
+        background.backgroundColor = [[UIColor alloc] initWithWhite: 0 alpha: 0.3];
+        [self.view addSubview: background];
         UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(cancel)];
-        [self.view addGestureRecognizer: tapGesture];
+        [background addGestureRecognizer: tapGesture];
         
         CGSize viewSize = self.view.bounds.size;
         CGSize imageSize = _image.size;
@@ -56,17 +58,17 @@
         UIButton* cancelButton = [UIButton buttonWithType: UIButtonTypeCustom];
         [cancelButton setTitle: [NSBundle qim_localizedStringForKey:@"common_cancel"] forState: UIControlStateNormal];
         [cancelButton addTarget: self action: @selector(cancel) forControlEvents: UIControlEventTouchUpInside];
-        [cancelButton sizeToFit];
-        cancelButton.center = CGPointMake(containerWidth / 4, containerHeight - 20);
+        cancelButton.frame = CGRectMake(0, containerHeight - 40,  containerWidth / 2, 40);
         [cancelButton setTitleColor: UIColor.systemBlueColor forState: UIControlStateNormal];
+        [cancelButton setTitleColor: UIColor.systemGrayColor forState: UIControlStateHighlighted];
         [container addSubview: cancelButton];
         
         UIButton* sendButton = [UIButton buttonWithType: UIButtonTypeCustom];
         [sendButton setTitle: [NSBundle qim_localizedStringForKey:@"common_send"] forState: UIControlStateNormal];
         [sendButton addTarget: self action: @selector(send) forControlEvents: UIControlEventTouchUpInside];
-        [sendButton sizeToFit];
-        sendButton.center = CGPointMake(containerWidth / 4 * 3, containerHeight - 20);
+        sendButton.frame = CGRectMake(containerWidth / 2, containerHeight - 40,  containerWidth / 2, 40);
         [sendButton setTitleColor: UIColor.systemBlueColor forState: UIControlStateNormal];
+        [sendButton setTitleColor: UIColor.systemGrayColor forState: UIControlStateHighlighted];
         [container addSubview: sendButton];
     }
 }
