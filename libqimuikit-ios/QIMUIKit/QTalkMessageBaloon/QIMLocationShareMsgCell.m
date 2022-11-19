@@ -138,6 +138,7 @@
             [[[UIApplication sharedApplication] visibleViewController] presentViewController:userLocationVC animated:YES completion:nil];
 //            [[[[UIApplication sharedApplication].delegate window] rootViewController] presentViewController:userLocationVC animated:YES completion:nil];
         }else{
+            userLocationVC.modalPresentationStyle = UIModalPresentationFullScreen;
             [self.owerViewController presentViewController:userLocationVC animated:YES completion:nil];
         }
     }
