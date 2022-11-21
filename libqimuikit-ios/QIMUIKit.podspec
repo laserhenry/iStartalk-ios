@@ -239,7 +239,7 @@ Pod::Spec.new do |s|
   s.dependency 'FDFullscreenPopGesture'
   s.dependency 'AMapSearch'
   s.dependency 'AMapLocation'
-  s.dependency 'AMap3DMap', '8.0.0'
+  s.dependency 'AMap3DMap'
   s.dependency 'SCLAlertView-Objective-C'
   s.dependency 'MMMarkdown'
 #  s.dependency 'Toast'

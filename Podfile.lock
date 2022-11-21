@@ -15,13 +15,13 @@ PODS:
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - AlipaySDK-iOS (15.8.11)
-  - AMap3DMap (8.0.0):
-    - AMapFoundation (~> 1.6.8)
-  - AMapFoundation (1.6.9)
-  - AMapLocation (2.8.0):
-    - AMapFoundation (~> 1.6.9)
-  - AMapSearch (9.2.0):
-    - AMapFoundation (~> 1.6.9)
+  - AMap3DMap (9.5.0):
+    - AMapFoundation (>= 1.8.0)
+  - AMapFoundation (1.8.0)
+  - AMapLocation (2.9.0):
+    - AMapFoundation (>= 1.7.0)
+  - AMapSearch (9.5.0):
+    - AMapFoundation (>= 1.8.0)
   - AvoidCrash (2.5.2)
   - boost-for-react-native (1.63.0)
   - CocoaAsyncSocket (7.6.5)
@@ -274,7 +274,7 @@ PODS:
     - QIMReactNativeLibrary/Core
   - QIMReactNativeLibrary/yoga (4.0.55)
   - QIMUIKit (4.0.58):
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -289,7 +289,7 @@ PODS:
     - SwipeTableView
     - YYKeyboardManager
   - QIMUIKit/ImagePicker (4.0.58):
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -305,7 +305,7 @@ PODS:
     - SwipeTableView
     - YYKeyboardManager
   - QIMUIKit/PublicUIHeader (4.0.58):
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -320,7 +320,7 @@ PODS:
     - YYKeyboardManager
   - QIMUIKit/QIMAppUI (4.0.58):
     - AlipaySDK-iOS
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -336,7 +336,7 @@ PODS:
     - SwipeTableView
     - YYKeyboardManager
   - QIMUIKit/QIMAppUIConfig (4.0.58):
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -350,7 +350,7 @@ PODS:
     - SwipeTableView
     - YYKeyboardManager
   - QIMUIKit/QIMCells (4.0.58):
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -366,7 +366,7 @@ PODS:
     - SwipeTableView
     - YYKeyboardManager
   - QIMUIKit/QIMFlutter (4.0.58):
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -380,7 +380,7 @@ PODS:
     - SwipeTableView
     - YYKeyboardManager
   - QIMUIKit/QIMGeneralUI (4.0.58):
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -396,7 +396,7 @@ PODS:
     - SwipeTableView
     - YYKeyboardManager
   - QIMUIKit/QIMMeUI (4.0.58):
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -412,7 +412,7 @@ PODS:
     - SwipeTableView
     - YYKeyboardManager
   - QIMUIKit/QIMMWPhotoBrowser (4.0.58):
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - DACircularProgress
@@ -431,7 +431,7 @@ PODS:
     - SwipeTableView
     - YYKeyboardManager
   - QIMUIKit/QIMNote (4.0.58):
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -448,7 +448,7 @@ PODS:
     - SwipeTableView
     - YYKeyboardManager
   - QIMUIKit/QIMRN (4.0.58):
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -463,7 +463,7 @@ PODS:
     - YYKeyboardManager
   - QIMUIKit/QIMSuperPlayer (4.0.58):
     - AFNetworking
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -480,7 +480,7 @@ PODS:
     - SwipeTableView
     - YYKeyboardManager
   - QIMUIKit/QIMUIKit-FULL (4.0.58):
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -509,7 +509,7 @@ PODS:
     - SwipeTableView
     - YYKeyboardManager
   - QIMUIKit/QIMUISDK (4.0.58):
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -524,7 +524,7 @@ PODS:
     - SwipeTableView
     - YYKeyboardManager
   - QIMUIKit/QIMUIVendorKit (4.0.58):
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -538,7 +538,7 @@ PODS:
     - SwipeTableView
     - YYKeyboardManager
   - QIMUIKit/SDWebImageWebPCoder (4.0.58):
-    - AMap3DMap (= 8.0.0)
+    - AMap3DMap
     - AMapLocation
     - AMapSearch
     - FDFullscreenPopGesture
@@ -661,10 +661,10 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   AlipaySDK-iOS: a07b6eafa847a5b29acb6c150ea16d9792d5d167
-  AMap3DMap: 89b82eaad00f9246f59d2a6103eff18be5b9dd4f
-  AMapFoundation: 8d8ecbb0b2e9ce5487995360d26c885d94642bfd
-  AMapLocation: 5ef44a1117be7dc541cb7a7d43d03c5ee91e4387
-  AMapSearch: b461cdf25b39cdca8957017de2f376cd1ac5da85
+  AMap3DMap: dc972a62d7fe451795e4b3637e377a2cf593d0e7
+  AMapFoundation: f48153f724114b58da9b01875ab88a1f6856e3db
+  AMapLocation: f5eb11e11c62f0f599f80b578eec8a1f70deb985
+  AMapSearch: e0c81206b8ac1d27ef349095a96ea6398e3a0da3
   AvoidCrash: 28c6916fe19bd2b84126b8dec7cbe61c9a12741d
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
@@ -691,7 +691,7 @@ SPEC CHECKSUMS:
   QIMKitVendor: 7ec8f3cd222057a14227f7991288e1bd0b0b7cb9
   QIMOpenSSL: 6058a67cc078ee7b8777435be5db87317f384f08
   QIMReactNativeLibrary: 701eadd6aefee292cd97aba082409231b148ca91
-  QIMUIKit: 6621736734b3a8b14a7d731820ad4877083f42d7
+  QIMUIKit: 880c27065736e11f864b2c0686ac560535a65973
   QRCodeGenerator: 75868df4a5f9cf43bbd68dbdfe380e21b11d528d
   QRCodeReaderViewController: e8f27d035b3e72b1d4b1c61ff66458287e3be0ff
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96

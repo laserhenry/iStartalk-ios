@@ -124,6 +124,9 @@
 - (void)initMapView
 {
     if (self.mapView == nil) {
+        [MAMapView updatePrivacyShow:AMapPrivacyShowStatusDidShow privacyInfo:AMapPrivacyInfoStatusDidContain];
+        [MAMapView updatePrivacyAgree:AMapPrivacyAgreeStatusDidAgree];
+        
         self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
         self.mapView.delegate = self;
         [self.view addSubview:self.mapView];
@@ -143,8 +146,8 @@
 
 - (void)initSearch
 {
-    
-    [AMapServices sharedServices].apiKey = [[STKit sharedInstance] getGAODE_APIKEY];
+    [AMapSearchAPI updatePrivacyShow:AMapPrivacyShowStatusDidShow privacyInfo:AMapPrivacyInfoStatusDidContain];
+    [AMapSearchAPI updatePrivacyAgree:AMapPrivacyAgreeStatusDidAgree];
     self.search = [[AMapSearchAPI alloc] init];
     self.search.delegate = self;
 }
@@ -222,6 +225,7 @@
     
     [self initBaseNavigationBar];
     
+    [AMapServices sharedServices].apiKey = [[STKit sharedInstance] getGAODE_APIKEY];
     [self initMapView];
     [self initAppleMapView]; 
     [self initSearch];
