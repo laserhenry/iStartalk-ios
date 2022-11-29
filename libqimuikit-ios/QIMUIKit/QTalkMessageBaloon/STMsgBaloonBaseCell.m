@@ -9,6 +9,7 @@
 #import "STMsgBaloonBaseCell.h"
 #import "QIMTextStorage.h"
 #import "QIMImageStorage.h"
+#import "QIMImageStorage.h"
 #import "QIMTextContainer.h"
 #import "QIMMessageParser.h"
 #import "QIMCollectionFaceManager.h"
@@ -592,14 +593,26 @@ static UIImage *__rightBallocImage = nil;
     switch (actionType) {
         case MA_Copy: {
             NSMutableString *str = [[NSMutableString alloc] initWithCapacity:3];
-            for (QIMTextStorage *textStorage in self.textContainer.textStorages) {
-                if (![textStorage isKindOfClass:[QIMTextStorage class]]) {
-                    continue;
-                } else {
+            for (id<QIMTextStorageProtocol> storage in self.textContainer.textStorages) {
+              if ([storage isKindOfClass:[QIMTextStorage class]]) {
+                    QIMTextStorage* textStorage = storage;
                     [str appendString:textStorage.text];
                 }
             }
             [_backView setClipboardWitxthText:str];
+        }
+            break;
+        case MA_CopyImage: {
+            QIMImageStorage* imageStorage = nil;
+            for (id<QIMTextStorageProtocol> storage in self.textContainer.textStorages) {
+                if([storage isKindOfClass:[QIMImageStorage class]]){
+                    imageStorage = storage;
+                    break;
+                }
+            }
+            NSURL* imageUrl = imageStorage.imageURL;
+            imageUrl = [imageStorage paddingUrl: imageUrl asThumb: false];
+            [_backView setClipboardWitxthImageUrl:imageUrl];
         }
             break;
         case MA_Collection: {

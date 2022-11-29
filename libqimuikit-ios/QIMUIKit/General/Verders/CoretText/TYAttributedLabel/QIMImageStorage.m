@@ -280,6 +280,27 @@
     
 }
 
+- (NSURL*) paddingUrl: (NSURL*) url asThumb: (BOOL) isThumb{
+    NSString* str = url.absoluteString;
+    if (![str containsString:@"?"]) {
+        str = [str stringByAppendingString:@"?"];
+    }
+    if (![str containsString:@"platform"]) {
+        str = [str stringByAppendingString:@"&platform=touch"];
+    }
+    if (![str containsString:@"imgtype"]) {
+        if(isThumb){
+            str = [str stringByAppendingString:@"&imgtype=thumb"];
+        }else{
+            str = [str stringByAppendingString:@"&imgtype=origin"];
+        }
+    }
+    if (![str containsString:@"webp="]) {
+        str = [str stringByAppendingString:@"&webp=true"];
+    }
+    return  [NSURL URLWithString:str];
+}
+
 #pragma mark - NSNotifications
 
 - (void)updateUploadProgress:(NSNotification *)notify {

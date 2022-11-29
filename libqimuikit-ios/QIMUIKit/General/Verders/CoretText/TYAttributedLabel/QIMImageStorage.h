@@ -40,4 +40,6 @@ typedef enum {
 
 @property (nonatomic, strong) NSDictionary        * infoDic;
 
+- (NSURL*) paddingUrl: (NSURL*) url asThumb: (BOOL) isThumb;
+
 @end

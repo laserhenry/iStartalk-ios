@@ -8,6 +8,7 @@
 
 #import "QIMMenuImageView.h"
 #import "QIMChatBubbleView.h"
+#import "SDWebImageManager.h"
 @implementation QIMMenuImageView
 @synthesize delegate;
 
@@ -175,6 +176,18 @@
     
 }
 
+-(void)setClipboardWitxthImageUrl:(NSURL *)url {
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    [manager loadImageWithURL:url options:0 progress: nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+        if (error) {
+            NSLog(@"SDWebImage failed to download image: %@", error);
+        }
+        UIPasteboard *board = [UIPasteboard generalPasteboard];
+        [board setImage: image];
+        NSLog(@"Image copyed to paste board");
+    }];
+}
+
 - (void)toWithdrawMsg:(id)sender {
     [self resignFirstResponder];
     if (delegate && [delegate respondsToSelector:@selector(onMenuActionWithType:)]) {
@@ -207,6 +220,13 @@
     [self resignFirstResponder];
     if (delegate && [delegate respondsToSelector:@selector(onMenuActionWithType:)]) {
         [delegate onMenuActionWithType:MA_CopyOriginMsg];
+    }
+}
+
+- (void)copyImage:(id)sender {
+    [self resignFirstResponder];
+    if (delegate && [delegate respondsToSelector:@selector(onMenuActionWithType:)]) {
+        [delegate onMenuActionWithType: MA_CopyImage];
     }
 }
 
@@ -289,6 +309,7 @@
              @(MA_Forward) : @{@"MenuTitle" : [NSBundle qim_localizedStringForKey:@"More"], @"MenuAction" : @"forwardMsgs:"},
              @(MA_Refer) : @{@"MenuTitle" : [NSBundle qim_localizedStringForKey:@"Quote"], @"MenuAction" : @"referMsgs:"},
              @(MA_CopyOriginMsg) : @{@"MenuTitle" : [NSBundle qim_localizedStringForKey:@"Original_Message"], @"MenuAction" : @"copyOriginMsg:"},
+             @(MA_CopyImage) : @{@"MenuTitle" : [NSBundle qim_localizedStringForKey:@"Copy Image"], @"MenuAction" : @"copyImage:"},
              };
 }
 

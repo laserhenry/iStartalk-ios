@@ -23,6 +23,7 @@ typedef enum{
     MA_Forward,     //更多
     MA_Refer,     //引用
     MA_CopyOriginMsg,   //拷贝原始消息
+    MA_CopyImage, //拷贝图片
 }MenuActionType;
 
 typedef enum {
@@ -55,6 +56,8 @@ typedef enum {
 - (void)showCopyMenu;
 + (void)cancelHighlighted;
 - (void)setClipboardWitxthText:(NSString *)text;
+
+- (void)setClipboardWitxthImageUrl:(NSURL *)url;
 
 - (void)setBubbleBgColor:(UIColor *)color;
 

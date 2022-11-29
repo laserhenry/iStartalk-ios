@@ -428,7 +428,8 @@
 
 "[File]" = "[File]";
 
-"Copy" = "Copy";
+"Copy" = "Copy Text";
+"Copy Image" = "Copy Image";
 
 "Add to Stickers" = "Add to Stickers";
 

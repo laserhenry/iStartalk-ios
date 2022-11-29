@@ -266,6 +266,16 @@
     return flag;
 }
 
+- (BOOL) hasImage:(NSArray *)textStroages {
+    
+    for (id textStorage in textStroages) {
+        if ([textStorage isKindOfClass:[QIMImageStorage class]]) {
+            return  YES;
+        }
+    }
+    return NO;
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     [_textLabel setFrameWithOrign:CGPointMake(kTextLableLeft + (self.message.messageDirection == QIMMessageDirection_Sent ? 0 : 10),10) Width:_textContainer.textWidth];
@@ -283,6 +293,10 @@
                 
                 [menuList addObject:@(MA_Collection)];
             }
+            if (self.textContainer.textStorages.count > 0 && [self hasImage:self.textContainer.textStorages]) {
+                [menuList addObject:@(MA_CopyImage)];
+            }
+            
             [menuList addObjectsFromArray:@[@(MA_Refer),@(MA_Repeater), @(MA_ToWithdraw), @(MA_Delete), @(MA_Forward)]];
         }
             break;
@@ -295,6 +309,11 @@
                 
                 [menuList addObject:@(MA_Collection)];
             }
+            
+            if (self.textContainer.textStorages.count > 0 && [self hasImage:self.textContainer.textStorages]) {
+                [menuList addObject:@(MA_CopyImage)];
+            }
+            
             [menuList addObjectsFromArray:@[@(MA_Refer), @(MA_Repeater), @(MA_ToWithdraw), @(MA_Delete), @(MA_Forward)]];
         }
             break;
