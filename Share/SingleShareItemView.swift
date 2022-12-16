@@ -1,0 +1,85 @@
+//
+//  SingleShareView.swift
+//  Share
+//
+//  Created by busylei on 2022/12/15.
+//  Copyright © 2022 QIM. All rights reserved.
+//
+
+import UIKit
+
+class SingleShareItemView: BaseShareItemView {
+    
+
+    override var imageViewContentMode: UIView.ContentMode {
+        .scaleAspectFit
+    }
+    
+    override func layoutSubviews() {
+        print("layoutSubviews ----")
+        for subview in subviews{
+            print("frame", subview.frame)
+        }
+    }
+    
+    override func addFileView(file: ShareFile){
+        let image: UIImage
+        image = UIImage(named: "file")!
+        let icon = UIImageView(image: image)
+        addSubview(icon)
+        let iconLayout = UILayoutGuide()
+        addLayoutGuide(iconLayout)
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            iconLayout.topAnchor.constraint(equalTo: topAnchor),
+            iconLayout.leadingAnchor.constraint(equalTo: leadingAnchor),
+            iconLayout.bottomAnchor.constraint(equalTo: bottomAnchor),
+            iconLayout.widthAnchor.constraint(equalTo: iconLayout.heightAnchor),
+            icon.widthAnchor.constraint(equalToConstant: 50),
+            icon.heightAnchor.constraint(equalToConstant: 50),
+            icon.centerXAnchor.constraint(equalTo: iconLayout.centerXAnchor),
+            icon.centerYAnchor.constraint(equalTo: iconLayout.centerYAnchor),
+        ])
+        
+
+        let description = UILabel()
+        description.text = file.name
+        addSubview(description)
+        let descriptionLayout = UILayoutGuide()
+        addLayoutGuide(descriptionLayout)
+        description.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            descriptionLayout.leadingAnchor.constraint(equalTo: iconLayout.trailingAnchor),
+            descriptionLayout.trailingAnchor.constraint(equalTo: trailingAnchor),
+            descriptionLayout.topAnchor.constraint(equalTo: topAnchor),
+            descriptionLayout.bottomAnchor.constraint(equalTo: bottomAnchor),
+            description.leadingAnchor.constraint(equalTo: descriptionLayout.leadingAnchor, constant: 20),
+            description.centerYAnchor.constraint(equalTo: descriptionLayout.centerYAnchor),
+           
+        ])
+    }
+    
+    var iamgeAspectRatio: CGFloat{
+        if type == .image || type == .movie{
+            let image: UIImage
+            if type == .image{
+                image = self.image!
+            }else{
+                image = self.movieImage!
+            }
+            let size = image.size
+            if size.width > 0{
+                return size.height / size.width
+            }
+        }
+        return 0
+    }
+    
+    var imageMaxHeight: CGFloat{
+        300
+    }
+    
+    var fileViewHeight: CGFloat{
+        80
+    }
+}

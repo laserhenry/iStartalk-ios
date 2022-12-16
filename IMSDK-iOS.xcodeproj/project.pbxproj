@@ -15,8 +15,39 @@
 		2CC52E2221B027DE0009EAB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC52E2021B027DE0009EAB5 /* LaunchScreen.storyboard */; };
 		2CC52E2521B027DE0009EAB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC52E2421B027DE0009EAB5 /* main.m */; };
 		5069279A25E137AC00439E03 /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 506925EC25E122AD00439E03 /* RTLabel.m */; };
+		7D50D58F2949CD050020FEFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D50D58E2949CD050020FEFD /* Assets.xcassets */; };
+		7D50D591294B0AFB0020FEFD /* SingleShareItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D50D590294B0AFB0020FEFD /* SingleShareItemView.swift */; };
+		7D50D593294B0D8F0020FEFD /* BaseShareItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D50D592294B0D8F0020FEFD /* BaseShareItemView.swift */; };
+		7D50D595294B10C40020FEFD /* MultiShareItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D50D594294B10C40020FEFD /* MultiShareItemView.swift */; };
+		7D9FBCC22946D14D0036776F /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9FBCC12946D14D0036776F /* ShareViewController.swift */; };
+		7D9FBCC52946D14D0036776F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D9FBCC32946D14D0036776F /* MainInterface.storyboard */; };
+		7D9FBCC92946D14D0036776F /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7D9FBCBF2946D14D0036776F /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BC9908A376B6B28934DA4BC2 /* libPods-IMSDK-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5739EC91D4FD5A403CFE4C /* libPods-IMSDK-iOS.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7D9FBCC72946D14D0036776F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2CC52E0A21B027DC0009EAB5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7D9FBCBE2946D14D0036776F;
+			remoteInfo = Share;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7D9FBCCA2946D14E0036776F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				7D9FBCC92946D14D0036776F /* Share.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2C2A79A822168AE800AF2153 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -35,6 +66,15 @@
 		506925EC25E122AD00439E03 /* RTLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
 		50F898A7269330D1005FC9D8 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		6BFF7E29ACF67F0EDFD9CEAE /* Pods-IMSDK-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMSDK-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IMSDK-iOS/Pods-IMSDK-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		7D50D58E2949CD050020FEFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7D50D590294B0AFB0020FEFD /* SingleShareItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleShareItemView.swift; sourceTree = "<group>"; };
+		7D50D592294B0D8F0020FEFD /* BaseShareItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseShareItemView.swift; sourceTree = "<group>"; };
+		7D50D594294B10C40020FEFD /* MultiShareItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiShareItemView.swift; sourceTree = "<group>"; };
+		7D9FBCBF2946D14D0036776F /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D9FBCC12946D14D0036776F /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		7D9FBCC42946D14D0036776F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		7D9FBCC62946D14D0036776F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D9FBCCE29472E010036776F /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
 		7DEA513A2919309100C1E0E3 /* IMSDK-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "IMSDK-iOS.entitlements"; sourceTree = "<group>"; };
 		9A830545AC1BCEB56DED8FEE /* Pods-IMSDK-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMSDK-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-IMSDK-iOS/Pods-IMSDK-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		CD5739EC91D4FD5A403CFE4C /* libPods-IMSDK-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IMSDK-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +86,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC9908A376B6B28934DA4BC2 /* libPods-IMSDK-iOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D9FBCBC2946D14D0036776F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +115,7 @@
 			children = (
 				506925EC25E122AD00439E03 /* RTLabel.m */,
 				2CC52E1421B027DC0009EAB5 /* IMSDK-iOS */,
+				7D9FBCC02946D14D0036776F /* Share */,
 				2CC52E1321B027DC0009EAB5 /* Products */,
 				D2BCDABEE36D10B63C2FD6F0 /* Pods */,
 				062F977CF210DA8C15089C39 /* Frameworks */,
@@ -78,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				2CC52E1221B027DC0009EAB5 /* IMSDK-iOS.app */,
+				7D9FBCBF2946D14D0036776F /* Share.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,6 +147,21 @@
 				2CC52E2421B027DE0009EAB5 /* main.m */,
 			);
 			path = "IMSDK-iOS";
+			sourceTree = "<group>";
+		};
+		7D9FBCC02946D14D0036776F /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				7D9FBCCE29472E010036776F /* Share.entitlements */,
+				7D9FBCC12946D14D0036776F /* ShareViewController.swift */,
+				7D50D592294B0D8F0020FEFD /* BaseShareItemView.swift */,
+				7D50D590294B0AFB0020FEFD /* SingleShareItemView.swift */,
+				7D50D594294B10C40020FEFD /* MultiShareItemView.swift */,
+				7D9FBCC32946D14D0036776F /* MainInterface.storyboard */,
+				7D9FBCC62946D14D0036776F /* Info.plist */,
+				7D50D58E2949CD050020FEFD /* Assets.xcassets */,
+			);
+			path = Share;
 			sourceTree = "<group>";
 		};
 		D2BCDABEE36D10B63C2FD6F0 /* Pods */ = {
@@ -122,15 +186,34 @@
 				2CC52E1021B027DC0009EAB5 /* Resources */,
 				35B71279B55488FAB2F12B0A /* [CP] Copy Pods Resources */,
 				7F99527C83A268ACC0A3615F /* [CP] Embed Pods Frameworks */,
+				7D9FBCCA2946D14E0036776F /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7D9FBCC82946D14D0036776F /* PBXTargetDependency */,
 			);
 			name = "IMSDK-iOS";
 			productName = "IMSDK-iOS";
 			productReference = 2CC52E1221B027DC0009EAB5 /* IMSDK-iOS.app */;
 			productType = "com.apple.product-type.application";
+		};
+		7D9FBCBE2946D14D0036776F /* Share */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D9FBCCD2946D14E0036776F /* Build configuration list for PBXNativeTarget "Share" */;
+			buildPhases = (
+				7D9FBCBB2946D14D0036776F /* Sources */,
+				7D9FBCBC2946D14D0036776F /* Frameworks */,
+				7D9FBCBD2946D14D0036776F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Share;
+			productName = Share;
+			productReference = 7D9FBCBF2946D14D0036776F /* Share.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -138,11 +221,16 @@
 		2CC52E0A21B027DC0009EAB5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				DefaultBuildSystemTypeForWorkspace = Latest;
+				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = QIM;
 				TargetAttributes = {
 					2CC52E1121B027DC0009EAB5 = {
 						CreatedOnToolsVersion = 10.0;
+					};
+					7D9FBCBE2946D14D0036776F = {
+						CreatedOnToolsVersion = 13.1;
 					};
 				};
 			};
@@ -160,6 +248,7 @@
 			projectRoot = "";
 			targets = (
 				2CC52E1121B027DC0009EAB5 /* IMSDK-iOS */,
+				7D9FBCBE2946D14D0036776F /* Share */,
 			);
 		};
 /* End PBXProject section */
@@ -173,6 +262,15 @@
 				2CC52E1F21B027DE0009EAB5 /* Assets.xcassets in Resources */,
 				2C794BF921B173F90063BA11 /* open_scheme.html in Resources */,
 				2CC52E1D21B027DC0009EAB5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D9FBCBD2946D14D0036776F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D50D58F2949CD050020FEFD /* Assets.xcassets in Resources */,
+				7D9FBCC52946D14D0036776F /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,7 +343,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7D9FBCBB2946D14D0036776F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D50D595294B10C40020FEFD /* MultiShareItemView.swift in Sources */,
+				7D50D591294B0AFB0020FEFD /* SingleShareItemView.swift in Sources */,
+				7D9FBCC22946D14D0036776F /* ShareViewController.swift in Sources */,
+				7D50D593294B0D8F0020FEFD /* BaseShareItemView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7D9FBCC82946D14D0036776F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7D9FBCBE2946D14D0036776F /* Share */;
+			targetProxy = 7D9FBCC72946D14D0036776F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2CC52E1B21B027DC0009EAB5 /* Main.storyboard */ = {
@@ -262,6 +379,14 @@
 				2CC52E2121B027DE0009EAB5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7D9FBCC32946D14D0036776F /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7D9FBCC42946D14D0036776F /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -394,6 +519,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6BFF7E29ACF67F0EDFD9CEAE /* Pods-IMSDK-iOS.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -558,6 +684,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9A830545AC1BCEB56DED8FEE /* Pods-IMSDK-iOS.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -713,6 +840,70 @@
 			};
 			name = Release;
 		};
+		7D9FBCCB2946D14E0036776F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CXAJ3S9LVA;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Share/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Share;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 QIM. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.im.startalk.Share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7D9FBCCC2946D14E0036776F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CXAJ3S9LVA;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Share/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Share;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 QIM. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.im.startalk.Share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -730,6 +921,15 @@
 			buildConfigurations = (
 				2CC52E2921B027DE0009EAB5 /* Debug */,
 				2CC52E2A21B027DE0009EAB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7D9FBCCD2946D14E0036776F /* Build configuration list for PBXNativeTarget "Share" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D9FBCCB2946D14E0036776F /* Debug */,
+				7D9FBCCC2946D14E0036776F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
