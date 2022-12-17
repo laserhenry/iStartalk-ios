@@ -10,4 +10,11 @@ import UIKit
 
 class MultiShareItemView: BaseShareItemView {
 
+    override var imageViewContentMode: UIView.ContentMode {
+        .scaleAspectFill
+    }
+    
+    override var playSize: CGFloat{
+        30
+    }
 }

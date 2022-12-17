@@ -15,16 +15,13 @@ class SingleShareItemView: BaseShareItemView {
         .scaleAspectFit
     }
     
-    override func layoutSubviews() {
-        print("layoutSubviews ----")
-        for subview in subviews{
-            print("frame", subview.frame)
-        }
+    override var playSize: CGFloat{
+        50
     }
     
     override func addFileView(file: ShareFile){
         let image: UIImage
-        image = UIImage(named: "file")!
+        image = UIImage(named: "File")!
         let icon = UIImageView(image: image)
         addSubview(icon)
         let iconLayout = UILayoutGuide()

@@ -25,9 +25,14 @@ class BaseShareItemView: UIView {
     var movieImage: UIImage?
     
     func setup(){
+        layer.cornerRadius = 5
+        clipsToBounds = true
+        
         switch type{
-        case .image, .movie:
+        case .image:
             addImageView(image: image!)
+        case .movie:
+            addMovieView(movie: movie!, cover: movieImage!)
         case .file:
             addFileView(file: file!)
         }
@@ -51,7 +56,37 @@ class BaseShareItemView: UIView {
     }
     
     func addMovieView(movie: AVAsset, cover: UIImage){
+        addImageView(image: cover)
+        let playImage = UIImage(named: "Play")!.withRenderingMode(.alwaysTemplate)
+        let playView = UIImageView(image: playImage)
+        playView.tintColor = .white
+        playView.alpha = 0.8
+        addSubview(playView)
+        playView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            playView.widthAnchor.constraint(equalToConstant: playSize),
+            playView.heightAnchor.constraint(equalToConstant: playSize),
+            playView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            playView.centerYAnchor.constraint(equalTo: centerYAnchor),
+        ])
+
+        let duration = movie.duration
+        let durationPresentation = getDurationPresentation(duration)
+        let durationLabel = UILabel()
+        durationLabel.text = durationPresentation
+        durationLabel.font = .systemFont(ofSize: 12)
+        durationLabel.textColor = .white
+        addSubview(durationLabel)
+        durationLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            durationLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            durationLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+        ])
         
+    }
+    
+    var playSize: CGFloat{
+        0
     }
     
     func addFileView(file: ShareFile){
@@ -68,5 +103,19 @@ class BaseShareItemView: UIView {
         }else{
             return UIImage()
         }
+    }
+    
+    func getDurationPresentation(_ time: CMTime) -> String{
+        let total = Int(time.seconds.rounded())
+        let hours = total / 3600
+        let minutes = (total % 3600) / 60
+        let seconds = total % 60
+        let presentation: String
+        if hours > 0 {
+            presentation = "\(hours):\(minutes):\(seconds)"
+        }else{
+            presentation = "\(minutes):\(seconds)"
+        }
+        return presentation
     }
 }
