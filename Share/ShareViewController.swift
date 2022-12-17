@@ -111,24 +111,6 @@ class ShareViewController: UIViewController, UICollectionViewDataSource, UIColle
             divider.bottomAnchor.constraint(equalTo: toolbar.bottomAnchor),
         ]);
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("viewWillAppear ----")
-        for subview in view.subviews{
-            print(subview, "frame", subview.frame)
-        }
-        print(".............")
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("viewDidAppear ----")
-        for subview in view.subviews{
-            print(subview, "frame", subview.frame)
-        }
-        print(".............")
-    }
     
     func addSingleItemView(_ item: ShareItem){
         let itemView = SingleShareItemView()
@@ -172,7 +154,7 @@ class ShareViewController: UIViewController, UICollectionViewDataSource, UIColle
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             collectionView.topAnchor.constraint(equalTo: toolbar.bottomAnchor, constant: 15),
-            collectionView.heightAnchor.constraint(lessThanOrEqualToConstant: 400),
+            collectionView.heightAnchor.constraint(equalTo: view.widthAnchor)
         ])
     }
     
