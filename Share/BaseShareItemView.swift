@@ -25,9 +25,6 @@ class BaseShareItemView: UIView {
     var movieImage: UIImage?
     
     func setup(){
-        layer.cornerRadius = 5
-        clipsToBounds = true
-        
         switch type{
         case .image:
             addImageView(image: image!)
@@ -41,6 +38,7 @@ class BaseShareItemView: UIView {
     func addImageView(image: UIImage){
         let imageView = UIImageView(image: image)
         imageView.contentMode = imageViewContentMode
+        imageView.clipsToBounds = true
         addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

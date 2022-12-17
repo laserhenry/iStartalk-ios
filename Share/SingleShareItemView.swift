@@ -19,6 +19,12 @@ class SingleShareItemView: BaseShareItemView {
         50
     }
     
+    override func setup() {
+        super.setup()
+        layer.cornerRadius = 5
+        clipsToBounds = true
+    }
+    
     override func addFileView(file: ShareFile){
         let image: UIImage
         image = UIImage(named: "File")!

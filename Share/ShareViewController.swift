@@ -11,12 +11,17 @@ import UniformTypeIdentifiers
 import Social
 import AVFoundation
 
-class ShareViewController: UIViewController {
+class ShareViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    
     static let IMAGE_IDENTIFIER = "public.image"
     static let MOVIE_IDENTIFIER = "public.movie"
     static let FILE_IDENTIFIER = "public.content"
     
+    static let COLLECTION_CELL_IDENTIFIER = "cell"
+    
     var toolbar: UIView!
+    var items: [ShareItem] = []
+    var collectionView: UICollectionView!
 
     override func loadView() {
         view = UIView()
@@ -40,8 +45,14 @@ class ShareViewController: UIViewController {
                 }
             }
         }else{
+           addMultiItemsView()
             for attachment in attachments {
-               
+                loadItem(attachment) { item in
+                    DispatchQueue.main.async { [self] in
+                        items.append(item)
+                        collectionView.reloadData()
+                    }
+                }
             }
         }
     }
@@ -144,6 +155,51 @@ class ShareViewController: UIViewController {
                 itemView.heightAnchor.constraint(equalToConstant: height)
             ])
         }
+    }
+    
+    func addMultiItemsView(){
+        let collectionLayout = UICollectionViewFlowLayout()
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Self.COLLECTION_CELL_IDENTIFIER)
+        collectionView.backgroundColor = .clear
+        collectionView.layer.cornerRadius = 5
+        collectionView.clipsToBounds = true
+        view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            collectionView.topAnchor.constraint(equalTo: toolbar.bottomAnchor, constant: 15),
+            collectionView.heightAnchor.constraint(lessThanOrEqualToConstant: 400),
+        ])
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return items.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        var spacing: CGFloat = 10
+        if let layout = collectionViewLayout as? UICollectionViewFlowLayout{
+            spacing = layout.minimumInteritemSpacing
+        }
+        let size = (collectionView.bounds.width - 2 * spacing) / 3
+        return CGSize(width: size, height: size)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.COLLECTION_CELL_IDENTIFIER, for: indexPath)
+        let item = items[indexPath.item]
+        let contentView = cell.contentView
+        
+        let itemView = MultiShareItemView()
+        setItemView(view: itemView, item: item)
+        itemView.setup()
+        contentView.addSubview(itemView)
+        itemView.frame = contentView.bounds
+        return cell
     }
     
     func loadItem(_ item: NSItemProvider, completionHandler: @escaping (_ item: ShareItem) -> Void){
