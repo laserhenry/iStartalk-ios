@@ -19,6 +19,7 @@
 		7D50D591294B0AFB0020FEFD /* SingleShareItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D50D590294B0AFB0020FEFD /* SingleShareItemView.swift */; };
 		7D50D593294B0D8F0020FEFD /* BaseShareItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D50D592294B0D8F0020FEFD /* BaseShareItemView.swift */; };
 		7D50D595294B10C40020FEFD /* MultiShareItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D50D594294B10C40020FEFD /* MultiShareItemView.swift */; };
+		7D50D59729557DA10020FEFD /* ShareItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D50D59629557D9D0020FEFD /* ShareItem.swift */; };
 		7D9FBCC22946D14D0036776F /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9FBCC12946D14D0036776F /* ShareViewController.swift */; };
 		7D9FBCC52946D14D0036776F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D9FBCC32946D14D0036776F /* MainInterface.storyboard */; };
 		7D9FBCC92946D14D0036776F /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7D9FBCBF2946D14D0036776F /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -70,6 +71,7 @@
 		7D50D590294B0AFB0020FEFD /* SingleShareItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleShareItemView.swift; sourceTree = "<group>"; };
 		7D50D592294B0D8F0020FEFD /* BaseShareItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseShareItemView.swift; sourceTree = "<group>"; };
 		7D50D594294B10C40020FEFD /* MultiShareItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiShareItemView.swift; sourceTree = "<group>"; };
+		7D50D59629557D9D0020FEFD /* ShareItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareItem.swift; sourceTree = "<group>"; };
 		7D9FBCBF2946D14D0036776F /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D9FBCC12946D14D0036776F /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		7D9FBCC42946D14D0036776F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				7D9FBCCE29472E010036776F /* Share.entitlements */,
+				7D50D59629557D9D0020FEFD /* ShareItem.swift */,
 				7D9FBCC12946D14D0036776F /* ShareViewController.swift */,
 				7D50D592294B0D8F0020FEFD /* BaseShareItemView.swift */,
 				7D50D590294B0AFB0020FEFD /* SingleShareItemView.swift */,
@@ -351,6 +354,7 @@
 				7D50D591294B0AFB0020FEFD /* SingleShareItemView.swift in Sources */,
 				7D9FBCC22946D14D0036776F /* ShareViewController.swift in Sources */,
 				7D50D593294B0D8F0020FEFD /* BaseShareItemView.swift in Sources */,
+				7D50D59729557DA10020FEFD /* ShareItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

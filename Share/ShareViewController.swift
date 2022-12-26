@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import UniformTypeIdentifiers
-import Social
 import AVFoundation
 
 class ShareViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -16,6 +14,9 @@ class ShareViewController: UIViewController, UICollectionViewDataSource, UIColle
     static let IMAGE_IDENTIFIER = "public.image"
     static let MOVIE_IDENTIFIER = "public.movie"
     static let FILE_IDENTIFIER = "public.content"
+    
+    static let GROUP_IDENTIFIER = "group.com.im.startalk"
+    static let CONTAINER_URL = "startalk://share"
     
     static let COLLECTION_CELL_IDENTIFIER = "cell"
     
@@ -40,8 +41,9 @@ class ShareViewController: UIViewController, UICollectionViewDataSource, UIColle
         if attachments.count == 1{
             let attachment = attachments[0]
             loadItem(attachment) { item in
-                DispatchQueue.main.async {
-                    self.addSingleItemView(item)
+                DispatchQueue.main.async { [self] in
+                    items.append(item)
+                    addSingleItemView(item)
                 }
             }
         }else{
@@ -190,15 +192,15 @@ class ShareViewController: UIViewController, UICollectionViewDataSource, UIColle
                 let shareItem: ShareItem
                 if item.hasItemConformingToTypeIdentifier(Self.IMAGE_IDENTIFIER){
                     let image = UIImage(contentsOfFile: url.path)
-                    shareItem = ShareItem(type: .image, image: image)
+                    shareItem = ShareItem(type: .image, url: url, image: image)
                 }else if item.hasItemConformingToTypeIdentifier(Self.MOVIE_IDENTIFIER){
                     let asset = AVURLAsset(url: url)
-                    shareItem = ShareItem(type: .movie, movie: asset)
+                    shareItem = ShareItem(type: .movie, url: url, movie: asset)
                 }else{
                     let name = url.lastPathComponent
                     let data = try! Data(contentsOf: url)
                     let file = ShareFile(name: name, data: data)
-                    shareItem = ShareItem(type: .file, file: file)
+                    shareItem = ShareItem(type: .file, url: url, file: file)
                 }
              
                 completionHandler(shareItem)
@@ -214,11 +216,55 @@ class ShareViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     @objc func cancel(){
-
+        extensionContext!.completeRequest(returningItems: nil)
     }
 
     @objc func send(){
-
+        saveItems()
+        openContainer()
+        extensionContext!.completeRequest(returningItems: [])
+    }
+    
+    func saveItems(){
+        let fileManager = FileManager.default
+        let groupUrl = fileManager.containerURL(forSecurityApplicationGroupIdentifier: Self.GROUP_IDENTIFIER)
+        guard let groupUrl = groupUrl else {
+            return
+        }
+        
+        var itemInfos: [[String: String]] = []
+        for item in items{
+            let fileName = UUID().description
+            let destUrl = groupUrl.appendingPathComponent(fileName)
+            try? fileManager.copyItem(at: item.url, to: destUrl)
+            let type = item.type.rawValue
+            let itemInfo = ["type": type, "path": destUrl.path]
+            itemInfos.append(itemInfo)
+            
+            print("dest is ", destUrl)
+        }
+        
+        let defaults = UserDefaults(suiteName: Self.GROUP_IDENTIFIER)
+        defaults?.set(itemInfos, forKey: "ShareItems")
+    }
+    
+    func openContainer(){
+        let url = URL(string: Self.CONTAINER_URL)!
+        let openURLSelector = sel_registerName("openURL:")
+        
+        var responder: UIResponder = self
+        while true{
+            if responder.responds(to: openURLSelector){
+                responder.perform(openURLSelector, with: url)
+                break
+            }
+            if let next = responder.next{
+                responder = next
+            }else{
+                break
+            }
+        }
+        
     }
 
     func makeButton(title: String, selector: Selector) -> UIButton{
@@ -229,23 +275,4 @@ class ShareViewController: UIViewController, UICollectionViewDataSource, UIColle
         return button
     }
 
-}
-
-enum ShareType{
-    case image
-    case movie
-    case file
-}
-
-
-struct ShareFile{
-    var name: String
-    var data: Data
-}
-
-struct ShareItem{
-    var type: ShareType
-    var image: UIImage?
-    var movie: AVAsset?
-    var file: ShareFile?
 }

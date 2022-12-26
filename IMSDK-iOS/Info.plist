@@ -22,50 +22,65 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.im.startalk</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>startalk</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>请点击&quot;好&quot;以允许访问。</string>
+	<string>请点击"好"以允许访问。</string>
 	<key>NSCalendarsUsageDescription</key>
-	<string>请点击&quot;好&quot;以允许访问。
+	<string>请点击"好"以允许访问。
         
         若不允许，你将无法给同步行程到系统日历。</string>
 	<key>NSCameraUsageDescription</key>
-	<string>请点击&quot;好&quot;以允许访问。
+	<string>请点击"好"以允许访问。
         
         若不允许，你将无法使用拍照、录制视频、扫一扫等功能。</string>
 	<key>NSContactsUsageDescription</key>
-	<string>请点击&quot;好&quot;以允许访问。
+	<string>请点击"好"以允许访问。
         
         若不允许，你将无法使用通讯录联系人、添加手机联系人等功能。</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>请点击&quot;好&quot;以允许访问。
+	<string>请点击"好"以允许访问。
         
         若不允许，你将无法使用位置发送等功能。</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>请点击&quot;好&quot;以允许访问。
+	<string>请点击"好"以允许访问。
         
         若不允许，你将无法使用位置发送等功能。</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>请点击&quot;好&quot;以允许访问。
+	<string>请点击"好"以允许访问。
         
         若不允许，你将无法使用位置发送等功能。</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>请点击&quot;好&quot;以允许访问。
+	<string>请点击"好"以允许访问。
         
         若不允许，你将无法使用视频通话、发送语音消息等功能。</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>请点击&quot;好&quot;以允许访问。
+	<string>请点击"好"以允许访问。
         
         若不允许，你将无法给好友发送本地相册图片及视频内容。</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>请点击&quot;好&quot;以允许访问。
+	<string>请点击"好"以允许访问。
         
         若不允许，你将无法给好友发送本地相册图片及视频内容。</string>
 	<key>NSRemindersUsageDescription</key>
-	<string>请点击&quot;好&quot;以允许访问。
+	<string>请点击"好"以允许访问。
         
         若不允许，你将无法给同步行程到系统日历。</string>
 	<key>UIAppFonts</key>
@@ -107,7 +122,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 </dict>
 </plist>
