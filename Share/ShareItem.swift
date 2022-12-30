@@ -15,15 +15,11 @@ enum ShareType: String{
     case file
 }
 
-struct ShareFile{
-    var name: String
-    var data: Data
-}
-
 struct ShareItem{
     var type: ShareType
+    var name: String
     var url: URL
     var image: UIImage?
     var movie: AVAsset?
-    var file: ShareFile?
+    var file: Data?
 }

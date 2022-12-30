@@ -33,8 +33,6 @@ class ShareViewController: UIViewController, UICollectionViewDataSource, UIColle
         }
 
         addToolbar()
-        
-        
 
         let inputItem = self.extensionContext!.inputItems[0] as! NSExtensionItem
         let attachments = inputItem.attachments!
@@ -189,18 +187,17 @@ class ShareViewController: UIViewController, UICollectionViewDataSource, UIColle
     func loadItem(_ item: NSItemProvider, completionHandler: @escaping (_ item: ShareItem) -> Void){
         item.loadItem(forTypeIdentifier: Self.FILE_IDENTIFIER) { object, error in
             if let url = object as? URL{
+                let name = url.lastPathComponent
                 let shareItem: ShareItem
                 if item.hasItemConformingToTypeIdentifier(Self.IMAGE_IDENTIFIER){
                     let image = UIImage(contentsOfFile: url.path)
-                    shareItem = ShareItem(type: .image, url: url, image: image)
+                    shareItem = ShareItem(type: .image, name: name, url: url, image: image)
                 }else if item.hasItemConformingToTypeIdentifier(Self.MOVIE_IDENTIFIER){
                     let asset = AVURLAsset(url: url)
-                    shareItem = ShareItem(type: .movie, url: url, movie: asset)
+                    shareItem = ShareItem(type: .movie, name: name, url: url, movie: asset)
                 }else{
-                    let name = url.lastPathComponent
                     let data = try! Data(contentsOf: url)
-                    let file = ShareFile(name: name, data: data)
-                    shareItem = ShareItem(type: .file, url: url, file: file)
+                    shareItem = ShareItem(type: .file, name: name, url: url, file: data)
                 }
              
                 completionHandler(shareItem)
@@ -210,6 +207,7 @@ class ShareViewController: UIViewController, UICollectionViewDataSource, UIColle
 
     func setItemView(view: BaseShareItemView, item: ShareItem){
         view.type = item.type
+        view.name = item.name
         view.image = item.image
         view.movie = item.movie
         view.file = item.file
@@ -234,18 +232,27 @@ class ShareViewController: UIViewController, UICollectionViewDataSource, UIColle
         
         var itemInfos: [[String: String]] = []
         for item in items{
-            let fileName = UUID().description
+            let type = item.type.rawValue
+            let name = item.name
+            let fileName = makeFileName(name: name)
             let destUrl = groupUrl.appendingPathComponent(fileName)
             try? fileManager.copyItem(at: item.url, to: destUrl)
-            let type = item.type.rawValue
-            let itemInfo = ["type": type, "path": destUrl.path]
+            let itemInfo = ["type": type, "name": name, "path": destUrl.path]
             itemInfos.append(itemInfo)
-            
-            print("dest is ", destUrl)
         }
         
         let defaults = UserDefaults(suiteName: Self.GROUP_IDENTIFIER)
         defaults?.set(itemInfos, forKey: "ShareItems")
+    }
+    
+    func makeFileName(name: String) -> String{
+        var fileName = UUID().description
+        let index = name.lastIndex(of: ".")
+        if let index = index {
+            let fileExtension = name.suffix(from: index)
+            fileName = fileName + fileExtension
+        }
+        return fileName
     }
     
     func openContainer(){

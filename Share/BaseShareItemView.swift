@@ -11,6 +11,7 @@ import AVFoundation
 
 class BaseShareItemView: UIView {
     var type: ShareType = .image
+    var name: String = ""
     
     var image: UIImage?
     var movie: AVAsset?{
@@ -20,7 +21,7 @@ class BaseShareItemView: UIView {
             }
         }
     }
-    var file: ShareFile?
+    var file: Data?
 
     var movieImage: UIImage?
     
@@ -31,7 +32,7 @@ class BaseShareItemView: UIView {
         case .movie:
             addMovieView(movie: movie!, cover: movieImage!)
         case .file:
-            addFileView(file: file!)
+            addFileView(name: name)
         }
     }
     
@@ -87,7 +88,7 @@ class BaseShareItemView: UIView {
         0
     }
     
-    func addFileView(file: ShareFile){
+    func addFileView(name:String){
         
     }
     

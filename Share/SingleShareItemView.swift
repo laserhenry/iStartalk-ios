@@ -25,7 +25,7 @@ class SingleShareItemView: BaseShareItemView {
         clipsToBounds = true
     }
     
-    override func addFileView(file: ShareFile){
+    override func addFileView(name: String){
         let image: UIImage
         image = UIImage(named: "File")!
         let icon = UIImageView(image: image)
@@ -46,7 +46,7 @@ class SingleShareItemView: BaseShareItemView {
         
 
         let description = UILabel()
-        description.text = file.name
+        description.text = name
         addSubview(description)
         let descriptionLayout = UILayoutGuide()
         addLayoutGuide(descriptionLayout)

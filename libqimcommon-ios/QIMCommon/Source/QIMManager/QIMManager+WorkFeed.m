@@ -850,11 +850,11 @@
                 [[STUserCacheManager sharedInstance] setUserObject:@(videoFileSize) forKey:@"videoFileSize"];
                 [[STUserCacheManager sharedInstance] setUserObject:@(videoTimeLen) forKey:@"videoTimeLen"];
                 [[STUserCacheManager sharedInstance] setUserObject:@(videoMaxTimeLen) forKey:@"videoMaxTimeLen"];
-                [[STUserCacheManager sharedInstance] setUserObject:@(300000) forKey:@"videoMaxTimeLen"];
+                //[[STUserCacheManager sharedInstance] setUserObject:@(300000) forKey:@"videoMaxTimeLen"];
             }
         }
     } withFailedCallBack:^(NSError *error) {
-
+        [[STUserCacheManager sharedInstance] setUserObject:@(300000) forKey:@"videoMaxTimeLen"];
     }];
 }
 

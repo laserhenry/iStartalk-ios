@@ -36,6 +36,8 @@
 #import "QIMUUIDTools.h"
 #import "QIMPublicRedefineHeader.h"
 #import "QIMSDK.h"
+#import "STShareExtensionHelper.h"
+#import "STShareViewController.h"
 
 #define GAODE_APIKEY @""
 
@@ -671,8 +673,14 @@ void InitCrashReport() {
 
 #else
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options {
-    
-    
+    STShareExtensionHelper * shareHelper = [STShareExtensionHelper sharedInstance];
+    NSArray* items = [shareHelper shareItems];
+    if(items != nil && items.count > 0){
+        UIViewController* rootViewController = self.window.rootViewController;
+        UIViewController * shareViewController = [STShareViewController new];
+        shareViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        [rootViewController presentViewController: shareViewController animated: NO completion:^{}];
+    }
     return YES;
 }
 #endif
