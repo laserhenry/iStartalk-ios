@@ -27,7 +27,7 @@ UIView* bar;
 UITableView* sessionView;
 
 NSArray * sessionList;
-
+QTalkSessionDataManager *dataManager;
 STKit* kit;
 
 NSArray* items;
@@ -105,7 +105,17 @@ NSInteger sendingCount;
     
     
     STKit* kit = [STKit sharedInstance];
+    [self setupSessions];
+}
+
+- (void) setupSessions{
     sessionList = [kit getSessionList];
+
+    dataManager = [QTalkSessionDataManager new];
+    [dataManager setQtBlock:^{
+        sessionList = [kit getSessionList];
+        [sessionView reloadData];
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
