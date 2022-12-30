@@ -175,7 +175,7 @@ NSInteger sendingCount;
         }else if([type isEqualToString:@"movie"]){
             [self sendMovie:path name:name session:session];
         }else{
-            
+            [self sendFile:path name:name session:session];
         }
     }
 }
@@ -294,7 +294,29 @@ NSInteger sendingCount;
 }
 
 - (void) sendFile: (NSString *) path name: (NSString *) name session: (NSDictionary *) session{
+    NSData* data = [NSData dataWithContentsOfFile:path];
+    [kit qim_saveLocalFileData: data withFileName:name];
+    NSString * localPath = [kit qim_getLocalFileDataWithFileName:name];
+    long long fileLength = data.length;
+    NSString *fileSize = [QIMStringTransformTools qim_CapacityTransformStrWithSize:fileLength];
+    NSString *fileMd5 = [data qim_md5String];
+    NSDictionary *jsonObject = @{
+                                 @"FileName": name,
+                                 @"FileSize": fileSize,
+                                 @"FileLength": @(fileLength),
+                                 @"FileMd5": fileMd5 ? fileMd5 : @"",
+                                 @"IPLocalPath": name,
+                                 @"Uploading": @(1)
+                                 };
+    NSString* chatId = [session objectForKey:@"XmppId"];
+    ChatType chatType = [[session objectForKey:@"ChatType"] intValue];
+    NSString *extendInfo = [[QIMJSONSerializer sharedInstance] serializeObject:jsonObject];
+    STMsgModel *msg = [kit createMessageWithMsg:extendInfo extenddInfo:extendInfo userId:chatId userType:chatType msgType:QIMMessageType_File];
+
+    [kit saveMsg:msg ByJid:chatId];
+    [kit qim_uploadFileWithFilePath:localPath forMessage:msg];
     
+    [self decreaseSendingCount];
 }
 
 - (NSString *) makeMovieName: (NSString*) name{
