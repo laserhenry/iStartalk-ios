@@ -47,18 +47,14 @@ class SingleShareItemView: BaseShareItemView {
 
         let description = UILabel()
         description.text = name
+        description.lineBreakMode = .byTruncatingMiddle
         addSubview(description)
-        let descriptionLayout = UILayoutGuide()
-        addLayoutGuide(descriptionLayout)
         description.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            descriptionLayout.leadingAnchor.constraint(equalTo: iconLayout.trailingAnchor),
-            descriptionLayout.trailingAnchor.constraint(equalTo: trailingAnchor),
-            descriptionLayout.topAnchor.constraint(equalTo: topAnchor),
-            descriptionLayout.bottomAnchor.constraint(equalTo: bottomAnchor),
-            description.leadingAnchor.constraint(equalTo: descriptionLayout.leadingAnchor, constant: 20),
-            description.centerYAnchor.constraint(equalTo: descriptionLayout.centerYAnchor),
-           
+            description.leadingAnchor.constraint(equalTo: iconLayout.trailingAnchor, constant: 20),
+            description.trailingAnchor.constraint(equalTo: trailingAnchor),
+            description.topAnchor.constraint(equalTo: topAnchor),
+            description.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
     

@@ -13,7 +13,7 @@ class ShareViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     static let IMAGE_IDENTIFIER = "public.image"
     static let MOVIE_IDENTIFIER = "public.movie"
-    static let FILE_IDENTIFIER = "public.content"
+    static let FILE_IDENTIFIER = "public.data"
     
     static let GROUP_IDENTIFIER = "group.com.im.startalk"
     static let CONTAINER_URL = "startalk://share"
@@ -133,7 +133,7 @@ class ShareViewController: UIViewController, UICollectionViewDataSource, UIColle
             let height = itemView.fileViewHeight
             NSLayoutConstraint.activate([
                 itemView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-                itemView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 15),
+                itemView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
                 itemView.heightAnchor.constraint(equalToConstant: height)
             ])
         }
