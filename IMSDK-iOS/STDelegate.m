@@ -675,7 +675,7 @@ void InitCrashReport() {
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options {
     STShareExtensionHelper * shareHelper = [STShareExtensionHelper sharedInstance];
     NSArray* items = [shareHelper shareItems];
-    if(items != nil && items.count > 0){
+    if([url.host isEqualToString:@"share"] && items != nil && items.count > 0){
         UIViewController* rootViewController = self.window.rootViewController;
         UIViewController * shareViewController = [STShareViewController new];
         shareViewController.modalPresentationStyle = UIModalPresentationFullScreen;

@@ -366,18 +366,12 @@ NSInteger sendingCount;
     dispatch_async(dispatch_get_main_queue(), ^{
         sendingCount = sendingCount - 1;
         if(sendingCount == 0){
-            [self cleanFiles:items];
+            STShareExtensionHelper * shareHelper = [STShareExtensionHelper sharedInstance];
+            [shareHelper cleanItems];
             [self close];
         }
     });
 }
 
-- (void) cleanFiles: (NSArray *) items{
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    for(NSDictionary* item in items){
-        NSString* path = item[@"path"];
-        [fileManager removeItemAtPath:path error: nil];
-    }
-}
 
 @end

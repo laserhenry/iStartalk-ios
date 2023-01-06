@@ -13,7 +13,7 @@ class ShareViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     static let IMAGE_IDENTIFIER = "public.image"
     static let MOVIE_IDENTIFIER = "public.movie"
-    static let FILE_IDENTIFIER = "public.data"
+    static let FILE_IDENTIFIER = "public.file-url"
     
     static let GROUP_IDENTIFIER = "group.com.im.startalk"
     static let CONTAINER_URL = "startalk://share"
@@ -185,22 +185,31 @@ class ShareViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     func loadItem(_ item: NSItemProvider, completionHandler: @escaping (_ item: ShareItem) -> Void){
-        item.loadItem(forTypeIdentifier: Self.FILE_IDENTIFIER) { object, error in
-            if let url = object as? URL{
-                let name = url.lastPathComponent
-                let shareItem: ShareItem
-                if item.hasItemConformingToTypeIdentifier(Self.IMAGE_IDENTIFIER){
+        if item.hasItemConformingToTypeIdentifier(Self.IMAGE_IDENTIFIER){
+            item.loadItem(forTypeIdentifier: Self.IMAGE_IDENTIFIER){ object, error in
+                if let url = object as? URL{
+                    let name = url.lastPathComponent
                     let image = UIImage(contentsOfFile: url.path)
-                    shareItem = ShareItem(type: .image, name: name, url: url, image: image)
-                }else if item.hasItemConformingToTypeIdentifier(Self.MOVIE_IDENTIFIER){
-                    let asset = AVURLAsset(url: url)
-                    shareItem = ShareItem(type: .movie, name: name, url: url, movie: asset)
-                }else{
-                    let data = try! Data(contentsOf: url)
-                    shareItem = ShareItem(type: .file, name: name, url: url, file: data)
+                    let shareItem = ShareItem(type: .image, name: name, url: url, image: image)
+                    completionHandler(shareItem)
                 }
-             
-                completionHandler(shareItem)
+            }
+        }else  if item.hasItemConformingToTypeIdentifier(Self.MOVIE_IDENTIFIER){
+            item.loadItem(forTypeIdentifier: Self.MOVIE_IDENTIFIER){ object, error in
+                if let url = object as? URL{
+                    let name = url.lastPathComponent
+                    let asset = AVURLAsset(url: url)
+                    let shareItem = ShareItem(type: .movie, name: name, url: url, movie: asset)
+                    completionHandler(shareItem)
+                }
+            }
+        }else{
+            item.loadItem(forTypeIdentifier: Self.FILE_IDENTIFIER){ object, error in
+                if let url = object as? URL{
+                    let name = url.lastPathComponent
+                    let shareItem = ShareItem(type: .file, name: name, url: url, file: nil)
+                    completionHandler(shareItem)
+                }
             }
         }
     }

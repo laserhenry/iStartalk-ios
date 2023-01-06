@@ -14,6 +14,8 @@
 
 - (NSArray *) shareItems;
 
+- (void) cleanItems;
+
 @end
 
 #endif /* STShareExtensionHelper_h */

@@ -36,5 +36,16 @@ NSUserDefaults * defaults;
     return [defaults arrayForKey: DEFAULTS_KEY];
 }
 
+- (void) cleanItems{
+    NSArray* items = [defaults arrayForKey: DEFAULTS_KEY];
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    for(NSDictionary* item in items){
+        NSString* path = item[@"path"];
+        [fileManager removeItemAtPath:path error: nil];
+    }
+    [defaults removeObjectForKey: DEFAULTS_KEY];
+}
+
+
 
 @end
