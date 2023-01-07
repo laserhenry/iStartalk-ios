@@ -32,6 +32,10 @@ NSUserDefaults * defaults;
     return self;
 }
 
+- (void) setItems:(NSArray *) items{
+    [defaults setValue:items forKey:DEFAULTS_KEY];
+}
+
 - (NSArray *) shareItems{
     return [defaults arrayForKey: DEFAULTS_KEY];
 }
@@ -45,7 +49,5 @@ NSUserDefaults * defaults;
     }
     [defaults removeObjectForKey: DEFAULTS_KEY];
 }
-
-
 
 @end

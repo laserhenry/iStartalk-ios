@@ -673,15 +673,28 @@ void InitCrashReport() {
 
 #else
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options {
-    STShareExtensionHelper * shareHelper = [STShareExtensionHelper sharedInstance];
-    NSArray* items = [shareHelper shareItems];
-    if([url.host isEqualToString:@"share"] && items != nil && items.count > 0){
-        UIViewController* rootViewController = self.window.rootViewController;
-        UIViewController * shareViewController = [STShareViewController new];
-        shareViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-        [rootViewController presentViewController: shareViewController animated: NO completion:^{}];
+    
+    if([url.scheme isEqualToString:@"startalk"] && [url.host isEqualToString:@"share"]){
+        STShareExtensionHelper * shareHelper = [STShareExtensionHelper sharedInstance];
+        NSArray* items = [shareHelper shareItems];
+        if(items != nil && items.count > 0){
+            [self showShareController];
+        }
+    }else if(url.isFileURL){
+        NSDictionary* shareItem = @{@"type": @"file", @"name": url.lastPathComponent, @"path": url.path};
+        STShareExtensionHelper * shareHelper = [STShareExtensionHelper sharedInstance];
+        [shareHelper setItems:@[shareItem]];
+        [self showShareController];
     }
+    
     return YES;
+}
+
+- (void) showShareController{
+    UIViewController* rootViewController = self.window.rootViewController;
+    UIViewController * shareViewController = [STShareViewController new];
+    shareViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    [rootViewController presentViewController: shareViewController animated: NO completion:^{}];
 }
 #endif
 

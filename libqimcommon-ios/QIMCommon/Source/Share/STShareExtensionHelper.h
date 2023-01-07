@@ -12,6 +12,8 @@
 
 + (STShareExtensionHelper *)sharedInstance;
 
+- (void) setItems:(NSArray *) item;
+
 - (NSArray *) shareItems;
 
 - (void) cleanItems;
